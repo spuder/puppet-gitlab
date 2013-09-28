@@ -4,9 +4,9 @@
 
 #Vagrant files
 
-.vagrant
-Vagrantfile
-boostrap.sh
+#.vagrant
+#Vagrantfile
+#boostrap.sh
 
 #Misc files
 .settings
