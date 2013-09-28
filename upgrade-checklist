@@ -1,0 +1,48 @@
+This document is a work in progress, do not follow it yet!
+
+##Upgrading gitlab
+
+New versions are released on the 22 of each month. 
+See the upgrade documentation here https://github.com/gitlabhq/gitlabhq/tree/master/doc/update
+
+
+#Before upgrade
+
+stop gitlab
+stop nginx
+stop database
+backup database
+
+checkout the new branches of git
+cd /home/git/gitlab/
+git checkout -b 6-1-stable origin/6-1-stable
+
+***Make sure to run a git status after switching branches**
+http://stackoverflow.com/questions/19070744/upgrading-gitlab-gives-following-error-dont-know-how-to-build-task-migrate-ii/19070762#19070762
+
+
+*compare the old init script to the new init script*
+git difftool 6-1-stable:lib/support/init.d/gitlab 6-0-stable:lib/support/init.d/gitlab
+If they are different, then save the new one to templates/gitalb.init.6.1.erb
+
+
+
+compare the old config/gitlab.yml to the new config/gitlab.yml, some versions add new flags
+git difftool 6-1-stable:config/gitlab.yml.example 6-0-stable:config/gitlab.yml.example
+If they are differrnt, then edit templates/gitlab.yml.6.0.erb
+
+compare the old gitlab-shell/config.yml to the new config
+
+
+
+
+#Upgrade
+
+
+When running rake commands, apped '--trace' to the end to see addional information
+
+#instead of this
+sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production
+
+#run this
+sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production --trace
