@@ -1,0 +1,14 @@
+#Mac files
+
+.DS_STORE
+
+#Vagrant files
+
+.vagrant
+Vagrantfile
+boostrap.sh
+
+#Misc files
+.settings
+*.swp
+
