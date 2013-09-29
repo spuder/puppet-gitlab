@@ -131,11 +131,11 @@ class gitlab::packages inherits gitlab {
   
   include mysql
 
-  mysql::db { "$gitlab::params::gitlab_dbname" :
+  mysql::db { "$gitlab::gitlab_dbname" :
   ensure    => present,
-	  user      => "$gitlab::params::gitlab_dbuser",
-	  password  => "$gitlab::params::gitlab_dbpwd",
-	  host      => "$gitlab::params::gitlab_dbhost",
+	  user      => "$gitlab::gitlab_dbuser",
+	  password  => "$gitlab::gitlab_dbpwd",
+	  host      => "$gitlab::gitlab_dbhost",
 	  grant     => ['all'],
 	  #TODO: change from all, to just the permissions specififed in the install doc
   }#TODO test this syntax

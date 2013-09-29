@@ -13,7 +13,7 @@
 	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
 	  gitlab_branch          => '6-1-stable',
 	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
-	  #gitlabshell_branch     => 'v1.7.1',#No longer used, now gitlabshell is in master branch
+	  gitlabshell_branch     => 'v1.7.1',
 	  
 	  gitlab_dbtype          => 'mysql',
 	  gitlab_dbname          => 'gitlabdb',
@@ -22,7 +22,7 @@
 	  gitlab_dbhost          => 'localhost',
 	  gitlab_dbport          => '3306',
 	  gitlab_domain          => $::fqdn,
-	  gitlab_repodir         => $git_home,
+	  gitlab_repodir         => $git_home,#TODO: Can this be removed? 
 	  gitlab_ssl             => false,
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',

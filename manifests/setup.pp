@@ -27,29 +27,29 @@
   
   #Execute all commands as the git user in the git home directory
   Exec {
-    user    => "${gitlab::params::git_user}",
-    cwd     => "${gitlab::params::git_home}",
+    user    => "${gitlab::git_user}",
+    cwd     => "${gitlab::git_home}",
     path    => '/usr/bin',
   }
   
   #Download gitlab-shell (replaces git-o-lite)
   exec { 'download gitlab-shell':
-    command   => "git clone ${gitlab::params::gitlabshell_sources} ${gitlab::params::git_home}/gitlab-shell",
-    creates   => "${gitlab::params::git_home}/gitlab-shell",
+    command   => "git clone ${gitlab::gitlabshell_sources} ${gitlab::git_home}/gitlab-shell",
+    creates   => "${gitlab::git_home}/gitlab-shell",
   }
   
   #Download gitlab source
   exec { 'download gitlab':
-    command => "git clone -b ${gitlab::params::gitlab_branch} ${gitlab::params::gitlab_sources} ${gitlab::params::git_home}/gitlab",
-    creates   => "${gitlab::params::git_home}/gitlab",
+    command => "git clone -b ${gitlab::gitlab_branch} ${gitlab::gitlab_sources} ${gitlab::git_home}/gitlab",
+    creates   => "${gitlab::git_home}/gitlab",
   }
   
   
   #Copy the gitlab-shell config
-  file { "${gitlab::params::git_home}/gitlab-shell/config.yml":
+  file { "${gitlab::git_home}/gitlab-shell/config.yml":
     ensure    => file,
     content   => template('gitlab/gitlab-shell.config.yml.erb'),
-    owner     => "${gitlab::params::git_user}",
+    owner     => "${gitlab::git_user}",
     group     => 'git', #TODO: Is git the best way to do this? 
     require   => [
                   Exec['download gitlab-shell'],
@@ -59,10 +59,10 @@
   
   
   #Copy the gitlab config
-  file { "${gitlab::params::git_home}/gitlab/config/gitlab.yml":
+  file { "${gitlab::git_home}/gitlab/config/gitlab.yml":
     ensure    => file,
     content   => template('gitlab/gitlab.yml.6.0.erb'),
-    owner     => "${gitlab::params::git_user}",
+    owner     => "${gitlab::git_user}",
     group     => 'git', #TODO: Is git the best way to do this? 
     require   => [
                   Exec['download gitlab-shell'],
@@ -71,10 +71,10 @@
   }
   
   #Copy the Unicorn config
-  file { "${gitlab::params::git_home}/gitlab/config/unicorn.rb":
+  file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
     content   => template('gitlab/gitlab.unicorn.rb.erb'),
-    owner     => "${gitlab::params::git_user}",
+    owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [
                   Exec['download gitlab-shell'],
@@ -83,10 +83,10 @@
   }
   
   #Copy the database config
-  file { "${gitlab::params::git_home}/gitlab/config/database.yml":
+  file { "${gitlab::git_home}/gitlab/config/database.yml":
     ensure    => file,
     content   => template('gitlab/gitlab.database.yml.erb'),
-    owner     => "${gitlab::params::git_user}",
+    owner     => "${gitlab::git_user}",
     group     => 'git',
     mode      => '0640',
     require   => [

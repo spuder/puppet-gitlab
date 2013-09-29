@@ -16,30 +16,52 @@
 
 ##Overview
 
-Installs gitlab 6 on a Ubuntu 12.04 server. 
+The spencerowen-puppet module installs a fully self contained gitlab server on an ubuntu server
+
+Tested :
+Gitlab 6-0-stable on Ubuntu 12.04
+
+ 
 
 ##Module Description
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
-    
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+This puppet module accomplishes the gitlab 6 installtion tasks outlined in the install.md 
+https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
+
+
+
+
 
 ##Setup
 
 ###What [Modulename] affects
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
+The module installs the following programs:
+
+installs ruby 2.0 (from saucy ppa's)
+nginx server
+postfix server
+mysql server
+
+The module configures the following files:
+
+/home/git/gitlab/config/gitlab.yml
+/home/git/gitlab/config/database.yml
+/home/git/gitlab/config/unicorn.rb
+/home/git/gitlab-shell/config.yml
+/etc/init.d/gitlab
+/etc/ngnix/sites-available/gitlab
+/etc/nginx/sites-enabled/gitlab
 
 ###Setup Requirements **OPTIONAL**
 
 This module requires the following programs
 
 puppet >= 3.3.0
+ruby   >= 2.0 (installed automatically)
 
 
-Install the following puppet modules
+This module requires the following modules to be defined in the puppet master
 
 puppet module install puppetlabs-apt
 puppet module install puppetlabs-mysql

@@ -4,7 +4,7 @@ class gitlab::service inherits gitlab {
   #init script
   file { '/etc/init.d/gitlab':
     ensure    => file,
-    content   => template('gitlab/gitlab.init.6-0.erb'), #TODO make this point to a variable
+    content   => template('gitlab/gitlab.init.6-1.erb'), #TODO make this point to a variable
     owner     => root,
     group     => root,
     mode      => '0755',
