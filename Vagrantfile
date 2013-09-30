@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu_12.04_nopuppet"
+  config.vm.hostname  ="gitlab"
+  config.vm.box_url   ="http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210-nocm.box"
   #config.vm.hostname = "gitlab.localdomain" #This fails to set the shortname, editing /etc/hosts and /etc/hostname manually through boostrap.sh
 
   # The url from where the 'config.vm.box' box will be fetched if it
