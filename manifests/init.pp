@@ -43,7 +43,11 @@ class gitlab (
     $ldap_port              = $gitlab::params::ldap_port,
     $ldap_method            = $gitlab::params::ldap_method,
     $ldap_bind_dn           = $gitlab::params::ldap_bind_dn,
-    $ldap_bind_password     = $gitlab::params::ldap_bind_password
+    $ldap_bind_password     = $gitlab::params::ldap_bind_password,
+    
+    $custom_login_icon      = $gitlab::params::custom_login_icon,
+    $custom_thumbnail_icon  = $gitlab::params::custom_thumbnail_icon,
+    
   ) inherits gitlab::params {
     
 	case $::osfamily {

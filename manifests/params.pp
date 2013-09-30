@@ -35,6 +35,9 @@ class gitlab::params {
   $ldap_bind_dn           = ''
   $ldap_bind_password     = ''
   
+  $custom_login_icon      = false
+  $custom_thumbnail_icon  = false
+  
 
 }
 

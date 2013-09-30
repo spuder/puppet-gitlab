@@ -123,8 +123,36 @@ class gitlab::config inherits params {
     mode    => '0644',
   }
  
-  
-  
+  #Overwrite gitlab icons with custom icons
+	case "${gitlab::custom_thumbnail_icon}" {
+		  'true':
+	    {
+	        warning("gitlab:custom_thumbnail_icon is true, altering gitlab icons")
+	      
+	        file{"${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
+	            source => "puppet:///modules/gitlab/logo-white.png.erb",
+	            owner   => "${gitlab::git_user}",
+	            group   => 'git',
+	            mode    => '0644',
+	        }
+	        file{"${gitlab::git_home}/gitlab/app/assets/images/logo-black.png.erb":
+	            source => "puppet:///modules/gitlab/logo-black.png.erb",
+	            owner   => "${gitlab::git_user}",
+	            group   => 'git',
+	            mode    => '0644',
+	        }
+	    }#end false
+		
+		  'false': 
+		  {
+		      warning("gitlab:custom_thumbnail_icon is false, leaving stock icons")
+		  }#end true
+		  
+		  default: 
+		  {
+		     warning("gitlab:custom_thumbnail_icon is not defined")
+		  }
+	}#end case
 
 
 }#end config.pp

@@ -23,7 +23,7 @@
 	  gitlab_dbport          => '3306',
 	  gitlab_domain          => $::fqdn,
 	  gitlab_repodir         => $git_home,#TODO: Can this be removed? 
-	  gitlab_ssl             => false,
+	  gitlab_ssl             => false,#TODO: remove wildcard from gitlab.nginx-gitlab.conf.erb
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
 	  gitlab_ssl_self_signed => false,
@@ -38,6 +38,9 @@
 	  ldap_method            => 'ssl',
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
+	  
+	  custom_login_icon      => true,
+	  custom_thumbnail_icon  => true,
 	  }
 	  
 	  
