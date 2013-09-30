@@ -17,6 +17,7 @@ class gitlab::install inherits gitlab {
     cwd     => "${gitlab::git_home}/gitlab",
     command => 'bundle install --deployment --without development test postgres aws',
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_setup_done",
+    timeout => 600,
     before  => [
               File["${gitlab::git_home}/.gitlab_setup_done"], 
               Exec['setup gitlab database'],
@@ -28,6 +29,7 @@ class gitlab::install inherits gitlab {
     cwd     => "${gitlab::git_home}/gitlab",
     command => '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production',
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_database_done",
+    timeout => 600,
     before  => File["${gitlab::git_home}/.gitlab_database_done"],
   }
 

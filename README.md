@@ -153,8 +153,45 @@ For example, a basic configuraiton might look like this:
 	  
 ##Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+All of the parameters that can be set
+(Subject to change)
 
+  class { 'gitlab' : 
+	  git_user               => 'git',
+	  git_home               => '/home/git',
+	  git_email              => 'git@adaptivecomputing.com',
+	  git_comment            => 'GitLab',
+	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
+	  gitlab_branch          => '6-1-stable',
+	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
+	  gitlabshell_branch     => 'v1.7.1',
+	  
+	  gitlab_dbtype          => 'mysql',
+	  gitlab_dbname          => 'gitlabdb',
+	  gitlab_dbuser          => 'gitlabdbu',
+	  gitlab_dbpwd           => 'changeme',
+	  gitlab_dbhost          => 'localhost',
+	  gitlab_dbport          => '3306',
+	  gitlab_domain          => $::fqdn,
+	  gitlab_repodir         => $git_home,#TODO: Can this be removed? 
+	  gitlab_ssl             => false,
+	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
+	  gitlab_ssl_self_signed => false,
+	  gitlab_projects        => '10',
+	  gitlab_username_change => true,
+	  
+	  ldap_enabled           => false,
+	  ldap_host              => 'ldap.domain.com',
+	  ldap_base              => 'dc=domain,dc=com',
+	  ldap_uid               => 'uid',
+	  ldap_port              => '636',
+	  ldap_method            => 'ssl',
+	  ldap_bind_dn           => '',
+	  ldap_bind_password     => '',
+	  }
+	  
+	  
 ##Limitations
 
 Designed and tested for Ubuntu 12.04
@@ -165,8 +202,23 @@ Will not work on CentOS / RHEL
 
 ##Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
+Pull Requests are accepted: 
+Please include the following information:
+
+**Pull requests should be made to the vagrant branch**
+Changes will then be merged into the master branch
+
+Please include the following: 
+
+Current Git commit
+Os teseted
+Output before and output after the patch
 
 ##Release Notes/Contributors/Etc **Optional**
+
+This module is based on the work done by the following people:
+
+sbadia - https://github.com/sbadia/puppet-gitlab
+atomaka - https://github.com/atomaka/puppet-gitlab
 
 If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
