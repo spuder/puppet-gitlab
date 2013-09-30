@@ -95,6 +95,15 @@ Warning: Failed to match dpkg-query line "No packages found matching git-core.\n
 http://projects.puppetlabs.com/issues/22621
 
 
+The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds: 
+Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
+
+After the installation is complete, start the gitlab service
+
+service gitlab start
+
+
+
 	
 ###Beginning with [Modulename]	
 
