@@ -92,19 +92,65 @@ Warning: Failed to match dpkg-query line "No packages found matching libxslt1-de
 Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\n"
 Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\n"
 Warning: Failed to match dpkg-query line "No packages found matching git-core.\n"
+http://projects.puppetlabs.com/issues/22621
 
 
 	
 ###Beginning with [Modulename]	
 
-The very basic steps needed for a user to get the module up and running. 
+To use the module, you must have mysql::server installed and configured with a user. 
+It is recomeded that this be setup in your site.pp file, hiera or another ENC.
 
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
 
+If you are using puppet stand alone, the following would setup mysql
+
+root$ import module puppetlabs-mysql
+
+root$ cat /tmp/gitlab-mysql-prerequisits.pp
+  class { 'mysql::server':
+    config_hash => { 'root_password' => 'badpassword' }
+  }
+  
+puppet apply /tmp/gitlab-mysql-prerequisits.pp
+
+  
+
+	 
 ##Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
 
+After the mysql root user has been steup, call the gitlab class with the desired parameters. 
+Any parameters omitted will be set to the defautls located in gitlab::params
+
+For example, a basic configuraiton might look like this: 
+
+  class { 'gitlab' : 
+	  git_email              => 'git@foo.com',
+	  git_comment            => 'GitLab',
+	  gitlab_branch          => '6-1-stable',
+	  gitlabshell_branch     => 'v1.7.1',
+	  
+	  gitlab_dbname          => 'gitlabdb',
+	  gitlab_dbuser          => 'gitlabdbu',
+	  gitlab_dbpwd           => 'changeme',
+	  
+	  gitlab_ssl             => false,
+	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
+	  gitlab_ssl_self_signed => false,
+	  gitlab_projects        => '10',
+	  gitlab_username_change => true,
+	  
+	  ldap_enabled           => false,
+	  ldap_host              => 'ldap.domain.com',
+	  ldap_base              => 'dc=domain,dc=com',
+	  ldap_uid               => 'uid',
+	  ldap_method            => 'ssl',
+	  ldap_bind_dn           => 'foo',
+	  ldap_bind_password     => 'bar',
+	  }
+	  
+	  
 ##Reference
 
 Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
