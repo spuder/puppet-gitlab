@@ -79,7 +79,7 @@ class gitlab::config inherits params {
 #    ensure    => file,
 #    content   => template('gitlab/gitlab-.gitconfig.erb'),
 #    mode      => '0644',
-#    owner     => "${gitlab::params::git_user}",
+#    owner     => "${gitlab::git_user}",
 #  }
   
 #  Setup global git user
@@ -88,7 +88,7 @@ class gitlab::config inherits params {
     environment => "HOME=/home/git",   #http://projects.puppetlabs.com/issues/5224
     #environment => '/root',
     #user    => "${gitlab::params::git_user}",
-    command => "git config --global user.name ${gitlab::params::git_comment}",
+    command => "git config --global user.name ${gitlab::git_comment}",
     #TODO: Force this to not just run once
     
   }
@@ -98,8 +98,8 @@ class gitlab::config inherits params {
     path        => '/usr/bin:/usr/local/bin',
     environment => "HOME=/home/git",  #http://projects.puppetlabs.com/issues/5224
     #environment => '/root',
-    #user        => "${gitlab::params::git_user}",
-    command     => "git config --global user.email ${gitlab::params::git_email}",
+    #user        => "${gitlab::git_user}",
+    command     => "git config --global user.email ${gitlab::git_email}",
     #TODO: Force this to not just run once   
     #TODO: Figure out why email is git@ac and not the value specified in the git_email variable
     
@@ -110,7 +110,7 @@ class gitlab::config inherits params {
     path        => '/usr/bin:/usr/local/bin',
     environment => "HOME=/home/git",  #http://projects.puppetlabs.com/issues/5224
     #environment => '/root',
-    #user        => "${gitlab::params::git_user}",
+    #user        => "${gitlab::git_user}",
     command     => "git config --global core.autocrlf input",
     #TODO: Force this to not just run once       
   }
@@ -118,7 +118,7 @@ class gitlab::config inherits params {
   #Set owner and permissions of /home/git/.gitconfig
   file { "${gitlab::params::git_home}/.gitconfig":
     ensure  => file, 
-    owner   => "${gitlab::params::git_user}",
+    owner   => "${gitlab::git_user}",
     group   => 'git',
     mode    => '0644',
   }
