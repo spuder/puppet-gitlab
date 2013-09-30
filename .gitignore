@@ -12,3 +12,5 @@
 .settings
 *.swp
 
+#Private files
+tests/adaptive.pp
