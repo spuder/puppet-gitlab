@@ -19,9 +19,9 @@ production: &base
   ## GitLab settings
   gitlab:
     ## Web server settings
-    host: gitlab.ac
+    host: <%= @gitlab_domain %>
     port: 80
-    https: false
+    https: <%= @gitlab_ssl %> #default false
 
     # Uncomment and customize the last line to run in a non-root path
     # WARNING: This feature is no longer supported
@@ -37,10 +37,10 @@ production: &base
 
     ## Email settings
     # Email address used in the "From" field in mails sent by GitLab
-    email_from: gitlab@ac
+    email_from: <%= @git_email %>
 
     # Email address of your support contact (default: same as email_from)
-    support_email: support@ac
+    support_email: <%= @git_email %>
 
     ## User settings
     default_projects_limit: 100
