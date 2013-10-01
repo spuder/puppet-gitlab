@@ -39,8 +39,21 @@
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
 	  
-	  custom_login_icon      => true,
-	  custom_thumbnail_icon  => true,
+	  custom_login_icon      => true,#TODO:Rename to logo
+	  custom_thumbnail_icon  => true,#TODO:Rename to logo
+	  
+	  gitlab_gravatar        => true,
+	  user_create_group      => false,
+	  user_create_team       => false,
+	  user_changename        => false,
+	  
+	  #Default Project features
+	  project_issues         => true,
+	  project_merge_request  => true,
+	  project_wiki           => false,
+	  project_wall           => false,
+	  project_snippets       => true,
+	  
 	  }
 	  
 	  

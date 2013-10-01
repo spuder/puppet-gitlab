@@ -45,8 +45,21 @@ class gitlab (
     $ldap_bind_dn           = $gitlab::params::ldap_bind_dn,
     $ldap_bind_password     = $gitlab::params::ldap_bind_password,
     
-    $custom_login_icon      = $gitlab::params::custom_login_icon,
-    $custom_thumbnail_icon  = $gitlab::params::custom_thumbnail_icon,
+    $custom_login_icon      = $gitlab::params::custom_login_icon,#TODO:Rename to logo
+    $custom_thumbnail_icon  = $gitlab::params::custom_thumbnail_icon,#TODO:Rename to logo
+    
+    $gitlab_gravatar        = $gitlab::params::gitlab_gravatar,
+    $user_create_group      = $gitlab::params::user_create_group,
+    $user_create_team       = $gitlab::params::user_create_team,
+    $user_changename        = $gitlab::params::user_changename,
+    
+    #Default Project features
+    $project_issues         = $gitlab::params::project_issues,
+    $project_merge_request  = $gitlab::params::project_merge_request,
+    $project_wiki           = $gitlab::params::project_wiki,
+    $project_wall           = $gitlab::params::project_wall,
+    $project_snippets       = $gitlab::params::project_snippets,
+    
     
   ) inherits gitlab::params {
     

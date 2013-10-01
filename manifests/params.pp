@@ -38,6 +38,18 @@ class gitlab::params {
   $custom_login_icon      = false
   $custom_thumbnail_icon  = false
   
+  $gitlab_gravatar        = true
+  $user_create_group      = false
+  $user_create_team       = false
+  $user_changename        = false
+  
+  #Default Project features
+  $project_issues         = true
+  $project_merge_request  = true
+  $project_wiki           = false
+  $project_wall           = false
+  $project_snippets       = true
+ 
 
 }
 
