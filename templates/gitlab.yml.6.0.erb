@@ -20,7 +20,7 @@ production: &base
   gitlab:
     ## Web server settings
     host: <%= @gitlab_domain %>
-    port: 80
+    port: 80 #TODO: make this dynamic
     https: <%= @gitlab_ssl %> #default false
 
     # Uncomment and customize the last line to run in a non-root path
@@ -118,9 +118,9 @@ production: &base
     # CAUTION!
     # This allows users to login without having a user account first (default: false).
     # User accounts will be created automatically when authentication was successful.
-    allow_single_sign_on: false
+    allow_single_sign_on: false #default false
     # Locks down those users until they have been cleared by the admin (default: true).
-    block_auto_created_users: true
+    block_auto_created_users: true #default true
 
     ## Auth providers
     # Uncomment the following lines and fill in the data of the auth provider you want to use
@@ -185,8 +185,6 @@ production: &base
     ## Google analytics. Uncomment if you want it
     # google_analytics_id: '_your_tracking_id'
 
-       #Low res logo ![Company Logo](http://f.cl.ly/items/07430N0X2F0t3n121g0l/adaptive_logo_horiz_2C-302x94.png)
-#High res logo#http://f.cl.ly/items/2W340504121P3O401w0Z/adaptive_logo_wide_large300px.png
 
     ## Text under sign-in page (Markdown enabled)
      sign_in_text: |
