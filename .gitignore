@@ -5,6 +5,7 @@
 #Vagrant files
 
 .vagrant/*
+.vagrant/
 #Vagrantfile
 #boostrap.sh
 
