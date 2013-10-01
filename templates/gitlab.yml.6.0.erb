@@ -43,10 +43,10 @@ production: &base
     support_email: <%= @git_email %>
 
     ## User settings
-    default_projects_limit: 100
-    # default_can_create_group: false  # default: true
-    # default_can_create_team: false   # default: true
-    username_changing_enabled: false # default: true - User can change her username/namespace
+    default_projects_limit: <%= @gitlab_projects %> #default 10
+    default_can_create_group: <%= @user_create_group %>  # default: true
+    default_can_create_team: <%= @user_create_team %>   # default: true
+    username_changing_enabled: <%= @user_changename %> # default: true - User can change her username/namespace
 
     ## Users management
     # signup_enabled: false          # default: false - Account passwords are not sent via the email if signup is enabled.
@@ -90,7 +90,7 @@ production: &base
 
   ## Gravatar
   gravatar:
-    enabled: true                 # Use user avatar image from Gravatar.com (default: true)
+    enabled: <%= @gitlab_gravatar %>                 # Use user avatar image from Gravatar.com (default: true)
     # plain_url: "http://..."     # default: http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=mm
     # ssl_url:   "https://..."    # default: https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=mm
 

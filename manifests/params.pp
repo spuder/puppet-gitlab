@@ -24,7 +24,7 @@ class gitlab::params {
   $gitlab_ssl_key         = '/etc/ssl/private/ssl-cert-snakeoil.key'
   $gitlab_ssl_self_signed = false
   $gitlab_projects        = '10'
-  $gitlab_username_change = true
+  #$gitlab_username_change = true
   
   $ldap_enabled           = false
   $ldap_host              = 'ldap.domain.com'
@@ -38,17 +38,18 @@ class gitlab::params {
   $custom_login_icon      = false
   $custom_thumbnail_icon  = false
   
+  #User default settings
   $gitlab_gravatar        = true
   $user_create_group      = false
   $user_create_team       = false
   $user_changename        = false
   
-  #Default Project features
+  #Project default settings
   $project_issues         = true
   $project_merge_request  = true
-  $project_wiki           = false
+  $project_wiki           = true
   $project_wall           = false
-  $project_snippets       = true
+  $project_snippets       = false
  
 
 }
