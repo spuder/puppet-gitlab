@@ -25,7 +25,7 @@ class gitlab::packages inherits gitlab {
   exec { 'apt-get update':
     path => '/usr/bin',
     command => 'apt-get update',
-  }
+  } #TODO: use puppetlabs-apt always update resource to manage this
   
   
   
@@ -138,7 +138,7 @@ class gitlab::packages inherits gitlab {
 	  host      => "$gitlab::gitlab_dbhost",
 	  grant     => ['all'],
 	  #TODO: change from all, to just the permissions specififed in the install doc
-  }#TODO test this syntax
+  }
   
   
   ## Postfix
