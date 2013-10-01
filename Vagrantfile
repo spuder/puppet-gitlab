@@ -6,6 +6,11 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+config.vm.provider "virtualbox" do |vb|
+  vb.customize ["modifyvm", :id, "--memory", 1024]
+  vb.customize ["modifyvm", :id, "--cpus", "2"]
+  vb.customize ["modifyvm", :id, "--ioapic", "on"] #http://geekbacon.com/2013/02/26/cannot-set-more-than-1-cpu-in-vagrant/
+end
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu_12.04_nopuppet"
   config.vm.hostname  ="gitlab"
