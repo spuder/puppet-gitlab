@@ -53,11 +53,12 @@ production: &base
 
     ## Default project features settings
     default_projects_features:
-      issues: true
-      merge_requests: true
-      wiki: true
-      wall: false
-      snippets: true
+      issues: <%= @project_issues %> #default true
+      merge_requests: <%= @project_merge_request %> #default true
+      wiki: <%= @project_wiki %> #default true
+      wall: <%= @project_wall %>  #default false
+      snippets: <%= @project_snippets %> #default false
+      #public: false #New to 6.1
     
 
   ## External issues trackers
@@ -184,7 +185,6 @@ production: &base
   extra:
     ## Google analytics. Uncomment if you want it
     # google_analytics_id: '_your_tracking_id'
-
 
     ## Text under sign-in page (Markdown enabled)
      sign_in_text: |
