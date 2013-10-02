@@ -7,7 +7,7 @@
 .vagrant/*
 .vagrant/
 #Vagrantfile
-#boostrap.sh
+#bootstrap.sh
 
 #Misc files
 .settings
