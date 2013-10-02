@@ -36,9 +36,9 @@ class gitlab (
     $ldap_bind_password     = $gitlab::params::ldap_bind_password,
     
     #Company Branding
-    $use_custom_login_logo  = $gitlab::params::use_custom_login_logo,#TODO:Rename to logo
+    $use_custom_login_logo  = $gitlab::params::use_custom_login_logo,
     $company_logo_url       = $gitlab::params::company_logo_url,
-    $custom_thumbnail_icon  = $gitlab::params::custom_thumbnail_icon,#TODO:Rename to logo
+    $use_custom_thumbnail   = $gitlab::params::use_custom_thumbnail,
     
     #User default settings
     $gitlab_gravatar        = $gitlab::params::gitlab_gravatar,

@@ -197,7 +197,7 @@ All of the parameters that can be set
     #Company Branding
     $use_custom_login_logo 
     $company_logo_url       
-    $custom_thumbnail_icon  
+    $use_custom_thumbnail  
     
     #User default settings
     $gitlab_gravatar        
