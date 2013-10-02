@@ -36,7 +36,8 @@ class gitlab (
     $ldap_bind_password     = $gitlab::params::ldap_bind_password,
     
     #Company Branding
-    $custom_login_icon      = $gitlab::params::custom_login_icon,#TODO:Rename to logo
+    $use_custom_login_logo  = $gitlab::params::use_custom_login_logo,#TODO:Rename to logo
+    $company_logo_url       = $gitlab::params::company_logo_url,
     $custom_thumbnail_icon  = $gitlab::params::custom_thumbnail_icon,#TODO:Rename to logo
     
     #User default settings

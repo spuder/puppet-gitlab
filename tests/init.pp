@@ -39,8 +39,8 @@
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
 	  
-	  custom_login_icon      => true,#TODO:Rename to logo
-	  custom_thumbnail_icon  => true,#TODO:Rename to logo
+	  use_custom_login_logo  => true,#TODO:Rename to logo
+	  custom_thumbnail_icon  => false,#TODO:Rename to logo
 	  
 	  gitlab_gravatar        => true,
 	  user_create_group      => false,
