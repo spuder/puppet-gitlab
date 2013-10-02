@@ -20,6 +20,7 @@ The spencerowen-puppet module installs a fully self contained gitlab server on a
 
 Tested :
 Gitlab 6-0-stable on Ubuntu 12.04
+Gitlab 6-1-stable on Ubuntu 12.04
 
  
 
@@ -143,61 +144,74 @@ For example, a basic configuraiton might look like this:
 	  gitlab_dbuser          => 'gitlabdbu',
 	  gitlab_dbpwd           => 'changeme',
 	  
-	  gitlab_ssl             => false,
-	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
-	  gitlab_ssl_self_signed => false,
+
 	  gitlab_projects        => '10',
 	  gitlab_username_change => true,
 	  
-	  ldap_enabled           => false,
-	  ldap_host              => 'ldap.domain.com',
-	  ldap_base              => 'dc=domain,dc=com',
-	  ldap_uid               => 'uid',
-	  ldap_method            => 'ssl',
-	  ldap_bind_dn           => 'foo',
-	  ldap_bind_password     => 'bar',
 	  }
 	  
 	  
 ##Reference
 
 All of the parameters that can be set
-(Subject to change)
 
-  class { 'gitlab' : 
-	  git_user               => 'git',
-	  git_home               => '/home/git',
-	  git_email              => 'git@adaptivecomputing.com',
-	  git_comment            => 'GitLab',
-	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
-	  gitlab_branch          => '6-1-stable',
-	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
-	  gitlabshell_branch     => 'v1.7.1',
-	  
-	  gitlab_dbtype          => 'mysql',
-	  gitlab_dbname          => 'gitlabdb',
-	  gitlab_dbuser          => 'gitlabdbu',
-	  gitlab_dbpwd           => 'changeme',
-	  gitlab_dbhost          => 'localhost',
-	  gitlab_dbport          => '3306',
-	  gitlab_domain          => $::fqdn,
-	  gitlab_repodir         => $git_home,#TODO: Can this be removed? 
-	  gitlab_ssl             => false,
-	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
-	  gitlab_ssl_self_signed => false,
-	  gitlab_projects        => '10',
-	  gitlab_username_change => true,
-	  
-	  ldap_enabled           => false,
-	  ldap_host              => 'ldap.domain.com',
-	  ldap_base              => 'dc=domain,dc=com',
-	  ldap_uid               => 'uid',
-	  ldap_port              => '636',
-	  ldap_method            => 'ssl',
-	  ldap_bind_dn           => '',
-	  ldap_bind_password     => '',
+
+
+  
+    #Gitlab server settings
+    $gitlab_branch         
+    $gitlabshell_branch     
+    $git_user               
+    $git_home               
+    $git_email              
+    $git_comment            
+    $gitlab_sources         
+    $gitlabshell_sources    
+    
+    #Database
+    $gitlab_dbtype          
+    $gitlab_dbname          
+    $gitlab_dbuser         
+    $gitlab_dbpwd           
+    $gitlab_dbhost         
+    $gitlab_dbport          
+    $gitlab_domain         
+    $gitlab_repodir        
+    
+    #Web & Security
+    $gitlab_ssl             
+    $gitlab_ssl_cert        
+    $gitlab_ssl_key         
+    $gitlab_ssl_self_signed 
+    
+    #LDAP
+    $ldap_enabled           
+    $ldap_host              
+    $ldap_base           
+    $ldap_uid              
+    $ldap_port          
+    $ldap_method         
+    $ldap_bind_dn           
+    $ldap_bind_password     
+    
+    #Company Branding
+    $use_custom_login_logo 
+    $company_logo_url       
+    $custom_thumbnail_icon  
+    
+    #User default settings
+    $gitlab_gravatar        
+    $user_create_group      
+    $user_create_team       
+    $user_changename        
+    
+    #Project default features
+    $project_issues         
+    $project_merge_request  
+    $project_wiki           
+    $project_wall           
+    $project_snippets       
+    $gitlab_projects        
 	  }
 	  
 	  
@@ -212,16 +226,10 @@ Will not work on CentOS / RHEL
 ##Development
 
 Pull Requests are accepted: 
-Please include the following information:
 
 **Pull requests should be made to the vagrant branch**
 Changes will then be merged into the master branch
 
-Please include the following: 
-
-Current Git commit
-Os teseted
-Output before and output after the patch
 
 ##Release Notes/Contributors/Etc **Optional**
 
@@ -230,4 +238,5 @@ This module is based on the work done by the following people:
 sbadia - https://github.com/sbadia/puppet-gitlab
 atomaka - https://github.com/atomaka/puppet-gitlab
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+##Changelog
+2013-Oct-3: First Release, fully tested

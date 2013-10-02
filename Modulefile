@@ -2,9 +2,9 @@ name    'spencerowen-gitlab'
 version '0.1.0'
 source ''
 author 'spencer owen'
-license ''
-summary ''
-description ''
+license 'GPLv3'
+summary 'Puppet GitLab Module'
+description 'Module to install GitLab >=6.x using puppet'
 project_page ''
 
 ## Add dependencies, if any:

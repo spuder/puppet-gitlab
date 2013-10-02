@@ -1,9 +1,9 @@
 {
   "name": "spencerowen-gitlab",
   "version": "0.1.0",
-  "summary": "",
+  "summary": "Puppet GitLab Module",
   "author": "spencer owen",
-  "description": "",
+  "description": "Module to install GitLab \u003e\u003d6.x using puppet",
   "dependencies": [
     {
       "name": "puppetlabs/apt",
@@ -14,5 +14,5 @@
   "checksums": {},
   "source": "",
   "project_page": "",
-  "license": ""
+  "license": "GPLv3"
 }
