@@ -28,7 +28,7 @@
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
 	  gitlab_ssl_self_signed => false,
 	  gitlab_projects        => '10',
-	  gitlab_username_change => true,
+	  #gitlab_username_change => true,
 	  
 	  ldap_enabled           => false,
 	  ldap_host              => 'ldap.domain.com',
