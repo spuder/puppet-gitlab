@@ -100,15 +100,15 @@ production: &base
 
   ## LDAP settings
   ldap:
-  enabled: <%= @ldap_enabled %>
-  host:  '<%= @ldap_host %>' 
-  base:  '<%= @ldap_base %>'
-  port:  <%= @ldap_port %>
-  uid:   '<%= @ldap_uid %>'        #example 'sAMAccountName'
-  method: '<%= @ldap_method %>'
-  bind_dn: '<%= @ldap_bind_dn %>'  #example 'CN=binddnuser,CN=users,DC=foo,DC=com'
-  password: '<%= @ldap_bind_password %>'
-  allow_username_or_email_login: true
+    enabled: <%= @ldap_enabled %>
+    host:  '<%= @ldap_host %>' 
+    base:  '<%= @ldap_base %>'
+    port:  <%= @ldap_port %>
+    uid:   '<%= @ldap_uid %>'        #example 'sAMAccountName'
+    method: '<%= @ldap_method %>'
+    bind_dn: '<%= @ldap_bind_dn %>'  #example 'CN=binddnuser,CN=users,DC=foo,DC=com'
+    password: '<%= @ldap_bind_password %>'
+    allow_username_or_email_login: true
 
 
   ## OmniAuth settings
