@@ -16,7 +16,7 @@
 #  
 include gitlab
 
-case "${gitlab::custom_login_icon}" {
+case "${gitlab::use_custom_login_logo}" {
   'true': 
   {
       warning("Icon is true")

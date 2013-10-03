@@ -39,6 +39,8 @@ class gitlab (
     $use_custom_login_logo  = $gitlab::params::use_custom_login_logo,
     $company_logo_url       = $gitlab::params::company_logo_url,
     $use_custom_thumbnail   = $gitlab::params::use_custom_thumbnail,
+    $use_company_link       = $gitlab::params::use_company_link,
+    $company_link           = $gitlab::params::company_link,
     
     #User default settings
     $gitlab_gravatar        = $gitlab::params::gitlab_gravatar,
