@@ -15,7 +15,7 @@ end
   config.vm.box = "ubuntu_12.04_nopuppet"
   config.vm.hostname  ="gitlab"
   config.vm.box_url   ="http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210-nocm.box"
-  #config.vm.hostname = "gitlab.localdomain" #This fails to set the shortname, editing /etc/hosts and /etc/hostname manually through boostrap.sh
+  #config.vm.hostname = "gitlab.localdomain" #This fails to set the shortname, editing /etc/hosts and /etc/hostname manually through bootstrap.sh
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -43,7 +43,7 @@ end
    config.vm.synced_folder ".", "/etc/puppet/modules/gitlab"
 
 
-   config.vm.provision :shell, :path => "boostrap.sh"
+   config.vm.provision :shell, :path => "bootstrap.sh"
 
 
 
