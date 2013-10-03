@@ -61,7 +61,7 @@
   #Copy the gitlab config
   file { "${gitlab::git_home}/gitlab/config/gitlab.yml":
     ensure    => file,
-    content   => template('gitlab/gitlab.yml.6-0.erb'),
+    content   => template("gitlab/gitlab.yml.${gitlab::gitlab_branch}.erb"),
     owner     => "${gitlab::git_user}",
     group     => 'git',  
     require   => [
