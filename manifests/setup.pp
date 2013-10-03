@@ -50,7 +50,7 @@
     ensure    => file,
     content   => template('gitlab/gitlab-shell.erb'),
     owner     => "${gitlab::git_user}",
-    group     => 'git', #TODO: Is git the best way to do this? 
+    group     => 'git',
     require   => [
                   Exec['download gitlab-shell'],
                   Exec['download gitlab'],
@@ -63,7 +63,7 @@
     ensure    => file,
     content   => template('gitlab/gitlab.yml.6-0.erb'),
     owner     => "${gitlab::git_user}",
-    group     => 'git', #TODO: Is git the best way to do this? 
+    group     => 'git',  
     require   => [
                   Exec['download gitlab-shell'],
                   Exec['download gitlab'],
@@ -73,7 +73,7 @@
   #Copy the Unicorn config
   file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
-    content   => template('gitlab/unicorn.rb.6-0.erb'),#TODO: make this a variable
+    content   => template('gitlab/unicorn.rb.6-0-stable.erb'),
     owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [
