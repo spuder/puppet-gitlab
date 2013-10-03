@@ -60,7 +60,7 @@ class gitlab::config inherits params {
   #Copy nginx config to sites-available
   file { '/etc/nginx/sites-available/gitlab':
     ensure    => file,
-    content   => template('gitlab/gitlab.nginx-gitlab.conf.erb'),
+    content   => template('gitlab/nginx-gitlab.conf.erb'),
     mode      => '0644',
     owner     => 'root',
     group     => 'root',

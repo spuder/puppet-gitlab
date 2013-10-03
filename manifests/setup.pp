@@ -48,7 +48,7 @@
   #Copy the gitlab-shell config
   file { "${gitlab::git_home}/gitlab-shell/config.yml":
     ensure    => file,
-    content   => template('gitlab/gitlab-shell.config.yml.erb'),
+    content   => template('gitlab/gitlab-shell.erb'),
     owner     => "${gitlab::git_user}",
     group     => 'git', #TODO: Is git the best way to do this? 
     require   => [
@@ -73,7 +73,7 @@
   #Copy the Unicorn config
   file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
-    content   => template('gitlab/gitlab.unicorn.rb.erb'),
+    content   => template('gitlab/unicorn.rb.6-0.erb'),#TODO: make this a variable
     owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [
