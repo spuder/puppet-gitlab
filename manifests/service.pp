@@ -8,7 +8,7 @@ class gitlab::service inherits gitlab {
     owner     => root,
     group     => root,
     mode      => '0755',
-    subscribe    => Service['gitlab'], 
+
   }
   
   #gitlab service
@@ -16,7 +16,8 @@ class gitlab::service inherits gitlab {
 	  ensure    => running,
 	  enable    => true,
 	  hasrestart  => false,#Leave as false until fixed https://github.com/gitlabhq/gitlabhq/pull/5259
-	  hasstatus   => true,  
+	  hasstatus   => true, 
+	  subscribe    => File['/etc/init.d/gitlab'],  
 	}
 
 	service { 'nginx' :
