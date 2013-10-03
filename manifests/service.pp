@@ -15,9 +15,14 @@ class gitlab::service inherits gitlab {
 	service { 'gitlab' :
 	  ensure    => running,
 	  enable    => true,
-	  hasrestart  => true,
+	  hasrestart  => false,#Leave as false until fixed https://github.com/gitlabhq/gitlabhq/pull/5259
 	  hasstatus   => true,  
 	}
 
-	
+	service { 'nginx' :
+	  ensure   => running,
+	  enable   => true,    
+	  hasrestart  => true,
+    hasstatus   => true, 
+	}
 }

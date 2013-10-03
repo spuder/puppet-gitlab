@@ -157,7 +157,7 @@ class gitlab::config inherits params {
   #Overwrite gitlab icons with custom icons
   #The origional icon is left intact and a symbolic link is used to point to logo-white.png
 	case "${gitlab::use_custom_thumbnail}" {
-		  true:
+		  'true':
 	    {
 	      
         #Set the thumbnails	to the custom icons in the gitlab/files directory

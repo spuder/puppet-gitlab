@@ -35,7 +35,6 @@ class gitlab::service inherits gitlab {
     group     => root,
     mode      => '0755',
   }
-  #TODO make this point to a variable
   
 }#end service
   

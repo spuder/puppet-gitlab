@@ -6,13 +6,13 @@
 
   
   class { 'gitlab' : 
-	  git_user               => 'git',
-	  git_home               => '/home/git',
+#	  git_user               => 'git',
+#	  git_home               => '/home/git',
 	  git_email              => 'git@adaptivecomputing.com',
-	  git_comment            => 'GitLab',
-	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
+#	  git_comment            => 'GitLab',
+#	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
 	  gitlab_branch          => '6-1-stable',
-	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
+#	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
 	  gitlabshell_branch     => 'v1.7.1',
 	  
 	  gitlab_dbtype          => 'mysql',
@@ -21,8 +21,8 @@
 	  gitlab_dbpwd           => 'changeme',
 	  gitlab_dbhost          => 'localhost',
 	  gitlab_dbport          => '3306',
-	  gitlab_domain          => $::fqdn,
-	  gitlab_repodir         => $git_home,#TODO: Can this be removed? 
+#	  gitlab_domain          => $::fqdn,
+#	  gitlab_repodir         => $git_home,
 	  gitlab_ssl             => false,#TODO: remove wildcard from gitlab.nginx-gitlab.conf.erb
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
@@ -39,9 +39,9 @@
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
 	  
-	  use_custom_login_logo  => true,
+	  use_custom_login_logo  => false,
 	  use_custom_thumbnail   => false,
-	  use_company_link       => true,
+	  use_company_link       => false,
 	  company_link           => 'http://failblog.cheezburger.com',
 	  
 	  gitlab_gravatar        => true,

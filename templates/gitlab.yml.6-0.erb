@@ -188,19 +188,8 @@ production: &base
 
     ## Text under sign-in page (Markdown enabled)
     sign_in_text: |
-
-    <% if @use_custom_login_logo == true %>
-      ![Company Logo](<%= @company_logo_url %>)
-    <% else %> 
-     sign_in_text: |
-      #![Company Logo](<%= @company_logo_url %>) 
-    <% end %>
-    
-    <% if @use_company_link  == true%>
-      [Learn more about CompanyName](<%= @company_link %>)
-    <% else %> 
-      #[Learn more about CompanyName](<%= @company_link %>)
-    <% end %>
+    <% if @use_custom_login_logo == true %> ![Company Logo](<%= @company_logo_url %>) <% else %># ![Company Logo](<%= @company_logo_url %>)  <% end %>
+    <% if @use_company_link  == true %> [Learn more about CompanyName](<%= @company_link %>) <% else %>#  [Learn more about CompanyName](<%= @company_link %>) <% end %>
 
 development:
   <<: *base

@@ -63,6 +63,7 @@ class gitlab::packages inherits gitlab {
 	#Ubuntu 12.04 doesn't come with ruby2.0, stole .deb files from saucy repo
 	file { '/etc/apt/sources.list.d/ruby2.0.list':
 	  content => "deb file:///vagrant/files/ruby2-repo /",
+	  #content => "deb https://www.dropbox.com/sh/yfom0psdb4xv48f/AsJdcCSM4S/ruby2-repo
 	  #TODO: Create a public link that contains the repo
 	  mode    => 0644,
 	  owner   => 'root',
