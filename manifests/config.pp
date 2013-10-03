@@ -101,7 +101,6 @@ class gitlab::config inherits params {
     #user        => "${gitlab::git_user}",
     command     => "git config --global user.email ${gitlab::git_email}",
     #TODO: Force this to not just run once   
-    #TODO: Figure out why email is git@ac and not the value specified in the git_email variable
     
   }
   
@@ -122,36 +121,106 @@ class gitlab::config inherits params {
     group   => 'git',
     mode    => '0644',
   }
- 
+  
+  #Thumbnail logo white default
+  file{"${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png":
+    source => "puppet:///modules/gitlab/gitlab-logo-white.png.erb",
+    owner   => "${gitlab::git_user}",
+    group   => 'git',
+    mode    => '0644',
+  }
+  
+  #Thumbnail logo black default
+  file{"${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png":
+    source => "puppet:///modules/gitlab/gitlab-logo-black.png.erb",
+    owner   => "${gitlab::git_user}",
+    group   => 'git',
+    mode    => '0644',
+  }
+  
+  #Thumbnail logo white custom
+  file{"${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png":
+    source => "puppet:///modules/gitlab/company-logo-white.png.erb",
+    owner   => "${gitlab::git_user}",
+    group   => 'git',
+    mode    => '0644',
+  }
+  
+  #Thumbnail logo white custom
+  file{"${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png":
+    source => "puppet:///modules/gitlab/company-logo-black.png.erb",
+    owner   => "${gitlab::git_user}",
+    group   => 'git',
+    mode    => '0644',
+  }
+          
   #Overwrite gitlab icons with custom icons
-	case "${gitlab::custom_thumbnail_icon}" {
-		  'true':
+  #The origional icon is left intact and a symbolic link is used to point to logo-white.png
+	case "${gitlab::use_custom_thumbnail}" {
+		  true:
 	    {
-	        warning("gitlab:custom_thumbnail_icon is true, altering gitlab icons")
 	      
-	        file{"${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
-	            source => "puppet:///modules/gitlab/logo-white.png.erb",
-	            owner   => "${gitlab::git_user}",
-	            group   => 'git',
-	            mode    => '0644',
-	        }
-	        file{"${gitlab::git_home}/gitlab/app/assets/images/logo-black.png.erb":
-	            source => "puppet:///modules/gitlab/logo-black.png.erb",
-	            owner   => "${gitlab::git_user}",
-	            group   => 'git',
-	            mode    => '0644',
-	        }
+        #Set the thumbnails	to the custom icons in the gitlab/files directory
+	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
+	         ensure  => link,
+	         target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png",
+           owner   => "${gitlab::git_user}",
+				   group   => 'git',
+				   mode    => '0644',
+				   require => [ 
+				              File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
+				              File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
+				              ],
+	      }
+	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
+           ensure  => link,
+           target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png",
+           owner   => "${gitlab::git_user}",
+           group   => 'git',
+           mode    => '0644',
+           require => [ 
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
+                      ],
+	      }
+
 	    }#end false
-		
-		  'false': 
-		  {
-		      warning("gitlab:custom_thumbnail_icon is false, leaving stock icons")
-		  }#end true
-		  
+
 		  default: 
 		  {
-		     warning("gitlab:custom_thumbnail_icon is not defined")
-		  }
+		      
+        #Set the thumbnails to the default desert fox icon		  
+        file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
+           ensure  => link,
+           target  => "${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png",
+           owner   => "${gitlab::git_user}",
+           group   => 'git',
+           mode    => '0644',
+           require => [ 
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
+                      ],
+        }
+        file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
+           ensure  => link,
+           target  => "${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png",
+           owner   => "${gitlab::git_user}",
+           group   => 'git',
+           mode    => '0644',
+           require => [ 
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
+                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
+                      ],
+        }
+		  }#end default
 	}#end case
 
 

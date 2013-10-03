@@ -38,8 +38,11 @@ class gitlab::params {
   $ldap_bind_password     = ''
   
   #Company Branding
-  $custom_login_icon      = false
-  $custom_thumbnail_icon  = false
+  $use_custom_login_logo  = false
+  $company_logo_url       = 'http://placekitten.com/300/90'
+  $use_custom_thumbnail   = false
+  $use_company_link       = false
+  $company_link           = 'http://placekitten.com'
   
   #User default settings
   $gitlab_gravatar        = true

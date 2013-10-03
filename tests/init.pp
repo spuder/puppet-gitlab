@@ -39,8 +39,10 @@
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
 	  
-	  custom_login_icon      => true,#TODO:Rename to logo
-	  custom_thumbnail_icon  => true,#TODO:Rename to logo
+	  use_custom_login_logo  => true,
+	  use_custom_thumbnail   => false,
+	  use_company_link       => true,
+	  company_link           => 'http://failblog.cheezburger.com',
 	  
 	  gitlab_gravatar        => true,
 	  user_create_group      => false,
