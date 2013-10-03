@@ -1,4 +1,4 @@
-name    'spencerowen-gitlab'
+name    'spuder-gitlab'
 version '0.1.0'
 source ''
 author 'spencer owen'
