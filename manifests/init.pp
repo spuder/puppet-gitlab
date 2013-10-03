@@ -55,6 +55,7 @@ class gitlab (
     $project_wall           = $gitlab::params::project_wall,
     $project_snippets       = $gitlab::params::project_snippets,
     $gitlab_projects        = $gitlab::params::gitlab_projects,
+    $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
     
     
     
