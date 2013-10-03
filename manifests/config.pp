@@ -77,7 +77,7 @@ class gitlab::config inherits params {
   
 #  file { "${gitlab::params::git_home}/.gitconfig":
 #    ensure    => file,
-#    content   => template('gitlab/gitlab-.gitconfig.erb'),
+#    content   => template('gitlab/gitconfig.erb'),
 #    mode      => '0644',
 #    owner     => "${gitlab::git_user}",
 #  }

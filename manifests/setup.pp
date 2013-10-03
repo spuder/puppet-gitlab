@@ -61,7 +61,7 @@
   #Copy the gitlab config
   file { "${gitlab::git_home}/gitlab/config/gitlab.yml":
     ensure    => file,
-    content   => template('gitlab/gitlab.yml.6.0.erb'),
+    content   => template('gitlab/gitlab.yml.6-0.erb'),
     owner     => "${gitlab::git_user}",
     group     => 'git', #TODO: Is git the best way to do this? 
     require   => [
@@ -85,7 +85,7 @@
   #Copy the database config
   file { "${gitlab::git_home}/gitlab/config/database.yml":
     ensure    => file,
-    content   => template('gitlab/gitlab.database.yml.erb'),
+    content   => template('gitlab/database.yml.erb'),
     owner     => "${gitlab::git_user}",
     group     => 'git',
     mode      => '0640',
