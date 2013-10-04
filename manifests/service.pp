@@ -25,5 +25,6 @@ class gitlab::service inherits gitlab {
 	  enable   => true,    
 	  hasrestart  => true,
     hasstatus   => true, 
+    require     => Service ['gitlab'],
 	}
 }

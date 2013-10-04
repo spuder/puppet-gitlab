@@ -60,11 +60,35 @@ class gitlab::packages inherits gitlab {
 	#=====================================
 	
 	#Add ruby2.0 packages to sources
-	#Ubuntu 12.04 doesn't come with ruby2.0, stole .deb files from saucy repo
+	
+	#Create /packages folder for ruby repo's
+	file { '/packages':
+	  ensure   => directory,
+    before   => [
+             File ['/packages/ruby2-0-repo'],
+             File ['/etc/apt/sources.list.d/ruby2.0.list'],
+             Exec ['apt-get install ruby2.0'],
+             Exec ['apt-get install ruby2.0-dev'],
+             Exec ['apt-get install rake'],
+             ],
+	}
+	
+	#Place the custom ruby package in /packages/ruby2-0-repo
+	file { '/packages/ruby2-0-repo':
+	  source   => "puppet:///modules/gitlab/ruby2-repo",
+	  mode     => '0755', 
+	  recurse  => true,
+	  before   => [
+	               File ['/etc/apt/sources.list.d/ruby2.0.list'],
+	               Exec ['apt-get install ruby2.0'],
+	               Exec ['apt-get install ruby2.0-dev'],
+	               Exec ['apt-get install rake'],
+	               ],  
+	}
+	
+	#Ubuntu 12.04 doesn't come with ruby2.0, install .deb files from a local repo
 	file { '/etc/apt/sources.list.d/ruby2.0.list':
-	  content => "deb file:///vagrant/files/ruby2-repo /",
-	  #content => "deb https://www.dropbox.com/sh/yfom0psdb4xv48f/AsJdcCSM4S/ruby2-repo
-	  #TODO: Create a public link that contains the repo
+	  content => "deb file:///packages/ruby2-0-repo /",
 	  mode    => 0644,
 	  owner   => 'root',
 	  group   => 'root',
@@ -80,7 +104,7 @@ class gitlab::packages inherits gitlab {
   }
   
   #Install ruby2.0-dev
-  exec {'apt-get instal ruby2.0-dev':
+  exec {'apt-get install ruby2.0-dev':
     path    => '/usr/bin',
     command => 'sudo apt-get install -y --force-yes ruby2.0-dev',
     require => Exec['apt-get update'],
