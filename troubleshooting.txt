@@ -1,5 +1,29 @@
 This file is a work in progress
 
+##Common Errors
+================
+
+#Error 500 
+http://f.cl.ly/items/0g253M0q3W290G1T0s2y/Image%202013.10.03%208%3A35%3A15%20PM.png
+Look at /home/git/gitlab/log/production.log
+
+
+If you see the following error, then the project is public, but the user is not part of the group
+
+NoMethodError (undefined method `id' for nil:NilClass):
+  app/controllers/public/projects_controller.rb:22:in `show'
+
+*Solution: Add user to group (with atleast reporter permissiosn), or make project private
+*Solution2: Access the project from the dashboard
+
+http://gitlab.somedomain/admin/groups/company
+
+
+
+
+
+  
+  
 ## Installation locations
 
 Git lab is installed to /home/git/gitlab
@@ -36,3 +60,5 @@ listen 80;
 
 #goog
 listen *:80 default_server;
+
+
