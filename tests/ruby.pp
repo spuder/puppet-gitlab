@@ -1,6 +1,7 @@
 
 #Don't use the puppetlabs crap ruby module
 
+#instead use
 #puppet module install example42/ruby
 
 

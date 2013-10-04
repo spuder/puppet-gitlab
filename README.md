@@ -211,8 +211,9 @@ All of the parameters that can be set
     $project_wiki           
     $project_wall           
     $project_snippets       
-    $gitlab_projects        
-	  }
+    $gitlab_projects 
+    $project_public_default     
+
 	  
 	  
 ##Limitations

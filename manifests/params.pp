@@ -39,10 +39,10 @@ class gitlab::params {
   
   #Company Branding
   $use_custom_login_logo  = false
-  $company_logo_url       = 'http://placekitten.com/300/90'
+  $company_logo_url       = 'http://placedog.com/300/93'
   $use_custom_thumbnail   = false
   $use_company_link       = false
-  $company_link           = 'http://placekitten.com'
+  $company_link           = 'http://placedog.com'
   
   #User default settings
   $gitlab_gravatar        = true

@@ -43,6 +43,7 @@
 	  use_custom_thumbnail   => false,
 	  use_company_link       => false,
 	  company_link           => 'http://failblog.cheezburger.com',
+	  project_public_default => false,
 	  
 	  gitlab_gravatar        => true,
 	  user_create_group      => false,

@@ -113,7 +113,6 @@ exit_if_not_running(){
   check_stale_pids
   if [ "$web_status" != "0" -a "$sidekiq_status" != "0" ]; then
     echo "GitLab is not running."
-    exit
   fi
 }
 
