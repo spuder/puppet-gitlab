@@ -20,7 +20,6 @@ class gitlab::service inherits gitlab {
     cwd     => "${gitlab::params::git_home}/gitlab",
     user    => "${gitlab::params::git_user}",
     command => "bundle exec rake gitlab:check RAILS_ENV=production > ${gitlab::params::git_home}/bundle-exec-rake-output-advanced.txt", 
-    #TODO: Figure out why email is git@ac and not the value specified in the git_email variable, causes the check to fail
   }
   
   

@@ -89,7 +89,6 @@ class gitlab::config inherits params {
     #environment => '/root',
     #user    => "${gitlab::params::git_user}",
     command => "git config --global user.name ${gitlab::git_comment}",
-    #TODO: Force this to not just run once
     
   }
   
@@ -100,8 +99,6 @@ class gitlab::config inherits params {
     #environment => '/root',
     #user        => "${gitlab::git_user}",
     command     => "git config --global user.email ${gitlab::git_email}",
-    #TODO: Force this to not just run once   
-    
   }
   
   #Setup global core.autocrlf input

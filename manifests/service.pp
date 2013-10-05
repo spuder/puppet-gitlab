@@ -1,6 +1,5 @@
 class gitlab::service inherits gitlab {
   
-#TODO: run an if statement to choose the correct init script (gitlab.init.6-1.erb, ect..)
   #init script
   file { '/etc/init.d/gitlab':
     ensure    => file,
