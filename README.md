@@ -134,7 +134,7 @@ Any parameters omitted will be set to the defautls located in gitlab::params
 
 For example, a basic configuraiton might look like this: 
 
-  class { 'gitlab' : 
+      class { 'gitlab' : 
 	  git_email              => 'git@foo.com',
 	  git_comment            => 'GitLab',
 	  gitlab_branch          => '6-1-stable',
