@@ -18,8 +18,15 @@ NoMethodError (undefined method `id' for nil:NilClass):
 
 http://gitlab.somedomain/admin/groups/company
 
+#Push prompts for git@foo password
+Check the following
+1. Is the hostname and shortname configured correctly (gitlab.yml, /etc/hosts, ect..)
+2. Is the git config --global configured
+3. Does the .ssh folder have the correct permissions
+4. Does the user have their ssh keys saved into gitlab?  
 
-
+You will most likely need to reinstall gitlab and make sure the hostname is correct before beining. 
+http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-push-for-git-user
 
 
   
