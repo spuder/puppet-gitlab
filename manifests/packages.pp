@@ -12,7 +12,6 @@ class gitlab::packages inherits gitlab {
 	                    'libmysqlclient-dev',
 	                    'redis-server',
 	                    'nginx', #TODO, decide if nginx should be installed via apt, or puppet (pupet had some problems)
-	                    'wget',
 	                    ]
 
                           

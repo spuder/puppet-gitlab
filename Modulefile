@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '0.2.0'
+version '0.2.1'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -248,3 +248,7 @@ project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/apt', '>=1.3.0'
+dependency 'puppetlabs/mysql', '>=2.0.0'
+dependency 'jfryman/nginx',	'>=0.0.5'
+dependency 'maestrodev/wget',	'>=1.2.2'
