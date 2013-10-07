@@ -1,5 +1,4 @@
 #!/bin/bash
-
 apt-get update 
 
 sudo apt-get install -y python-software-properties
@@ -11,7 +10,6 @@ apt-get install -y puppet-common
 
 echo "127.0.0.1 localhost.localdomain localhost
 127.0.0.1 gitlab.localdomain gitlab" > /etc/hosts
-
 echo "gitlab" > /etc/hostname
 
 puppet module install puppetlabs-apt

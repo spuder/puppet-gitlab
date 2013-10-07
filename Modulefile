@@ -25,8 +25,8 @@ description '# gitlab #
 The spencerowen-puppet module installs a fully self contained gitlab server on an ubuntu server
 
 Tested :
-Gitlab 6-0-stable on Ubuntu 12.04
-Gitlab 6-1-stable on Ubuntu 12.04
+Gitlab 6-0-stable on Ubuntu 12.04  
+Gitlab 6-1-stable on Ubuntu 12.04  
 
  
 
@@ -45,27 +45,27 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 The module installs the following programs:
 
-installs ruby 2.0 (from saucy ppa\'s)
-nginx server
-postfix server
-mysql server
+installs ruby 2.0 (from saucy ppa\'s)  
+nginx server  
+postfix server  
+mysql server  
 
-The module configures the following files:
+The module configures the following files:  
 
-/home/git/gitlab/config/gitlab.yml
-/home/git/gitlab/config/database.yml
-/home/git/gitlab/config/unicorn.rb
-/home/git/gitlab-shell/config.yml
-/etc/init.d/gitlab
-/etc/ngnix/sites-available/gitlab
-/etc/nginx/sites-enabled/gitlab
+/home/git/gitlab/config/gitlab.yml  
+/home/git/gitlab/config/database.yml  
+/home/git/gitlab/config/unicorn.rb  
+/home/git/gitlab-shell/config.yml  
+/etc/init.d/gitlab  
+/etc/ngnix/sites-available/gitlab  
+/etc/nginx/sites-enabled/gitlab  
 
 ###Setup Requirements **OPTIONAL**
 
 This module requires the following programs
 
-puppet >= 3.3.0
-ruby   >= 2.0 (installed automatically)
+puppet >= 3.3.0  
+ruby   >= 2.0 (installed automatically)  
 
 
 This module requires the following modules to be defined in the puppet master
@@ -94,16 +94,16 @@ postfix
 You can safely ignore the following warnings that are presented durring installation
 Certain versions of puppet return these errors even though the packages were installed properly
 
-Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\\n"
-Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\\n"
-Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\\n"
-Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\\n"
-Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\\n"
-Warning: Failed to match dpkg-query line "No packages found matching git-core.\\n"
-http://projects.puppetlabs.com/issues/22621
+Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\\n"  
+Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\\n"  
+Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\\n"  
+Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\\n"  
+Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\\n"  
+Warning: Failed to match dpkg-query line "No packages found matching git-core.\\n"  
+http://projects.puppetlabs.com/issues/22621  
 
 
-The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds: 
+The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds:   
 Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
 
@@ -119,10 +119,10 @@ If you are using puppet stand alone, the following would setup mysql
 
 root$ import module puppetlabs-mysql
 
-root$ cat /tmp/gitlab-mysql-prerequisits.pp
-  class { \'mysql::server\':
-    config_hash => { \'root_password\' => \'badpassword\' }
-  }
+root$ cat /tmp/gitlab-mysql-prerequisits.pp  
+  class { \'mysql::server\':  
+    config_hash => { \'root_password\' => \'badpassword\' }  
+  }  
   
 puppet apply /tmp/gitlab-mysql-prerequisits.pp
 
@@ -231,19 +231,19 @@ Will not work on CentOS / RHEL
 
 Pull Requests are accepted: 
 
-**Pull requests should be made to the vagrant branch**
-Changes will then be merged into the master branch
-
 
 ##Release Notes/Contributors/Etc **Optional**
 
 This module is based on the work done by the following people:
 
-sbadia - https://github.com/sbadia/puppet-gitlab
-atomaka - https://github.com/atomaka/puppet-gitlab
+sbadia - https://github.com/sbadia/puppet-gitlab  
+atomaka - https://github.com/atomaka/puppet-gitlab  
 
 ##Changelog
-2013-Oct-3: First Release, fully tested'
+2013-Oct-3: First Release, fully tested
+2013-Oct-5: Removes ruby repo from files, and instead downloads from web  
+Fixes https://forge.puppetlabs.com/spuder/gitlab  
+'
 project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 
 ## Add dependencies, if any:

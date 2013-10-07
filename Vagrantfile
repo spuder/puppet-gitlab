@@ -41,8 +41,6 @@ end
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
    config.vm.synced_folder ".", "/etc/puppet/modules/gitlab"
-
-
    config.vm.provision :shell, :path => "bootstrap.sh"
 
 
