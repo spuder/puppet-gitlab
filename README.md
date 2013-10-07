@@ -225,9 +225,6 @@ Will not work on CentOS / RHEL
 
 Pull Requests are accepted: 
 
-**Pull requests should be made to the vagrant branch**
-Changes will then be merged into the master branch
-
 
 ##Release Notes/Contributors/Etc **Optional**
 
