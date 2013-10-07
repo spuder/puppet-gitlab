@@ -17,3 +17,4 @@ echo "gitlab" > /etc/hostname
 puppet module install puppetlabs-apt
 puppet module install puppetlabs-mysql
 puppet module install example42/postfix
+puppet module install maestrodev/wget

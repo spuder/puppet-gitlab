@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '0.1.0'
+version '0.2.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -41,7 +41,7 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-###What [Modulename] affects
+###What spuder-gitlab affects
 
 The module installs the following programs:
 
@@ -74,6 +74,7 @@ puppet module install puppetlabs-apt
 puppet module install puppetlabs-mysql
 puppet module install example42/postfix
 puppet module install jfryman-nginx
+puppet module install maestrodev/wget
 
 
 The following dependencies should be resolved automatically
@@ -105,14 +106,10 @@ http://projects.puppetlabs.com/issues/22621
 The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds: 
 Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
-After the installation is complete, start the gitlab service
-
-service gitlab start
-
 
 
 	
-###Beginning with [Modulename]	
+###Beginning with spuder-gitlab	
 
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
