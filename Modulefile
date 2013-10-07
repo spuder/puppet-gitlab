@@ -248,4 +248,3 @@ project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
-dependency	'puppetlabs/apt', '>= 1.3.0'
