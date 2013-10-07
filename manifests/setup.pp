@@ -74,6 +74,7 @@
   file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
     content   => template('gitlab/unicorn.rb.6-0-stable.erb'),
+    #TODO: Make a variable
     owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [

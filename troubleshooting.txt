@@ -13,7 +13,7 @@ If you see the following error, then the project is public, but the user is not 
 NoMethodError (undefined method `id' for nil:NilClass):
   app/controllers/public/projects_controller.rb:22:in `show'
 
-*Solution: Add user to group (with atleast reporter permissiosn), or make project private
+*Solution: Add user to group (with atleast reporter permission), or make project private
 *Solution2: Access the project from the dashboard
 
 http://gitlab.somedomain/admin/groups/company
