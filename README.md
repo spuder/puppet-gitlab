@@ -234,6 +234,7 @@ sbadia - https://github.com/sbadia/puppet-gitlab
 atomaka - https://github.com/atomaka/puppet-gitlab  
 
 ##Changelog
-2013-Oct-3: First Release, fully tested
-2013-Oct-5: Removes ruby repo from files, and instead downloads from web  
-Fixes https://forge.puppetlabs.com/spuder/gitlab  
+2013-Oct-3: 0.1.0 First Release, fully tested
+2013-Oct-5: 0.2.0 Removes ruby repo from files, and instead downloads from web  
+Fixes https://forge.puppetlabs.com/spuder/gitlab    
+2013-Oct-5: 0.2.1 Adds module dependencies   
