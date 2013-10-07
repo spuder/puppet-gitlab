@@ -62,13 +62,13 @@ puppet >= 3.3.0
 ruby   >= 2.0 (installed automatically)  
 
 
-This module requires the following modules to be defined in the puppet master
+spuder-gitlab automatically installs the following dependencies
 
-puppet module install puppetlabs-apt
-puppet module install puppetlabs-mysql
-puppet module install example42/postfix
-puppet module install jfryman-nginx
-puppet module install maestrodev/wget
+puppetlabs-apt
+puppetlabs-mysql >= 2.0.0
+example42/postfix
+jfryman-nginx
+ maestrodev/wget
 
 
 The following dependencies should be resolved automatically
@@ -146,6 +146,8 @@ For example, a basic configuraiton might look like this:
 	  gitlab_username_change => true,
 	  
 	  }
+	  
+Compare tests/init.pp for a working example of setting up gitlab
 	  
 	  
 ##Reference
@@ -237,4 +239,5 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-3: 0.1.0 First Release, fully tested
 2013-Oct-5: 0.2.0 Removes ruby repo from files, and instead downloads from web  
 Fixes https://forge.puppetlabs.com/spuder/gitlab    
-2013-Oct-5: 0.2.1 Adds module dependencies   
+2013-Oct-5: 0.2.1 Adds module dependencies
+2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1   

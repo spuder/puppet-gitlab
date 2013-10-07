@@ -233,7 +233,8 @@ class gitlab::packages inherits gitlab {
 	## MySQL
   #=====================================
   
-  include mysql
+  #include mysql #This syntax is no longer supported as of puppetlabs-mysql 2.0.0
+  # The end user must manually setup the database, see tests/init.pp for an example
 
   mysql::db { "$gitlab::gitlab_dbname" :
   ensure    => present,

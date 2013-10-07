@@ -1,8 +1,15 @@
 
 
-  class { 'mysql::server':
-    config_hash => { 'root_password' => 'badpassword' }
-  }#TODO: This needs to be moved to hiera or foreman
+#This is the syntax to create a mysql server in puppetlabs-mysql version < 2.0.0
+#  class { 'mysql::server':
+#    config_hash => { 'root_password' => 'badpassword' }
+#  }
+  
+#This is the syntax to create a mysql server in puppetlabs-mysql version > 2.0.0
+#Use caution as it could overwrite an existing database
+	class { 'mysql::server':
+	  root_password   => 'foo', 
+	}
 
   
   class { 'gitlab' : 
