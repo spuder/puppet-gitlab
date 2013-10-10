@@ -178,7 +178,7 @@ The logo should be saved as a .png
 Company-logo-white.png will be used against the dark background themes
 Company-logo-black.png will be used against the light background themes
 
-![thumbnail]
+![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
 	  
 	  
 ##Reference
