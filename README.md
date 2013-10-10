@@ -1,9 +1,6 @@
 # gitlab #
 
 
-[landing] : ./images/landing.png
-[thumbnail] : ./images/thumbnail.png
-
 ####Table of Contents
 
 1. [Overview](#overview)
@@ -155,18 +152,21 @@ Compare tests/init.pp for a working example of setting up gitlab
 
 The login page and the icon in the top left of the profile page can be customized. 
 
-An example to change the landing page icon
-    class { 'gitlab' : 
-        git_email  => 'git@foo.com',
-        ......   
-        use_custom_login_logo => true,
-        company_logo_url       => 'http://placekitten.com/300/93',
-        use_company_link	  =>  true,
-        company_link           => 'http://icanhas.cheezburger.com',
-        }
+An example to change the landing page icon  
+
+      class { 'gitlab' : 
+          git_email  => 'git@foo.com',
+          ......   
+          use_custom_login_logo => true,
+          company_logo_url       => 'http://placekitten.com/300/93',
+          use_company_link	  =>  true,
+          company_link           => 'http://icanhas.cheezburger.com',
+        }  
+        
+
         
         
-[landing]
+![logo](http://f.cl.ly/items/401M3R213a2H1Z220O07/Image%202013.10.10%2010%3A05%3A33%20AM.png)
 
 To change the thumbnail icon, replace the contents of the following files with your logo
 
@@ -178,7 +178,7 @@ The logo should be saved as a .png
 Company-logo-white.png will be used against the dark background themes
 Company-logo-black.png will be used against the light background themes
 
-[thumbnail]
+![thumbnail]
 	  
 	  
 ##Reference
