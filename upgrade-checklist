@@ -23,13 +23,13 @@ http://stackoverflow.com/questions/19070744/upgrading-gitlab-gives-following-err
 
 *compare the old init script to the new init script*
 git difftool 6-1-stable:lib/support/init.d/gitlab 6-0-stable:lib/support/init.d/gitlab
-If they are different, then save the new one to templates/gitalb.init.6.1.erb
+If they are different, then save the new one to templates/gitalb.init.6.x.erb (where x is the new release)
 
 
 
 compare the old config/gitlab.yml to the new config/gitlab.yml, some versions add new flags
 git difftool 6-1-stable:config/gitlab.yml.example 6-0-stable:config/gitlab.yml.example
-If they are differrnt, then edit templates/gitlab.yml.6.0.erb
+If they are different, then create a new template with the release number by coping the currently working one (templates/gitlab.yml.6.x.erb )
 
 compare the old gitlab-shell/config.yml to the new config
 
@@ -46,3 +46,11 @@ sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production
 
 #run this
 sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production --trace
+
+
+#Post upgrade
+
+You will need to replace the thumbnail icons located on the puppet master in
+
+/etc/puppet/modules/files/company-logo-black.png.erb
+/etc/puppet/modules/files/company-logo-white.png.erb

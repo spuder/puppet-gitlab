@@ -1,6 +1,9 @@
 # gitlab #
 
 
+[landing] : ./images/landing.png
+[thumbnail] : ./images/thumbnail.png
+
 ####Table of Contents
 
 1. [Overview](#overview)
@@ -115,8 +118,8 @@ If you are using puppet stand alone, the following would setup mysql
 
     root$ cat /tmp/gitlab-mysql-prerequisits.pp  
       class { '::mysql::server':  
-      root_password => 'somesuperlongpasswordwithentropy' }  
-    }  
+          root_password => 'somesuperlongpasswordwithentropy' }  
+      }  
 
 Then apply the config like so  
 
@@ -134,22 +137,48 @@ Any parameters omitted will be set to the defautls located in gitlab::params
 For example, a basic configuraiton might look like this: 
 
       class { 'gitlab' : 
-	  git_email              => 'git@foo.com',
-	  git_comment            => 'GitLab',
-	  gitlab_branch          => '6-1-stable',
-	  gitlabshell_branch     => 'v1.7.1',
-	  
-	  gitlab_dbname          => 'gitlabdb',
-	  gitlab_dbuser          => 'gitlabdbu',
-	  gitlab_dbpwd           => 'changeme',
-	  
-
-	  gitlab_projects        => '10',
-	  gitlab_username_change => true,
-	  
+	      git_email              => 'git@foo.com',
+	      git_comment            => 'GitLab',
+	      gitlab_branch          => '6-1-stable',
+	      gitlabshell_branch     => 'v1.7.1',
+	      gitlab_dbname          => 'gitlabdb',
+	      gitlab_dbuser          => 'gitlabdbu',
+	      gitlab_dbpwd           => 'changeme',
+	      gitlab_projects        => '10',
+	      gitlab_username_change => true,
 	  }
 	  
 Compare tests/init.pp for a working example of setting up gitlab
+
+
+##Customization
+
+The login page and the icon in the top left of the profile page can be customized. 
+
+An example to change the landing page icon
+    class { 'gitlab' : 
+        git_email  => 'git@foo.com',
+        ......   
+        use_custom_login_logo => true,
+        company_logo_url       => 'http://placekitten.com/300/93',
+        use_company_link	  =>  true,
+        company_link           => 'http://icanhas.cheezburger.com',
+        }
+        
+        
+[landing]
+
+To change the thumbnail icon, replace the contents of the following files with your logo
+
+
+/etc/puppet/modules/gitlab/files/company-logo-white.png.erb 
+
+The logo should be about 80px X 80px
+The logo should be saved as a .png
+Company-logo-white.png will be used against the dark background themes
+Company-logo-black.png will be used against the light background themes
+
+[thumbnail]
 	  
 	  
 ##Reference
@@ -230,9 +259,10 @@ Will not work on CentOS / RHEL
 Pull Requests are accepted: 
 
 
-##Release Notes/Contributors/Etc **Optional**
+##Release Notes/Contributors/Etc 
 
-This module is based on the work done by the following people:
+This module is based on the work done by the following people:  
+Due diligence to give credit and remain within license has been done
 
 sbadia - https://github.com/sbadia/puppet-gitlab  
 atomaka - https://github.com/atomaka/puppet-gitlab  
