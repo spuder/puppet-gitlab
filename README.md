@@ -150,7 +150,7 @@ Compare tests/init.pp for a working example of setting up gitlab
 
 ##Customization
 
-#Login Page  
+####Login Page  
 
 The login page and the icon in the top left of the profile page can be customized. 
 
@@ -172,7 +172,7 @@ An example to change the landing page icon
 
 --------------------------------------------------------------------------------------
 
-#Thumbnail Icon
+###Thumbnail Icon
 
 To change the thumbnail icon, replace the contents of the following files with your logo
 
