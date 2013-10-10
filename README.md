@@ -4,7 +4,8 @@
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
- 
+
+[modulename](spuder-gitlab)
 
 ####Table of Contents
 
@@ -21,7 +22,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
 
 ##Overview
 
-The spuder-puppet module installs a fully self contained gitlab server on an ubuntu server
+The [modulename] module installs a fully self contained gitlab server on an ubuntu server
 
 Tested :  
 Gitlab 6-0-stable on Ubuntu 12.04  
@@ -40,7 +41,7 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-###What spuder-gitlab affects
+###What [modulename] affects
 
 The module installs the following programs:
 
@@ -69,11 +70,10 @@ ruby   >= 2.0 (installed automatically)
 
 spuder-gitlab automatically installs the following dependencies
 
-puppetlabs-apt
-puppetlabs-mysql >= 2.0.0
-example42/postfix
-jfryman-nginx
-maestrodev/wget
+puppetlabs-apt  
+puppetlabs-mysql >= 2.0.0  
+jfryman-nginx  
+maestrodev/wget  
 
 
 The following dependencies should be resolved automatically
@@ -93,22 +93,22 @@ postfix
 You can safely ignore the following warnings that are presented durring installation
 Certain versions of puppet return these errors even though the packages were installed properly
 
-Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\n"  
-Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\n"  
-Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\n"  
-Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\n"  
-Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\n"  
-Warning: Failed to match dpkg-query line "No packages found matching git-core.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching git-core.\n"  
 http://projects.puppetlabs.com/issues/22621  
 
 
-The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds:   
-Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
+**The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
+  Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
 
 
 	
-###Beginning with spuder-gitlab	
+###Beginning with [modulename]
 
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
@@ -180,8 +180,8 @@ An example to change the landing page icon
 
 To change the thumbnail icon, replace the contents of the following files with your logo
  
-/etc/puppet/modules/gitlab/files/company-logo-white.png.erb 
-/etc/puppet/modules/gitlab/files/company-logo-black.png.erb 
+/etc/puppet/modules/gitlab/files/company-logo-white.png.erb   
+/etc/puppet/modules/gitlab/files/company-logo-black.png.erb   
 
 Company-logo-white.png will be used against the dark background themes  
 Company-logo-black.png will be used against the light background themes 
@@ -193,7 +193,7 @@ Company-logo-black.png will be used against the light background themes
 
 ![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
 	  
-*The logo should be about 80px X 80px*
+*The logo should be about 80px by 80px in size*  
 *The logo should be saved as a .png* 
 
 
@@ -213,7 +213,7 @@ An example to integrate with Active Directory
         ldap_bind_password     => 'bar',
     }
     
-**Users must have email addresses defined in AD to be able to login to gitlab**
+**Users must have email addresses defined in AD to be able to login to gitlab!**
 	  
 ##Reference
 
@@ -291,6 +291,7 @@ Will not work on CentOS / RHEL
 ##Development
 
 Pull Requests are accepted: 
+This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen
 
 
 ##Release Notes/Contributors/Etc 
