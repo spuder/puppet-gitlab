@@ -4,7 +4,7 @@ source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
 summary 'Puppet GitLab Module'
-description '# gitlab #  
+description '# gitlab #
 
 
 Source - https://github.com/spuder/puppet-gitlab  

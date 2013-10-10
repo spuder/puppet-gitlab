@@ -1,4 +1,4 @@
-# gitlab #  
+# gitlab #
 
 
 Source - https://github.com/spuder/puppet-gitlab  
