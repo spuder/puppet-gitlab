@@ -125,6 +125,7 @@ class gitlab::config inherits params {
     owner   => "${gitlab::git_user}",
     group   => 'git',
     mode    => '0644',
+    backup  => false,
   }
   
   #Thumbnail logo black default
@@ -133,6 +134,7 @@ class gitlab::config inherits params {
     owner   => "${gitlab::git_user}",
     group   => 'git',
     mode    => '0644',
+    backup  => false,
   }
   
   #Thumbnail logo white custom
@@ -141,6 +143,7 @@ class gitlab::config inherits params {
     owner   => "${gitlab::git_user}",
     group   => 'git',
     mode    => '0644',
+    backup  => false,
   }
   
   #Thumbnail logo white custom
@@ -149,6 +152,7 @@ class gitlab::config inherits params {
     owner   => "${gitlab::git_user}",
     group   => 'git',
     mode    => '0644',
+    backup  => false,
   }
           
   #Overwrite gitlab icons with custom icons

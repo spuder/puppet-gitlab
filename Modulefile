@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '0.2.4'
+version '0.2.5'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -22,7 +22,7 @@ description '# gitlab #
 
 ##Overview
 
-The spencerowen-puppet module installs a fully self contained gitlab server on an ubuntu server
+The spuder-puppet module installs a fully self contained gitlab server on an ubuntu server
 
 Tested :
 Gitlab 6-0-stable on Ubuntu 12.04  
@@ -117,14 +117,16 @@ It is recomeded that this be setup in your site.pp file, hiera or another ENC.
 
 If you are using puppet stand alone, the following would setup mysql
 
-root$ import module puppetlabs-mysql
+    root$ import module puppetlabs-mysql
 
-root$ cat /tmp/gitlab-mysql-prerequisits.pp  
-  class { \'mysql::server\':  
-    config_hash => { \'root_password\' => \'badpassword\' }  
-  }  
-  
-puppet apply /tmp/gitlab-mysql-prerequisits.pp
+    root$ cat /tmp/gitlab-mysql-prerequisits.pp  
+      class { \'::mysql::server\':  
+      root_password => \'somesuperlongpasswordwithentropy\' }  
+    }  
+
+Then apply the config like so  
+
+    puppet apply /tmp/gitlab-mysql-prerequisits.pp
 
   
 
@@ -242,13 +244,15 @@ sbadia - https://github.com/sbadia/puppet-gitlab
 atomaka - https://github.com/atomaka/puppet-gitlab  
 
 ##Changelog
-2013-Oct-3: 0.1.0 First Release, fully tested
+2013-Oct-3: 0.1.0 First Release, fully tested  
 2013-Oct-5: 0.2.0 Removes ruby repo from files, and instead downloads from web  
-Fixes https://forge.puppetlabs.com/spuder/gitlab    
-2013-Oct-5: 0.2.1 Adds module dependencies
-2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1   
-2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0
-2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8'
+2013-Oct-5: 0.2.1 Adds module dependencies   
+2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1  
+2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0   
+2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
+2013-Oct-10: 0.2.5 Blind revision to fix thumbnail issue (he says sheepishly while blushing)   
+
+'
 project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 
 ## Add dependencies, if any:
