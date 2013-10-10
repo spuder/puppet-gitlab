@@ -1,11 +1,12 @@
-# gitlab #
+gitlab
+=========
 
 
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
 
-[modulename](spuder-gitlab)
+
 
 ####Table of Contents
 
@@ -14,7 +15,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
 3. [Setup - The basics of getting started with [Modulename]](#setup)
     * [What [Modulename] affects](#what-[modulename]-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with [Modulename]](#beginning-with-[Modulename])
+    * [Beginning with gitlab](#beginning-with-gitlab)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -22,7 +23,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
 
 ##Overview
 
-The [modulename] module installs a fully self contained gitlab server on an ubuntu server
+The gitlab module installs a fully self contained gitlab server on an ubuntu server
 
 Tested :  
 Gitlab 6-0-stable on Ubuntu 12.04  
@@ -41,7 +42,7 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-###What [modulename] affects
+###What gitlab affects
 
 The module installs the following programs:
 
@@ -108,7 +109,7 @@ http://projects.puppetlabs.com/issues/22621
 
 
 	
-###Beginning with [modulename]
+###Beginning with gitlab
 
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
@@ -292,6 +293,7 @@ Will not work on CentOS / RHEL
 
 Pull Requests are accepted: 
 This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen
+Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown
 
 
 ##Release Notes/Contributors/Etc 
