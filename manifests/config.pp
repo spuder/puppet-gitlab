@@ -161,6 +161,7 @@ class gitlab::config inherits params {
 	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
 	         ensure  => link,
 	         target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png",
+	         backup  => false,
            owner   => "${gitlab::git_user}",
 				   group   => 'git',
 				   mode    => '0644',
@@ -174,6 +175,7 @@ class gitlab::config inherits params {
 	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
            ensure  => link,
            target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png",
+           backup  => false,
            owner   => "${gitlab::git_user}",
            group   => 'git',
            mode    => '0644',
@@ -194,6 +196,7 @@ class gitlab::config inherits params {
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
            ensure  => link,
            target  => "${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png",
+           backup  => false,
            owner   => "${gitlab::git_user}",
            group   => 'git',
            mode    => '0644',
@@ -207,6 +210,7 @@ class gitlab::config inherits params {
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
            ensure  => link,
            target  => "${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png",
+           backup  => false,
            owner   => "${gitlab::git_user}",
            group   => 'git',
            mode    => '0644',

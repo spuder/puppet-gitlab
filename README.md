@@ -68,7 +68,7 @@ puppetlabs-apt
 puppetlabs-mysql >= 2.0.0
 example42/postfix
 jfryman-nginx
- maestrodev/wget
+maestrodev/wget
 
 
 The following dependencies should be resolved automatically
@@ -242,3 +242,4 @@ Fixes https://forge.puppetlabs.com/spuder/gitlab
 2013-Oct-5: 0.2.1 Adds module dependencies
 2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1   
 2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0
+2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8
