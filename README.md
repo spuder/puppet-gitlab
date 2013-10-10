@@ -150,6 +150,8 @@ Compare tests/init.pp for a working example of setting up gitlab
 
 ##Customization
 
+#Login Page  
+
 The login page and the icon in the top left of the profile page can be customized. 
 
 An example to change the landing page icon  
@@ -168,15 +170,19 @@ An example to change the landing page icon
         
 ![logo](http://f.cl.ly/items/401M3R213a2H1Z220O07/Image%202013.10.10%2010%3A05%3A33%20AM.png)
 
+--------------------------------------------------------------------------------------
+
+#Thumbnail Icon
+
 To change the thumbnail icon, replace the contents of the following files with your logo
 
 
 /etc/puppet/modules/gitlab/files/company-logo-white.png.erb 
 
-The logo should be about 80px X 80px
-The logo should be saved as a .png
-Company-logo-white.png will be used against the dark background themes
-Company-logo-black.png will be used against the light background themes
+The logo should be about 80px X 80px  
+The logo should be saved as a .png  
+Company-logo-white.png will be used against the dark background themes  
+Company-logo-black.png will be used against the light background themes  
 
 ![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
 	  
