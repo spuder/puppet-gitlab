@@ -69,7 +69,7 @@ puppet >= 3.3.0
 ruby   >= 2.0 (installed automatically)  
 
 
-spuder-gitlab automatically installs the following dependencies
+spuder-gitlab requires the following modules, they will be installed automatically  
 
 puppetlabs-apt  
 puppetlabs-mysql >= 2.0.0  
@@ -77,18 +77,18 @@ jfryman-nginx
 maestrodev/wget  
 
 
-The following dependencies should be resolved automatically
+The following programs will be installed
 
-git  		>=1.7.10
-ruby 		>=2.0.0
-- bundler
-- mysql2
--ruby2.0
--charlock_holmes
-mysqlserver
-mysqlclient
-ngnix
-postfix
+- git  		>=1.7.10  
+- ruby 		>=2.0.0  
+- bundler  
+- mysql2  
+- ruby2.0  
+- charlock_holmes  
+- mysqlserver  
+- mysqlclient  
+- ngnix  
+- postfix  
 
 
 You can safely ignore the following warnings that are presented durring installation
@@ -151,7 +151,7 @@ For example, a basic configuraiton might look like this:
 	      gitlab_username_change => true,
 	  }
 	  
-Compare tests/init.pp for a working example of setting up gitlab
+Look at tests/init.pp for an example of what class parameters to use
 
 
 ##Customization
@@ -291,15 +291,15 @@ Will not work on CentOS / RHEL
 
 ##Development
 
-Pull Requests are accepted: 
-This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen
-Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown
+Pull Requests are accepted: *Send requests to dev branch*
+
+This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen  
+Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown  
 
 
 ##Release Notes/Contributors/Etc 
 
 This module is based on the work done by the following people:  
-Credit for the design pattern and much of the parameters belong to them. 
 
 sbadia - https://github.com/sbadia/puppet-gitlab  
 atomaka - https://github.com/atomaka/puppet-gitlab  

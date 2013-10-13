@@ -20,6 +20,14 @@
     {
       "name": "maestrodev/wget",
       "version_requirement": "\u003e\u003d1.2.2"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "\u003e\u003d4.0.0"
+    },
+    {
+      "name": "example42/postfix",
+      "version_requirement": "\u003e\u003d2.0.9"
     }
   ],
   "types": [],
