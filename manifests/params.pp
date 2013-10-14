@@ -10,7 +10,7 @@ class gitlab::params {
   $git_comment            = 'GitLab'
   $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
   $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git'
-  $gitlab_domain          = $::fqdn  #TODO: Can it have multiple values? Would be needed if there are going to be aliases http://nginx.org/en/docs/http/server_names.html
+  $gitlab_domain          = $::fqdn  
   $gitlab_repodir         = $git_home
   
   

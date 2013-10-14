@@ -4,13 +4,15 @@ source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
 summary 'Puppet GitLab Module'
-description '# gitlab #
+description 'gitlab
+=========
 
 
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
- 
+
+
 
 ####Table of Contents
 
@@ -19,7 +21,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
 3. [Setup - The basics of getting started with [Modulename]](#setup)
     * [What [Modulename] affects](#what-[modulename]-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with [Modulename]](#beginning-with-[Modulename])
+    * [Beginning with gitlab](#beginning-with-gitlab)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -27,7 +29,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
 
 ##Overview
 
-The spuder-puppet module installs a fully self contained gitlab server on an ubuntu server
+The gitlab module installs a fully self contained gitlab server on an ubuntu server
 
 Tested :  
 Gitlab 6-0-stable on Ubuntu 12.04  
@@ -46,7 +48,7 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-###What spuder-gitlab affects
+###What gitlab affects
 
 The module installs the following programs:
 
@@ -73,48 +75,47 @@ puppet >= 3.3.0
 ruby   >= 2.0 (installed automatically)  
 
 
-spuder-gitlab automatically installs the following dependencies
+spuder-gitlab requires the following modules, they will be installed automatically  
 
-puppetlabs-apt
-puppetlabs-mysql >= 2.0.0
-example42/postfix
-jfryman-nginx
-maestrodev/wget
+puppetlabs-apt  
+puppetlabs-mysql >= 2.0.0  
+jfryman-nginx  
+maestrodev/wget  
 
 
-The following dependencies should be resolved automatically
+The following programs will be installed
 
-git  		>=1.7.10
-ruby 		>=2.0.0
-- bundler
-- mysql2
--ruby2.0
--charlock_holmes
-mysqlserver
-mysqlclient
-ngnix
-postfix
+- git  		>=1.7.10  
+- ruby 		>=2.0.0  
+- bundler  
+- mysql2  
+- ruby2.0  
+- charlock_holmes  
+- mysqlserver  
+- mysqlclient  
+- ngnix  
+- postfix  
 
 
 You can safely ignore the following warnings that are presented durring installation
 Certain versions of puppet return these errors even though the packages were installed properly
 
-Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\\n"  
-Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\\n"  
-Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\\n"  
-Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\\n"  
-Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\\n"  
-Warning: Failed to match dpkg-query line "No packages found matching git-core.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\\n"  
+    Warning: Failed to match dpkg-query line "No packages found matching git-core.\\n"  
 http://projects.puppetlabs.com/issues/22621  
 
 
-The install process may take a long time, and may appear to be stuck at the following line for up to 600 seconds:   
-Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
+**The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
+  Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
 
 
 	
-###Beginning with spuder-gitlab	
+###Beginning with gitlab
 
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
@@ -126,7 +127,9 @@ If you are using puppet stand alone, the following would setup mysql
 
     root$ cat /tmp/gitlab-mysql-prerequisits.pp  
       class { \'::mysql::server\':  
-          root_password => \'somesuperlongpasswordwithentropy\' }  
+        root_password => \'somesuperlongpasswordwithentropy\' }  
+        remove_default_accounts => true,
+  		restart                 => true,
       }  
 
 Then apply the config like so  
@@ -156,7 +159,7 @@ For example, a basic configuraiton might look like this:
 	      gitlab_username_change => true,
 	  }
 	  
-Compare tests/init.pp for a working example of setting up gitlab
+Look at tests/init.pp for an example of what class parameters to use
 
 
 ##Customization
@@ -186,8 +189,8 @@ An example to change the landing page icon
 
 To change the thumbnail icon, replace the contents of the following files with your logo
  
-/etc/puppet/modules/gitlab/files/company-logo-white.png.erb 
-/etc/puppet/modules/gitlab/files/company-logo-black.png.erb 
+/etc/puppet/modules/gitlab/files/company-logo-white.png.erb   
+/etc/puppet/modules/gitlab/files/company-logo-black.png.erb   
 
 Company-logo-white.png will be used against the dark background themes  
 Company-logo-black.png will be used against the light background themes 
@@ -199,7 +202,7 @@ Company-logo-black.png will be used against the light background themes
 
 ![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
 	  
-*The logo should be about 80px X 80px*
+*The logo should be about 80px by 80px in size*  
 *The logo should be saved as a .png* 
 
 
@@ -219,7 +222,7 @@ An example to integrate with Active Directory
         ldap_bind_password     => \'bar\',
     }
     
-**Users must have email addresses defined in AD to be able to login to gitlab**
+**Users must have email addresses defined in AD to be able to login to gitlab!**
 	  
 ##Reference
 
@@ -296,13 +299,15 @@ Will not work on CentOS / RHEL
 
 ##Development
 
-Pull Requests are accepted: 
+Pull Requests are accepted: *Send requests to dev branch*
+
+This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen  
+Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown  
 
 
 ##Release Notes/Contributors/Etc 
 
 This module is based on the work done by the following people:  
-Credit for the design pattern and much of the parameters belong to them. 
 
 sbadia - https://github.com/sbadia/puppet-gitlab  
 atomaka - https://github.com/atomaka/puppet-gitlab  

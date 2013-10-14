@@ -121,7 +121,9 @@ If you are using puppet stand alone, the following would setup mysql
 
     root$ cat /tmp/gitlab-mysql-prerequisits.pp  
       class { '::mysql::server':  
-          root_password => 'somesuperlongpasswordwithentropy' }  
+        root_password => 'somesuperlongpasswordwithentropy' }  
+        remove_default_accounts => true,
+  		restart                 => true,
       }  
 
 Then apply the config like so  
