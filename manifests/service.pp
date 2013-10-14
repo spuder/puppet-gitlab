@@ -14,8 +14,9 @@ class gitlab::service inherits gitlab {
 	service { 'gitlab' :
 	  ensure    => running,
 	  enable    => true,
-	  hasrestart  => false,#Leave as false until fixed https://github.com/gitlabhq/gitlabhq/pull/5259
-	  hasstatus   => true, 
+	  hasrestart  => true,
+	  #hasstatus   => true, #https://ask.puppetlabs.com/question/3382/starting-service-fails/
+	  status  => '/etc/init.d/gitlab status | /bin/grep -q "up and running"',
 	  subscribe    => File['/etc/init.d/gitlab'],  
 	}
 
