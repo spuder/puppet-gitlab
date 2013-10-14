@@ -30,10 +30,10 @@
 	  gitlab_dbport          => '3306',
 #	  gitlab_domain          => $::fqdn,
 #	  gitlab_repodir         => $git_home,
-	  gitlab_ssl             => false,#TODO: remove wildcard from gitlab.nginx-gitlab.conf.erb
+	  gitlab_ssl             => true,#TODO: remove wildcard from gitlab.nginx-gitlab.conf.erb
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
-	  gitlab_ssl_self_signed => false,
+	  gitlab_ssl_self_signed => true, #Do not use self signed certs in production!
 	  gitlab_projects        => '10',
 	  #gitlab_username_change => true,
 	  

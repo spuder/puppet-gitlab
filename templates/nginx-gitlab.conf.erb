@@ -1,28 +1,26 @@
-# GITLAB
-# Maintainer: @randx
-# App Version: 5.0
+## MANAGED BY PUPPET
 
 upstream gitlab {
   server unix:<%= @git_home %>/gitlab/tmp/sockets/gitlab.socket;
 }
 
-<% if @gitlab_ssl %>
+# setup server with or without https depending on gitlab::gitlab_ssl variable
+# currently only http or https can be running at one time, not both
+<% if scope['gitlab::gitlab_ssl'] !=true %>
 server {
   listen *:80 default_server;
   server_name <%= @gitlab_domain %>;
   server_tokens off;
-  root /nowhere;
+  root /nowhere; 
   rewrite ^ https://$server_name$request_uri permanent;
-}
-<% end %>
 
+<% else %>
 server {
-  listen <%= @gitlab_ssl ? '*:443' : '*:80' %> default_server;         # e.g., listen 192.168.1.1:80;
+  listen *:443 ssl;         # e.g., listen 192.168.1.1:80;
   server_name <%= @gitlab_domain %>;     # e.g., server_name source.example.com;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
 
-<% if @gitlab_ssl %>
   ssl                           on;
   ssl_certificate               <%= @gitlab_ssl_cert %>;
   ssl_certificate_key           <%= @gitlab_ssl_key %>;
@@ -30,6 +28,7 @@ server {
   ssl_ciphers                   AES:HIGH:!ADH:!MDF;
   ssl_prefer_server_ciphers     on;
 <% end %>
+
 
   # individual nginx logs for this gitlab vhost
   access_log  /var/log/nginx/gitlab_access.log;
