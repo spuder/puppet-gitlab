@@ -217,6 +217,38 @@ An example to integrate with Active Directory
     }
     
 **Users must have email addresses defined in AD to be able to login to gitlab!**
+
+
+### HTTPS (SSL)
+
+Simple example with no encryption (not recommended)  
+   
+    class { 'gitlab' :
+    ....
+      $gitlab_ssl             = false
+    }
+
+Simple example with SSL and Self Signed Cert (not recommended for production)  
+Ngnix will use the certificate and key located in :   
+
+  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
+  private key = /etc/ssl/private/ssl-cert-snakeoil.key  
+    class { 'gitlab' :
+    ....
+      $gitlab_ssl             = true
+      $gitlab_ssl_self_signed = true
+    }
+    
+Simple example with CA signed Cert (Recommended)   
+You will need to place your .pem file and your private key in a location accessible to nxinx
+ 
+    class { 'gitlab' : 
+       $gitlab_ssl             = false
+        $gitlab_ssl_cert        = '/home/git/foo/bar.pem'
+        $gitlab_ssl_key         = '/home/git/foo/bar.key'
+        $gitlab_ssl_self_signed = false
+    }
+  
 	  
 ##Reference
 
