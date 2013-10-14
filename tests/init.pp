@@ -46,9 +46,9 @@
 	  ldap_bind_dn           => '',
 	  ldap_bind_password     => '',
 	  
-	  use_custom_login_logo  => false,
-	  use_custom_thumbnail   => false,
-	  use_company_link       => false,
+	  use_custom_login_logo  => true,
+	  use_custom_thumbnail   => true,
+	  use_company_link       => true,
 	  company_link           => 'http://failblog.cheezburger.com',
 	  project_public_default => false,
 	  
