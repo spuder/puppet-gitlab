@@ -65,16 +65,16 @@ The module configures the following files:
 
 This module requires the following programs
 
-puppet >= 3.3.0  
-ruby   >= 2.0 (installed automatically)  
+- puppet >= 3.3.0  
+- ruby   >= 2.0 (installed automatically)  
 
 
 spuder-gitlab requires the following modules, they will be installed automatically  
 
-puppetlabs-apt  
-puppetlabs-mysql >= 2.0.0  
-jfryman-nginx  
-maestrodev/wget  
+- puppetlabs-apt  
+- puppetlabs-mysql >= 2.0.0  
+- jfryman-nginx  
+- maestrodev/wget  
 
 
 The following programs will be installed
@@ -104,13 +104,18 @@ http://projects.puppetlabs.com/issues/22621
 
 
 **The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
-  Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
+    Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
 
+--------------------------------------------------------------------------------------
 
-	
+	 
+##Usage
+
+
 ###Beginning with gitlab
 
+####Database
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
 
@@ -128,14 +133,10 @@ If you are using puppet stand alone, the following would setup mysql
 
 Then apply the config like so  
 
-    puppet apply /tmp/gitlab-mysql-prerequisits.pp
+    puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug
+    
 
-  
-
-	 
-##Usage
-
-
+#####Gitlab class parameters
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defautls located in gitlab::params
 
@@ -153,7 +154,7 @@ For example, a basic configuraiton might look like this:
 	      gitlab_username_change => true,
 	  }
 	  
-Look at tests/init.pp for an example of what class parameters to use
+**Look at tests/init.pp for an example of what class parameters to use**
 
 
 ##Customization
@@ -233,13 +234,14 @@ Ngnix will use the certificate and key located in :
 
   certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
+  
     class { 'gitlab' :
     ....
       $gitlab_ssl             = true
       $gitlab_ssl_self_signed = true
     }
     
-Simple example with CA signed Cert (Recommended)   
+Simple example with Certificate Authority signed Cert (Recommended)   
 You will need to place your .pem file and your private key in a location accessible to nxinx
  
     class { 'gitlab' : 
@@ -322,13 +324,24 @@ May work on Debian 7
 Will not work on CentOS / RHEL  
 
 
+###Support
+This module is provided 'as is' with no guarantee of quality.  
+
+Issues and pull requests should be reported to the Github issues page
+https://github.com/spuder/puppet-gitlab/issues 
+
+
+
 
 ##Development
 
-Pull Requests are accepted: *Send requests to dev branch*
+Pull Requests are accepted: **Please send requests to dev branch**
 
-This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen  
-Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown  
+This module is patterned after the nextGen standard purposed by example42  
+http://www.example42.com/?q=NextGen  
+  
+Readme is patterned after the puppet markdown template here  
+http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown   
 
 
 ##Release Notes/Contributors/Etc 
