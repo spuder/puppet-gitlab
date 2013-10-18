@@ -2,7 +2,7 @@
 class gitlab::params {
   
   #Gitlab server settings
-  $gitlab_branch          = '6-0-stable'
+  $gitlab_branch          = '6-1-stable'
   $gitlabshell_branch     = 'v1.7.1'
   $git_user               = 'git'       #only change if you really know what you are doing
   $git_home               = '/home/git'
