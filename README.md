@@ -358,6 +358,6 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1  
 2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0   
 2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
-2013-Oct-10: 0.2.5 Blind revision to fix thumbnail issue (he says sheepishly while blushing)  
+2013-Oct-10: 0.2.5 Fixes thumbnail issue 
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
 
