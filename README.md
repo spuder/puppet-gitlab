@@ -182,13 +182,13 @@ An example to change the landing page icon
 
 ###Thumbnail Icon
 
-To change the thumbnail icon, replace the contents of the following files with your logo
+To change the thumbnail icon, place two .png files with the following names, into the following folder
  
-/etc/puppet/modules/gitlab/files/company-logo-white.png.erb   
-/etc/puppet/modules/gitlab/files/company-logo-black.png.erb   
+/home/git/company-logo-white.png  
+/home/git/company-logo-black.png     
 
-Company-logo-white.png will be used against the dark background themes  
-Company-logo-black.png will be used against the light background themes 
+company-logo-white.png will be used against the dark background themes  
+company-logo-black.png will be used against the light background themes 
 
 
     class { 'gitlab' :
@@ -199,6 +199,9 @@ Company-logo-black.png will be used against the light background themes
 	  
 *The logo should be about 80px by 80px in size*  
 *The logo should be saved as a .png* 
+
+**You will need to restart the gitlab server, and clear your browsers cache before**
+**the changes will be applied**
 
 
 ###LDAP / AD 
@@ -360,4 +363,5 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
 2013-Oct-10: 0.2.5 Fixes thumbnail issue 
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
+2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14
 

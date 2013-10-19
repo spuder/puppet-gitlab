@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '0.3.0'
+version '0.3.1'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -71,16 +71,16 @@ The module configures the following files:
 
 This module requires the following programs
 
-puppet >= 3.3.0  
-ruby   >= 2.0 (installed automatically)  
+- puppet >= 3.3.0  
+- ruby   >= 2.0 (installed automatically)  
 
 
 spuder-gitlab requires the following modules, they will be installed automatically  
 
-puppetlabs-apt  
-puppetlabs-mysql >= 2.0.0  
-jfryman-nginx  
-maestrodev/wget  
+- puppetlabs-apt  
+- puppetlabs-mysql >= 2.0.0  
+- jfryman-nginx  
+- maestrodev/wget  
 
 
 The following programs will be installed
@@ -110,13 +110,18 @@ http://projects.puppetlabs.com/issues/22621
 
 
 **The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
-  Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
+    Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
 
+--------------------------------------------------------------------------------------
 
-	
+	 
+##Usage
+
+
 ###Beginning with gitlab
 
+####Database
 To use the module, you must have mysql::server installed and configured with a user. 
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
 
@@ -134,14 +139,10 @@ If you are using puppet stand alone, the following would setup mysql
 
 Then apply the config like so  
 
-    puppet apply /tmp/gitlab-mysql-prerequisits.pp
+    puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug
+    
 
-  
-
-	 
-##Usage
-
-
+#####Gitlab class parameters
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defautls located in gitlab::params
 
@@ -159,7 +160,7 @@ For example, a basic configuraiton might look like this:
 	      gitlab_username_change => true,
 	  }
 	  
-Look at tests/init.pp for an example of what class parameters to use
+**Look at tests/init.pp for an example of what class parameters to use**
 
 
 ##Customization
@@ -187,13 +188,13 @@ An example to change the landing page icon
 
 ###Thumbnail Icon
 
-To change the thumbnail icon, replace the contents of the following files with your logo
+To change the thumbnail icon, place two .png files with the following names, into the following folder
  
-/etc/puppet/modules/gitlab/files/company-logo-white.png.erb   
-/etc/puppet/modules/gitlab/files/company-logo-black.png.erb   
+/home/git/company-logo-white.png  
+/home/git/company-logo-black.png     
 
-Company-logo-white.png will be used against the dark background themes  
-Company-logo-black.png will be used against the light background themes 
+company-logo-white.png will be used against the dark background themes  
+company-logo-black.png will be used against the light background themes 
 
 
     class { \'gitlab\' :
@@ -204,6 +205,9 @@ Company-logo-black.png will be used against the light background themes
 	  
 *The logo should be about 80px by 80px in size*  
 *The logo should be saved as a .png* 
+
+**You will need to restart the gitlab server, and clear your browsers cache before**
+**the changes will be applied**
 
 
 ###LDAP / AD 
@@ -239,13 +243,14 @@ Ngnix will use the certificate and key located in :
 
   certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
+  
     class { \'gitlab\' :
     ....
       $gitlab_ssl             = true
       $gitlab_ssl_self_signed = true
     }
     
-Simple example with CA signed Cert (Recommended)   
+Simple example with Certificate Authority signed Cert (Recommended)   
 You will need to place your .pem file and your private key in a location accessible to nxinx
  
     class { \'gitlab\' : 
@@ -328,13 +333,24 @@ May work on Debian 7
 Will not work on CentOS / RHEL  
 
 
+###Support
+This module is provided \'as is\' with no guarantee of quality.  
+
+Issues and pull requests should be reported to the Github issues page
+https://github.com/spuder/puppet-gitlab/issues 
+
+
+
 
 ##Development
 
-Pull Requests are accepted: *Send requests to dev branch*
+Pull Requests are accepted: **Please send requests to dev branch**
 
-This module is patterned after the nextGen standard purposed by example42 http://www.example42.com/?q=NextGen  
-Readme is patterned after the puppet markdown template here http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown  
+This module is patterned after the nextGen standard purposed by example42  
+http://www.example42.com/?q=NextGen  
+  
+Readme is patterned after the puppet markdown template here  
+http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown   
 
 
 ##Release Notes/Contributors/Etc 
@@ -351,8 +367,9 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-7: 0.2.2 Fixes puppetlabs-mysql api change https://github.com/spuder/puppet-gitlab/issues/1  
 2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0   
 2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
-2013-Oct-10: 0.2.5 Blind revision to fix thumbnail issue (he says sheepishly while blushing)  
+2013-Oct-10: 0.2.5 Fixes thumbnail issue 
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
+2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14
 
 '
 project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'

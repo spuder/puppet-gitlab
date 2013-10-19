@@ -1,6 +1,7 @@
 #init -> packages -> user -> setup -> install -> config -> service
 class gitlab::config inherits params {
   
+  #All file resource declarations should be executed as git:git
   File {
     owner   => "${gitlab::params::git_user}",
     group   => 'git',    
@@ -137,34 +138,19 @@ class gitlab::config inherits params {
     backup  => false,
   }
   
-  #Thumbnail logo white custom
-  file{"${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png":
-    source => "puppet:///modules/gitlab/company-logo-white.png.erb",
-    owner   => "${gitlab::git_user}",
-    group   => 'git',
-    mode    => '0644',
-    backup  => false,
-  }
-  
-  #Thumbnail logo white custom
-  file{"${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png":
-    source => "puppet:///modules/gitlab/company-logo-black.png.erb",
-    owner   => "${gitlab::git_user}",
-    group   => 'git',
-    mode    => '0644',
-    backup  => false,
-  }
           
   #Overwrite gitlab icons with custom icons
   #The origional icon is left intact and a symbolic link is used to point to logo-white.png
 	case "${gitlab::use_custom_thumbnail}" {
 		  'true':
 	    {
+	      notify{'Setting thumbnail icon to custom icon':}
+	    
 	      
         #Set the thumbnails	to the custom icons in the gitlab/files directory
 	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
 	         ensure  => link,
-	         target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png",
+	         target  => "${gitlab::git_home}/company-logo-white.png",
 	         backup  => false,
            owner   => "${gitlab::git_user}",
 				   group   => 'git',
@@ -172,13 +158,11 @@ class gitlab::config inherits params {
 				   require => [ 
 				              File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
 				              File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
 				              ],
 	      }
 	      file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
            ensure  => link,
-           target  => "${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png",
+           target  => "${gitlab::git_home}/company-logo-black.png",
            backup  => false,
            owner   => "${gitlab::git_user}",
            group   => 'git',
@@ -186,15 +170,15 @@ class gitlab::config inherits params {
            require => [ 
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
                       ],
 	      }
 
-	    }#end false
+	    }#end true
 
-		  default: 
+		  'false': 
 		  {
+		    notify{'Setting thumbnail icon to default gitlab':}
+		  
 		      
         #Set the thumbnails to the default desert fox icon		  
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
@@ -207,8 +191,6 @@ class gitlab::config inherits params {
            require => [ 
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
                       ],
         }
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
@@ -221,11 +203,16 @@ class gitlab::config inherits params {
            require => [ 
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                       File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-white.png"],
-                      File["${gitlab::git_home}/gitlab/app/assets/images/company-logo-black.png"],
                       ],
         }
-		  }#end default
+		  }#end false
+		  
+		  default:
+		  {
+		    fail{'use_custom_thumbnail was set to neither false nor true':}
+		  
+		  }
+		  
 	}#end case
 
 
