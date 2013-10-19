@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '0.3.1'
+version '0.4.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -344,12 +344,13 @@ https://github.com/spuder/puppet-gitlab/issues
 
 ##Development
 
-Pull Requests are accepted: **Please send requests to dev branch**
+Pull Requests are accepted:  
+**Please send requests to dev branch**
 
 This module is patterned after the nextGen standard purposed by example42  
 http://www.example42.com/?q=NextGen  
   
-Readme is patterned after the puppet markdown template here  
+The Readme is patterned after the puppet markdown template here  
 http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown   
 
 
@@ -369,7 +370,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
 2013-Oct-10: 0.2.5 Fixes thumbnail issue  
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
-2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14
+2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14  
+2013-Oct-19: 0.4.0 Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5  
 
 '
 project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
