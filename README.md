@@ -46,7 +46,7 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 The module installs the following programs:
 
-installs ruby 2.0 (from saucy ppa's)  
+installs ruby 
 nginx server  
 postfix server  
 mysql server  
@@ -65,8 +65,8 @@ The module configures the following files:
 
 This module requires the following programs
 
-- puppet >= 3.3.0  
-- ruby   >= 2.0 (installed automatically)  
+- puppet >= 3.0.0  
+- ruby   >= 1.9.x (installed automatically)  
 
 
 spuder-gitlab requires the following modules, they will be installed automatically  
@@ -80,10 +80,9 @@ spuder-gitlab requires the following modules, they will be installed automatical
 The following programs will be installed
 
 - git  		>=1.7.10  
-- ruby 		>=2.0.0  
+- ruby 		>=1.9.x  
 - bundler  
-- mysql2  
-- ruby2.0  
+- mysql2   
 - charlock_holmes  
 - mysqlserver  
 - mysqlclient  
@@ -120,7 +119,7 @@ To use the module, you must have mysql::server installed and configured with a u
 It is recomeded that this be setup in your site.pp file, hiera or another ENC.
 
 
-If you are using puppet stand alone, the following would setup mysql
+If you are using puppet stand alone, the following would setup mysql, and remove insecure account
 
     root$ import module puppetlabs-mysql
 
