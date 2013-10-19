@@ -28,6 +28,10 @@
     {
       "name": "example42/postfix",
       "version_requirement": "\u003e\u003d2.0.9"
+    },
+    {
+      "name": "puppetlabs/ruby",
+      "version_requirement": "\u003e\u003d0.1.0"
     }
   ],
   "types": [],
