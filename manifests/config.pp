@@ -75,48 +75,12 @@ class gitlab::config inherits gitlab {
     group     =>  'root',
   }
 
-
-#  file { "${gitlab::params::git_home}/.gitconfig":
-#    ensure    => file,
-#    content   => template('gitlab/gitconfig.erb'),
-#    mode      => '0644',
-#    owner     => "${gitlab::git_user}",
-#  }
-
-#  Setup global git user
-  exec { 'git config --global user.name':
-    path          =>  '/usr/bin:/usr/local/bin',
-    environment   =>  'HOME=/home/git',   #http://projects.puppetlabs.com/issues/5224
-    #environment  =>  '/root',
-    #user         =>  "${gitlab::params::git_user}",
-    command       =>  "git config --global user.name ${gitlab::git_comment}",
-  }
-
-  #Setup global git email
-  exec { 'git config --global user.email':
-    path          =>  '/usr/bin:/usr/local/bin',
-    environment   =>  'HOME=/home/git',  #http://projects.puppetlabs.com/issues/5224
-    #environment  =>  '/root',
-    #user         =>  "${gitlab::git_user}",
-    command       =>  "git config --global user.email ${gitlab::git_email}",
-  }
-
-  #Setup global core.autocrlf input
-  exec { 'git config --global core.autocrlf input':
-    path          =>  '/usr/bin:/usr/local/bin',
-    environment   =>  'HOME=/home/git',  #http://projects.puppetlabs.com/issues/5224
-    #environment  =>  '/root',
-    #user         =>  "${gitlab::git_user}",
-    command       =>  'git config --global core.autocrlf input',
-    #TODO: Force this to not just run once
-  }
-
-  #Set owner and permissions of /home/git/.gitconfig
-  file { "${gitlab::params::git_home}/.gitconfig":
-    ensure  =>  file,
-    owner   =>  "${gitlab::git_user}",
-    group   =>  'git',
-    mode    =>  '0644',
+  #Sets sudo -u git -H git config --global user.name, user.email, autocrlf = input
+  file { "${gitlab::git_home}/.gitconfig":
+    ensure    => file,
+    content   => template('gitlab/gitconfig.erb'),
+    mode      => '0644',
+    owner     => "${gitlab::git_user}",
   }
 
   #Thumbnail logo white default
