@@ -58,7 +58,6 @@ class gitlab (
     $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
     
     
-    
   ) inherits gitlab::params {
     
 	case $::osfamily {
@@ -73,7 +72,7 @@ class gitlab (
 	  }
 	}
 	
-	#Include all resources
+	 #Include all resources
 	include gitlab::packages
 	include gitlab::user
 	include gitlab::setup
@@ -85,7 +84,7 @@ class gitlab (
 	anchor { 'gitlab::end':}
 	
 	
-	#Installation order
+	 #Installation order
 	Anchor['gitlab::begin']      ->
 	 Class['::gitlab::packages'] -> 
 	 Class['::gitlab::user']     ->
@@ -93,7 +92,7 @@ class gitlab (
 	 Class['::gitlab::install']  ->
 	 Class['::gitlab::config']   ->
 	 Class['::gitlab::service']  ->
-  Anchor['gitlab::end']
+        Anchor['gitlab::end']
 	 
     
     
