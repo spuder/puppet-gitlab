@@ -50,7 +50,7 @@ class gitlab::packages inherits gitlab {
     gems_version     => 'latest',
   }
 
-  exec {'update-alternatives --install  ruby /usr/bin/ruby1.9.1 10':
+  exec {'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10':
     path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
     command => 'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10',
   }

@@ -92,7 +92,7 @@ The following programs will be installed
 - charlock_holmes  
 - mysqlserver  
 - mysqlclient  
-- ngnix  
+- ngnix  	>=0.8.21
 - postfix  
 
 

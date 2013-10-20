@@ -16,7 +16,7 @@ server {
 
 <% else %>
 server {
-  listen *:443 ssl;         # e.g., listen 192.168.1.1:80;
+  listen *:443 ssl default_server;         # e.g., listen 192.168.1.1:80;
   server_name <%= @gitlab_domain %>;     # e.g., server_name source.example.com;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;

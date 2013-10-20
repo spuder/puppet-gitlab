@@ -141,8 +141,9 @@ class gitlab::config inherits gitlab {
   #Overwrite gitlab icons with custom icons
   #The origional icon is left intact and a symbolic link is used to point to logo-white.png
   case "${gitlab::use_custom_thumbnail}" {
-      'true': #TODO: Figure out why 'true' needs to be in quotes
-      {
+
+
+      'true': {
         notify{'Setting thumbnail icon to custom icon':}
 
         #Set the thumbnails  to the custom icons in the gitlab/files directory
@@ -173,8 +174,7 @@ class gitlab::config inherits gitlab {
 
       }#end true
 
-      'false': #TODO: Figure out why 'false' needs to be in quotes
-      {
+      'false':  {
         notify{'Setting thumbnail icon to default gitlab':}
 
         #Set the thumbnails to the default desert fox icon
@@ -206,7 +206,7 @@ class gitlab::config inherits gitlab {
 
       default:
       {
-        fail{'use_custom_thumbnail was set to neither false nor true':}
+        fail("use_custom_thumbnail was set to ${gitlab::use_custom_thumbnail} which is neither false nor true")
       }
 
   }#end case
