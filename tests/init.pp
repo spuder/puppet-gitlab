@@ -49,7 +49,7 @@
 	  use_custom_login_logo  => true,
 	  use_custom_thumbnail   => false,
 	  use_company_link       => true,
-	  company_link           => 'http://failblog.cheezburger.com',
+	  company_link           => '[Learn more about CompanyName](http://failblog.cheezburger.com)',
 	  project_public_default => false,
 	  
 	  gitlab_gravatar        => true,

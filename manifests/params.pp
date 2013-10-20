@@ -43,7 +43,7 @@ class gitlab::params {
   $company_logo_url       = 'http://placedog.com/300/93'
   $use_custom_thumbnail   = false
   $use_company_link       = false
-  $company_link           = 'http://placedog.com'
+  $company_link           = '[Learn more about foo](http://failblog.cheezburger.com)'
   
   #User default settings
   $gitlab_gravatar        = true
