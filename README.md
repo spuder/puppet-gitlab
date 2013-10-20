@@ -324,6 +324,8 @@ Should work on Ubuntu 14.04
 May work on Debian 7  
 Will not work on CentOS / RHEL  
 
+Changing $git_user, and $git_home is untested and may have unintended side effects
+
 
 ###Support
 This module is provided 'as is' with no guarantee of quality.  
