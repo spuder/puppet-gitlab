@@ -17,28 +17,27 @@ class gitlab::packages inherits gitlab {
 	package { $system_packages: 
 	  ensure => present,
 	}
-  
 	
 	## Git v1.7.10 
 	#=====================================
 	
 	include apt
 
-         #Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
+        #Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
 	apt::ppa { 'ppa:git-core/ppa':
 	}
 	
-	 #Install key for repo (otherwise it prints error)
+	#Install key for repo (otherwise it prints error)
 	apt::key { 'ppa:git-core/ppa': 
 	    key    => 'E1DF1F24',
 	}
 	
 	package { 'git-core': 
-	  ensure => present, 
+	  ensure  => present, 
 	  require => [
 	              Apt::Ppa['ppa:git-core/ppa'],
 	              Apt::Key['ppa:git-core/ppa'],
-	              ],
+	             ],
         }
 	
 
@@ -54,12 +53,12 @@ class gitlab::packages inherits gitlab {
 	}
 	
 	exec {'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10':
-	  path   => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+	  path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
 	  command => 'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10',
 	  
 	}
 	exec {'update-alternatives --set ruby /usr/bin/ruby1.9.1':
-	  path   => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+	  path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
 	  command => 'update-alternatives --set ruby /usr/bin/ruby1.9.1',
 	  require => Exec['update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10'],
 	  
