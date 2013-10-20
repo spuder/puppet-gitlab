@@ -64,9 +64,6 @@ class gitlab (
 	  Debian: {
 	    debug("A debian os was detected: ${::osfamily}")
 	  }
-	  Redhat: {
-	    warning("${::osfamily} not fully tested with ${gitlab_branch}")
-	  }
 	  default: {
 	    fail("${::osfamily} not supported yet")
 	  }
@@ -92,7 +89,7 @@ class gitlab (
 	 Class['::gitlab::install']  ->
 	 Class['::gitlab::config']   ->
 	 Class['::gitlab::service']  ->
-        Anchor['gitlab::end']
+  Anchor['gitlab::end']
 	 
     
     

@@ -73,8 +73,7 @@
   #Copy the Unicorn config
   file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
-    content   => template('gitlab/unicorn.rb.6-0-stable.erb'),
-    #TODO: Make a variable
+    content   => template('gitlab/unicorn.rb.${gitlab::gitlab_branch}.erb'),
     owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [

@@ -17,7 +17,6 @@
 #  password  => "$gitlab::params::gitlab_dbpwd",
 #  host      => "$gitlab::params::gitlab_dbhost",
 #  grant     => ['all'],
-#  #TODO: change from all, to just the permissions specififed in the install doc
 #}
 
 ################################
