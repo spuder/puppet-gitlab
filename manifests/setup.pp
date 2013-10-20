@@ -73,8 +73,8 @@
   #Copy the Unicorn config
   file { "${gitlab::git_home}/gitlab/config/unicorn.rb":
     ensure    => file,
-    content   => template('gitlab/unicorn.rb.${gitlab::gitlab_branch}.erb'),
-    owner     => "${gitlab::git_user}",
+    content   => template("gitlab/unicorn.rb.${gitlab::gitlab_branch}.erb"),
+     owner     => "${gitlab::git_user}",
     group     => 'git',
     require   => [
                   Exec['download gitlab-shell'],
