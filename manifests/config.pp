@@ -7,7 +7,6 @@ class gitlab::config inherits params {
     group   => 'git',    
   }
   
-  
   #Create log directory
   file { "${gitlab::params::git_home}/gitlab/log":
     ensure  => directory, 
@@ -83,14 +82,13 @@ class gitlab::config inherits params {
 #    owner     => "${gitlab::git_user}",
 #  }
   
-#  Setup global git user
+  #Setup global git user
   exec { 'git config --global user.name':
     path    => '/usr/bin:/usr/local/bin',
     environment => "HOME=/home/git",   #http://projects.puppetlabs.com/issues/5224
     #environment => '/root',
     #user    => "${gitlab::params::git_user}",
-    command => "git config --global user.name ${gitlab::git_comment}",
-    
+    command => "git config --global user.name ${gitlab::git_comment}", 
   }
   
   #Setup global git email 

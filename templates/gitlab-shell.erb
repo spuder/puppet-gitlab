@@ -5,7 +5,7 @@
 user: <%= @git_user %>
 
 # Url to gitlab instance. Used for api calls. Should be ends with slash.
-gitlab_url: "<%= @gitlab_ssl ? 'https' : 'http' %>://<%= @gitlab_domain %>/"
+gitlab_url: "<%= @gitlab_ssl ? 'https' : 'http' %>://<%= @fqdn %>/"
 
 http_settings:
 #  user: someone
@@ -13,7 +13,7 @@ http_settings:
   self_signed_cert: <%= @gitlab_ssl_self_signed %>
 
 # Repositories path
-repos_path: "<%= @gitlab_repodir %>/repositories"
+repos_path: "<%= @git_home %>/repositories"
 
 # File used as authorized_keys for gitlab user
 auth_file: "<%= @git_home %>/.ssh/authorized_keys"

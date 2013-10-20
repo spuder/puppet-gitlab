@@ -31,7 +31,7 @@ include gitlab::params
   #Install gitlab-shell
   exec { 'install gitlab-shell':
     command   => "ruby ${gitlab::params::git_home}/gitlab-shell/bin/install",
-    creates   => "${gitlab::params::gitlab_repodir}/gitlab-shell/repositories",
+    creates   => "${gitlab::params::git_home}/gitlab-shell/repositories",
     require    => [
                   Exec['download gitlab-shell'],
                   File['/home/git/gitlab-shell/config.yml'],

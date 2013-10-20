@@ -277,8 +277,7 @@ All of the parameters that can be set
     $gitlab_dbpwd           
     $gitlab_dbhost         
     $gitlab_dbport          
-    $gitlab_domain         
-    $gitlab_repodir        
+    $gitlab_domain             
     
       #Web & Security
     $gitlab_ssl             
@@ -364,6 +363,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-10: 0.2.5 Fixes thumbnail issue  
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
 2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14  
-2013-Oct-19: 1.0.0 Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5 
+2013-Oct-19: 1.0.0 
+Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5 
 company_url now takes the entire markup instead of just the link. See gitlab.yml6-x-stable.erb 
+Removed unused parameters $gitlab_repodir, $gitlab_domain
 

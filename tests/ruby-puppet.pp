@@ -22,9 +22,3 @@ exec {'update-alternatives --set gem /usr/bin/gem1.9.1':
   require => Exec['update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10'],
   
 }
-  
-  #update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10 
-  #update-alternatives --set ruby /usr/bin/ruby1.9.1
-  
-  #update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10 
-  #update-alternatives --set gem /usr/bin/gem1.9.1

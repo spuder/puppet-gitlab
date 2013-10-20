@@ -6,7 +6,7 @@ class gitlab::user inherits gitlab {
     ensure      => present, 
     #shell       => '/bin/false',      #https://github.com/gitlabhq/gitlabhq/pull/5218
     shell       => '/bin/bash',    
-    password   => '*',
+    password    => '*',
     home        => "${gitlab::git_home}",
     system      => true,                          #Makes sure user has uid less than 500 (or 1000)
     managehome  => true,

@@ -9,10 +9,7 @@ class gitlab::params {
   $git_email              = 'git@someserver.net'
   $git_comment            = 'GitLab'
   $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
-  $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git'
-  $gitlab_domain          = $::fqdn  
-  $gitlab_repodir         = $git_home
-  
+  $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git' 
   
   #Database
   $gitlab_dbtype          = 'mysql'
@@ -60,8 +57,6 @@ class gitlab::params {
   $gitlab_projects        = '10'
   $project_public_default = true #https://github.com/gitlabhq/gitlabhq/issues/5000
   
- 
-
 }
 
 
