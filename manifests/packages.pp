@@ -73,8 +73,7 @@ class gitlab::packages inherits gitlab {
     user       => "${gitlab::gitlab_dbuser}",
     password   => "${gitlab::gitlab_dbpwd}",
     host       => "${gitlab::gitlab_dbhost}",
-    grant      => ['all'],
-    #TODO: change from all, to just the permissions specififed indocs
+    grant      => ['SELECT', 'LOCK TABLES', 'INSERT', 'UPDATE', 'DELETE', 'CREATE', 'DROP', 'INDEX', 'ALTER'],
   }
 
 
