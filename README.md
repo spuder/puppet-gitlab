@@ -61,20 +61,17 @@ The module configures the following files:
 /etc/ngnix/sites-available/gitlab  
 /etc/nginx/sites-enabled/gitlab  
 
-###Setup Requirements **OPTIONAL**
+###Setup Requirements
 
 This module requires the following programs
 
 - puppet >= 3.0.0  
-- ruby   >= 1.9.x (installed automatically)  
 
-
-spuder-gitlab requires the following modules, they will be installed automatically  
+This module requires the following modules  
 
 - puppetlabs-apt  
 - puppetlabs-mysql >= 2.0.0  
 - jfryman-nginx  
-- maestrodev/wget  
 
 
 The following programs will be installed
@@ -300,7 +297,7 @@ All of the parameters that can be set
     $company_logo_url       
     $use_custom_thumbnail  
     
-    #User default settings
+     #User default settings
     $gitlab_gravatar        
     $user_create_group      
     $user_create_team       
@@ -337,9 +334,8 @@ https://github.com/spuder/puppet-gitlab/issues
 
 
 ##Development
-
-Pull Requests are accepted:  
-**Please send requests to dev branch**
+ 
+**Please send pull requests to dev branch**
 
 This module is patterned after the nextGen standard purposed by example42  
 http://www.example42.com/?q=NextGen  
@@ -363,7 +359,7 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-9: 0.2.3 Changes puppetlabs-apt dependency from 1.3.0 to 1.0.0   
 2013-Oct-9: 0.2.4 Fixes backup issue when replacing thumbnail icons https://github.com/spuder/puppet-gitlab/issues/8   
 2013-Oct-10: 0.2.5 Fixes thumbnail issue  
-2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
+2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links  
 2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14  
 2013-Oct-21: 1.0.0 
 - Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5 
@@ -373,4 +369,6 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Increases security on database permissions https://github.com/spuder/puppet-gitlab/issues/16
 - Changes git user from disabled to locked https://github.com/spuder/puppet-gitlab/issues/9
 - Fixed issue where init script was modified as work around https://github.com/spuder/puppet-gitlab/issues/12
+- Removes dependency on wget module
+- Removes dependency on unused nginx module
 
