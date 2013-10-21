@@ -11,11 +11,11 @@
 #  config_hash => { 'root_password' => 'badpassword' }
 #}
 #
-#mysql::db { "$gitlab::params::gitlab_dbname" :
+#mysql::db { "$gitlab::gitlab_dbname" :
 #  ensure    => present,
-#  user      => "$gitlab::params::gitlab_dbuser",
-#  password  => "$gitlab::params::gitlab_dbpwd",
-#  host      => "$gitlab::params::gitlab_dbhost",
+#  user      => "$gitlab::gitlab_dbuser",
+#  password  => "$gitlab::gitlab_dbpwd",
+#  host      => "$gitlab::gitlab_dbhost",
 #  grant     => ['all'],
 #}
 

@@ -5,8 +5,8 @@ class git_branch_test inherits gitlab {
 
   #Download gitlab source
   exec { 'download gitlab':
-    command => "git clone -b ${gitlab::params::gitlab_branch} ${gitlab::params::gitlab_sources} ${gitlab::params::git_home}/gitlab",
-    creates   => "${gitlab::params::git_home}/gitlab",
+    command => "git clone -b ${gitlab::gitlab_branch} ${gitlab::gitlab_sources} ${gitlab::git_home}/gitlab",
+    creates   => "${gitlab::git_home}/gitlab",
   }
   
 }

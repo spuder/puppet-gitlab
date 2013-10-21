@@ -8,18 +8,18 @@ class gitlab::service inherits gitlab {
   #sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
   exec { 'gitlab basic check':
     path    => '/usr/bin:/usr/local:/usr/local/bin',
-    cwd     => "${gitlab::params::git_home}/gitlab",
-    user    => "${gitlab::params::git_user}",
-    command => "bundle exec rake gitlab:env:info RAILS_ENV=production > ${gitlab::params::git_home}/bundle-exec-rake-output-basic.txt", 
+    cwd     => "${gitlab::git_home}/gitlab",
+    user    => "${gitlab::git_user}",
+    command => "bundle exec rake gitlab:env:info RAILS_ENV=production > ${gitlab::git_home}/bundle-exec-rake-output-basic.txt", 
   }
   
   
   #sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production (make sure gitlab is running)
     exec { 'gitlab advanced check':
     path    => '/usr/bin:/usr/local:/usr/local/bin',
-    cwd     => "${gitlab::params::git_home}/gitlab",
-    user    => "${gitlab::params::git_user}",
-    command => "bundle exec rake gitlab:check RAILS_ENV=production > ${gitlab::params::git_home}/bundle-exec-rake-output-advanced.txt", 
+    cwd     => "${gitlab::git_home}/gitlab",
+    user    => "${gitlab::git_user}",
+    command => "bundle exec rake gitlab:check RAILS_ENV=production > ${gitlab::git_home}/bundle-exec-rake-output-advanced.txt", 
   }
   
   
