@@ -1,4 +1,6 @@
+#init -> packages -> user -> setup -> install -> config -> service
 class gitlab (
+
     #Gitlab server settings
     $gitlab_branch          = $gitlab::params::gitlab_branch,
     $gitlabshell_branch     = $gitlab::params::gitlabshell_branch,
@@ -46,7 +48,7 @@ class gitlab (
     $user_create_team       = $gitlab::params::user_create_team,
     $user_changename        = $gitlab::params::user_changename,
     
-    #Project default features
+    #Project default settings
     $project_issues         = $gitlab::params::project_issues,
     $project_merge_request  = $gitlab::params::project_merge_request,
     $project_wiki           = $gitlab::params::project_wiki,
@@ -56,19 +58,16 @@ class gitlab (
     $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
     
   ) inherits gitlab::params {
-    
+
 	case $::osfamily {
 	  Debian: {
 	    debug("A debian os was detected: ${::osfamily}")
-	  }
-	  Redhat: {
-	    warning("${::osfamily} not fully tested with ${gitlab_branch}")
 	  }
 	  default: {
 	    fail("${::osfamily} not supported yet")
 	  }
 	}
-	
+
 	#Include all resources
 	include gitlab::packages
 	include gitlab::user
@@ -76,22 +75,20 @@ class gitlab (
 	include gitlab::install
 	include gitlab::config
 	include gitlab::service
-	
+
 	anchor { 'gitlab::begin':}
 	anchor { 'gitlab::end':}
-	
-	
+
 	#Installation order
 	Anchor['gitlab::begin']      ->
-	 Class['::gitlab::packages'] -> 
+	 Class['::gitlab::packages'] ->
 	 Class['::gitlab::user']     ->
 	 Class['::gitlab::setup']    ->
 	 Class['::gitlab::install']  ->
 	 Class['::gitlab::config']   ->
 	 Class['::gitlab::service']  ->
   Anchor['gitlab::end']
-	     
-     
+
 }#end gitlab
     
     

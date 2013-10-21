@@ -19,9 +19,9 @@ class gitlab::install inherits gitlab {
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_setup_done",
     timeout => 600,
     before  => [
-              File["${gitlab::git_home}/.gitlab_setup_done"],
-              Exec['setup gitlab database'],
-              ],
+           File["${gitlab::git_home}/.gitlab_setup_done"],
+           Exec['setup gitlab database'],
+               ],
   }
 
   # Setup gitlab database

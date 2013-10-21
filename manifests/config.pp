@@ -3,15 +3,14 @@ class gitlab::config inherits gitlab {
 
   #All file resource declarations should be executed as git:git
   File {
-    owner   => "${gitlab::git_user}",
-    group   => 'git',
+    owner   =>  "${gitlab::git_user}",
+    group   =>  'git',
   }
-
 
   #Create log directory
   file { "${gitlab::git_home}/gitlab/log":
-    ensure  => directory,
-    mode    => '0755',
+    ensure  =>  directory,
+    mode    =>  '0755',
   }
 
   #Create tmp directory
@@ -34,53 +33,53 @@ class gitlab::config inherits gitlab {
 
   #Create satellites directory
   file { "${gitlab::git_home}/gitlab-satellites":
-    ensure    =>  directory,
-    mode      =>  '0755',
+    ensure  =>  directory,
+    mode    =>  '0755',
   }
 
   #Create public/uploads directory otherwise backups will fail
   file { "${gitlab::git_home}/gitlab/public/uploads":
-    ensure    =>  directory,
-    mode      =>  '0755',
+    ensure  =>  directory,
+    mode    =>  '0755',
   }
 
   #Create nginx sites-available directory
   file { '/etc/nginx/sites-available':
-    ensure    =>  directory,
-    owner     =>  'root',
-    group     =>  'root',
+    ensure  =>  directory,
+    owner   =>  'root',
+    group   =>  'root',
   }
 
   #Create nginx sites-enabled directory
   file { '/etc/nginx/sites-enabled':
-    ensure    =>  directory,
-    owner     =>  'root',
-    group     =>  'root',
+    ensure  =>  directory,
+    owner   =>  'root',
+    group   =>  'root',
   }
 
   #Copy nginx config to sites-available
   file { '/etc/nginx/sites-available/gitlab':
-    ensure    =>  file,
-    content   =>  template('gitlab/nginx-gitlab.conf.erb'),
-    mode      =>  '0644',
-    owner     =>  'root',
-    group     =>  'root',
+    ensure  =>  file,
+    content =>  template('gitlab/nginx-gitlab.conf.erb'),
+    mode    =>  '0644',
+    owner   =>  'root',
+    group   =>  'root',
   }
 
   #Create symbolic link
   file  { '/etc/nginx/sites-enabled/gitlab':
-    ensure    =>  link,
-    target    =>  '/etc/nginx/sites-available/gitlab',
-    owner     =>  'root',
-    group     =>  'root',
+    ensure  =>  link,
+    target  =>  '/etc/nginx/sites-available/gitlab',
+    owner   =>  'root',
+    group   =>  'root',
   }
 
   #Sets sudo -u git -H git config --global user.name, user.email, autocrlf = input
   file { "${gitlab::git_home}/.gitconfig":
-    ensure    => file,
-    content   => template('gitlab/gitconfig.erb'),
-    mode      => '0644',
-    owner     => "${gitlab::git_user}",
+    ensure  =>  file,
+    content =>  template('gitlab/gitconfig.erb'),
+    mode    =>  '0644',
+    owner   =>  "${gitlab::git_user}",
   }
 
   #Thumbnail logo white default
@@ -101,11 +100,9 @@ class gitlab::config inherits gitlab {
     backup  =>  false,
   }
 
-
   #Overwrite gitlab icons with custom icons
   #The origional icon is left intact and a symbolic link is used to point to logo-white.png
   case "${gitlab::use_custom_thumbnail}" {
-
 
       'true': {
         notify{'Setting thumbnail icon to custom icon':}
@@ -121,7 +118,7 @@ class gitlab::config inherits gitlab {
           require =>  [
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                  ],
+                      ],
         }
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
           ensure  =>  link,
@@ -133,7 +130,7 @@ class gitlab::config inherits gitlab {
           require =>  [
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                  ],
+                      ],
         }
 
       }#end true
@@ -152,7 +149,7 @@ class gitlab::config inherits gitlab {
           require =>  [
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                  ],
+                      ],
         }
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-black.png":
           ensure  =>  link,
@@ -164,16 +161,15 @@ class gitlab::config inherits gitlab {
           require =>  [
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png"],
                   File["${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-black.png"],
-                  ],
+                      ],
         }
       }#end false
 
-      default:
-      {
+      default:  {
         fail("use_custom_thumbnail was set to ${gitlab::use_custom_thumbnail} which is neither false nor true")
       }
 
-  }#end case
+  }#end case $use_custom_thumbnail
 
 
 }#end config.pp
