@@ -277,8 +277,7 @@ All of the parameters that can be set
     $gitlab_dbpwd           
     $gitlab_dbhost         
     $gitlab_dbport          
-    $gitlab_domain         
-    $gitlab_repodir        
+    $gitlab_domain             
     
       #Web & Security
     $gitlab_ssl             
@@ -325,6 +324,8 @@ Should work on Ubuntu 14.04
 May work on Debian 7  
 Will not work on CentOS / RHEL  
 
+Changing $git_user, and $git_home is untested and may have unintended side effects
+
 
 ###Support
 This module is provided 'as is' with no guarantee of quality.  
@@ -364,5 +365,12 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-10: 0.2.5 Fixes thumbnail issue  
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links
 2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14  
-2013-Oct-19: 0.4.0 Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5  
+2013-Oct-21: 1.0.0 
+- Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5 
+- company_url now takes the entire markup instead of just the link. See gitlab.yml6-x-stable.erb 
+- Removed unused parameters $gitlab_repodir, $gitlab_domain
+- Indentation & syntax changes to conform to puppet lint https://github.com/spuder/puppet-gitlab/issues/19
+- Increases security on database permissions https://github.com/spuder/puppet-gitlab/issues/16
+- Changes git user from disabled to locked https://github.com/spuder/puppet-gitlab/issues/9
+- Fixed issue where init script was modified as work around https://github.com/spuder/puppet-gitlab/issues/12
 

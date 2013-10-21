@@ -9,10 +9,7 @@ class gitlab::params {
   $git_email              = 'git@someserver.net'
   $git_comment            = 'GitLab'
   $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
-  $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git'
-  $gitlab_domain          = $::fqdn  
-  $gitlab_repodir         = $git_home
-  
+  $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git' 
   
   #Database
   $gitlab_dbtype          = 'mysql'
@@ -43,7 +40,7 @@ class gitlab::params {
   $company_logo_url       = 'http://placedog.com/300/93'
   $use_custom_thumbnail   = false
   $use_company_link       = false
-  $company_link           = 'http://placedog.com'
+  $company_link           = '[Learn more about foo](http://failblog.cheezburger.com)'
   
   #User default settings
   $gitlab_gravatar        = true
@@ -59,7 +56,7 @@ class gitlab::params {
   $project_snippets       = false
   $gitlab_projects        = '10'
   $project_public_default = true #https://github.com/gitlabhq/gitlabhq/issues/5000
-
+  
 }
 
 

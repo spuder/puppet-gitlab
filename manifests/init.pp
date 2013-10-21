@@ -16,8 +16,6 @@ class gitlab (
     $gitlab_dbpwd           = $gitlab::params::gitlab_dbpwd,
     $gitlab_dbhost          = $gitlab::params::gitlab_dbhost,
     $gitlab_dbport          = $gitlab::params::gitlab_dbport,
-    $gitlab_domain          = $gitlab::params::gitlab_domain,
-    $gitlab_repodir         = $gitlab::params::gitlab_repodir,
     
     #Web & Security
     $gitlab_ssl             = $gitlab::params::gitlab_ssl,
@@ -57,19 +55,21 @@ class gitlab (
     $gitlab_projects        = $gitlab::params::gitlab_projects,
     $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
     
-    
   ) inherits gitlab::params {
     
 	case $::osfamily {
 	  Debian: {
 	    debug("A debian os was detected: ${::osfamily}")
 	  }
+	  Redhat: {
+	    warning("${::osfamily} not fully tested with ${gitlab_branch}")
+	  }
 	  default: {
 	    fail("${::osfamily} not supported yet")
 	  }
 	}
 	
-	 #Include all resources
+	#Include all resources
 	include gitlab::packages
 	include gitlab::user
 	include gitlab::setup
@@ -81,7 +81,7 @@ class gitlab (
 	anchor { 'gitlab::end':}
 	
 	
-	 #Installation order
+	#Installation order
 	Anchor['gitlab::begin']      ->
 	 Class['::gitlab::packages'] -> 
 	 Class['::gitlab::user']     ->
@@ -90,12 +90,8 @@ class gitlab (
 	 Class['::gitlab::config']   ->
 	 Class['::gitlab::service']  ->
   Anchor['gitlab::end']
-	 
-    
-    
-    
-    
-    
+	     
+     
 }#end gitlab
     
     

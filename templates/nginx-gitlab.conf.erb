@@ -9,15 +9,15 @@ upstream gitlab {
 <% if scope['gitlab::gitlab_ssl'] !=true %>
 server {
   listen *:80 default_server;
-  server_name <%= @gitlab_domain %>;
+  server_name <%= @fqdn %>;
   server_tokens off;
   root /nowhere; 
   rewrite ^ https://$server_name$request_uri permanent;
 
 <% else %>
 server {
-  listen *:443 ssl default_server;         # e.g., listen 192.168.1.1:80;
-  server_name <%= @gitlab_domain %>;     # e.g., server_name source.example.com;
+  listen *:443 ssl default_server;
+  server_name <%= @fqdn %>;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
 

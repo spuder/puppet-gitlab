@@ -24,15 +24,17 @@ Check the following:
 1. Is the hostname and shortname configured correctly (gitlab.yml, /etc/hosts, ect..)  
 2. Is the git config --global configured  
 3. Does the .ssh folder have the correct permissions  
-4. Does the user have their ssh keys saved into gitlab?    
+4. Does the user have their ssh keys saved into gitlab?   
+5. Does the repo actually have a file to push? 
 
-You will most likely need to reinstall gitlab and make sure the hostname is correct before beining.   
+You will most likely need to reinstall gitlab and make sure the hostname is correct
 http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-push-for-git-user
 
 ##Thumbnail icon won't change  
 - Clear the cash in your browser  
 - Run `service gitlab reload` or `service gitlab restart`  
 - Restart the server  
+- Verify the icons in /home/git/ exist
   
   
 # Installation locations
