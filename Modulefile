@@ -376,7 +376,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Fixed issue where init script was modified as work around https://github.com/spuder/puppet-gitlab/issues/12
 - Removes dependency on wget module
 - Removes dependency on unused nginx module
-- Removes $user_create_team  as 6.x no longer has concept of teams     
+- Removes $user_create_team  as 6.x no longer has concept of teams
+- Adds http redirect in nginx, and other security improvements     
 
 
 '
