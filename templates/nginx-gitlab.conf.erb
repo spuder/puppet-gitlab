@@ -1,7 +1,7 @@
 ## MANAGED BY PUPPET
 
 upstream gitlab {
-  server unix:<%= @git_home %>/gitlab/tmp/sockets/gitlab.socket;
+  server unix:/home/git/gitlab/tmp/sockets/gitlab.socket;
 }
 
 # setup server with or without https depending on gitlab::gitlab_ssl variable
@@ -11,10 +11,27 @@ server {
   listen *:80 default_server;
   server_name <%= @fqdn %>;
   server_tokens off;
-  root /nowhere; 
-  rewrite ^ https://$server_name$request_uri permanent;
+  root <%= @git_home %>/gitlab/public;
 
 <% else %>
+server {
+#This does not redirect properly, see https://github.com/spuder/puppet-gitlab/issues/24
+  listen *:80;
+  #server_name <%= @fqdn %>;
+  #server_tokens off;
+  #root <%= @git_home %>/gitlab/public;
+  #root /nowhere; 
+  return 301 https://$host$request_uri;
+  #rewrite ^ https://$server_name$request_uri permanent; 
+
+  #http://serverfault.com/questions/250476/how-to-force-or-redirect-to-ssl-in-nginx
+  #rewrite ^ https://$server_name$request_uri permanent;
+  #return 301 https://$server_name$request_uri;
+  #return 301 http://$server_name$request_uri;
+  #return 301 http://192.168.33.10$request_uri;
+  #return 301 http://$host$request_uri;
+
+}
 server {
   listen *:443 ssl default_server;
   server_name <%= @fqdn %>;
@@ -27,8 +44,8 @@ server {
   ssl_protocols                 SSLv3 TLSv1 TLSv1.1 TLSv1.2;
   ssl_ciphers                   AES:HIGH:!ADH:!MDF;
   ssl_prefer_server_ciphers     on;
-<% end %>
 
+<% end %>
 
   # individual nginx logs for this gitlab vhost
   access_log  /var/log/nginx/gitlab_access.log;
