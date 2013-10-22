@@ -19,7 +19,7 @@ production: &base
   ## GitLab settings
   gitlab:
     ## Web server settings
-    host: <%= @gitlab_domain %>
+    host: <%= @fqdn %>
     port: 80 #TODO: make this dynamic
     https: <%= @gitlab_ssl %> #default false
 
