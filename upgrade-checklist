@@ -24,15 +24,27 @@ http://stackoverflow.com/questions/19070744/upgrading-gitlab-gives-following-err
 *compare the old init script to the new init script*
 git difftool 6-1-stable:lib/support/init.d/gitlab 6-0-stable:lib/support/init.d/gitlab
 If they are different, then save the new one to templates/gitalb.init.6.x.erb (where x is the new release)
+There are no variables in the init script
 
 
-
-compare the old config/gitlab.yml to the new config/gitlab.yml, some versions add new flags
+*compare the old config/gitlab.yml to the new config/gitlab.yml*, some versions add new flags
 git difftool 6-1-stable:config/gitlab.yml.example 6-0-stable:config/gitlab.yml.example
 If they are different, then create a new template with the release number by coping the currently working one (templates/gitlab.yml.6.x.erb )
+Update the variables as appropriate
 
-compare the old gitlab-shell/config.yml to the new config
+*compare the old gitlab-shell/config.yml to the new config*
 
+
+*compare the old unicorn.rb.example*
+
+git diff 6-2-stable 6-1-stable -- config/unicorn.rb.example
+cp config/unicorn.rb.example ../gitlab/templates/unicorn.rb.6-2-stable.erb
+
+*compare the old database setup script 
+
+git diff 6-2-stable 6-1-stable --config/database.yml.mysql
+If they are different, then create a new database.6-x-stable.erb file
+Update the variables as appropriate
 
 
 

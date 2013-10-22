@@ -20,15 +20,15 @@ production: &base
   gitlab:
     ## Web server settings
     host: <%= @fqdn %>
-    port: 80 #TODO: make this dynamic
-    https: <%= @gitlab_ssl %> #default false
+    port: 80
+    https: <%= @gitlab_ssl %>
 
     # Uncomment and customize the last line to run in a non-root path
-    # WARNING: This feature is no longer supported
+    # WARNING: This feature is known to work, but unsupported
     # Note that three settings need to be changed for this to work.
     # 1) In your application.rb file: config.relative_url_root = "/gitlab"
     # 2) In your gitlab.yml file: relative_url_root: /gitlab
-    # 3) In your unicorn.rb: ENV['RAILS_RELATIVE_URL_ROOT']
+    # 3) In your unicorn.rb: ENV['RAILS_RELATIVE_URL_ROOT'] = "/gitlab"
     #
     # relative_url_root: /gitlab
 
@@ -43,27 +43,41 @@ production: &base
     support_email: <%= @git_email %>
 
     ## User settings
-    default_projects_limit: <%= @gitlab_projects %> #default 10
-    default_can_create_group: <%= @user_create_group %>  # default: true
-    default_can_create_team: <%= @user_create_team %>   # default: true
+    default_projects_limit: <%= @gitlab_projects %>
+    default_can_create_group: <%= @user_create_group %>   # default: true
     username_changing_enabled: <%= @user_changename %> # default: true - User can change her username/namespace
+    ## Default theme
+    ##   BASIC  = 1
+    ##   MARS   = 2
+    ##   MODERN = 3
+    ##   GRAY   = 4
+    ##   COLOR  = 5
+    default_theme: 2 # default: 2
+
 
     ## Users management
-    # signup_enabled: false          # default: false - Account passwords are not sent via the email if signup is enabled.
+    # default: false - Account passwords are not sent via the email if signup is enabled. 
+    # signup_enabled: true
+
+    ## Automatic issue closing
+    # If a commit message matches this regular expression, all issues referenced from the matched text will be closed.
+    # This  happends when the commit is pushed or merged into the default branch of a project.
+    # When not specified the default issue_closing_pattern as specified below will be used.
+    # issue_closing_pattern: ([Cc]loses|[Ff]ixes) +#\d+
 
     ## Default project features settings
     default_projects_features:
-      issues: <%= @project_issues %> #default true
-      merge_requests: <%= @project_merge_request %> #default true
-      wiki: <%= @project_wiki %> #default true
-      wall: <%= @project_wall %>  #default false
-      snippets: <%= @project_snippets %> #default false
-      #public: false #New to 6.1
-    
+      issues: <%= @project_issues %>
+      merge_requests: <%= @project_merge_request %>
+      wiki: <%= @project_wiki %>
+      wall: <%= @project_wall %>
+      snippets: <%= @project_snippets %>
+      public: <%= @project_public_default %>
 
   ## External issues trackers
   issues_tracker:
     # redmine:
+    #   title: "Redmine"
     #   ## If not nil, link 'Issues' on project page will be replaced with this
     #   ## Use placeholders:
     #   ##  :project_id        - GitLab project identifier
@@ -84,6 +98,7 @@ production: &base
     #   new_issue_url: "http://redmine.sample/projects/:issues_tracker_id/issues/new"
     # 
     # jira:
+    #   title: "Atlassian Jira"
     #   project_url: "http://jira.sample/issues/?jql=project=:issues_tracker_id"
     #   issues_url: "http://jira.sample/browse/:id"
     #   new_issue_url: "http://jira.sample/secure/CreateIssue.jspa"
@@ -110,7 +125,6 @@ production: &base
     password: '<%= @ldap_bind_password %>'
     allow_username_or_email_login: true
 
-
   ## OmniAuth settings
   omniauth:
     # Allow login via Twitter, Google, etc. using OmniAuth providers
@@ -119,9 +133,9 @@ production: &base
     # CAUTION!
     # This allows users to login without having a user account first (default: false).
     # User accounts will be created automatically when authentication was successful.
-    allow_single_sign_on: false #default false
+    allow_single_sign_on: false
     # Locks down those users until they have been cleared by the admin (default: true).
-    block_auto_created_users: true #default true
+    block_auto_created_users: true
 
     ## Auth providers
     # Uncomment the following lines and fill in the data of the auth provider you want to use
@@ -198,6 +212,7 @@ test:
   <<: *base
   issues_tracker:
     redmine:
+      title: "Redmine"
       project_url: "http://redmine/projects/:issues_tracker_id"
       issues_url: "http://redmine/:project_id/:issues_tracker_id/:id"
       new_issue_url: "http://redmine/projects/:issues_tracker_id/issues/new"
