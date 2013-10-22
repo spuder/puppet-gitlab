@@ -45,7 +45,7 @@ production: &base
     ## User settings
     default_projects_limit: <%= @gitlab_projects %> #default 10
     default_can_create_group: <%= @user_create_group %>  # default: true
-    default_can_create_team: <%= @user_create_team %>   # default: true
+    #default_can_create_team: <%= @user_create_team %>   # default: true
     username_changing_enabled: <%= @user_changename %> # default: true - User can change her username/namespace
 
     ## Users management

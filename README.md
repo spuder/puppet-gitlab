@@ -300,7 +300,6 @@ All of the parameters that can be set
      #User default settings
     $gitlab_gravatar        
     $user_create_group      
-    $user_create_team       
     $user_changename        
     
       #Project default features
@@ -371,4 +370,6 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Fixed issue where init script was modified as work around https://github.com/spuder/puppet-gitlab/issues/12
 - Removes dependency on wget module
 - Removes dependency on unused nginx module
+- Removes $user_create_team  as 6.x no longer has concept of teams     
+
 

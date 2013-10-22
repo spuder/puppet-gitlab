@@ -54,7 +54,6 @@
 	  
 	  gitlab_gravatar        => true,
 	  user_create_group      => false,
-	  user_create_team       => false,
 	  user_changename        => false,
 	  
 	  #Default Project features

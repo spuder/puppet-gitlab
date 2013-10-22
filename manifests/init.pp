@@ -45,7 +45,6 @@ class gitlab (
     #User default settings
     $gitlab_gravatar        = $gitlab::params::gitlab_gravatar,
     $user_create_group      = $gitlab::params::user_create_group,
-    $user_create_team       = $gitlab::params::user_create_team,
     $user_changename        = $gitlab::params::user_changename,
     
     #Project default settings
@@ -57,6 +56,11 @@ class gitlab (
     $gitlab_projects        = $gitlab::params::gitlab_projects,
     $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
     
+    #Deprecated in 1.0.0
+    $gitlab_repodir   = '',
+    $gitlab_domain    = '',
+    $user_create_team = '',
+
   ) inherits gitlab::params {
 
 	case $::osfamily {
@@ -67,6 +71,17 @@ class gitlab (
 	    fail("${::osfamily} not supported yet")
 	  }
 	}
+	
+	if $gitlab_repodir != '' {
+	  fail('The flag, $gitlab_repodir is no longer a valid parameter, please remove from your manifests')
+	}
+  if $gitlab_domain != '' {
+    fail('The flag, $gitlab_domain is no longer a valid parameter, please remove from your manifests')
+  }
+  if $user_create_team != '' {
+    fail('The flag, $user_create_team is no longer a valid parameter, please remove from your manifests')
+  }
+	
 
 	#Include all resources
 	include gitlab::packages
