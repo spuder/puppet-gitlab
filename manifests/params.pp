@@ -13,8 +13,8 @@ class gitlab::params {
   
   #Database
   $gitlab_dbtype          = 'mysql'
-  $gitlab_dbname          = 'gitlabdb'
-  $gitlab_dbuser          = 'gitlabdbu'
+  $gitlab_dbname          = 'gitlabhq_production'
+  $gitlab_dbuser          = 'gitlab'
   $gitlab_dbpwd           = 'changeme'
   $gitlab_dbhost          = 'localhost'
   $gitlab_dbport          = '3306'

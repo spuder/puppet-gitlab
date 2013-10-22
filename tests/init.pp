@@ -28,8 +28,7 @@
 	  gitlab_dbpwd           => 'changeme',
 	  gitlab_dbhost          => 'localhost',
 	  gitlab_dbport          => '3306',
-#	  gitlab_domain          => $::fqdn,
-#	  gitlab_repodir         => $git_home,
+
 	  gitlab_ssl             => true,
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
