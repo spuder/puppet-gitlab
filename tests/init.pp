@@ -18,7 +18,7 @@
 	  git_email              => 'git@foo.com',
 #	  git_comment            => 'GitLab',
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
-	  gitlab_branch          => '6-1-stable',
+	  gitlab_branch          => '6-2-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
 	  gitlabshell_branch     => 'v1.7.1',
 	  

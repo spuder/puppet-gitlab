@@ -20,7 +20,7 @@ production: &base
   gitlab:
     ## Web server settings
     host: <%= @fqdn %>
-    port: 80
+    port: <% if @gitlab_ssl == true %>443<% else %>80<% end %>
     https: <%= @gitlab_ssl %>
 
     # Uncomment and customize the last line to run in a non-root path
