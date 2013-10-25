@@ -5,6 +5,7 @@ gitlab
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
+Upgrade  - https://github.com/spuder/puppet-gitlab/blob/master/upgrade-checklist
 
 
 
@@ -16,7 +17,7 @@ Forge  - https://forge.puppetlabs.com/spuder/gitlab
     * [What [Modulename] affects](#what-[modulename]-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with gitlab](#beginning-with-gitlab)
-4. [Usage - Configuration options and additional functionality](#usage)
+4. [Usage - Configuration options and additional functionalityy](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
@@ -28,12 +29,13 @@ The gitlab module installs a fully self contained gitlab server on an ubuntu ser
 Tested :  
 Gitlab 6-0-stable on Ubuntu 12.04  
 Gitlab 6-1-stable on Ubuntu 12.04  
+Gitlab 6-2-stable on Ubuntu 12.04   
 
  
 
 ##Module Description
 
-This puppet module accomplishes the gitlab 6 installtion tasks outlined in the install.md 
+This puppet module accomplishes the gitlab 6 installation tasks outlined in the install.md 
 https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
 
 
@@ -42,14 +44,6 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-###What gitlab affects
-
-The module installs the following programs:
-
-installs ruby 
-nginx server  
-postfix server  
-mysql server  
 
 The module configures the following files:  
 
@@ -87,21 +81,6 @@ The following programs will be installed
 - postfix  
 
 
-You can safely ignore the following warnings that are presented durring installation
-Certain versions of puppet return these errors even though the packages were installed properly
-
-    Warning: Failed to match dpkg-query line "No packages found matching mysql-client.\n"  
-    Warning: Failed to match dpkg-query line "No packages found matching mysql-server.\n"  
-    Warning: Failed to match dpkg-query line "No packages found matching libxslt1-dev.\n"  
-    Warning: Failed to match dpkg-query line "No packages found matching python-docutils.\n"  
-    Warning: Failed to match dpkg-query line "No packages found matching libicu-dev.\n"  
-    Warning: Failed to match dpkg-query line "No packages found matching git-core.\n"  
-http://projects.puppetlabs.com/issues/22621  
-
-
-**The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
-    Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
-
 
 --------------------------------------------------------------------------------------
 
@@ -113,10 +92,10 @@ http://projects.puppetlabs.com/issues/22621
 
 ####Database
 To use the module, you must have mysql::server installed and configured with a user. 
-It is recomeded that this be setup in your site.pp file, hiera or another ENC.
+It is recommended that this be setup in your site.pp file, hiera or another ENC.
 
 
-If you are using puppet stand alone, the following would setup mysql, and remove insecure account
+The following would setup mysql, and remove insecure test schema
 
     root$ import module puppetlabs-mysql
 
@@ -134,13 +113,12 @@ Then apply the config like so
 
 #####Gitlab class parameters
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
-Any parameters omitted will be set to the defautls located in gitlab::params
+Any parameters omitted will be set to the defaults located in gitlab::params
 
-For example, a basic configuraiton might look like this: 
+For example, a basic configuration might look like this: 
 
       class { 'gitlab' : 
 	      git_email              => 'git@foo.com',
-	      git_comment            => 'GitLab',
 	      gitlab_branch          => '6-1-stable',
 	      gitlabshell_branch     => 'v1.7.1',
 	      gitlab_dbname          => 'gitlabdb',
@@ -151,6 +129,9 @@ For example, a basic configuraiton might look like this:
 	  }
 	  
 **Look at tests/init.pp for an example of what class parameters to use**
+
+**The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
+    Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
 
 ##Customization
@@ -166,7 +147,7 @@ An example to change the landing page icon
           use_custom_login_logo  => true,
           company_logo_url       => 'http://placekitten.com/300/93',
           use_company_link	     =>  true,
-          company_link           => 'http://icanhas.cheezburger.com',
+          company_link           => '[Learn more about CompanyName](http://icanhas.cheezburger.com/)',
         }  
         
 
@@ -255,7 +236,6 @@ You will need to place your .pem file and your private key in a location accessi
 
 All of the parameters that can be set
 
-
   
       #Gitlab server settings
     $gitlab_branch         
@@ -315,12 +295,10 @@ All of the parameters that can be set
 	  
 ##Limitations
 
-Designed and tested for Ubuntu 12.04  
-Should work on Ubuntu 14.04  
-May work on Debian 7  
+Designed and tested on Ubuntu 12.04  
 Will not work on CentOS / RHEL  
 
-Changing $git_user, and $git_home is untested and may have unintended side effects
+Changing $git_user, and $git_home is untested and may have unintended side effects  
 
 
 ###Support
