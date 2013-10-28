@@ -6,65 +6,52 @@ New versions are released on the 22 of each month.
 See the upgrade documentation here https://github.com/gitlabhq/gitlabhq/tree/master/doc/update
 
 
-#Before upgrade
 
-stop gitlab
-stop nginx
-stop database
-backup database
+#Pitfalls
 
-checkout the new branches of git
-cd /home/git/gitlab/
-git checkout -b 6-1-stable origin/6-1-stable
 
-**Make sure to run a git status after switching branches**
+##Problem: You are unable to switch git branches, verify that the working directory is clean###
+
+Solution:  
+Make sure to run a git status after switching branches**
 http://stackoverflow.com/questions/19070744/upgrading-gitlab-gives-following-error-dont-know-how-to-build-task-migrate-ii/19070762#19070762
 
 
-*compare the old init script to the new init script*  
+##Problem: You get an error that a file isn't found when trying to run puppet##
 
-    git diff 6-0-stable 6-1-stable --lib/support/init.d/gitlab
+    Error: Could not retrieve catalog from remote server: Error 400 on SERVER: Could not find template 'gitlab/gitlab.yml.6-2-stable.erb' at /etc/puppet/modules/gitlab/manifests/setup.pp:63 on node gitlab.microsoft.com
 
-If they are different, then save the new one to templates/gitalb.init.6.x.erb (where x is the new release)
-There are no variables in the init script
-
-
-*compare the old config/gitlab.yml to the new config/gitlab.yml*  
-
-    git difftool 6-0-stable 6-1-stable --config/gitlab.yml.example  
-    
-If they are different, then create a new template with the release number by coping the currently working one (templates/gitlab.yml.6.x.erb )
-Update the variables as appropriate
-
-*compare the old gitlab-shell/config.yml to the new config*
+Solution:  
+Try uninstalling and reinstalling the gitlab module. Puppet module upgrade is know to not always be reliable
 
 
-*compare the old unicorn.rb.example*
+##Problem: Thumbnail icon is not updated
 
-    git diff 6-2-stable 6-1-stable -- config/unicorn.rb.example  
-    
-cp config/unicorn.rb.example ../gitlab/templates/unicorn.rb.6-2-stable.erb
+Solution:
+Verify that the icons are named /home/git/company-logo-black.png and /home/git/company-logo-white.png and that the symbolic link looks like the following:
 
-*compare the old database setup script 
+lrwxrwxrwx 1 git git    32 Oct 26 01:28 logo-black.png -> /home/git/company-logo-black.png
+lrwxrwxrwx 1 git git    32 Oct 26 01:28 logo-white.png -> /home/git/company-logo-white.png
 
-    git diff 6-2-stable 6-1-stable --config/database.yml.mysql  
-    
-If they are different, then create a new database.6-x-stable.erb file
-Update the variables as appropriate
 
+Compare the md5sum of the icons in /home/git with the icons in /home/git/gitlab/app/assets/images/gitlab-logo-black.png ect..
+Restart nignx, gitlab and your web browser
+
+Try disabling sendfile in the nginx config
+http://stackoverflow.com/questions/6236078/how-to-clear-the-cache-of-nginx
 
 
 #Upgrade
 
 
-When running rake commands, apped '--trace' to the end to see addional information
+Upgrade the gitlab module to the latest version
 
-#instead of this
-sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production
+    puppet module upgrade spuder-gitlab
 
-#run this
-sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production --trace
 
+Stop the puppet service to prevent it from accidentially overwriting anything
+
+    service puppet stop
 
 Follow the install guide until you reach the step to update your config files. 
 Instead of manually updating the config files, change the puppet git_branch parameter to the new version of gitlab
@@ -73,6 +60,8 @@ Instead of manually updating the config files, change the puppet git_branch para
 
 
 Do not manually update the init script, it will be updated at the next puppet run
+
+Do not manually restart gitlab or nginx, they will automatically started at the next puppet run
 
 Check the application status
 
@@ -89,4 +78,5 @@ If all looks well, run the puppet apply again without the --noop flag
 #Post upgrade
 
 - Verify the ssl certificate permissions
-- Verify the custom thumbnail icons permission
+- Verify the custom thumbnail icons permissions
+
