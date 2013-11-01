@@ -24,6 +24,8 @@ class gitlab::params {
   $gitlab_ssl_cert        = '/etc/ssl/certs/ssl-cert-snakeoil.pem'
   $gitlab_ssl_key         = '/etc/ssl/private/ssl-cert-snakeoil.key'
   $gitlab_ssl_self_signed = false #Do not use self signed certs in production!
+  $default_servername     = 'gitlab' #example gitlab.foo.com  
+
   
   #LDAP 
   $ldap_enabled           = false

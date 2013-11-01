@@ -24,6 +24,7 @@ class gitlab (
     $gitlab_ssl_cert        = $gitlab::params::gitlab_ssl_cert,
     $gitlab_ssl_key         = $gitlab::params::gitlab_ssl_key,
     $gitlab_ssl_self_signed = $gitlab::params::gitlab_ssl_self_signed,
+    $default_servername     = $gitlab::params::default_servername, 
     
     #LDAP
     $ldap_enabled           = $gitlab::params::ldap_enabled,

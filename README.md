@@ -212,7 +212,7 @@ Simple example with no encryption (not recommended)
 Simple example with SSL and Self Signed Cert (not recommended for production)  
 Ngnix will use the certificate and key located in :   
 
-  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
+  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
   
     class { 'gitlab' :
@@ -226,7 +226,7 @@ You will need to place your .pem file and your private key in a location accessi
  
     class { 'gitlab' : 
        $gitlab_ssl             = false
-        $gitlab_ssl_cert        = '/home/git/foo/bar.pem'
+        $gitlab_ssl_cert        = '/home/git/foo/bar.pem'  #Can be .pem or .crt
         $gitlab_ssl_key         = '/home/git/foo/bar.key'
         $gitlab_ssl_self_signed = false
     }
@@ -350,5 +350,7 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Removes dependency on unused nginx module
 - Removes $user_create_team  as 6.x no longer has concept of teams
 - Adds http redirect in nginx, and other security improvements     
+2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
+Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain
 
 

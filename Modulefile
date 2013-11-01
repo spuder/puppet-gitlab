@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.0.0'
+version '1.1.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -11,6 +11,7 @@ description 'gitlab
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
+Upgrade  - https://github.com/spuder/puppet-gitlab/blob/master/upgrade-checklist
 
 
 
@@ -34,6 +35,7 @@ The gitlab module installs a fully self contained gitlab server on an ubuntu ser
 Tested :  
 Gitlab 6-0-stable on Ubuntu 12.04  
 Gitlab 6-1-stable on Ubuntu 12.04  
+Gitlab 6-2-stable on Ubuntu 12.04   
 
  
 
@@ -48,12 +50,6 @@ https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md
 
 ##Setup
 
-The module installs the following programs:
-
-installs ruby 
-nginx server  
-postfix server  
-mysql server  
 
 The module configures the following files:  
 
@@ -105,7 +101,7 @@ To use the module, you must have mysql::server installed and configured with a u
 It is recommended that this be setup in your site.pp file, hiera or another ENC.
 
 
-If you are using puppet stand alone, the following would setup mysql, and remove insecure account
+The following would setup mysql, and remove insecure test schema
 
     root$ import module puppetlabs-mysql
 
@@ -129,7 +125,6 @@ For example, a basic configuration might look like this:
 
       class { \'gitlab\' : 
 	      git_email              => \'git@foo.com\',
-	      git_comment            => \'GitLab\',
 	      gitlab_branch          => \'6-1-stable\',
 	      gitlabshell_branch     => \'v1.7.1\',
 	      gitlab_dbname          => \'gitlabdb\',
@@ -158,7 +153,7 @@ An example to change the landing page icon
           use_custom_login_logo  => true,
           company_logo_url       => \'http://placekitten.com/300/93\',
           use_company_link	     =>  true,
-          company_link           => \'http://icanhas.cheezburger.com\',
+          company_link           => \'[Learn more about CompanyName](http://icanhas.cheezburger.com/)\',
         }  
         
 
@@ -223,7 +218,7 @@ Simple example with no encryption (not recommended)
 Simple example with SSL and Self Signed Cert (not recommended for production)  
 Ngnix will use the certificate and key located in :   
 
-  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
+  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
   
     class { \'gitlab\' :
@@ -237,7 +232,7 @@ You will need to place your .pem file and your private key in a location accessi
  
     class { \'gitlab\' : 
        $gitlab_ssl             = false
-        $gitlab_ssl_cert        = \'/home/git/foo/bar.pem\'
+        $gitlab_ssl_cert        = \'/home/git/foo/bar.pem\'  #Can be .pem or .crt
         $gitlab_ssl_key         = \'/home/git/foo/bar.key\'
         $gitlab_ssl_self_signed = false
     }
@@ -246,7 +241,6 @@ You will need to place your .pem file and your private key in a location accessi
 ##Reference
 
 All of the parameters that can be set
-
 
   
       #Gitlab server settings
@@ -307,12 +301,10 @@ All of the parameters that can be set
 	  
 ##Limitations
 
-Designed and tested for Ubuntu 12.04  
-Should work on Ubuntu 14.04  
-May work on Debian 7  
+Designed and tested on Ubuntu 12.04  
 Will not work on CentOS / RHEL  
 
-Changing $git_user, and $git_home is untested and may have unintended side effects
+Changing $git_user, and $git_home is untested and may have unintended side effects  
 
 
 ###Support
@@ -364,6 +356,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Removes dependency on unused nginx module
 - Removes $user_create_team  as 6.x no longer has concept of teams
 - Adds http redirect in nginx, and other security improvements     
+2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
+Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain
 
 
 '

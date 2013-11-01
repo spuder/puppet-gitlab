@@ -40,6 +40,9 @@ Restart nignx, gitlab and your web browser
 Try disabling sendfile in the nginx config
 http://stackoverflow.com/questions/6236078/how-to-clear-the-cache-of-nginx
 
+Wait a few days. 
+On more tha one occastion, even after performing all above steps, the thumbnail icon was still incorrect. 
+The problem magically fixed itself after a few days. 
 
 #Upgrade
 

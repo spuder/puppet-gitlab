@@ -16,9 +16,11 @@ server {
 <% else %>
 server {
   listen 80;
-  server_name <%= @fqdn %>;
+  server_name <%= $default_servername %>.*;
   server_tokens off;
-  return 301 https://$host$request_uri;
+  #return 301 https://$host$request_uri;
+  return 301 https://<%= @fqdn %>$request_uri;
+
 }
 server {
   listen 443 ssl default_server;
