@@ -10,20 +10,20 @@
       "version_requirement": "\u003e\u003d1.0.0"
     },
     {
-      "name": "puppetlabs/mysql",
-      "version_requirement": "\u003e\u003d2.0.0"
-    },
-    {
       "name": "puppetlabs/stdlib",
       "version_requirement": "\u003e\u003d4.0.0"
     },
     {
       "name": "example42/postfix",
-      "version_requirement": "\u003e\u003d2.0.9"
+      "version_requirement": "\u003e\u003d2.0.0"
     },
     {
       "name": "puppetlabs/ruby",
       "version_requirement": "\u003e\u003d0.1.0"
+    },
+    {
+      "name": "puppetlabs/mysql",
+      "version_requirement": "\u003e\u003d2.0.0"
     }
   ],
   "types": [],

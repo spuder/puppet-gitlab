@@ -365,8 +365,8 @@ project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
-dependency 'puppetlabs-apt', '>=1.0.0'
-dependency 'puppetlabs/mysql', '>=2.0.0'
-dependency 'puppetlabs-stdlib', '>=4.0.0'
-dependency 'example42-postfix', '>=2.0.9'
+dependency 'puppetlabs/apt', '>=1.0.0'
+dependency 'puppetlabs/stdlib', '>=4.0.0'
+dependency 'example42-postfix', '>=2.0.0'
 dependency 'puppetlabs/ruby', '>=0.1.0'
+dependency 'puppetlabs/mysql', '>=2.0.0'
