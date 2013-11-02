@@ -1,0 +1,5 @@
+###########################################################
+#	If you see an error; 'Permission denied',         #
+#  verify you have added your ssh key the web interface,  #
+#        or use https ( requires git >= 1.7.10 )          #
+###########################################################

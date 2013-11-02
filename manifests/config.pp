@@ -7,6 +7,10 @@ class gitlab::config inherits gitlab {
     group   =>  'git',
   }
 
+
+#Gitlab CONFIG
+##############
+ 
   #Create log directory
   file { "${gitlab::git_home}/gitlab/log":
     ensure  =>  directory,
@@ -43,6 +47,10 @@ class gitlab::config inherits gitlab {
     mode    =>  '0755',
   }
 
+
+#NGINX CONFIG
+#############
+
   #Create nginx sites-available directory
   file { '/etc/nginx/sites-available':
     ensure  =>  directory,
@@ -74,6 +82,34 @@ class gitlab::config inherits gitlab {
     group   =>  'root',
   }
 
+
+#Gitlab-shell CONFIG
+####################
+  
+  #Verify .ssh directory exists
+  file { "${gitlab::git_home}/.ssh":
+    ensure  =>  directory,
+    mode    =>  '0700',    
+  }
+  
+  #Verify authorized keys file exists
+  file  { "${gitlab::git_home}/authorized_keys":
+    ensure  =>  present,
+    mode    =>  '0600',
+  }
+
+
+  #Show error when users forget to add key
+  file  { "${gitlab::git_home}":
+    ensure  =>  file,
+    source  =>  'puppet:///modules/gitlab/ssh-banner.txt',
+    mode    =>  '0755',
+  }
+
+
+#Git CONFIG
+###########
+
   #Sets sudo -u git -H git config --global user.name, user.email, autocrlf = input
   file { "${gitlab::git_home}/.gitconfig":
     ensure  =>  file,
@@ -81,6 +117,10 @@ class gitlab::config inherits gitlab {
     mode    =>  '0644',
     owner   =>  "${gitlab::git_user}",
   }
+
+
+
+
 
   #Thumbnail logo white default
   file{"${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png":
