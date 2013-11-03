@@ -6,6 +6,7 @@ Source - https://github.com/spuder/puppet-gitlab
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
 Upgrade  - https://github.com/spuder/puppet-gitlab/blob/master/upgrade-checklist
+Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/
 
 
 
@@ -164,8 +165,7 @@ To change the thumbnail icon, place two .png files with the following names, int
 /home/git/company-logo-white.png  
 /home/git/company-logo-black.png     
 
-company-logo-white.png will be used against the dark background themes  
-company-logo-black.png will be used against the light background themes 
+
 
 
     class { 'gitlab' :
@@ -174,8 +174,11 @@ company-logo-black.png will be used against the light background themes
 
 ![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
 	  
-*The logo should be about 80px by 80px in size*  
-*The logo should be saved as a .png* 
+company-logo-white.png is used against the dark background themes  
+company-logo-black.png is used against the light background themes 
+
+*The logos should be about 80px by 80px in size*  
+*The logos should be saved as a .png* 
 
 **You will need to restart the gitlab server, and clear your browsers cache before**
 **the changes will be applied**
@@ -296,17 +299,16 @@ All of the parameters that can be set
 ##Limitations
 
 Designed and tested on Ubuntu 12.04  
-Will not work on CentOS / RHEL  
+Will not work on CentOS / RHEL  (yet)
 
-Changing $git_user, and $git_home is untested and may have unintended side effects  
+Modifying $git_user, and $git_home is untested and may have unintended side effects  
 
 
 ###Support
 This module is provided 'as is' with no guarantee of quality.  
 
-Issues and pull requests should be reported to the Github issues page
+Problems should be reported to the Github issues page  
 https://github.com/spuder/puppet-gitlab/issues 
-
 
 
 
@@ -338,7 +340,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Oct-10: 0.2.5 Fixes thumbnail issue  
 2013-Oct-10: 0.3.0 Adds HTTPS Support, Updates Readme with links  
 2013-Oct-18: 0.3.1 Fixes issue where the thumbnail icon would be overwritten https://github.com/spuder/puppet-gitlab/issues/14  
-2013-Oct-21: 1.0.0 
+2013-Oct-21: 1.0.0  Major Release
+
 - Rewrite of the ruby module, now uses puppetlabs-ruby instead of custom package https://github.com/spuder/puppet-gitlab/issues/5 
 - company_url now takes the entire markup instead of just the link. See gitlab.yml6-x-stable.erb 
 - Removed unused parameters $gitlab_repodir, $gitlab_domain
@@ -349,7 +352,8 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Removes dependency on wget module
 - Removes dependency on unused nginx module
 - Removes $user_create_team  as 6.x no longer has concept of teams
-- Adds http redirect in nginx, and other security improvements     
+- Adds http redirect in nginx, and other security improvements   
+  
 2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
 Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain
 
