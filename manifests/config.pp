@@ -100,7 +100,7 @@ class gitlab::config inherits gitlab {
 
 
   #Show error when users forget to add key
-  file  { "${gitlab::git_home}":
+  file  { "${gitlab::git_home}/ssh-banner.txt":
     ensure  =>  file,
     source  =>  'puppet:///modules/gitlab/ssh-banner.txt',
     mode    =>  '0755',
