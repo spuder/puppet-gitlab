@@ -28,4 +28,4 @@ matrix:
       env: PUPPET_GEM_VERSION="~> 3.3.0"
 notifications:
   email: false
-script: "puppet apply /vagrant/tests/init.pp --debug"
+script: "/usr/bin/puppet apply /vagrant/tests/init.pp --debug"
