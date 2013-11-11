@@ -264,6 +264,7 @@ All of the parameters that can be set
     $gitlab_ssl_cert        
     $gitlab_ssl_key         
     $gitlab_ssl_self_signed 
+    $default_servername  
     
       #LDAP
     $ldap_enabled           
@@ -355,6 +356,7 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 - Adds http redirect in nginx, and other security improvements   
   
 2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
-Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain
+Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain  
+2013-Nov-11: 1.1.1 Increases default gitlabshell from 1.7.1 to 1.7.4, default branch is now 6-2-stable  
 
 
