@@ -358,5 +358,7 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
 Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain  
 2013-Nov-11: 1.1.1 Increases default gitlabshell from 1.7.1 to 1.7.4, default branch is now 6-2-stable  
+2013-Nov-14: 1.1.2 Increases default gitlabshell from 1.7.4 to 1.7.8, as a result of a security vulnerability
+
 
 
