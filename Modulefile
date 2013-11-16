@@ -19,34 +19,24 @@ Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppe
 ####Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with [Modulename]](#setup)
+2. [Setup - The basics of getting started with [Modulename]](#setup)
     * [What [Modulename] affects](#what-[modulename]-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with gitlab](#beginning-with-gitlab)
-4. [Usage - Configuration options and additional functionalityy](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+3. [Usage - Configuration options and additional functionalityy](#usage)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
 
 ##Overview
 
-The gitlab module installs a fully self contained gitlab server on an ubuntu server
+Installs Gitlab 6 on Ubuntu
 
-Tested :  
+Supported Versions :  
 Gitlab 6-0-stable on Ubuntu 12.04  
 Gitlab 6-1-stable on Ubuntu 12.04  
 Gitlab 6-2-stable on Ubuntu 12.04   
 
- 
-
-##Module Description
-
-This puppet module accomplishes the gitlab 6 installation tasks outlined in the install.md 
-https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
-
-
-
+See https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
 
 
 ##Setup
@@ -126,8 +116,7 @@ For example, a basic configuration might look like this:
 
       class { \'gitlab\' : 
 	      git_email              => \'git@foo.com\',
-	      gitlab_branch          => \'6-1-stable\',
-	      gitlabshell_branch     => \'v1.7.1\',
+	      gitlab_branch          => \'6-2-stable\',
 	      gitlab_dbname          => \'gitlabdb\',
 	      gitlab_dbuser          => \'gitlabdbu\',
 	      gitlab_dbpwd           => \'changeme\',
@@ -247,87 +236,73 @@ All of the parameters that can be set
 
   
       #Gitlab server settings
-    $gitlab_branch         
-    $gitlabshell_branch     
-    $git_user               
-    $git_home               
-    $git_email              
-    $git_comment            
-    $gitlab_sources         
-    $gitlabshell_sources    
+    $gitlab_branch         		#Which branch to checkout from $gitlab_sources
+    $gitlabshell_branch     	#Which branch to checkout from $gitlabshell_sources
+    $git_user               	#Default is \'git\', changing this is risky! 
+    $git_home               	#Default /home/git
+    $git_email              	#The email address gitlab will send email from 
+    $git_comment            	#Arbitrary unix identifier, Default \'gitlab\'
+    $gitlab_sources         	#git URL with gitlab source
+    $gitlabshell_sources    	#git URL with gitlabshell source
     
       #Database
-    $gitlab_dbtype          
-    $gitlab_dbname          
-    $gitlab_dbuser         
-    $gitlab_dbpwd           
-    $gitlab_dbhost         
-    $gitlab_dbport          
-    $gitlab_domain             
+    $gitlab_dbtype          	#Only MySQL supported at the moment
+    $gitlab_dbname          	#Name of the schma, Default \'gitlabhq_production\'
+    $gitlab_dbuser         		#User with access to the schema, Default \'gitlab\'
+    $gitlab_dbpwd           	#$gitlab_dbuser database password
+    $gitlab_dbhost         		#Hostname of database server, Default \'localhost\'
+    $gitlab_dbport          	#Default \'3306\'
     
       #Web & Security
-    $gitlab_ssl             
-    $gitlab_ssl_cert        
-    $gitlab_ssl_key         
-    $gitlab_ssl_self_signed 
-    $default_servername  
+    $gitlab_ssl             	#Boolean if using SSL Default false
+    $gitlab_ssl_cert        	#location of ssl certificate Default \'/etc/ssl/certs/ssl-cert-snakeoil.pem\'
+    $gitlab_ssl_key         	#location of ssl key Default \'/etc/ssl/private/ssl-cert-snakeoil.key\'
+    $gitlab_ssl_self_signed 	#If cert is signed by CA or self signed, Default: false
+    $default_servername 		#Subdomain Default \'gitlab\' Example \'gitlab.foo.com\' 
     
       #LDAP
-    $ldap_enabled           
-    $ldap_host              
-    $ldap_base           
-    $ldap_uid              
-    $ldap_port          
-    $ldap_method         
-    $ldap_bind_dn           
-    $ldap_bind_password     
+    $ldap_enabled 				#Default false          
+    $ldap_host              	#URL of domain controller Default \'ldap.domain.com\'
+    $ldap_base           		#base domain Default \'dc=domain,dc=com\'
+    $ldap_uid              		#Unix = \'uid\' AD = \'sAMAccountName\'
+    $ldap_port          		#Default \'636\'
+    $ldap_method         		#Default ssl
+    $ldap_bind_dn           	#Address of the bind user Default \'\'
+    $ldap_bind_password     	#Password of bind user
     
       #Company Branding
-    $use_custom_login_logo 
-    $company_logo_url       
-    $use_custom_thumbnail  
+    $use_custom_login_logo 		#Boolean, if landing page should use $company_logo_url Default: false
+    $company_logo_url       	#URL that contains a logo, usually about 300 x 90 px
+    $use_custom_thumbnail  		#Boolean, thumbnail icon are located in /home/git/
+    #use_company_link			#Add arbitrary text under icon
+    #company_link				#Markdown of any text Example: \'[Learn more about foo](http://failblog.cheezburger.com)\'
     
      #User default settings
-    $gitlab_gravatar        
-    $user_create_group      
-    $user_changename        
+    $gitlab_gravatar        	#Default: true
+    $user_create_group      	#Default: false
+    $user_changename        	#Default: false
     
       #Project default features
-    $project_issues         
-    $project_merge_request  
-    $project_wiki           
-    $project_wall           
-    $project_snippets       
-    $gitlab_projects 
-    $project_public_default     
+    $project_issues         	#Default: true
+    $project_merge_request  	#Default: true
+    $project_wiki           	#Default: true
+    $project_wall           	#Default: false
+    $project_snippets       	#Default: false
+    $gitlab_projects 			#Default: 10
+    $project_public_default     #Default: true
 
 	  
 	  
 ##Limitations
 
-Designed and tested on Ubuntu 12.04  
 Will not work on CentOS / RHEL  (yet)
 
 Modifying $git_user, and $git_home is untested and may have unintended side effects  
 
 
 ###Support
-This module is provided \'as is\' with no guarantee of quality.  
 
-Problems should be reported to the Github issues page  
-https://github.com/spuder/puppet-gitlab/issues 
-
-
-
-##Development
- 
-**Please send pull requests to dev branch**
-
-This module is patterned after the nextGen standard purposed by example42  
-http://www.example42.com/?q=NextGen  
-  
-The Readme is patterned after the puppet markdown template here  
-http://docs.puppetlabs.com/puppet/2.7/reference/READMEtemplate.markdown   
+Issues page: https://github.com/spuder/puppet-gitlab/issues 
 
 
 ##Release Notes/Contributors/Etc 
@@ -364,7 +339,7 @@ atomaka - https://github.com/atomaka/puppet-gitlab
 2013-Nov-1: 1.1.0 Adds new flag $default_servername, allows user to choose what subdomain gitlab is configured as in nginx
 Instead of gitlab.foo.com, user can now make the url git.foo.com or any other subdomain  
 2013-Nov-11: 1.1.1 Increases default gitlabshell from 1.7.1 to 1.7.4, default branch is now 6-2-stable  
-2013-Nov-14: 1.1.2 Increases default gitlabshell from 1.7.4 to 1.7.8, as a result of a security vulnerability
+2013-Nov-14: 1.1.2 Increases default gitlabshell from 1.7.4 to 1.7.8, as a result of a security vulnerability  
 
 
 
