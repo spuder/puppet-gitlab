@@ -71,7 +71,9 @@ production: &base
       wiki: <%= @project_wiki %>
       wall: <%= @project_wall %>
       snippets: <%= @project_snippets %>
-      public: <%= @project_public_default %>
+      # public: <%= @project_public_default %> #Commented out as work around for issue where projects are always public
+     #https://github.com/gitlabhq/gitlabhq/issues/5462#issuecomment-28960437
+
 
   ## External issues trackers
   issues_tracker:
