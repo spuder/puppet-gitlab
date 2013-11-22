@@ -1,9 +1,9 @@
 This file is a work in progress
 
-#Common Errors
+# Common Errors
 ================
 
-##Error 500 
+## Error 500 
 http://f.cl.ly/items/0g253M0q3W290G1T0s2y/Image%202013.10.03%208%3A35%3A15%20PM.png    
 Look at /home/git/gitlab/log/production.log  
 
@@ -19,7 +19,7 @@ If you see the following error, then the project is public, but the user is not 
 
 http://gitlab.somedomain/admin/groups/company
 
-##Push prompts for git@foo password
+## Push prompts for git@foo password
 Check the following:  
 1. Is the hostname and shortname configured correctly (gitlab.yml, /etc/hosts, ect..)  
 2. Is the git config --global configured  
@@ -30,7 +30,7 @@ Check the following:
 You will most likely need to reinstall gitlab and make sure the hostname is correct
 http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-push-for-git-user
 
-##Thumbnail icon won't change  
+## Thumbnail icon won't change  
 - Clear the cash in your browser  
 - Run `service gitlab reload` or `service gitlab restart`  
 - Restart the server  

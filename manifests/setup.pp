@@ -20,6 +20,7 @@
             Package['bundler'],
             Package['mysql2'],
                   ],
+                  #TODO: Add notify to notify()
   }
   
   notify { "Installing charlock holmes with ruby version ${::rubyversion}" : }
@@ -33,13 +34,17 @@
   
   #Download gitlab-shell (replaces git-o-lite)
   exec { 'download gitlab-shell':
-    command   =>  "git clone ${gitlab::gitlabshell_sources} ${gitlab::git_home}/gitlab-shell",
+    command   =>  "/usr/bin/git clone ${gitlab::gitlabshell_sources} ${gitlab::git_home}/gitlab-shell",
     creates   =>  "${gitlab::git_home}/gitlab-shell",
+  }->
+  exec { 'checkout gitlab-shell':
+    cwd       =>  "${gitlab::git_home}/gitlab-shell",
+    command   =>  "/usr/bin/git checkout ${gitlab::gitlabshell_branch}",
   }
   
   #Download gitlab source
   exec { 'download gitlab':
-    command   =>  "git clone -b ${gitlab::gitlab_branch} ${gitlab::gitlab_sources} ${gitlab::git_home}/gitlab",
+    command   =>  "/usr/bin/git clone -b ${gitlab::gitlab_branch} ${gitlab::gitlab_sources} ${gitlab::git_home}/gitlab",
     creates   =>  "${gitlab::git_home}/gitlab",
   }
   
