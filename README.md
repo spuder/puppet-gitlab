@@ -14,7 +14,6 @@ Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppe
 
 1. [Overview](#overview)
 2. [Setup - The basics of getting started with [Modulename]](#setup)
-    * [What [Modulename] affects](#what-[modulename]-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with gitlab](#beginning-with-gitlab)
 3. [Usage - Configuration options and additional functionalityy](#usage)
@@ -26,15 +25,16 @@ Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppe
 Installs Gitlab 6 on Ubuntu
 
 Supported Versions :  
+
 Gitlab 6-0-stable on Ubuntu 12.04  
 Gitlab 6-1-stable on Ubuntu 12.04  
 Gitlab 6-2-stable on Ubuntu 12.04   
+Gitlab 6-3-stable on Ubuntu 12.04  
 
 See https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
 
 
 ##Setup
-
 
 The module configures the following files:  
 
@@ -56,21 +56,6 @@ This module requires the following modules
 
 - puppetlabs-apt  
 - puppetlabs-mysql >= 2.0.0  
-- jfryman-nginx  
-
-
-The following programs will be installed
-
-- git  		>=1.7.10  
-- ruby 		>=1.9.x  
-- bundler  
-- mysql2   
-- charlock_holmes  
-- mysqlserver  
-- mysqlclient  
-- ngnix  	>=0.8.21
-- postfix  
-
 
 
 --------------------------------------------------------------------------------------
