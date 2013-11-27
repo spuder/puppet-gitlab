@@ -38,7 +38,8 @@ listen "<%= @git_home %>/gitlab/tmp/sockets/gitlab.socket", :backlog => 64
 listen "127.0.0.1:8080", :tcp_nopush => true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
-timeout 30
+#timeout 30 #30 is too low in my testing, changing to 60 (spuder)
+timeout 60
 
 # feel free to point this anywhere accessible on the filesystem
 pid "<%= @git_home %>/gitlab/tmp/pids/unicorn.pid"
