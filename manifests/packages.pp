@@ -13,9 +13,7 @@ class gitlab::packages inherits gitlab {
                     'redis-server',
                     'nginx',
                       ]
-  package { $system_packages:
-    ensure  =>  present,
-  }
+  ensure_packages($system_packages)
 
   ## Git v1.7.10
   #=====================================
