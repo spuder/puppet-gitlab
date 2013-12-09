@@ -11,8 +11,8 @@ description 'gitlab
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
-Upgrade  - https://github.com/spuder/puppet-gitlab/blob/dev/doc/upgrade-checklist.md 
-Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/
+Upgrade  - https://github.com/spuder/puppet-gitlab/blob/dev/doc/upgrade-checklist.md  
+Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/  
 
 
 
