@@ -20,7 +20,7 @@
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
 	  gitlab_branch          => '6-3-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
-#   gitlabshell_branch     => 'v1.7.9',
+   gitlabshell_branch     => 'v1.8.0',
 	  
 	  gitlab_dbtype          => 'mysql',
 	  gitlab_dbname          => 'gitlabdb',

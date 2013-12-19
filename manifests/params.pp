@@ -3,7 +3,7 @@ class gitlab::params {
   
   #Gitlab server settings
   $gitlab_branch          = '6-3-stable'
-  $gitlabshell_branch     = 'v1.7.9'
+  $gitlabshell_branch     = 'v1.8.0'
   $git_user               = 'git'       #only change if you really know what you are doing
   $git_home               = '/home/git'
   $git_email              = 'git@someserver.net'
@@ -55,7 +55,7 @@ class gitlab::params {
   $project_wiki           = true
   $project_wall           = false
   $project_snippets       = false
-  $gitlab_projects        = '10'
+  $gitlab_projects        = '15'
   $project_public_default = true #https://github.com/gitlabhq/gitlabhq/issues/5000
   
 }
