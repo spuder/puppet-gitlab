@@ -196,7 +196,7 @@ Simple example with no encryption (not recommended)
 Simple example with SSL and Self Signed Cert (not recommended for production)  
 Ngnix will use the certificate and key located in :   
 
-  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem
+  certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
   
     class { \'gitlab\' :
