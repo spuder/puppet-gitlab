@@ -1,4 +1,3 @@
 If you see an error; 'Permission denied',verify you have added your ssh key 
-to the web interface, or use https 
-
+within the web interface, or use https  
 
