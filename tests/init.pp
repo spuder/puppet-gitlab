@@ -50,7 +50,8 @@
 	  use_custom_thumbnail   => false,
 	  use_company_link       => true,
 	  company_link           => 'http://failblog.cheezburger.com',
-	  project_public_default => false,
+	  #project_public_default => false, #Deprecated in 2.0.0 
+	  visibility_level       => 'internal', # New in 6-4, replaces project_public_default
 	  
 	  gitlab_gravatar        => true,
 	  user_create_group      => false,

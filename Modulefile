@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.4.0'
+version '2.0.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -21,7 +21,6 @@ CHANGELOG - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
 
 1. [Overview](#overview)
 2. [Setup - The basics of getting started with [Modulename]](#setup)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with gitlab](#beginning-with-gitlab)
 3. [Usage - Configuration options and additional functionalityy](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -37,32 +36,23 @@ Gitlab 6-0-stable on Ubuntu 12.04
 Gitlab 6-1-stable on Ubuntu 12.04  
 Gitlab 6-2-stable on Ubuntu 12.04   
 Gitlab 6-3-stable on Ubuntu 12.04  
+Gitlab 6-4-stable on Ubuntu 12.04
 
 See https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
 
 
-##Setup
 
-The module configures the following files:  
+##Setup  
 
-/home/git/gitlab/config/gitlab.yml  
-/home/git/gitlab/config/database.yml  
-/home/git/gitlab/config/unicorn.rb  
-/home/git/gitlab-shell/config.yml  
-/etc/init.d/gitlab  
-/etc/ngnix/sites-available/gitlab  
-/etc/nginx/sites-enabled/gitlab  
+Requires puppet 3.0.0 or greater
 
-###Setup Requirements
 
-This module requires the following programs
+Requires the following module dependencies   
 
-- puppet >= 3.0.0  
-
-This module requires the following modules  
-
-- puppetlabs-apt  
-- puppetlabs-mysql >= 2.0.0  
+- puppetlabs-apt    >= 1.0.0
+- puppetlabs-mysql  >= 2.0.0  
+- puppetlabs-ruby   >= 0.1.0
+- puppetlabs-stdlib >= 4.0.0
 
 
 --------------------------------------------------------------------------------------
@@ -80,13 +70,13 @@ It is recommended that this be setup in your site.pp file, hiera or another ENC.
 
 The following would setup mysql, and remove insecure test schema
 
-    root$ import module puppetlabs-mysql
+    root$ puppet module install puppetlabs-mysql
 
     root$ cat /tmp/gitlab-mysql-prerequisits.pp  
       class { \'::mysql::server\':  
         root_password => \'somesuperlongpasswordwithentropy\' }  
         remove_default_accounts => true,
-  		restart                 => true,
+  		  restart                 => true,
       }  
 
 Then apply the config like so  
@@ -94,7 +84,8 @@ Then apply the config like so
     puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug
     
 
-#####Gitlab class parameters
+#####Gitlab class parameters  
+
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defaults located in gitlab::params
 
@@ -102,17 +93,17 @@ For example, a basic configuration might look like this:
 
       class { \'gitlab\' : 
 	      git_email              => \'git@foo.com\',
-	      gitlab_branch          => \'6-2-stable\',
+	      gitlab_branch          => \'6-4-stable\',
 	      gitlab_dbname          => \'gitlabdb\',
 	      gitlab_dbuser          => \'gitlabdbu\',
 	      gitlab_dbpwd           => \'changeme\',
-	      gitlab_projects        => \'10\',
+	      gitlab_projects        => \'15\',
 	      gitlab_username_change => true,
 	  }
 	  
 **Look at tests/init.pp for an example of what class parameters to use**
 
-**The install process may take a long time, and may appear to be stuck at the following line for about 800 seconds:**   
+**The install process may take 15 minute, and may appear to be stuck at the following line; this is normal:**   
     Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
 
@@ -145,8 +136,6 @@ To change the thumbnail icon, place two .png files with the following names, int
  
 /home/git/company-logo-white.png  
 /home/git/company-logo-black.png     
-
-
 
 
     class { \'gitlab\' :
@@ -232,50 +221,50 @@ All of the parameters that can be set
     $gitlabshell_sources    	#git URL with gitlabshell source
     
       #Database
-    $gitlab_dbtype          	#Only MySQL supported at the moment
-    $gitlab_dbname          	#Name of the schma, Default \'gitlabhq_production\'
-    $gitlab_dbuser         		#User with access to the schema, Default \'gitlab\'
-    $gitlab_dbpwd           	#$gitlab_dbuser database password
-    $gitlab_dbhost         		#Hostname of database server, Default \'localhost\'
-    $gitlab_dbport          	#Default \'3306\'
+    $gitlab_dbtype          	# Only MySQL supported at the moment
+    $gitlab_dbname          	# Name of the schma, Default \'gitlabhq_production\'
+    $gitlab_dbuser         		# User with access to the schema, Default \'gitlab\'
+    $gitlab_dbpwd           	# $gitlab_dbuser database password
+    $gitlab_dbhost         		# Hostname of database server, Default \'localhost\'
+    $gitlab_dbport          	# Default \'3306\'
     
       #Web & Security
-    $gitlab_ssl             	#Boolean if using SSL Default false
-    $gitlab_ssl_cert        	#location of ssl certificate Default \'/etc/ssl/certs/ssl-cert-snakeoil.pem\'
-    $gitlab_ssl_key         	#location of ssl key Default \'/etc/ssl/private/ssl-cert-snakeoil.key\'
-    $gitlab_ssl_self_signed 	#If cert is signed by CA or self signed, Default: false
-    $default_servername 		#Subdomain Default \'gitlab\' Example \'gitlab.foo.com\' 
+    $gitlab_ssl             	#B oolean if using SSL, Default: false
+    $gitlab_ssl_cert        	# location of ssl certificate Default \'/etc/ssl/certs/ssl-cert-snakeoil.pem\'
+    $gitlab_ssl_key         	# location of ssl key Default \'/etc/ssl/private/ssl-cert-snakeoil.key\'
+    $gitlab_ssl_self_signed 	# If cert is signed by CA or self signed, Default: false
+    $default_servername 		  # Subdomain Default \'gitlab\' Example \'gitlab.foo.com\' 
     
       #LDAP
-    $ldap_enabled 				#Default false          
-    $ldap_host              	#URL of domain controller Default \'ldap.domain.com\'
-    $ldap_base           		#base domain Default \'dc=domain,dc=com\'
-    $ldap_uid              		#Unix = \'uid\' AD = \'sAMAccountName\'
-    $ldap_port          		#Default \'636\'
-    $ldap_method         		#Default ssl
-    $ldap_bind_dn           	#Address of the bind user Default \'\'
-    $ldap_bind_password     	#Password of bind user
+    $ldap_enabled 				    # Default: false          
+    $ldap_host              	# URL of domain controller Default \'ldap.domain.com\'
+    $ldap_base           		  # base domain Default \'dc=domain,dc=com\'
+    $ldap_uid              		# Unix = \'uid\' AD = \'sAMAccountName\'
+    $ldap_port          		  # Default: \'636\'
+    $ldap_method         		  # Default: ssl
+    $ldap_bind_dn           	# Address of the bind user Default \'\'
+    $ldap_bind_password     	# Password of bind user
     
       #Company Branding
-    $use_custom_login_logo 		#Boolean, if landing page should use $company_logo_url Default: false
-    $company_logo_url       	#URL that contains a logo, usually about 300 x 90 px
-    $use_custom_thumbnail  		#Boolean, thumbnail icon are located in /home/git/
-    #use_company_link			#Add arbitrary text under icon
-    #company_link				#Markdown of any text Example: \'[Learn more about foo](http://failblog.cheezburger.com)\'
+    $use_custom_login_logo 		# Determins if landing page uses $company_logo_url,Default: false
+    $company_logo_url       	# URL that contains a logo, usually about 300 x 90 px
+    $use_custom_thumbnail  		# thumbnail icon are located in /home/git/, Default: false
+    #use_company_link			    # Add arbitrary text under icon
+    #company_link				      # Markdown of any text Example: \'[Learn more about foo](http://failblog.cheezburger.com)\'
     
      #User default settings
-    $gitlab_gravatar        	#Default: true
-    $user_create_group      	#Default: false
-    $user_changename        	#Default: false
+    $gitlab_gravatar        	# Default: true
+    $user_create_group      	# Default: false
+    $user_changename        	# Default: false
     
       #Project default features
-    $project_issues         	#Default: true
-    $project_merge_request  	#Default: true
-    $project_wiki           	#Default: true
-    $project_wall           	#Default: false
-    $project_snippets       	#Default: false
-    $gitlab_projects 			#Default: 10
-    $project_public_default     #Default: true #Broken until gitlab fixes https://github.com/gitlabhq/gitlabhq/issues/5462  
+    $project_issues         	# Default: true
+    $project_merge_request  	# Default: true
+    $project_wiki           	# Default: true
+    $project_wall           	# Default: false
+    $project_snippets       	# Default: false
+    $gitlab_projects 			    # Default: 15
+    $visibility_level         # New in 6-4! \'public/internal/private\' Default: internal 
 
 	  
 	  
@@ -308,6 +297,5 @@ project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 # dependency 'username/name', '>= 1.2.0'
 dependency 'puppetlabs/apt', '>=1.0.0'
 dependency 'puppetlabs/stdlib', '>=4.0.0'
-dependency 'example42-postfix', '>=2.0.0'
 dependency 'puppetlabs/ruby', '>=0.1.0'
 dependency 'puppetlabs/mysql', '>=2.0.0'

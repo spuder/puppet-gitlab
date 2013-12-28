@@ -60,10 +60,9 @@ production: &base
     # default: false - Account passwords are not sent via the email if signup is enabled. 
     # signup_enabled: true
 
-	# Restrict setting visibility levels for non-admin users.
+    # Restrict setting visibility levels for non-admin users.
     # The default is to allow all levels.
     #restricted_visibility_levels: [ "public" ]
-
 
     ## Automatic issue closing
     # If a commit message matches this regular expression, all issues referenced from the matched text will be closed.
@@ -78,7 +77,7 @@ production: &base
       wiki: <%= @project_wiki %>
       wall: <%= @project_wall %>
       snippets: <%= @project_snippets %>
-      visibility_level: "internal"  # can be "private" | "internal" | "public"
+      visibility_level: <%= @visibility_level %>  # can be "private" | "internal" | "public"
 
 
   ## External issues trackers
@@ -180,6 +179,8 @@ production: &base
 
   ## GitLab Shell settings
   gitlab_shell:
+    path: /home/git/gitlab-shell/
+
     # REPOS_PATH MUST NOT BE A SYMLINK!!!
     repos_path: /home/git/repositories/
     hooks_path: /home/git/gitlab-shell/hooks/

@@ -55,12 +55,15 @@ class gitlab (
     $project_wall           = $gitlab::params::project_wall,
     $project_snippets       = $gitlab::params::project_snippets,
     $gitlab_projects        = $gitlab::params::gitlab_projects,
-    $project_public_default = $gitlab::params::project_public_default, #gitlab >=6.1
+    $visibility_level       = $gitlab::params::visibility_level, 
     
     #Deprecated in 1.0.0
     $gitlab_repodir   = '',
     $gitlab_domain    = '',
     $user_create_team = '',
+    
+    #Deprecated in 2.0.0
+    $project_public_default = ''
 
   ) inherits gitlab::params {
 
@@ -81,6 +84,11 @@ class gitlab (
   }
   if $user_create_team != '' {
     fail('The flag, $user_create_team is no longer a valid parameter, please remove from your manifests')
+  }
+  if $project_public_default != '' {
+    if $gitlab_branch >= '6-4-stable' {
+      fail('Gitlab 6-4 and newer replaced $project_public_default with $visibility_level, please update your manifests. See http://bit.ly/1egMAW2')
+    }
   }
 	
 

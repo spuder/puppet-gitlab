@@ -2,7 +2,7 @@
 class gitlab::params {
   
   #Gitlab server settings
-  $gitlab_branch          = '6-3-stable'
+  $gitlab_branch          = '6-4-stable'
   $gitlabshell_branch     = 'v1.8.0'
   $git_user               = 'git'       #only change if you really know what you are doing
   $git_home               = '/home/git'
@@ -56,8 +56,8 @@ class gitlab::params {
   $project_wall           = false
   $project_snippets       = false
   $gitlab_projects        = '15'
-  $project_public_default = true #https://github.com/gitlabhq/gitlabhq/issues/5000
-  
+  #$project_public_default = Deprecated in 6-4
+  $visibility_level       = 'internal'
 }
 
 

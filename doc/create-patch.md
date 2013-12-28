@@ -72,7 +72,7 @@ Duplicate the unicorn.rb.example file
 Duplicate the init script
 
     cd $PUPPET_LOCATION
-    cat templates/init.$CURRENT_RELEASE.erb > templates/init.rb.$NEW_RELEASE.erb
+    cat templates/init.$CURRENT_RELEASE.erb > templates/init.$NEW_RELEASE.erb
     # Make the changes in /tmp/gitlab-init.diff to templates/init.$NEW_RELEASE.erb
 
 
