@@ -31,6 +31,7 @@ Gitlab 6-0-stable on Ubuntu 12.04
 Gitlab 6-1-stable on Ubuntu 12.04  
 Gitlab 6-2-stable on Ubuntu 12.04   
 Gitlab 6-3-stable on Ubuntu 12.04  
+Gitlab 6-4-stable on Ubuntu 12.04
 
 See https://github.com/gitlabhq/gitlabhq/blob/6-1-stable/doc/install/installation.md?source=cc
 

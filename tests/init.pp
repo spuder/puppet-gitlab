@@ -18,9 +18,9 @@
 	  git_email              => 'git@foo.com',
 #	  git_comment            => 'GitLab',
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
-	  gitlab_branch          => '6-3-stable',
+	  gitlab_branch          => '6-4-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
-   gitlabshell_branch     => 'v1.8.0',
+    gitlabshell_branch     => 'v1.8.0',
 	  
 	  gitlab_dbtype          => 'mysql',
 	  gitlab_dbname          => 'gitlabdb',
