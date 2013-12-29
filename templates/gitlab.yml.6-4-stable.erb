@@ -1,5 +1,5 @@
 # MANAGED BY PUPPET
-# Version 6-4
+# Version 6-4-stable
 
 # # # # # # # # # # # # # # # # # #
 # GitLab application config file  #
@@ -23,7 +23,7 @@ production: &base
     https: <%= @gitlab_ssl %>
 
     # Uncomment and customize the last line to run in a non-root path
-    # WARNING: We recommend creating a FQDN to host GitLab in a root path instead of this.
+    # WARNING: We recommend creating a FQDN to host GitLab in a root path instead of this. 
     # Note that four settings need to be changed for this to work.
     # 1) In your application.rb file: config.relative_url_root = "/gitlab"
     # 2) In your gitlab.yml file: relative_url_root: /gitlab
@@ -58,7 +58,7 @@ production: &base
 
     ## Users management
     # default: false - Account passwords are not sent via the email if signup is enabled. 
-    # signup_enabled: true
+    # signup_enabled: false
 
     # Restrict setting visibility levels for non-admin users.
     # The default is to allow all levels.
@@ -66,9 +66,9 @@ production: &base
 
     ## Automatic issue closing
     # If a commit message matches this regular expression, all issues referenced from the matched text will be closed.
-    # This  happens when the commit is pushed or merged into the default branch of a project.
+    # This happens when the commit is pushed or merged into the default branch of a project.
     # When not specified the default issue_closing_pattern as specified below will be used.
-    # issue_closing_pattern: ([Cc]loses|[Ff]ixes) +#\d+
+    # issue_closing_pattern: ([Cc]lose[sd]|[Ff]ixe[sd]) +#\d+
 
     ## Default project features settings
     default_projects_features:
@@ -77,8 +77,7 @@ production: &base
       wiki: <%= @project_wiki %>
       wall: <%= @project_wall %>
       snippets: <%= @project_snippets %>
-      visibility_level: <%= @visibility_level %>  # can be "private" | "internal" | "public"
-
+      visibility_level: "<%= @visibility_level %>"  # can be "private" | "internal" | "public"
 
   ## External issues trackers
   issues_tracker:
@@ -148,8 +147,7 @@ production: &base
     ## Auth providers
     # Uncomment the following lines and fill in the data of the auth provider you want to use
     # If your favorite auth provider is not listed you can use others:
-    # see https://github.com/gitlabhq/gitlabhq/wiki/Working-custom-omniauth-provider-configurations
-
+    # see https://github.com/gitlabhq/gitlab-public-wiki/wiki/Working-custom-omniauth-provider-configurations
     # The 'app_id' and 'app_secret' parameters are always passed as the first two
     # arguments, followed by optional 'args' which can be either a hash or an array.
     providers:

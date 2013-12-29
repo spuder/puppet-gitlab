@@ -1,5 +1,4 @@
-# MANAGED BY PUPPET
-# Version 6-4
+# Sample verbose configuration file for Unicorn (not Rack)
 #
 # This configuration file documents many features of Unicorn
 # that may not be needed for some applications. See
@@ -41,9 +40,6 @@ listen "<%= @git_home %>/gitlab/tmp/sockets/gitlab.socket", :backlog => 64
 listen "127.0.0.1:8080", :tcp_nopush => true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
-#2013-Dec spuder a 30 second timeout causes 502 errors when cloning large 
-#projects over https
-#timeout 30
 timeout 60
 
 # feel free to point this anywhere accessible on the filesystem
