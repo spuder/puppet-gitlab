@@ -53,6 +53,7 @@ Requires the following module dependencies
 - puppetlabs-mysql  >= 2.0.0  
 - puppetlabs-ruby   >= 0.1.0
 - puppetlabs-stdlib >= 4.0.0
+- example42-postfix >= 2.0.0
 
 
 --------------------------------------------------------------------------------------
@@ -297,5 +298,6 @@ project_page 'https://github.com/spuder/puppet-gitlab/blob/master/README.md'
 # dependency 'username/name', '>= 1.2.0'
 dependency 'puppetlabs/apt', '>=1.0.0'
 dependency 'puppetlabs/stdlib', '>=4.0.0'
+dependency 'example42-postfix', '>=2.0.0'
 dependency 'puppetlabs/ruby', '>=0.1.0'
 dependency 'puppetlabs/mysql', '>=2.0.0'

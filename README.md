@@ -47,6 +47,7 @@ Requires the following module dependencies
 - puppetlabs-mysql  >= 2.0.0  
 - puppetlabs-ruby   >= 0.1.0
 - puppetlabs-stdlib >= 4.0.0
+- example42-postfix >= 2.0.0
 
 
 --------------------------------------------------------------------------------------
