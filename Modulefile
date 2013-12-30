@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '2.0.0'
+version '1.5.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'

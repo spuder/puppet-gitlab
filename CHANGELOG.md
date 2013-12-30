@@ -47,6 +47,6 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 - Adds Support for gitlabshell 1.8.0 (See step 3 https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/6.2-to-6.3.md)
 - Moves Changelog to it's own file
 
-2013-Dec-27: 2.0.0  
+2013-Dec-30: 1.5.0  
 - Adds support for gitlab 6-4-stable
 - $project_public_default was replaced with $visibility_level. Instead of public/private, projects can now be public/internal/private as of gitlab 6-4, $visibility_level lets you choose which of these 3 options to be the default
