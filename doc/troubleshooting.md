@@ -19,6 +19,14 @@ If you see the following error, then the project is public, but the user is not 
 
 http://gitlab.somedomain/admin/groups/company
 
+
+## Error 502
+
+- Verify that you ran the precompile command 
+cd /home/git/gitlab
+sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production
+
+
 ## Push prompts for git@foo password
 Check the following:  
 1. Is the hostname and shortname configured correctly (gitlab.yml, /etc/hosts, ect..)  
@@ -30,6 +38,8 @@ Check the following:
 You will most likely need to reinstall gitlab and make sure the hostname is correct
 http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-push-for-git-user
 
+
+
 ## Thumbnail icon won't change  
 - Clear the cash in your browser  
 - Run `service gitlab reload` or `service gitlab restart`  
@@ -37,16 +47,9 @@ http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-pu
 - Verify the icons in /home/git/ exist
   
   
-# Installation locations
-
-Git lab is installed to /home/git/gitlab
-Git lab shell is installed to /home/git/gitlab-shell
 
 
-
-
-# Logging
-
+## Logging
 
 ngninx logs are located in the following directories: 
 
