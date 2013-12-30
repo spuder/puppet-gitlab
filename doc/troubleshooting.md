@@ -38,6 +38,10 @@ Check the following:
 You will most likely need to reinstall gitlab and make sure the hostname is correct
 http://stackoverflow.com/questions/18501874/gitlab-prompts-for-password-while-push-for-git-user
 
+## welcome to nginx page, doesn't redirect to https
+
+If you have https enabled, and you nagivate to gitlab over http, remove the 'default' config from /etc/nginx/sites-available
+
 
 
 ## Thumbnail icon won't change  

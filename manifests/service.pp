@@ -20,6 +20,24 @@ class gitlab::service inherits gitlab {
     subscribe   =>  File['/etc/init.d/gitlab'],
   }
 
+  #6-4 added a precompile rake command
+  exec {'bundle exec rake assets:precompile RAILS_ENV=production':
+    cwd     =>  "${gitlab::git_home}/gitlab",
+    user    =>  "${gitlab::git_user}",
+    path    =>  '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/sbin:/bin',
+    unless  =>  "/usr/bin/test -f ${gitlab::git_home}/.precompile_done",
+    before  =>  File["${gitlab::git_home}/.precompile_done"],
+  }
+
+  # Trap door to only allow precompile once
+  file{"${gitlab::git_home}/.precompile_done":
+    ensure  =>  present,
+    content =>  "precompile for gitlab ${gitlab::gitlab_branch} completed",
+    owner   =>  "${gitlab::git_user}",
+    group   =>  'git',
+    mode    =>  '0644',
+  }
+
   service { 'nginx' :
     ensure      =>  running,
     enable      =>  true,

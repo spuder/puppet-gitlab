@@ -33,7 +33,7 @@
 	  gitlab_ssl_cert        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
 	  gitlab_ssl_key         => '/etc/ssl/private/ssl-cert-snakeoil.key',
 	  gitlab_ssl_self_signed => true, #Do not use self signed certs in production!
-	  gitlab_projects        => '10',
+	  gitlab_projects        => '15',
 	  default_servername     => 'gitlab', #If you want to change gitlab.foo.com to foobar.foo.com
 	  #gitlab_username_change => true,
 	  
