@@ -212,7 +212,7 @@ You will need to place your .pem file and your private key in a location accessi
 All of the parameters that can be set
 
   
-      #Gitlab server settings
+      Gitlab server settings
 
     $gitlab_branch            #Which branch to checkout from $gitlab_sources
     $gitlabshell_branch       #Which branch to checkout from $gitlabshell_sources
@@ -223,7 +223,7 @@ All of the parameters that can be set
     $gitlab_sources           #git URL with gitlab source
     $gitlabshell_sources      #git URL with gitlabshell source
     
-      #Database
+      Database
 
     $gitlab_dbtype            # Only MySQL supported at the moment
     $gitlab_dbname            # Name of the schma, Default 'gitlabhq_production'
@@ -232,7 +232,7 @@ All of the parameters that can be set
     $gitlab_dbhost            # Hostname of database server, Default 'localhost'
     $gitlab_dbport            # Default '3306'
     
-      #Web & Security
+      Web & Security
 
     $gitlab_ssl               # Boolean if using SSL, Default: false
     $gitlab_ssl_cert          # location of ssl certificate Default '/etc/ssl/certs/ssl-cert-snakeoil.pem'
@@ -240,7 +240,7 @@ All of the parameters that can be set
     $gitlab_ssl_self_signed   # If cert is signed by CA or self signed, Default: false
     $default_servername       # Subdomain Default 'gitlab' Example 'gitlab.foo.com' 
     
-      #LDAP
+      LDAP
 
     $ldap_enabled             # Default: false          
     $ldap_host                # URL of domain controller Default 'ldap.domain.com'
@@ -251,7 +251,7 @@ All of the parameters that can be set
     $ldap_bind_dn             # Address of the bind user Default ''
     $ldap_bind_password       # Password of bind user
     
-      #Company Branding
+      Company Branding
 
     $use_custom_login_logo    # Determins if landing page uses $company_logo_url,Default: false
     $company_logo_url         # URL that contains a logo, usually about 300 x 90 px
@@ -259,20 +259,20 @@ All of the parameters that can be set
     #use_company_link         # Add arbitrary text under icon
     #company_link             # Markdown of any text Example: '[Learn more about foo](http://failblog.cheezburger.com)'
     
-     #User default settings
+     User default settings
 
     $gitlab_gravatar          # Default: true
     $user_create_group        # Default: false
     $user_changename          # Default: false
     
-      #Project default features
+      Project default features
 
-    $project_issues         	# Default: true
-    $project_merge_request  	# Default: true
-    $project_wiki           	# Default: true
-    $project_wall           	# Default: false
-    $project_snippets       	# Default: false
-    $gitlab_projects 			    # Default: 15
+    $project_issues           # Default: true
+    $project_merge_request    # Default: true
+    $project_wiki             # Default: true
+    $project_wall             # Default: false
+    $project_snippets         # Default: false
+    $gitlab_projects          # Default: 15
     $visibility_level         # New in 6-4 'public/internal/private' Default: internal 
 
 
