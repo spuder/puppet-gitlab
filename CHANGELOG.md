@@ -50,3 +50,6 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 2013-Dec-30: 1.5.0  
 - Adds support for gitlab 6-4-stable
 - $project_public_default was replaced with $visibility_level. Instead of public/private, projects can now be public/internal/private as of gitlab 6-4, $visibility_level lets you choose which of these 3 options to be the default
+
+2013-Dec-30: 1.5.1
+- Fixes typos in readme file
