@@ -52,7 +52,7 @@ Requires the following module dependencies
 
 --------------------------------------------------------------------------------------
 
-	 
+
 ##Usage
 
 
@@ -67,17 +67,17 @@ The following would setup mysql, and remove insecure test schema
 
     root$ puppet module install puppetlabs-mysql
 
-    root$ cat /tmp/gitlab-mysql-prerequisits.pp  
+Create a manifest file to install mysql
+    $vim /tmp/gitlab-mysql-prerequisits.pp  
       class { '::mysql::server':  
-        root_password => 'somesuperlongpasswordwithentropy' }  
-        remove_default_accounts => true,
-  		  restart                 => true,
+        root_password => 'correct-horse-battery-staple' }  
+        remove_default_accounts =>  true,
+        restart                 =>  true,
       }  
 
-Then apply the config like so  
+Then apply the mysql manifest 
 
-    puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug
-    
+    puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug  
 
 #####Gitlab class parameters  
 
@@ -87,20 +87,27 @@ Any parameters omitted will be set to the defaults located in gitlab::params
 For example, a basic configuration might look like this: 
 
       class { 'gitlab' : 
-	      git_email              => 'git@foo.com',
-	      gitlab_branch          => '6-4-stable',
-	      gitlab_dbname          => 'gitlabdb',
-	      gitlab_dbuser          => 'gitlabdbu',
-	      gitlab_dbpwd           => 'changeme',
-	      gitlab_projects        => '15',
-	      gitlab_username_change => true,
+        git_email              =>  'git@foo.com',
+        gitlab_branch          =>  '6-4-stable',
+        gitlab_dbname          =>  'gitlabdb',
+        gitlab_dbuser          =>  'gitlabdbu',
+        gitlab_dbpwd           =>  'changeme',
+        gitlab_projects        =>  '15',
+        gitlab_username_change =>  true,
         ....
-	  }
-	  
+    }
+
 **Look at tests/init.pp for an example of what class parameters to use**
 
 **The install process may take 15 minute, and may appear to be stuck at the following line; this is normal:**   
     Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
+
+####Username & Password
+
+The default username and password are:
+
+    admin@local.host
+    5iveL!fe
 
 
 ##Customization
@@ -113,10 +120,10 @@ An example to change the landing page icon
 
       class { 'gitlab' : 
           .... 
-          use_custom_login_logo  => true,
-          company_logo_url       => 'http://placekitten.com/300/93',
+          use_custom_login_logo  =>  true,
+          company_logo_url       =>  'http://placekitten.com/300/93',
           use_company_link	     =>  true,
-          company_link           => '[Learn more about CompanyName](http://icanhas.cheezburger.com/)',
+          company_link           =>  '[Learn more about CompanyName](http://icanhas.cheezburger.com/)',
         }  
         
 
@@ -131,7 +138,7 @@ An example to change the landing page icon
 To change the thumbnail icon, place two .png files with the following names, into the following folder
  
 /home/git/company-logo-white.png  
-/home/git/company-logo-black.png     
+/home/git/company-logo-black.png  
 
 
     class { 'gitlab' :
@@ -158,14 +165,14 @@ An example to integrate with Active Directory
 
     class { 'gitlab' : 
         ......
-        ldap_enabled           => true,
-        ldap_host              => 'DC1.microsoft.com',
-        ldap_base              => 'DC=microsoft,DC=com',
-        ldap_port              => '636',
-        ldap_uid               => 'sAMAccountName',      #LDAP = 'uid', AD = 'sAMAccountName'
-        ldap_method            => 'ssl',                 #either ssl or plain
-        ldap_bind_dn           => 'CN=foo,CN=users,DC=microsoft,DC=com',  
-        ldap_bind_password     => 'bar',
+        ldap_enabled           =>  true,
+        ldap_host              =>  'DC1.microsoft.com',
+        ldap_base              =>  'DC=microsoft,DC=com',
+        ldap_port              =>  '636',
+        ldap_uid               =>  'sAMAccountName',      #LDAP = 'uid', AD = 'sAMAccountName'
+        ldap_method            =>  'ssl',                 #either ssl or plain
+        ldap_bind_dn           =>  'CN=foo,CN=users,DC=microsoft,DC=com',  
+        ldap_bind_password     =>  'bar',
     }
     
 **Users must have email addresses defined in AD to be able to login to gitlab!**
@@ -177,41 +184,40 @@ Simple example with no encryption (not recommended)
    
     class { 'gitlab' :
       ....
-      $gitlab_ssl             = false
+      $gitlab_ssl             =>  false
       .....
     }
 
 Simple example with SSL and Self Signed Cert (not recommended for production)  
-Ngnix will use the certificate and key located in :   
+Ngnix will use the self signed certificate and key located in :  
 
   certificate = /etc/ssl/certs/ssl-cert-snakeoil.pem  
   private key = /etc/ssl/private/ssl-cert-snakeoil.key  
-  
+
     class { 'gitlab' :
       ....
-      $gitlab_ssl             = true
-      $gitlab_ssl_self_signed = true
+      $gitlab_ssl              =>  true
+      $gitlab_ssl_self_signed  =>  true
       ....
     }
-    
+
 Simple example with Certificate Authority signed Cert (Recommended)   
 You will need to place your .pem file and your private key in a location accessible to nxinx
- 
+
     class { 'gitlab' : 
       ....
-      $gitlab_ssl             = false
-      $gitlab_ssl_cert        = '/home/git/foo/bar.pem'  #Can be .pem or .crt
-      $gitlab_ssl_key         = '/home/git/foo/bar.key'
-      $gitlab_ssl_self_signed = false
+      $gitlab_ssl             =>  false
+      $gitlab_ssl_cert        =>  '/home/git/foo/bar.pem'  #Can be .pem or .crt
+      $gitlab_ssl_key         =>  '/home/git/foo/bar.key'
+      $gitlab_ssl_self_signed =>  false
       ....
     }
-  
-	  
+
+
 ##Reference
 
 All of the parameters that can be set
 
-  
       Gitlab server settings
 
     $gitlab_branch            #Which branch to checkout from $gitlab_sources
@@ -222,7 +228,7 @@ All of the parameters that can be set
     $git_comment              #Arbitrary unix identifier, Default 'gitlab'
     $gitlab_sources           #git URL with gitlab source
     $gitlabshell_sources      #git URL with gitlabshell source
-    
+
       Database
 
     $gitlab_dbtype            # Only MySQL supported at the moment
@@ -231,7 +237,7 @@ All of the parameters that can be set
     $gitlab_dbpwd             # $gitlab_dbuser database password
     $gitlab_dbhost            # Hostname of database server, Default 'localhost'
     $gitlab_dbport            # Default '3306'
-    
+
       Web & Security
 
     $gitlab_ssl               # Boolean if using SSL, Default: false
@@ -239,7 +245,7 @@ All of the parameters that can be set
     $gitlab_ssl_key           # location of ssl key Default '/etc/ssl/private/ssl-cert-snakeoil.key'
     $gitlab_ssl_self_signed   # If cert is signed by CA or self signed, Default: false
     $default_servername       # Subdomain Default 'gitlab' Example 'gitlab.foo.com' 
-    
+
       LDAP
 
     $ldap_enabled             # Default: false          
@@ -250,7 +256,7 @@ All of the parameters that can be set
     $ldap_method              # Default: ssl
     $ldap_bind_dn             # Address of the bind user Default ''
     $ldap_bind_password       # Password of bind user
-    
+
       Company Branding
 
     $use_custom_login_logo    # Determins if landing page uses $company_logo_url,Default: false
@@ -258,13 +264,13 @@ All of the parameters that can be set
     $use_custom_thumbnail     # thumbnail icon are located in /home/git/, Default: false
     #use_company_link         # Add arbitrary text under icon
     #company_link             # Markdown of any text Example: '[Learn more about foo](http://failblog.cheezburger.com)'
-    
+
      User default settings
 
     $gitlab_gravatar          # Default: true
     $user_create_group        # Default: false
     $user_changename          # Default: false
-    
+
       Project default features
 
     $project_issues           # Default: true
@@ -289,6 +295,9 @@ of Ubuntu provided packages
 ###Support
 
 Issues page: https://github.com/spuder/puppet-gitlab/issues 
+irc: chat.freenode.net room: #gitlab nickanme: spuder
+Twitter @spencer450
+
 
 
 ##Release Notes/Contributors/Etc 
