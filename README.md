@@ -284,19 +284,19 @@ All of the parameters that can be set
 
 ##Limitations
 
-- Only works on Debian / Ubuntu systems. CentOS / RHEL not supported
+- Works on Debian / Ubuntu systems. CentOS / RHEL not supported
 
 - Modifying $git_user, and $git_home is untested and may have unintended side effects  
 
 - Only supports up to ruby 1.9.3 on Ubuntu 12.04 due to limitation 
-of Ubuntu provided packages
+of Ubuntu provided packages  
 (Will support ruby 2.0 when Ubuntu 14.04 is released)
 
 ###Support
 
-Issues page: https://github.com/spuder/puppet-gitlab/issues 
-irc: chat.freenode.net room: #gitlab nickanme: spuder
-Twitter @spencer450
+Issues page: https://github.com/spuder/puppet-gitlab/issues  
+irc: chat.freenode.net room: #gitlab nickanme: spuder  
+Twitter @spencer450  
 
 
 
