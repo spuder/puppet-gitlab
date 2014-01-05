@@ -5,7 +5,6 @@ gitlab
 Source - https://github.com/spuder/puppet-gitlab  
 Issues - https://github.com/spuder/puppet-gitlab/issues   
 Forge  - https://forge.puppetlabs.com/spuder/gitlab  
-Upgrade  - https://github.com/spuder/puppet-gitlab/blob/dev/doc/upgrade-checklist.md  
 Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/  
 Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md  
 
@@ -16,7 +15,7 @@ Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
 1. [Overview](#overview)
 2. [Setup - The basics of getting started with [Modulename]](#setup)
     * [Beginning with gitlab](#beginning-with-gitlab)
-3. [Usage - Configuration options and additional functionalityy](#usage)
+3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 
@@ -99,7 +98,7 @@ For example, a basic configuration might look like this:
 
 **Look at tests/init.pp for an example of what class parameters to use**
 
-**The install process may take 15 minute, and may appear to be stuck at the following line; this is normal:**   
+**The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:**   
     Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
 ####Username & Password
@@ -307,6 +306,10 @@ This module is based on the work done by the following people:
 sbadia - https://github.com/sbadia/puppet-gitlab  
 atomaka - https://github.com/atomaka/puppet-gitlab  
 
+The advantages of this puppet module over the work prevously done by sbadia and atomka are:
+- Ability to use older version of gitlab (templates are updated for each release)
+- Ability to brand gitlab with custom logos
+- Better dependency resolution
 
 
 
