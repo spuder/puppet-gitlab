@@ -142,9 +142,9 @@ To change the thumbnail icon, place two .png files with the following names, int
 
 
     class { 'gitlab' :
-        ....
-        use_custom_thumbnail  => true,
-        ....
+      ....
+      use_custom_thumbnail  => true,
+      ....
     }
 
 ![thumbnail](http://f.cl.ly/items/2l2L1t1u3X0n0s350Y1I/Image%202013.10.10%2010%3A31%3A54%20AM.png)
@@ -184,7 +184,7 @@ Simple example with no encryption (not recommended)
    
     class { 'gitlab' :
       ....
-      $gitlab_ssl             =>  false
+      gitlab_ssl      =>  false,
       .....
     }
 
@@ -196,8 +196,8 @@ Ngnix will use the self signed certificate and key located in :
 
     class { 'gitlab' :
       ....
-      $gitlab_ssl              =>  true
-      $gitlab_ssl_self_signed  =>  true
+      gitlab_ssl              =>  true
+      gitlab_ssl_self_signed  =>  true
       ....
     }
 
@@ -206,10 +206,10 @@ You will need to place your .pem file and your private key in a location accessi
 
     class { 'gitlab' : 
       ....
-      $gitlab_ssl             =>  false
-      $gitlab_ssl_cert        =>  '/home/git/foo/bar.pem'  #Can be .pem or .crt
-      $gitlab_ssl_key         =>  '/home/git/foo/bar.key'
-      $gitlab_ssl_self_signed =>  false
+      gitlab_ssl             =>  false
+      gitlab_ssl_cert        =>  '/home/git/foo/bar.pem'  #Can be .pem or .crt
+      gitlab_ssl_key         =>  '/home/git/foo/bar.key'
+      gitlab_ssl_self_signed =>  false
       ....
     }
 
@@ -218,68 +218,68 @@ You will need to place your .pem file and your private key in a location accessi
 
 All of the parameters that can be set
 
-      Gitlab server settings
+  Gitlab server settings
 
-    $gitlab_branch            #Which branch to checkout from $gitlab_sources
-    $gitlabshell_branch       #Which branch to checkout from $gitlabshell_sources
-    $git_user                 #Default is 'git', changing this is risky! 
-    $git_home                 #Default /home/git
-    $git_email                #The email address gitlab will send email from 
-    $git_comment              #Arbitrary unix identifier, Default 'gitlab'
-    $gitlab_sources           #git URL with gitlab source
-    $gitlabshell_sources      #git URL with gitlabshell source
+    gitlab_branch            #Which branch to checkout from gitlab_sources
+    gitlabshell_branch       #Which branch to checkout from gitlabshell_sources
+    git_user                 #Default is 'git', changing this is risky! 
+    git_home                 #Default /home/git
+    git_email                #The email address gitlab will send email from 
+    git_comment              #Arbitrary unix identifier, Default 'gitlab'
+    gitlab_sources           #git URL with gitlab source
+    gitlabshell_sources      #git URL with gitlabshell source
 
-      Database
+  Database
 
-    $gitlab_dbtype            # Only MySQL supported at the moment
-    $gitlab_dbname            # Name of the schma, Default 'gitlabhq_production'
-    $gitlab_dbuser            # User with access to the schema, Default 'gitlab'
-    $gitlab_dbpwd             # $gitlab_dbuser database password
-    $gitlab_dbhost            # Hostname of database server, Default 'localhost'
-    $gitlab_dbport            # Default '3306'
+    gitlab_dbtype            # Only MySQL supported at the moment
+    gitlab_dbname            # Name of the schma, Default 'gitlabhq_production'
+    gitlab_dbuser            # User with access to the schema, Default 'gitlab'
+    gitlab_dbpwd             # $gitlab_dbuser database password
+    gitlab_dbhost            # Hostname of database server, Default 'localhost'
+    gitlab_dbport            # Default '3306'
 
-      Web & Security
+  Web & Security
 
-    $gitlab_ssl               # Boolean if using SSL, Default: false
-    $gitlab_ssl_cert          # location of ssl certificate Default '/etc/ssl/certs/ssl-cert-snakeoil.pem'
-    $gitlab_ssl_key           # location of ssl key Default '/etc/ssl/private/ssl-cert-snakeoil.key'
-    $gitlab_ssl_self_signed   # If cert is signed by CA or self signed, Default: false
-    $default_servername       # Subdomain Default 'gitlab' Example 'gitlab.foo.com' 
+    gitlab_ssl               # Boolean if using SSL, Default: false
+    gitlab_ssl_cert          # location of ssl certificate Default '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+    gitlab_ssl_key           # location of ssl key Default '/etc/ssl/private/ssl-cert-snakeoil.key'
+    gitlab_ssl_self_signed   # If cert is signed by CA or self signed, Default: false
+    default_servername       # Subdomain Default 'gitlab' Example 'gitlab.foo.com' 
 
-      LDAP
+  LDAP
 
-    $ldap_enabled             # Default: false          
-    $ldap_host                # URL of domain controller Default 'ldap.domain.com'
-    $ldap_base                # base domain Default 'dc=domain,dc=com'
-    $ldap_uid                 # Unix = 'uid' AD = 'sAMAccountName'
-    $ldap_port                # Default: '636'
-    $ldap_method              # Default: ssl
-    $ldap_bind_dn             # Address of the bind user Default ''
-    $ldap_bind_password       # Password of bind user
+    ldap_enabled             # Default: false          
+    ldap_host                # URL of domain controller Default 'ldap.domain.com'
+    ldap_base                # base domain Default 'dc=domain,dc=com'
+    ldap_uid                 # Unix = 'uid' AD = 'sAMAccountName'
+    ldap_port                # Default: '636'
+    ldap_method              # Default: ssl
+    ldap_bind_dn             # Address of the bind user Default ''
+    ldap_bind_password       # Password of bind user
 
-      Company Branding
+  Company Branding
 
-    $use_custom_login_logo    # Determins if landing page uses $company_logo_url,Default: false
-    $company_logo_url         # URL that contains a logo, usually about 300 x 90 px
-    $use_custom_thumbnail     # thumbnail icon are located in /home/git/, Default: false
-    #use_company_link         # Add arbitrary text under icon
-    #company_link             # Markdown of any text Example: '[Learn more about foo](http://failblog.cheezburger.com)'
+    use_custom_login_logo    # Determins if landing page uses company_logo_url,Default: false
+    company_logo_url         # URL that contains a logo, usually about 300 x 90 px
+    use_custom_thumbnail     # thumbnail icon are located in /home/git/, Default: false
+    use_company_link         # Add arbitrary text under icon
+    company_link             # Markdown of any text Example: '[Learn more about foo](http://failblog.cheezburger.com)'
 
-     User default settings
+  User default settings
 
-    $gitlab_gravatar          # Default: true
-    $user_create_group        # Default: false
-    $user_changename          # Default: false
+    gitlab_gravatar          # Default: true
+    user_create_group        # Default: false
+    user_changename          # Default: false
 
-      Project default features
+  Project default features
 
-    $project_issues           # Default: true
-    $project_merge_request    # Default: true
-    $project_wiki             # Default: true
-    $project_wall             # Default: false
-    $project_snippets         # Default: false
-    $gitlab_projects          # Default: 15
-    $visibility_level         # New in 6-4 'public/internal/private' Default: internal 
+    project_issues           # Default: true
+    project_merge_request    # Default: true
+    project_wiki             # Default: true
+    project_wall             # Default: false
+    project_snippets         # Default: false
+    gitlab_projects          # Default: 15
+    visibility_level         # New in 6-4 'public/internal/private' Default: internal 
 
 
 ##Limitations
