@@ -141,7 +141,6 @@ class gitlab::config inherits gitlab {
   case "${gitlab::use_custom_thumbnail}" {
 
       'true': {
-        notify{'Setting thumbnail icon to custom icon':}
 
         #Set the thumbnails  to the custom icons in the gitlab/files directory
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
@@ -172,7 +171,6 @@ class gitlab::config inherits gitlab {
       }#end true
 
       'false':  {
-        notify{'Setting thumbnail icon to default gitlab':}
 
         #Set the thumbnails to the default desert fox icon
         file{ "${gitlab::git_home}/gitlab/app/assets/images/logo-white.png":
