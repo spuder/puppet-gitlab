@@ -53,3 +53,6 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 
 2013-Dec-30: 1.5.1
 - Fixes typos in readme file
+
+2013-Jan-8: 1.5.3  
+- Removes unessesary notifies (thanks daniel lawrence)  
