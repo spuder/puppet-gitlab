@@ -22,8 +22,6 @@
                   ],
   }
   
-  notify { "Installing charlock holmes with ruby version ${::rubyversion}" : }
-  
   #Execute all commands as the git user in the git home directory
   Exec {
     user    =>  "${gitlab::git_user}",
