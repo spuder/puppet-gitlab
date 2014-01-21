@@ -9,7 +9,7 @@ class gitlab::install inherits gitlab {
   # Install gitlab-shell
   exec { 'install gitlab-shell':
     command => "ruby ${gitlab::git_home}/gitlab-shell/bin/install",
-    creates => "${gitlab::git_home}/gitlab-shell/repositories",
+    creates => "${gitlab::git_home}/repositories",
   }
 
   # Install gitlab

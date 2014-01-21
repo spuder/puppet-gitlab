@@ -31,13 +31,9 @@
   }
   
   #Download gitlab-shell (replaces git-o-lite)
-  exec { 'download gitlab-shell':
-    command   =>  "/usr/bin/git clone ${gitlab::gitlabshell_sources} ${gitlab::git_home}/gitlab-shell",
+  exec { 'clone branch gitlab-shell':
+    command   =>  "/usr/bin/git clone ${gitlab::gitlabshell_sources} -b ${gitlab::gitlabshell_branch} ${gitlab::git_home}/gitlab-shell",
     creates   =>  "${gitlab::git_home}/gitlab-shell",
-  }->
-  exec { 'checkout gitlab-shell':
-    cwd       =>  "${gitlab::git_home}/gitlab-shell",
-    command   =>  "/usr/bin/git checkout ${gitlab::gitlabshell_branch}",
   }
   
   #Download gitlab source
@@ -54,7 +50,7 @@
     owner     =>  "${gitlab::git_user}",
     group     =>  'git',
     require   =>  [
-              Exec['download gitlab-shell'],
+              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
@@ -67,7 +63,7 @@
     owner     =>  "${gitlab::git_user}",
     group     =>  'git',  
     require   =>  [
-              Exec['download gitlab-shell'],
+              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
@@ -79,7 +75,7 @@
     owner     =>  "${gitlab::git_user}",
     group     =>  'git',
     require   =>  [
-              Exec['download gitlab-shell'],
+              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
@@ -92,7 +88,7 @@
     group     =>  'git',
     mode      =>  '0640',
     require   =>  [
-              Exec['download gitlab-shell'],
+              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
