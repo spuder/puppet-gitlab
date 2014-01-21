@@ -1,7 +1,7 @@
 ## MANAGED BY PUPPET
 
 upstream gitlab {
-  server unix:/home/git/gitlab/tmp/sockets/gitlab.socket;
+  server unix:<%= @git_home %>/gitlab/tmp/sockets/gitlab.socket;
 }
 
 # setup server with or without https depending on gitlab::gitlab_ssl variable
