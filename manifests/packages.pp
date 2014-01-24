@@ -49,14 +49,29 @@ class gitlab::packages inherits gitlab {
   }
 
   exec {'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10':
-    path    =>  '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+    path    =>  '/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
     command =>  'update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10',
+    unless  => 'update-alternatives --query ruby | grep -w /usr/bin/ruby1.9.1',
   }
 
   exec {'update-alternatives --set ruby /usr/bin/ruby1.9.1':
-    path    =>  '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+    path    =>  '/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
     command =>  'update-alternatives --set ruby /usr/bin/ruby1.9.1',
+    unless  => 'update-alternatives --get-selections | grep -w /usr/bin/ruby1.9.1',
     require =>  Exec['update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 10'],
+  }
+
+  exec {'update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10':
+    path    =>  '/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+    command =>  'update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10',
+    unless  => 'update-alternatives --query gem | grep -w /usr/bin/gem1.9.1',
+  }
+
+  exec {'update-alternatives --set gem /usr/bin/gem1.9.1':
+    path    =>  '/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+    command =>  'update-alternatives --set gem /usr/bin/gem1.9.1',
+    unless  => 'update-alternatives --get-selections | grep -w /usr/bin/gem1.9.1',
+    require =>  Exec['update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10'],
   }
 
 
