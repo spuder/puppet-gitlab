@@ -29,8 +29,8 @@ Gitlab 6-0-stable on Ubuntu 12.04
 Gitlab 6-1-stable on Ubuntu 12.04  
 Gitlab 6-2-stable on Ubuntu 12.04   
 Gitlab 6-3-stable on Ubuntu 12.04  
-Gitlab 6-4-stable on Ubuntu 12.04
-Gitlab 6-5-stable on Ubuntu 12.04
+Gitlab 6-4-stable on Ubuntu 12.04  
+Gitlab 6-5-stable on Ubuntu 12.04  
 
 
 
