@@ -3,10 +3,13 @@ This document outlines the steps required to make the module compabile with new 
 A new version of gitlab comes out on the 22nd of each month. 
 
 
-CURRENT_RELEASE='6-3-stable'
-NEW_RELEASE='6-4-stable'
+#### Create variables
 
-GITLAB_LOCATION=~/Code/gitlabhq
+
+CURRENT_RELEASE='6-4-stable'  
+NEW_RELEASE='6-5-stable'
+
+GITLAB_LOCATION=~/Code/gitlabhq  
 PUPPET_LOCATION=~/Code/puppet-gitlab
 
 
@@ -69,12 +72,36 @@ PUPPET_LOCATION=~/Code/puppet-gitlab
 
     wget https://raw.github.com/gitlabhq/gitlabhq/$NEW_RELEASE/config/unicorn.rb.example -O $PUPPET_LOCATION/templates/unicorn.rb.$NEW_RELEASE.erb
 
-    cat $PUPPET_LOCATION/templates/unicorn.rb.$NEW_RELEASE.erb | grep '<%' > /tmp/unicorn-config-previous.diff
+    cat $PUPPET_LOCATION/templates/unicorn.rb.$CURRENT_RELEASE.erb | grep '<%' > /tmp/unicorn-config-previous.diff
+    
+        # Verify $PUPPET_LOCATION/templates/$NEW_RELEASE unicorn.rb file downloaded properly
+
+    # Replace all variables in the unicorn config file with the ones listed in /tmp/unicorn-config-previous.diff 
+
+    # Make any other adjustments found in /tmp/unicorn-config-previous.diff 
+    
+    # Optionally make sure there were no huge changes
+    
+    git diff --no-prefix $CURRENT_RELEASE:config/unicorn.rb.example $NEW_RELEASE: > /tmp/unicorn.diff
 
 # Init Script
 # ===========
 
     wget https://raw.github.com/gitlabhq/gitlabhq/$NEW_RELEASE/lib/support/init.d/gitlab -O $PUPPET_LOCATION/templates/init.$NEW_RELEASE.erb
+    
+    # Verify $PUPPET_LOCATION/templates/init.$NEW_RELEASE.erb file downloaded properly
+    
+    cat $PUPPET_LOCATION/templates/unicorn.rb.$CURRENT_RELEASE.erb | grep '<%' > /tmp/init-previous-variables.txt
+    
+    
+    # Replace every line in the new init script with the line mentioned in /tmp/init-previous-variables.txt 
+    
+    # Optionally make sure there were no huge changes
+    
+    git diff --no-prefix $CURRENT_RELEASE:lib/support/init.d/gitlab $NEW_RELEASE:lib/support/init.d/gitlab > /tmp/init.diff
+    
+
+    
 
 
 # Nginx Config

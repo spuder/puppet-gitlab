@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.5.3'
+version '1.5.4'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -36,8 +36,7 @@ Gitlab 6-1-stable on Ubuntu 12.04
 Gitlab 6-2-stable on Ubuntu 12.04   
 Gitlab 6-3-stable on Ubuntu 12.04  
 Gitlab 6-4-stable on Ubuntu 12.04
-
-See https://github.com/gitlabhq/gitlabhq/blob/6-4-stable/doc/install/installation.md?source=cc
+Gitlab 6-5-stable on Ubuntu 12.04
 
 
 
@@ -60,6 +59,13 @@ Requires the following module dependencies
 
 ##Usage
 
+###Vagrant
+
+A vagrantfile is included for testing / development  
+
+
+    $ vagrant up 
+
 
 ###Beginning with gitlab
 
@@ -72,12 +78,13 @@ The following would setup mysql, and remove insecure test schema
 
     root$ puppet module install puppetlabs-mysql
 
-Create a manifest file to install mysql
+Create a manifest file to install mysql  
+
     $vim /tmp/gitlab-mysql-prerequisits.pp  
       class { \'::mysql::server\':  
-        root_password => \'correct-horse-battery-staple\' }  
-        remove_default_accounts =>  true,
-        restart                 =>  true,
+        root_password            => \'correct-horse-battery-staple\' }  
+        remove_default_accounts  =>  true,
+        restart                  =>  true,
       }  
 
 Then apply the mysql manifest 
@@ -93,7 +100,7 @@ For example, a basic configuration might look like this:
 
       class { \'gitlab\' : 
         git_email              =>  \'git@foo.com\',
-        gitlab_branch          =>  \'6-4-stable\',
+        gitlab_branch          =>  \'6-5-stable\',
         gitlab_dbname          =>  \'gitlabdb\',
         gitlab_dbuser          =>  \'gitlabdbu\',
         gitlab_dbpwd           =>  \'changeme\',
@@ -104,8 +111,9 @@ For example, a basic configuration might look like this:
 
 **Look at tests/init.pp for an example of what class parameters to use**
 
-**The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:**   
-    Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
+**The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:**  
+ 
+     Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
 ####Username & Password
 
@@ -225,14 +233,14 @@ All of the parameters that can be set
 
   Gitlab server settings
 
-    gitlab_branch            #Which branch to checkout from gitlab_sources
-    gitlabshell_branch       #Which branch to checkout from gitlabshell_sources
-    git_user                 #Default is \'git\', changing this is risky! 
-    git_home                 #Default /home/git
-    git_email                #The email address gitlab will send email from 
-    git_comment              #Arbitrary unix identifier, Default \'gitlab\'
-    gitlab_sources           #git URL with gitlab source
-    gitlabshell_sources      #git URL with gitlabshell source
+    gitlab_branch            # Which branch to checkout from gitlab_sources
+    gitlabshell_branch       # Which branch to checkout from gitlabshell_sources
+    git_user                 # Default is \'git\', changing this is risky! 
+    git_home                 # Default /home/git
+    git_email                # The email address gitlab will send email from 
+    git_comment              # Arbitrary unix identifier, Default \'gitlab\'
+    gitlab_sources           # git URL with gitlab source
+    gitlabshell_sources      # git URL with gitlabshell source
 
   Database
 
@@ -300,7 +308,7 @@ of Ubuntu provided packages
 ###Support
 
 Issues page: https://github.com/spuder/puppet-gitlab/issues  
-irc: chat.freenode.net room: #gitlab nickanme: spuder  
+irc: chat.freenode.net room: #gitlab nickname: spuder  
 Twitter @spencer450  
 
 
@@ -312,10 +320,16 @@ This module is based on the work done by the following people:
 sbadia - https://github.com/sbadia/puppet-gitlab  
 atomaka - https://github.com/atomaka/puppet-gitlab  
 
-The advantages of this puppet module over the work prevously done by sbadia and atomka are:
-- Ability to use older version of gitlab (templates are updated for each release)
-- Ability to brand gitlab with custom logos
-- Better dependency resolution
+The advantages of this puppet module over the work prevously done in other gitlab modules 
+
+- Ability to use older version of gitlab (templates are updated for each release)  
+- Ability to brand gitlab with custom logos  
+- Better dependency resolution  
+- MySQL database automatically created  
+- Ruby automatically installed  
+- Vagrant integration  
+- Simplified out out of box expierence  
+
 
 
 

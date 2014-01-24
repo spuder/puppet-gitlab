@@ -56,3 +56,11 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 
 2013-Jan-8: 1.5.3  
 - Removes unessesary notifies (thanks daniel lawrence)  
+
+2013-Jan-24: 1.5.4  
+- Improves ruby update-alternatives so puppet doesn't reapply every itteration
+ (Thanks b4ldr)  
+- Increases unicorn timeout from 30 to 60 to address issues with large repos  
+- Increases gitlab config max_size from 5MB to 50MB to address issues with   large repos  
+- Adds support for 6.5  
+- Updates module upgrade steps with improved instructions
