@@ -99,7 +99,7 @@ For example, a basic configuration might look like this:
         gitlab_dbuser          =>  'gitlabdbu',
         gitlab_dbpwd           =>  'changeme',
         gitlab_projects        =>  '15',
-        gitlab_username_change =>  true,
+        user_changename        =>  true,
         ....
     }
 
