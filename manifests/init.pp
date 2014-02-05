@@ -8,6 +8,7 @@ class gitlab (
     $git_home               = $gitlab::params::git_home,
     $git_email              = $gitlab::params::git_email,
     $git_comment            = $gitlab::params::git_comment,
+    $git_ssh_port           = $gitlab::params::git_ssh_port,
     $gitlab_sources         = $gitlab::params::gitlab_sources,
     $gitlabshell_sources    = $gitlab::params::gitlabshell_sources,
     

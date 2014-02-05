@@ -233,6 +233,7 @@ All of the parameters that can be set
     git_home                 # Default /home/git
     git_email                # The email address gitlab will send email from 
     git_comment              # Arbitrary unix identifier, Default 'gitlab'
+    git_ssh_port             # SSH port, Default '22'
     gitlab_sources           # git URL with gitlab source
     gitlabshell_sources      # git URL with gitlabshell source
 

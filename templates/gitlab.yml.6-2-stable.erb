@@ -55,7 +55,7 @@ production: &base
 
 
     ## Users management
-    # default: false - Account passwords are not sent via the email if signup is enabled. 
+    # default: false - Account passwords are not sent via the email if signup is enabled.
     # signup_enabled: true
 
     ## Automatic issue closing
@@ -97,7 +97,7 @@ production: &base
     #   ##  :project_id        - GitLab project identifier
     #   ##  :issues_tracker_id - Project Name or Id in external issue tracker
     #   new_issue_url: "http://redmine.sample/projects/:issues_tracker_id/issues/new"
-    # 
+    #
     # jira:
     #   title: "Atlassian Jira"
     #   project_url: "http://jira.sample/issues/?jql=project=:issues_tracker_id"
@@ -117,7 +117,7 @@ production: &base
   ## LDAP settings
   ldap:
     enabled: <%= @ldap_enabled %>
-    host:  '<%= @ldap_host %>' 
+    host:  '<%= @ldap_host %>'
     base:  '<%= @ldap_base %>'
     port:  <%= @ldap_port %>
     uid:   '<%= @ldap_uid %>'        #example 'sAMAccountName'
@@ -180,7 +180,7 @@ production: &base
     receive_pack: true
 
     # If you use non-standard ssh port you need to specify it
-    # ssh_port: 22
+    ssh_port: <%= @git_ssh_port %>
 
   ## Git settings
   # CAUTION!
