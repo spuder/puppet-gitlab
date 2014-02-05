@@ -8,6 +8,7 @@ class gitlab::params {
   $git_home               = '/home/git'
   $git_email              = 'git@someserver.net'
   $git_comment            = 'GitLab'
+  $git_ssh_port           = '22'
   $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
   $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git' 
   
