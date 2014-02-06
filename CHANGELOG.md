@@ -64,3 +64,6 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 - Increases gitlab config max_size from 5MB to 50MB to address issues with   large repos  
 - Adds support for 6.5  
 - Updates module upgrade steps with improved instructions
+
+2013-Feb-4: 1.5.5  
+- Adds support for choosing your own ssh port
