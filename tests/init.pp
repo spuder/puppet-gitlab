@@ -17,6 +17,7 @@
 #	  git_home               => '/home/git',
 	  git_email              => 'git@foo.com',
 #	  git_comment            => 'GitLab',
+    git_ssh_port           => '22',
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
 	  gitlab_branch          => '6-5-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
