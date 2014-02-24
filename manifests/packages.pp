@@ -1,5 +1,8 @@
 #init -> packages -> user -> setup -> install -> config -> service
 class gitlab::packages inherits gitlab {
+  
+  include apt
+    
 
   $system_packages = [
                     'libicu-dev',
@@ -11,14 +14,12 @@ class gitlab::packages inherits gitlab {
                     'build-essential',
                     'libmysqlclient-dev',
                     'redis-server',
-                    'nginx',
                       ]
   ensure_packages($system_packages)
 
   ## Git v1.7.10
   #=====================================
 
-  include apt
 
   #Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
   apt::ppa { 'ppa:git-core/ppa':
@@ -30,7 +31,7 @@ class gitlab::packages inherits gitlab {
   }
 
   package { 'git-core':
-    ensure  =>  present,
+    ensure  =>  latest,
     require =>  [
         Apt::Ppa['ppa:git-core/ppa'],
         Apt::Key['ppa:git-core/ppa'],
@@ -93,5 +94,27 @@ class gitlab::packages inherits gitlab {
   ## Postfix
   #===================================
   include postfix
+
+
+  ## Nginx
+  #=========
+    
+  apt::ppa { 'ppa:nginx/stable':
+  }
+
+  #Install key for repo (otherwise it prints error)
+  apt::key { 'ppa:nginx/stable':
+      key   =>  'C300EE8C',
+  }
+
+  package { 'nginx':
+    ensure  =>  latest,
+    require =>  [
+        Apt::Ppa['ppa:nginx/stable'],
+        Apt::Key['ppa:nginx/stable'],
+                ],
+  }
+  
+  
 
 }#end packages.pp
