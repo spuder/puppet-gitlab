@@ -31,6 +31,7 @@ Gitlab 6-2-stable on Ubuntu 12.04
 Gitlab 6-3-stable on Ubuntu 12.04  
 Gitlab 6-4-stable on Ubuntu 12.04  
 Gitlab 6-5-stable on Ubuntu 12.04  
+Gitlab 6-6-stable on Ubutnu 12.04  
 
 
 
@@ -321,9 +322,11 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Ability to brand gitlab with custom logos  
 - Better dependency resolution  
 - MySQL database automatically created  
+- Git PPA auotmatically installed
 - Ruby automatically installed  
 - Vagrant integration  
 - Simplified out out of box expierence  
+- Significantly better documentation  
 
 
 

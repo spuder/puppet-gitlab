@@ -2,7 +2,7 @@
 class gitlab::params {
   
   #Gitlab server settings
-  $gitlab_branch          = '6-5-stable'
+  $gitlab_branch          = '6-6-stable'
   $gitlabshell_branch     = 'v1.8.0'
   $git_user               = 'git'       #only change if you really know what you are doing
   $git_home               = '/home/git'
@@ -34,7 +34,7 @@ class gitlab::params {
   $ldap_base              = 'dc=domain,dc=com'
   $ldap_uid               = 'uid' #Active directory = 'sAMAccountName'
   $ldap_port              = '636'
-  $ldap_method            = 'ssl' 
+  $ldap_method            = 'ssl' #"tls" or "ssl" or "plain"
   $ldap_bind_dn           = ''
   $ldap_bind_password     = ''
   

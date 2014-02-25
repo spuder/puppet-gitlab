@@ -19,7 +19,7 @@
 #	  git_comment            => 'GitLab',
     git_ssh_port           => '22',
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
-	  gitlab_branch          => '6-5-stable',
+	  gitlab_branch          => '6-6-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
     gitlabshell_branch     => 'v1.8.0',
 	  
@@ -51,7 +51,7 @@
 	  use_custom_thumbnail   => false,
 	  use_company_link       => true,
 	  company_link           => 'http://failblog.cheezburger.com',
-	  #project_public_default => false, #Deprecated in 2.0.0 
+	  #project_public_default => false, #Deprecated
 	  visibility_level       => 'internal', # New in 6-4, replaces project_public_default
 	  
 	  gitlab_gravatar        => true,
