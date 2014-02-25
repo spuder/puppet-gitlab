@@ -322,7 +322,7 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Ability to brand gitlab with custom logos  
 - Better dependency resolution  
 - MySQL database automatically created  
-- Git PPA auotmatically installed
+- Git and Nginx PPA's automatically installed
 - Ruby automatically installed  
 - Vagrant integration  
 - Simplified out out of box expierence  

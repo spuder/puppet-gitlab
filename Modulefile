@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.5.6'
+version '1.6.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -37,6 +37,7 @@ Gitlab 6-2-stable on Ubuntu 12.04
 Gitlab 6-3-stable on Ubuntu 12.04  
 Gitlab 6-4-stable on Ubuntu 12.04  
 Gitlab 6-5-stable on Ubuntu 12.04  
+Gitlab 6-6-stable on Ubutnu 12.04  
 
 
 
@@ -105,7 +106,7 @@ For example, a basic configuration might look like this:
         gitlab_dbuser          =>  \'gitlabdbu\',
         gitlab_dbpwd           =>  \'changeme\',
         gitlab_projects        =>  \'15\',
-        gitlab_username_change =>  true,
+        user_changename        =>  true,
         ....
     }
 
@@ -239,6 +240,7 @@ All of the parameters that can be set
     git_home                 # Default /home/git
     git_email                # The email address gitlab will send email from 
     git_comment              # Arbitrary unix identifier, Default \'gitlab\'
+    git_ssh_port             # SSH port, Default \'22\'
     gitlab_sources           # git URL with gitlab source
     gitlabshell_sources      # git URL with gitlabshell source
 
@@ -326,9 +328,11 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Ability to brand gitlab with custom logos  
 - Better dependency resolution  
 - MySQL database automatically created  
+- Git and Nginx PPA\'s automatically installed
 - Ruby automatically installed  
 - Vagrant integration  
 - Simplified out out of box expierence  
+- Significantly better documentation  
 
 
 
