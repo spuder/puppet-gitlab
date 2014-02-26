@@ -1,9 +1,18 @@
 ##Changelog
 
+2014-Feb-26: 1.7.0
+
+- Adds cron job to backup gitlab at 2 am every night 
+see https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md
+- Exposes 2 new backup flags
+- Installs and configures logrotate by default
+- Unicorn should now use the proper number of cores for sidekick jobs
+
+
 2014-Feb-24: 1.6.0
 
-- Fixes outdated installation of nginx
-- Adds nginx ppa and ensures latest version is installed
+- Fixes outdated installation of nginx. 
+- Adds nginx ppa and ensures latest version is installed. Should fix scalability issues and slow web interface problem
 - Changes git version from 'present' to 'latest'
 
 2014-Feb-24: 1.5.6  
