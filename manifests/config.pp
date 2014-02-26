@@ -46,6 +46,15 @@ class gitlab::config inherits gitlab {
     ensure  =>  directory,
     mode    =>  '0755',
   }
+  
+#Backup CONFIG
+
+  cron { logrotate:
+    command => "cd /home/git/gitlab && PATH=/usr/local/bin:/usr/bin:/bin bundle exec rake gitlab:backup:create RAILS_ENV=production",
+    user    => git,
+    hour    => 2,
+    minute  => 0,
+  }
 
 
 #NGINX CONFIG
