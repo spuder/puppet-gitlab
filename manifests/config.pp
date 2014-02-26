@@ -105,6 +105,19 @@ class gitlab::config inherits gitlab {
     source  =>  'puppet:///modules/gitlab/ssh-banner.txt',
     mode    =>  '0755',
   }
+  
+
+#Logrotate CONFIG
+#################
+
+  #Setup logrotate config file
+  file { '/etc/logrotate.d/gitlab':
+    ensure  =>  present,
+    content =>  template('gitlab/logrotate.erb'),
+    mode    =>  '0644',
+    owner   =>  'root',
+    group   =>  'root',
+  }
 
 
 #Git CONFIG
