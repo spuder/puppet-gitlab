@@ -46,6 +46,27 @@ class gitlab::config inherits gitlab {
     ensure  =>  directory,
     mode    =>  '0755',
   }
+  
+#Backup CONFIG
+##############
+ 
+  #Ensure /home/git/gitlab/tmp/backups is owned by git user
+  file { "${gitlab::git_home}/gitlab/${gitlab::backup_path}":
+    ensure  =>  directory,
+    owner   =>  'git',
+    group   =>  'git',
+    mode    =>  '0755', 
+    recurse =>  true,
+  }
+  
+  #Execute rake backup every night at 2 am
+  cron { logrotate:
+    command => "cd /home/git/gitlab && PATH=/usr/local/bin:/usr/bin:/bin bundle exec rake gitlab:backup:create RAILS_ENV=production",
+    user    => git,
+    hour    => 2,
+    minute  => 0,
+    require => File["${gitlab::git_home}/gitlab/${gitlab::backup_path}"],
+  }
 
 
 #NGINX CONFIG

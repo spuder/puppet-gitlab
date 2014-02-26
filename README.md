@@ -290,6 +290,11 @@ All of the parameters that can be set
     gitlab_projects          # Default: 15
     visibility_level         # New in 6-4 'public/internal/private' Default: internal 
 
+  Backup
+
+    backup_path              # Path is relative to Rails.root (default: tmp/backups/)
+    backup_keep_time         # Default: 0 (forever) (in seconds), 604800 = 1 week
+
 
 ##Limitations
 
