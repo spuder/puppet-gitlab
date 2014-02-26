@@ -59,6 +59,11 @@ class gitlab::params {
   $gitlab_projects        = '15'
   #$project_public_default = Deprecated in 6-4
   $visibility_level       = 'internal'
+  
+  #Backup
+  $backup_path            = 'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
+  $backup_keep_time       = '0'             # default: 0 (forever) (in seconds), 604800 = 1 week
+  
 }
 
 

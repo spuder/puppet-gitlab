@@ -56,7 +56,11 @@ class gitlab (
     $project_wall           = $gitlab::params::project_wall,
     $project_snippets       = $gitlab::params::project_snippets,
     $gitlab_projects        = $gitlab::params::gitlab_projects,
-    $visibility_level       = $gitlab::params::visibility_level, 
+    $visibility_level       = $gitlab::params::visibility_level,
+    
+    #Backup 
+    $backup_path            = $gitlab::params::backup_path,
+    $backup_keep_time       = $gitlab::params::backup_keep_time, 
     
     #Deprecated in 1.0.0
     $gitlab_repodir   = '',
