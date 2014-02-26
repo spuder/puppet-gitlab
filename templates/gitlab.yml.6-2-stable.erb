@@ -166,8 +166,8 @@ production: &base
 
   ## Backup settings
   backup:
-    path: "<% @backup_path %>"   # Path is relative to Rails.root (default: tmp/backups/)
-    keep_time: <% @backup_keep_time %>   # default: 0 (forever) (in seconds)
+    path: "<%= @backup_path %>"   # Path is relative to Rails.root (default: tmp/backups/)
+    keep_time: <%= @backup_keep_time %>   # default: 0 (forever) (in seconds)
 
   ## GitLab Shell settings
   gitlab_shell:
