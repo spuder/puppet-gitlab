@@ -11,6 +11,7 @@ class gitlab::packages inherits gitlab {
                     'build-essential',
                     'libmysqlclient-dev',
                     'redis-server',
+                    'logrotate',
                     'nginx',
                       ]
   ensure_packages($system_packages)
