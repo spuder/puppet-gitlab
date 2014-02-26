@@ -1,4 +1,4 @@
-#init -> packages -> user -> setup -> install -> config -> service
+# init -> packages -> user -> setup -> install -> config -> service
 class gitlab::packages inherits gitlab {
   
   include apt
@@ -19,14 +19,14 @@ class gitlab::packages inherits gitlab {
   ensure_packages($system_packages)
 
   ## Git v1.7.10
-  #=====================================
+  # =====================================
 
 
-  #Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
+  # Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
   apt::ppa { 'ppa:git-core/ppa':
   }
 
-  #Install key for repo (otherwise it prints error)
+  # Install key for repo (otherwise it prints error)
   apt::key { 'ppa:git-core/ppa':
       key   =>  'E1DF1F24',
   }
@@ -41,7 +41,7 @@ class gitlab::packages inherits gitlab {
 
 
   ## Ruby
-  #=====================================
+  # =====================================
 
   class { 'ruby':
     ruby_package      =>  'ruby1.9.1-full',
@@ -79,7 +79,7 @@ class gitlab::packages inherits gitlab {
 
 
   ## MySQL
-  #=====================================
+  # =====================================
 
   # The end user must manually setup the database
   # see tests/init.pp for an example
@@ -93,17 +93,17 @@ class gitlab::packages inherits gitlab {
 
 
   ## Postfix
-  #===================================
+  # ===================================
   include postfix
 
 
   ## Nginx
-  #=========
+  # =========
     
   apt::ppa { 'ppa:nginx/stable':
   }
 
-  #Install key for repo (otherwise it prints error)
+  # Install key for repo (otherwise it prints error)
   apt::key { 'ppa:nginx/stable':
       key   =>  'C300EE8C',
   }
@@ -118,4 +118,4 @@ class gitlab::packages inherits gitlab {
   
   
 
-}#end packages.pp
+}# end packages.pp
