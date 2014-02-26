@@ -17,7 +17,7 @@ Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](h
 3. [Usage](#usage)
 	* [Vagrant](#vagrant)
 	* [Database](#database)
-	* [Parameters](#parameters)
+	* [Install](#install)
 	* [Password](#password)
 4. [Customization](#customization)  
 	* [Login Page](#login-page)
@@ -98,7 +98,7 @@ Then apply the mysql manifest
 
     puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug  
 
-#####Parameters  
+#####Install  
 
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defaults located in gitlab::params
@@ -107,7 +107,7 @@ For example, a basic configuration might look like this:
 
       class { 'gitlab' : 
         git_email              =>  'git@foo.com',
-        gitlab_branch          =>  '6-5-stable',
+        gitlab_branch          =>  '6-6-stable',
         gitlab_dbname          =>  'gitlabdb',
         gitlab_dbuser          =>  'gitlabdbu',
         gitlab_dbpwd           =>  'changeme',
@@ -116,9 +116,9 @@ For example, a basic configuration might look like this:
         ....
     }
 
-**Look at tests/init.pp for an example of what class parameters to use**
+*A full list of parameters is shown below or in [manifsts/params.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/params.pp)*
 
-**The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:**  
+*The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:*
  
      Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
