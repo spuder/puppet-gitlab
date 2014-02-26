@@ -332,6 +332,8 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Vagrant integration  
 - Simplified out out of box expierence  
 - Significantly better documentation  
+- Backups enabled by default
+- Logstash enabled by default
 
 
 
