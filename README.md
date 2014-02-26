@@ -2,11 +2,11 @@ gitlab
 =========
 
 
-Source - https://github.com/spuder/puppet-gitlab  
-Issues - https://github.com/spuder/puppet-gitlab/issues   
-Forge  - https://forge.puppetlabs.com/spuder/gitlab  
-Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/  
-Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md  
+Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
+Issues - [https://github.com/spuder/puppet-gitlab/issues](https://github.com/spuder/puppet-gitlab/issues)    
+Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
+Install Video - [http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/](http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/)  
+Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md)    
 
 
 
@@ -16,8 +16,20 @@ Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
 2. [Setup - The basics of getting started with [Modulename]](#setup)
     * [Beginning with gitlab](#beginning-with-gitlab)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
+	* [Vagrant](#vagrant)
+	* [Database](#database)
+	* [Parameters](#parameters)
+	* [Password](#password)
+4. [Customization](#customization)
+	* [Login Page](#login page)
+	* [Thumbnail Icon](#thumbnail icon)
+	* [LDAP](#ldap & ad)
+	* [HTTPS (SSL)](#https)
+
+5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+6. [Limitations - OS compatibility, etc.](#limitations)
+	* [Support](#support)
+7. [Release Notes/Contributors/Etc](#Release Notes/Contributors/Etc)
 
 ##Overview
 
@@ -60,9 +72,10 @@ A vagrantfile is included for testing / development
 
 
     $ vagrant up 
+    $ puppet apply /vagrant/tests/init.pp --debug
+    # navigate to https://192.168.33.10
 
 
-###Beginning with gitlab
 
 ####Database
 To use the module, you must have mysql::server installed and configured with a user. 
@@ -86,7 +99,7 @@ Then apply the mysql manifest
 
     puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug  
 
-#####Gitlab class parameters  
+#####Parameters  
 
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defaults located in gitlab::params
@@ -110,7 +123,7 @@ For example, a basic configuration might look like this:
  
      Debug: Executing '/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 
-####Username & Password
+####Password
 
 The default username and password are:
 
@@ -334,6 +347,9 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Significantly better documentation  
 - Backups enabled by default
 - Logstash enabled by default
+
+Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
+
 
 
 
