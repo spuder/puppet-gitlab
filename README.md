@@ -13,23 +13,22 @@ Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](h
 ####Table of Contents
 
 1. [Overview](#overview)
-2. [Setup - The basics of getting started with [Modulename]](#setup)
-    * [Beginning with gitlab](#beginning-with-gitlab)
-3. [Usage - Configuration options and additional functionality](#usage)
+2. [Setup](#setup)
+3. [Usage](#usage)
 	* [Vagrant](#vagrant)
 	* [Database](#database)
 	* [Parameters](#parameters)
 	* [Password](#password)
-4. [Customization](#customization)
-	* [Login Page](#login page)
-	* [Thumbnail Icon](#thumbnail icon)
-	* [LDAP](#ldap & ad)
-	* [HTTPS (SSL)](#https)
+4. [Customization](#customization)  
+	* [Login Page](#login-page)
+	* [Thumbnail Icon](#thumbnail-icon)
+	* [LDAP & AD](#ldap-&-ad)
+	* [HTTPS (SSL)](#https-(ssl))
 
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-6. [Limitations - OS compatibility, etc.](#limitations)
+6. [Limitations](#limitations)
 	* [Support](#support)
-7. [Release Notes/Contributors/Etc](#Release Notes/Contributors/Etc)
+7. [Release Notes/Contributors/Etc](#Release-Notes/Contributors/Etc)
 
 ##Overview
 
