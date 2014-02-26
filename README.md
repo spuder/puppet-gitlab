@@ -22,13 +22,13 @@ Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](h
 4. [Customization](#customization)  
 	* [Login Page](#login-page)
 	* [Thumbnail Icon](#thumbnail-icon)
-	* [LDAP & AD](#ldap-&-ad)
-	* [HTTPS (SSL)](#https-(ssl))
+	* [LDAP](#ldap)
+	* [HTTPS](#https)
 
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 6. [Limitations](#limitations)
 	* [Support](#support)
-7. [Release Notes/Contributors/Etc](#Release-Notes/Contributors/Etc)
+7. [Miscellaneous](#Miscellaneous)
 
 ##Overview
 
@@ -179,7 +179,7 @@ company-logo-black.png is used against the light background themes
 **the changes will be applied**
 
 
-###LDAP / AD 
+###LDAP
 
 An example to integrate with Active Directory
 
@@ -198,7 +198,7 @@ An example to integrate with Active Directory
 **Users must have email addresses defined in AD to be able to login to gitlab!**
 
 
-### HTTPS (SSL)
+### HTTPS
 
 Simple example with no encryption (not recommended)  
    
@@ -326,7 +326,7 @@ Twitter @spencer450
 
 
 
-##Release Notes/Contributors/Etc 
+##Miscellaneous 
 
 This module is based on the work done by the following people:  
 
