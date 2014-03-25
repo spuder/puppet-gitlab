@@ -19,9 +19,9 @@
 #	  git_comment            => 'GitLab',
     git_ssh_port           => '22',
 #	  gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
-	  gitlab_branch          => '6-6-stable',
+	  gitlab_branch          => '6-7-stable',
 #	  gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
-    gitlabshell_branch     => 'v1.8.0',
+    gitlabshell_branch     => 'v1.9.1',
 	  
 	  gitlab_dbtype          => 'mysql',
 	  gitlab_dbname          => 'gitlabdb',

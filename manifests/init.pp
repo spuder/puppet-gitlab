@@ -90,10 +90,35 @@ class gitlab (
   if $user_create_team != '' {
     fail('The flag, $user_create_team is no longer a valid parameter, please remove from your manifests')
   }
+  
+  
+
   if $project_public_default != '' {
     if $gitlab_branch >= '6-4-stable' {
       fail('Gitlab 6-4 and newer replaced $project_public_default with $visibility_level, please update your manifests. See http://bit.ly/1egMAW2')
     }
+  }
+  
+  
+
+  if $gitlab_branch == '6-7-stable' or $gitlab_branch == '6-7-stable-ee' {
+    
+    #Warning message for the broken feature in gitlab 6-7-stable
+    #https://github.com/gitlabhq/gitlabhq/issues/6611
+    notify{'Checking for known configuration problem in 6-7-stable':}
+
+	  if $use_custom_login_logo != false {
+	     fail('Gitlab 6-7 currently crashes if login logos are used,
+	       set $use_custom_login_logo to false in manifest until fixed,
+	     https://github.com/gitlabhq/gitlabhq/issues/6611')
+	  }
+	  notify{"use_custom_login_logo is currently $use_custom_login_logo":}
+	  if $use_company_link != false {
+	     fail('Gitlab 6-7 currently crashes if login logos are used,
+	       set $use_company_link to false manifest until fixed,
+	     https://github.com/gitlabhq/gitlabhq/issues/6611')
+	  }
+	  
   }
 	
 

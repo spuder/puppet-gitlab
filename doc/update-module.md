@@ -47,23 +47,23 @@ PUPPET_LOCATION=~/Code/geppetto/puppet-gitlab
 # Gitlab Config
 # =============
 
-        cd $GITLAB_LOCATION
-        git diff --no-prefix $CURRENT_RELEASE:config/gitlab.yml.example $NEW_RELEASE:config/gitlab.yml.example > /tmp/gitlab-config.diff
+    cd $GITLAB_LOCATION
+    git diff --no-prefix $CURRENT_RELEASE:config/gitlab.yml.example $NEW_RELEASE:config/gitlab.yml.example > /tmp/gitlab-config.diff
 
-        wget https://raw.github.com/gitlabhq/gitlabhq/$NEW_RELEASE/config/gitlab.yml.example -O $PUPPET_LOCATION/templates/gitlab.yml.$NEW_RELEASE.erb
+    wget https://raw.github.com/gitlabhq/gitlabhq/$NEW_RELEASE/config/gitlab.yml.example -O $PUPPET_LOCATION/templates/gitlab.yml.$NEW_RELEASE.erb
 
-        cat $PUPPET_LOCATION/templates/gitlab.yml.$CURRENT_RELEASE.erb | grep '<%' > /tmp/gitlab-config-previous.diff
+    cat $PUPPET_LOCATION/templates/gitlab.yml.$CURRENT_RELEASE.erb | grep '<%' > /tmp/gitlab-config-previous.diff
 
 
     Verify $PUPPET_LOCATION/templates/$NEW_RELEASE/gitlab.yml.x file downloaded properly
 
     Replace all variables in the gitlab config file with the ones listed in /tmp/gitlab-config-previous.diff
 
-        cat /tmp/gitlab-config-previous.diff
+    cat /tmp/gitlab-config-previous.diff
 
     Make any other adjustments found in /tmp/gitlab-config.diff
 
-        cat /tmp/gitlab-config.diff
+    cat /tmp/gitlab-config.diff
 
 
 # Unicorn Config
@@ -158,9 +158,16 @@ Update the module version
 
 Test the new config with vagrant
 
+    cd ~/Code/geppetto/puppet-gitlab
     vagrant up
     puppet apply /vagrant/tests/init.pp
+    
 
+# Share
+# ====
+
+Push changes to github  
+push changes to puppet forge  
 
 # Resources
 

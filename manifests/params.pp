@@ -2,8 +2,8 @@
 class gitlab::params {
   
   # Gitlab server settings
-  $gitlab_branch          = '6-6-stable'
-  $gitlabshell_branch     = 'v1.8.0'
+  $gitlab_branch          = '6-7-stable'
+  $gitlabshell_branch     = 'v1.9.1'
   $git_user               = 'git'       # only change if you really know what you are doing
   $git_home               = '/home/git'
   $git_email              = 'git@someserver.net'
@@ -40,7 +40,7 @@ class gitlab::params {
   
   # Company Branding
   $use_custom_login_logo  = false
-  $company_logo_url       = 'http://placedog.com/300/93'
+  $company_logo_url       = 'http://placepuppy.it/300/110'
   $use_custom_thumbnail   = false
   $use_company_link       = false
   $company_link           = '[Learn more about foo](http://failblog.cheezburger.com)'

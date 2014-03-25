@@ -1,5 +1,14 @@
 ##Changelog
 
+2014-March-24: 1.8.0  
+ 
+- **You must set '$use_custom_login_logo' and '$use_company_link' to false because of a bug in 6-7-stable** https://github.com/gitlabhq/gitlabhq/issues/6611  
+- Adds support for 6-7-stable 
+- Moves ldap_base to different line in gitlab config file   
+- Changes placedog to placepuppy because the former was shutdown  
+
+
+
 2014-Feb-26: 1.7.0
 
 - Adds cron job to backup gitlab at 2 am every night 
