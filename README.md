@@ -43,7 +43,7 @@ Gitlab 6-3-stable on Ubuntu 12.04
 Gitlab 6-4-stable on Ubuntu 12.04  
 Gitlab 6-5-stable on Ubuntu 12.04  
 Gitlab 6-6-stable on Ubutnu 12.04  
-Gitlab 6-7-stable on Ubuntu 12.04
+Gitlab 6-7-stable on Ubuntu 12.04  
 
 
 
