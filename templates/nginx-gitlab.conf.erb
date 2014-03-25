@@ -40,7 +40,7 @@ server {
 }
 server {
   listen 443 ssl default_server;
-  server_name <%= @fqdn %>;
+  server_name <%= @fqdn %> <%= @hostname %>;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
   ssl                           on;
