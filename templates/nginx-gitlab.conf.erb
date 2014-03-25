@@ -24,7 +24,7 @@ upstream gitlab {
 # currently only http or https can be running at one time, not both
 <% if scope['gitlab::gitlab_ssl'] !=true %>
 server {
-  listen 80 default_server;
+  listen 80;
   server_name <%= @fqdn %>;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
