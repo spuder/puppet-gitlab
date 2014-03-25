@@ -2,10 +2,12 @@
 
 2014-March-24: 1.8.0  
  
-- **You must set '$use_custom_login_logo' and '$use_company_link' to false because of a bug in 6-7-stable** https://github.com/gitlabhq/gitlabhq/issues/6611  
 - Adds support for 6-7-stable 
 - Moves ldap_base to different line in gitlab config file   
 - Changes placedog to placepuppy because the former was shutdown  
+- Removes 'default server' in nginx config when running without ssl (port 80), fixes nginx -t warning. 
+- Changes Text under sign in page layout in gitlab config to work with new markdown rendering engine in 6-7  
+
 
 
 

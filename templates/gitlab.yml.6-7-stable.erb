@@ -236,13 +236,25 @@ production: &base
     # piwik_site_id: '_your_piwik_site_id'
 
     ## Text under sign-in page (Markdown enabled)
+    <% if scope['gitlab::use_custom_login_logo'] == true or scope['gitlab::use_company_link'] == true -%>
+    sign_in_text: |
+    <% else -%>
     # sign_in_text: |
-    <% if @use_custom_login_logo == true %> ![Company Logo](<%= @company_logo_url %>) <% else %># ![Company Logo](<%= @company_logo_url %>)  <% end %>
-    <% if @use_company_link  == true %> <%= @company_link %> <% else %>#  [Learn more about CompanyName](<%= @company_link %>) <% end %>
+    <% end -%>
+    <% if scope['gitlab::use_custom_login_logo'] == true -%>
+    ![Company Logo](<%= @company_logo_url -%>) 
+    <% else -%>
+    # ![Company Logo](<%= @company_logo_url -%>)  
+    <% end -%>
+    <% if scope['gitlab::use_company_link'] == true -%>
+    <%= @company_link %> 
+    <% else %>
+    #  [Learn more about CompanyName](<%= @company_link -%>)
+    <% end -%>
 
 
 development:
-  <<: *base
+  <<: *base 
 
 test:
   <<: *base
