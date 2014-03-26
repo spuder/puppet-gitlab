@@ -346,7 +346,7 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Simplified out out of box expierence  
 - Significantly better documentation  
 - Backups enabled by default
-- Logstash enabled by default
+- Logrotate enabled by default
 
 Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
 

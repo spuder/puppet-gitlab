@@ -8,22 +8,33 @@ description 'gitlab
 =========
 
 
-Source - https://github.com/spuder/puppet-gitlab  
-Issues - https://github.com/spuder/puppet-gitlab/issues   
-Forge  - https://forge.puppetlabs.com/spuder/gitlab  
-Install Video - http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/  
-Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md  
+Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
+Issues - [https://github.com/spuder/puppet-gitlab/issues](https://github.com/spuder/puppet-gitlab/issues)    
+Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
+Install Video - [http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/](http://spuder.wordpress.com/2013/10/30/install-gitlab-with-puppet/)  
+Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md)    
 
 
 
 ####Table of Contents
 
 1. [Overview](#overview)
-2. [Setup - The basics of getting started with [Modulename]](#setup)
-    * [Beginning with gitlab](#beginning-with-gitlab)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
+2. [Setup](#setup)
+3. [Usage](#usage)
+	* [Vagrant](#vagrant)
+	* [Database](#database)
+	* [Install](#install)
+	* [Password](#password)
+4. [Customization](#customization)  
+	* [Login Page](#login-page)
+	* [Thumbnail Icon](#thumbnail-icon)
+	* [LDAP](#ldap)
+	* [HTTPS](#https)
+
+5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+6. [Limitations](#limitations)
+	* [Support](#support)
+7. [Miscellaneous](#Miscellaneous)
 
 ##Overview
 
@@ -67,9 +78,10 @@ A vagrantfile is included for testing / development
 
 
     $ vagrant up 
+    $ puppet apply /vagrant/tests/init.pp --debug
+    # navigate to https://192.168.33.10
 
 
-###Beginning with gitlab
 
 ####Database
 To use the module, you must have mysql::server installed and configured with a user. 
@@ -93,7 +105,7 @@ Then apply the mysql manifest
 
     puppet apply /tmp/gitlab-mysql-prerequisits.pp  --debug  
 
-#####Gitlab class parameters  
+#####Install  
 
 After the mysql root user has been steup, call the gitlab class with the desired parameters. 
 Any parameters omitted will be set to the defaults located in gitlab::params
@@ -102,7 +114,7 @@ For example, a basic configuration might look like this:
 
       class { \'gitlab\' : 
         git_email              =>  \'git@foo.com\',
-        gitlab_branch          =>  \'6-5-stable\',
+        gitlab_branch          =>  \'6-6-stable\',
         gitlab_dbname          =>  \'gitlabdb\',
         gitlab_dbuser          =>  \'gitlabdbu\',
         gitlab_dbpwd           =>  \'changeme\',
@@ -111,13 +123,13 @@ For example, a basic configuration might look like this:
         ....
     }
 
-**Look at tests/init.pp for an example of what class parameters to use**
+*A full list of parameters is shown below or in [manifsts/params.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/params.pp)*
 
-**The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:**  
+*The install process may take 15 minutes, and may appear to be stuck at the following line; this is normal:*
  
      Debug: Executing \'/usr/bin/yes yes | bundle exec rake gitlab:setup RAILS_ENV=production\'
 
-####Username & Password
+####Password
 
 The default username and password are:
 
@@ -174,7 +186,7 @@ company-logo-black.png is used against the light background themes
 **the changes will be applied**
 
 
-###LDAP / AD 
+###LDAP
 
 An example to integrate with Active Directory
 
@@ -193,7 +205,7 @@ An example to integrate with Active Directory
 **Users must have email addresses defined in AD to be able to login to gitlab!**
 
 
-### HTTPS (SSL)
+### HTTPS
 
 Simple example with no encryption (not recommended)  
    
@@ -297,6 +309,11 @@ All of the parameters that can be set
     gitlab_projects          # Default: 15
     visibility_level         # New in 6-4 \'public/internal/private\' Default: internal 
 
+  Backup
+
+    backup_path              # Path is relative to Rails.root (default: tmp/backups/)
+    backup_keep_time         # Default: 0 (forever) (in seconds), 604800 = 1 week
+
 
 ##Limitations
 
@@ -316,7 +333,7 @@ Twitter @spencer450
 
 
 
-##Release Notes/Contributors/Etc 
+##Miscellaneous 
 
 This module is based on the work done by the following people:  
 
@@ -334,6 +351,11 @@ The advantages of this puppet module over the work prevously done in other gitla
 - Vagrant integration  
 - Simplified out out of box expierence  
 - Significantly better documentation  
+- Backups enabled by default
+- Logrotate enabled by default
+
+Changelog - https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md
+
 
 
 
