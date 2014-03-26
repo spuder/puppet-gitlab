@@ -7,7 +7,7 @@
 - Changes placedog to placepuppy because the former was shutdown  
 - Removes 'default server' in nginx config when running without ssl (port 80), fixes nginx -t warning. 
 - Changes Text under sign in page layout in gitlab config to work with new markdown rendering engine in 6-7  
-
+- Adds hostname as alias to nginx config
 
 
 
