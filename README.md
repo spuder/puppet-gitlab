@@ -106,7 +106,8 @@ Any parameters omitted will be set to the defaults located in gitlab::params
 
 For example, a basic configuration might look like this: 
 
-      class { 'gitlab' : 
+      class { 'gitlab' :
+        gitlab_manage_packages =>  true
         git_email              =>  'git@foo.com',
         gitlab_branch          =>  '6-6-stable',
         gitlab_dbname          =>  'gitlabdb',
@@ -239,6 +240,10 @@ You will need to place your .pem file and your private key in a location accessi
 
 All of the parameters that can be set
 
+  Configuration  
+  
+    gitlab_manage_packages   # If false, will not attempt to install or configure nginx, mysql, git, ruby. (see packages.pp)
+    
   Gitlab server settings
 
     gitlab_branch            # Which branch to checkout from gitlab_sources

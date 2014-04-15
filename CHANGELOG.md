@@ -1,5 +1,10 @@
 ##Changelog
 
+2014-April-15: 1.9.0  
+
+- Adds $gitlab_manage_packages. If set to false, you can manually install/configure nginx, mysql, ruby. See [packages.pp:](https://github.com/spuder/puppet-gitlab/blob/master/manifests/packages.pp)  
+- Adds requirement of puppet 3.0 to prevent error when parsing erb templates  
+
 2014-March-24: 1.8.0  
  
 - Adds support for 6-7-stable 
