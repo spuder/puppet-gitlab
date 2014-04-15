@@ -18,27 +18,12 @@ class gitlab::packages inherits gitlab {
                       ]
   ensure_packages($system_packages)
 
-  ## Git v1.7.10
-  # =====================================
-
-
-  # Include git ppa (gitlab requires git 1.7.10 or newer which isn't in standard repo)
-  apt::ppa { 'ppa:git-core/ppa':
-  }
-
-  # Install key for repo (otherwise it prints error)
-  apt::key { 'ppa:git-core/ppa':
-      key   =>  'E1DF1F24',
-  }
+  ## Git core version > 1.7.10 is now standard
+  # =======================================
 
   package { 'git-core':
-    ensure  =>  latest,
-    require =>  [
-        Apt::Ppa['ppa:git-core/ppa'],
-        Apt::Key['ppa:git-core/ppa'],
-                ],
+    ensure => latest,
   }
-
 
   ## Ruby
   # =====================================
@@ -100,20 +85,8 @@ class gitlab::packages inherits gitlab {
   ## Nginx
   # =========
     
-  apt::ppa { 'ppa:nginx/stable':
-  }
-
-  # Install key for repo (otherwise it prints error)
-  apt::key { 'ppa:nginx/stable':
-      key   =>  'C300EE8C',
-  }
-
   package { 'nginx':
     ensure  =>  latest,
-    require =>  [
-        Apt::Ppa['ppa:nginx/stable'],
-        Apt::Key['ppa:nginx/stable'],
-                ],
   }
   
   
