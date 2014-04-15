@@ -15,6 +15,7 @@ class gitlab::packages inherits gitlab {
                     'libmysqlclient-dev',
                     'redis-server',
                     'logrotate',
+                    'sudo',
                       ]
   ensure_packages($system_packages)
 
