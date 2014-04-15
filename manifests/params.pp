@@ -1,6 +1,9 @@
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab::params {
   
+  # Manage Packages
+  $gitlab_manage_packages = true
+  
   # Gitlab server settings
   $gitlab_branch          = '6-7-stable'
   $gitlabshell_branch     = 'v1.9.1'

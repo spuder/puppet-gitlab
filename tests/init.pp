@@ -13,6 +13,7 @@
 
   
   class { 'gitlab' : 
+          gitlab_manage_packages => true,
 #	  git_user               => 'git',
 #	  git_home               => '/home/git',
 	  git_email              => 'git@foo.com',

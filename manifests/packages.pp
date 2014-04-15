@@ -1,3 +1,8 @@
+# Class gitlab::packages
+# Sets up rquirements for gitlab
+# This class is optional, dependingo on what $gitlab_manage_packages is set to
+# if set to false, you must manually install all the packages below
+
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab::packages inherits gitlab {
   
@@ -15,6 +20,7 @@ class gitlab::packages inherits gitlab {
                     'libmysqlclient-dev',
                     'redis-server',
                     'logrotate',
+                    'sudo',
                       ]
   ensure_packages($system_packages)
 

@@ -1,6 +1,9 @@
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab (
 
+    # Manage packages
+    $gitlab_manage_packages = $gitlab::params::gitlab_manage_packages,
+    
     # Gitlab server settings
     $gitlab_branch          = $gitlab::params::gitlab_branch,
     $gitlabshell_branch     = $gitlab::params::gitlabshell_branch,
@@ -80,7 +83,8 @@ class gitlab (
 	    fail("${::osfamily} not supported yet")
 	  }
 	}
-	
+
+# Check if removed flags are present
 	if $gitlab_repodir != '' {
 	  fail('The flag, $gitlab_repodir is no longer a valid parameter, please remove from your manifests')
 	}
@@ -90,39 +94,69 @@ class gitlab (
   if $user_create_team != '' {
     fail('The flag, $user_create_team is no longer a valid parameter, please remove from your manifests')
   }
-  
-  
 
-  if $project_public_default != '' {
+# Check if flags removed in 6-4 are present  
+   if $project_public_default != '' {
     if $gitlab_branch >= '6-4-stable' {
       fail('Gitlab 6-4 and newer replaced $project_public_default with $visibility_level, please update your manifests. See http://bit.ly/1egMAW2')
     }
   }
   
-  
-
+# Test if pupet 3.0, required for scope lookup in erb templates
+  if $::puppetversion <= '3.0.0' {
+    fail("Module requires puppet 3.0 or greater, you have ${::puppetversion}")
+  }
 	
 
-	# Include all resources
-	include gitlab::packages
-	include gitlab::user
-	include gitlab::setup
-	include gitlab::install
-	include gitlab::config
-	include gitlab::service
 
-	anchor { 'gitlab::begin':}
-	anchor { 'gitlab::end':}
 
-	# Installation order
-	Anchor['gitlab::begin']      ->
-	 Class['::gitlab::packages'] ->
-	 Class['::gitlab::user']     ->
-	 Class['::gitlab::setup']    ->
-	 Class['::gitlab::install']  ->
-	 Class['::gitlab::config']   ->
-	 Class['::gitlab::service']  ->
-  Anchor['gitlab::end']
+# Allow user to install nginx, mysql, git ect.. packages separately
+  if $gitlab_manage_packages == true {
+    info("Gitlab will manage packages because gitlab_manage_packages is: ${gitlab_manage_packages} ")
+    
+    include gitlab::packages
+    include gitlab::user
+    include gitlab::setup
+    include gitlab::install
+    include gitlab::config
+    include gitlab::service
+  
+    anchor { 'gitlab::begin':}
+    anchor { 'gitlab::end':}
+    # Installation order
+    Anchor['gitlab::begin']      ->
+     Class['::gitlab::packages'] ->
+     Class['::gitlab::user']     ->
+     Class['::gitlab::setup']    ->
+     Class['::gitlab::install']  ->
+     Class['::gitlab::config']   ->
+     Class['::gitlab::service']  ->
+    Anchor['gitlab::end']
+      
+  }
+  else {
+    info("You must install packages manually because gitlab_manage_packages is: ${gitlab_manage_packages}, see manifests/packages.pp")
+    
+    include gitlab::user
+    include gitlab::setup
+    include gitlab::install
+    include gitlab::config
+    include gitlab::service
+  
+    anchor { 'gitlab::begin':}
+    anchor { 'gitlab::end':}
+    # Installation order
+    Anchor['gitlab::begin']      ->
+     Class['::gitlab::user']     ->
+     Class['::gitlab::setup']    ->
+     Class['::gitlab::install']  ->
+     Class['::gitlab::config']   ->
+     Class['::gitlab::service']  ->
+    Anchor['gitlab::end']
+  }
+    
+
+
 
 }# end gitlab
     

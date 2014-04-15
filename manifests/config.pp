@@ -152,6 +152,9 @@ class gitlab::config inherits gitlab {
     owner   =>  "${gitlab::git_user}",
   }
 
+# Icon Branding
+###########
+
   # Thumbnail logo white default
   file{"${gitlab::git_home}/gitlab/app/assets/images/gitlab-logo-white.png":
     source  =>  'puppet:///modules/gitlab/gitlab-logo-white.png.erb',
