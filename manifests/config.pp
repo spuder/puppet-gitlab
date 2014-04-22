@@ -102,6 +102,11 @@ class gitlab::config inherits gitlab {
     owner   =>  'root',
     group   =>  'root',
   }
+  
+  # Create symbolic link
+  file  { '/etc/nginx/sites-enabled/default':
+    ensure  =>  absent,
+  }
 
 
 # Gitlab-shell CONFIG
