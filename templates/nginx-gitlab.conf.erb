@@ -25,14 +25,14 @@ upstream gitlab {
 <% if scope['gitlab::gitlab_ssl'] !=true %>
 server {
   listen 80;
-  server_name <%= @fqdn %>;
+  server_name <%= @fqdn %> <%= @hostname_aliases %> <%= @default_servername %>;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
 
 <% else %>
 server {
   listen 80;
-  server_name <%= $default_servername %>.*;
+  server_name _;
   server_tokens off;
   #return 301 https://$host$request_uri;
   return 301 https://<%= @fqdn %>$request_uri;
@@ -40,7 +40,7 @@ server {
 }
 server {
   listen 443 ssl default_server;
-  server_name <%= @fqdn %> <%= @hostname %>;
+  server_name <%= @fqdn %> <%= @hostname_aliases %> <%= @default_servername %>;
   server_tokens off;
   root <%= @git_home %>/gitlab/public;
   ssl                           on;

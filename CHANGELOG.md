@@ -1,5 +1,11 @@
 ##Changelog
 
+2014-April-22: 1.10.0
+
+- Adds custom fact '$hostname_aliases'
+- Adds $hostname_aliases to nginx config for both port 80 and 443
+- Changes wildcard servername from * to _ 
+
 2014-April-15: 1.9.0  
 
 - Adds $gitlab_manage_packages. If set to false, you can manually install/configure nginx, mysql, ruby. See [packages.pp:](https://github.com/spuder/puppet-gitlab/blob/master/manifests/packages.pp)  
