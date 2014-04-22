@@ -92,5 +92,5 @@
               Exec['download gitlab'],
                   ],
   }
-
+  
 }# end setup.pp

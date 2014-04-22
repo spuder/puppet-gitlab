@@ -38,7 +38,7 @@ class gitlab::config inherits gitlab {
   # Create satellites directory
   file { "${gitlab::git_home}/gitlab-satellites":
     ensure  =>  directory,
-    mode    =>  '0755',
+    mode    =>  '0750',
   }
 
   # Create public/uploads directory otherwise backups will fail

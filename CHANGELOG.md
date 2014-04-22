@@ -5,6 +5,11 @@
 - Adds custom fact '$hostname_aliases'
 - Adds $hostname_aliases to nginx config for both port 80 and 443
 - Changes wildcard servername from * to _ 
+- Updates upgrade_instructions document
+- 6-8 adds gzip compression to nginx config
+- 6-8 turns off gzip compression to prevent breach attach (on by default from gitlab)
+- Increases gitlab-shell from 1.9.1 to 1.9.3
+- Changes gitlab-satellite permissions to 0750
 
 2014-April-15: 1.9.0  
 

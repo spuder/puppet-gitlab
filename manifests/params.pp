@@ -5,8 +5,8 @@ class gitlab::params {
   $gitlab_manage_packages = true
   
   # Gitlab server settings
-  $gitlab_branch          = '6-7-stable'
-  $gitlabshell_branch     = 'v1.9.1'
+  $gitlab_branch          = '6-8-stable'
+  $gitlabshell_branch     = 'v1.9.3'
   $git_user               = 'git'       # only change if you really know what you are doing
   $git_home               = '/home/git'
   $git_email              = 'git@someserver.net'
