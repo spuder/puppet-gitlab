@@ -1,5 +1,8 @@
 ##Changelog
 
+2014-April-22: 1.10.1
+- Updates tag on git branch (1.10.0 was never pushed to puppet forge)
+
 2014-April-22: 1.10.0
 
 - Adds custom fact '$hostname_aliases'
