@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.9.0'
+version '1.10.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -50,6 +50,7 @@ Gitlab 6-4-stable on Ubuntu 12.04
 Gitlab 6-5-stable on Ubuntu 12.04  
 Gitlab 6-6-stable on Ubutnu 12.04  
 Gitlab 6-7-stable on Ubuntu 12.04  
+Gitlab 6-8-stable on Ubuntu 12.04
 
 
 
