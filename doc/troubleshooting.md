@@ -49,7 +49,10 @@ If you have https enabled, and you nagivate to gitlab over http, remove the 'def
 - Run `service gitlab reload` or `service gitlab restart`  
 - Restart the server  
 - Verify the icons in /home/git/ exist
-  
+- Run the following command mentioned in the upgrade guide
+   
+    sudo -u git -H bundle exec rake assets:clean assets:precompile cache:clear RAILS_ENV=production
+
   
 
 
