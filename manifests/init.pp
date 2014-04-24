@@ -112,7 +112,7 @@ class gitlab (
 
 # Allow user to install nginx, mysql, git ect.. packages separately
   if $gitlab_manage_packages == true {
-    info("Gitlab will manage packages because gitlab_manage_packages is: ${gitlab_manage_packages} ")
+    notice("Gitlab will manage packages because gitlab_manage_packages is: ${gitlab_manage_packages} ")
     
     include gitlab::packages
     include gitlab::user
@@ -135,7 +135,7 @@ class gitlab (
       
   }
   else {
-    info("You must install packages manually because gitlab_manage_packages is: ${gitlab_manage_packages}, see manifests/packages.pp")
+    notice("You must install packages manually because gitlab_manage_packages is: ${gitlab_manage_packages}, see manifests/packages.pp")
     
     include gitlab::user
     include gitlab::setup
