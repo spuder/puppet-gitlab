@@ -10,6 +10,7 @@ class gitlab::packages inherits gitlab {
     
 
   $system_packages = [
+                    'git-core',
                     'libicu-dev',
                     'python2.7',
                     'python-docutils',
@@ -37,13 +38,9 @@ class gitlab::packages inherits gitlab {
       key   =>  'E1DF1F24',
   }
 
-  package { 'git-core':
-    ensure  =>  latest,
-    require =>  [
-        Apt::Ppa['ppa:git-core/ppa'],
-        Apt::Key['ppa:git-core/ppa'],
-                ],
-  }
+  Apt::Ppa['ppa:git-core/ppa'] ->
+    Apt::Key['ppa:git-core/ppa'] ->
+    Package['git-core']
 
 
   ## Ruby
