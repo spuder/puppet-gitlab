@@ -47,12 +47,17 @@ If you have https enabled, and you nagivate to gitlab over http, remove the 'def
 ## Thumbnail icon won't change  
 - Clear the cash in your browser  
 - Run `service gitlab reload` or `service gitlab restart`  
-- Restart the server  
 - Verify the icons in /home/git/ exist
+- Remove all logo-*.png files from /home/git/gitlab/public/assets/
 - Run the following command mentioned in the upgrade guide
    
     sudo -u git -H bundle exec rake assets:clean assets:precompile cache:clear RAILS_ENV=production
+    
+- Restart gitlab
 
+  
+  If that still didn't work, open the develper console, and take note of the name of the file in /home/git/gitlab/public/assets/logo-white-67df65ed619f59dbc0cb6d47aac306d6.png. Replace it with the custom logo
+  
   
 
 
