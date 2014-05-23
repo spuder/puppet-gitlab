@@ -132,6 +132,14 @@ class gitlab::config inherits gitlab {
     mode    =>  '0755',
   }
   
+  # Copy the gitlab-shell config
+  file { "${gitlab::git_home}/gitlab-shell/config.yml":
+    ensure    =>  file,
+    content   =>  template('gitlab/gitlab-shell.erb'),
+    owner     =>  "${gitlab::git_user}",
+    group     =>  'git',
+  }
+  
 
 # Logrotate CONFIG
 #################

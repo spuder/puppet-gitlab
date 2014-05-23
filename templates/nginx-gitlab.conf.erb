@@ -97,6 +97,9 @@ server {
   }
   
   # Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
+  # WARNING: If you are using relative urls do remove the block below
+  # See config/application.rb under "Relative url support" for the list of
+  # other files that need to be changed for relative url support
   location ~ ^/(assets)/  {
     root <%= @git_home %>/gitlab/public;
     gzip_static on; # to serve pre-gzipped version
@@ -106,4 +109,3 @@ server {
   
   error_page 502 /502.html;
 }
-

@@ -30,29 +30,20 @@
     path    =>  '/usr/bin',
   }
   
-  # Download gitlab-shell (replaces git-o-lite)
-  exec { 'clone branch gitlab-shell':
-    command   =>  "/usr/bin/git clone ${gitlab::gitlabshell_sources} -b ${gitlab::gitlabshell_branch} ${gitlab::git_home}/gitlab-shell",
-    creates   =>  "${gitlab::git_home}/gitlab-shell",
+  if "${gitlab::params::gitlab_branch}" <= '6-8-stable' {
+    # Download gitlab-shell (replaces git-o-lite)
+    exec { 'clone branch gitlab-shell':
+      command   =>  "/usr/bin/git clone ${gitlab::gitlabshell_sources} -b ${gitlab::gitlabshell_branch} ${gitlab::git_home}/gitlab-shell",
+      creates   =>  "${gitlab::git_home}/gitlab-shell",
+    }
   }
+  
+  
   
   # Download gitlab source
   exec { 'download gitlab':
     command   =>  "/usr/bin/git clone -b ${gitlab::gitlab_branch} ${gitlab::gitlab_sources} ${gitlab::git_home}/gitlab",
     creates   =>  "${gitlab::git_home}/gitlab",
-  }
-  
-  
-  # Copy the gitlab-shell config
-  file { "${gitlab::git_home}/gitlab-shell/config.yml":
-    ensure    =>  file,
-    content   =>  template('gitlab/gitlab-shell.erb'),
-    owner     =>  "${gitlab::git_user}",
-    group     =>  'git',
-    require   =>  [
-              Exec['clone branch gitlab-shell'],
-              Exec['download gitlab'],
-                  ],
   }
   
   
@@ -63,7 +54,6 @@
     owner     =>  "${gitlab::git_user}",
     group     =>  'git',  
     require   =>  [
-              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
@@ -75,7 +65,6 @@
     owner     =>  "${gitlab::git_user}",
     group     =>  'git',
     require   =>  [
-              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }
@@ -88,7 +77,6 @@
     group     =>  'git',
     mode      =>  '0640',
     require   =>  [
-              Exec['clone branch gitlab-shell'],
               Exec['download gitlab'],
                   ],
   }

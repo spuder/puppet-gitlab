@@ -6,24 +6,40 @@ class gitlab::install inherits gitlab {
     path => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/sbin:/bin',
   }
 
-  # Install gitlab-shell
-  exec { 'install gitlab-shell':
-    command => "ruby ${gitlab::git_home}/gitlab-shell/bin/install",
-    creates => "${gitlab::git_home}/repositories",
-  }
-
   # Install gitlab
   exec { 'install gitlab':
     cwd     => "${gitlab::git_home}/gitlab",
-    command => 'bundle install --deployment --without development test postgres aws',
+    command => "bundle install -j${::processorcount} --deployment --without development test postgres aws",
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_setup_done",
-    timeout => 600,
     before  => [
            File["${gitlab::git_home}/.gitlab_setup_done"],
            Exec['setup gitlab database'],
+           Exec['install gitlab-shell'],
                ],
   }
-
+  
+  # In gitlab 6-9 the installation of gitlab-shell was converted into a rake task
+  if "${gitlab::gitlab_branch}" <= 6-8-stable {
+    
+    # Install gitlab-shell
+    exec { 'install gitlab-shell':
+      command => "ruby ${gitlab::git_home}/gitlab-shell/bin/install",
+      creates => "${gitlab::git_home}/repositories",
+      timeout => 600,
+    }
+    
+  }
+  else {
+    
+    exec { 'install gitlab-shell':
+      cwd     => "${gitlab::git_home}/gitlab",
+      command => "bundle exec rake gitlab:shell:install[${gitlab::gitlabshell_branch}] REDIS_URL=redis://localhost:6379 RAILS_ENV=production",
+      creates => "${gitlab::git_home}/repositories",
+      user    => 'git',
+    }
+    
+  }
+  
   # Setup gitlab database
   exec { 'setup gitlab database':
     cwd     => "${gitlab::git_home}/gitlab",
@@ -31,6 +47,7 @@ class gitlab::install inherits gitlab {
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_database_done",
     timeout => 600,
     before  => File["${gitlab::git_home}/.gitlab_database_done"],
+    require => Exec['install gitlab-shell'],
   }
 
   # Trap door to only allow database setup once
@@ -51,5 +68,8 @@ class gitlab::install inherits gitlab {
     mode    => '0644'
   }
 
+
+  
+  
 }
 # end install.pp
