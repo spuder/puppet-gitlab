@@ -110,7 +110,7 @@ class gitlab (
 
 
 
-# Allow user to install nginx, mysql, git ect.. packages separately
+# If false, allows user to install nginx, mysql, git ect.. packages separately
   if $gitlab_manage_packages == true {
     notice("Gitlab will manage packages because gitlab_manage_packages is: ${gitlab_manage_packages} ")
     

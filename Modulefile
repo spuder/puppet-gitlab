@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.10.1'
+version '1.11.0'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -44,13 +44,16 @@ Supported Versions :
 
 Gitlab 6-0-stable on Ubuntu 12.04  
 Gitlab 6-1-stable on Ubuntu 12.04  
-Gitlab 6-2-stable on Ubuntu 12.04   
+Gitlab 6-2-stable on Ubuntu 12.04  
 Gitlab 6-3-stable on Ubuntu 12.04  
 Gitlab 6-4-stable on Ubuntu 12.04  
 Gitlab 6-5-stable on Ubuntu 12.04  
 Gitlab 6-6-stable on Ubutnu 12.04  
 Gitlab 6-7-stable on Ubuntu 12.04  
-Gitlab 6-8-stable on Ubuntu 12.04
+Gitlab 6-8-stable on Ubuntu 12.04  
+Gitlab 6-9-stable on Ubuntu 12.04  
+
+
 
 
 
@@ -330,6 +333,8 @@ All of the parameters that can be set
 - Only supports up to ruby 1.9.3 on Ubuntu 12.04 due to limitation 
 of Ubuntu provided packages  
 (Will support ruby 2.0 when Ubuntu 14.04 is released)
+
+- Only works with MySQL, As of gitlab 6-9, gitlabhq recomends using postgres
 
 ###Support
 

@@ -5,11 +5,11 @@ class gitlab::params {
   $gitlab_manage_packages = true
   
   # Gitlab server settings
-  $gitlab_branch          = '6-8-stable'
-  $gitlabshell_branch     = 'v1.9.3'
+  $gitlab_branch          = '6-9-stable'
+  $gitlabshell_branch     = 'v1.9.4'
   $git_user               = 'git'       # only change if you really know what you are doing
   $git_home               = '/home/git'
-  $git_email              = 'git@someserver.net'
+  $git_email              = 'example@example.com'
   $git_comment            = 'GitLab'
   $git_ssh_port           = '22'
   $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
