@@ -10,7 +10,9 @@ class gitlab::service inherits gitlab {
     mode      =>  '0755',
   }
 
-  # 6-4 added a precompile rake command
+  # Note, this can fail if you set $use_custom_thumbnail to true and
+  # the thumbnails aren't in the expected location
+  # NoMethodError: undefined method `directory?' for nil:NilClass
   exec {'bundle exec rake assets:precompile RAILS_ENV=production':
     cwd     =>  "${gitlab::git_home}/gitlab",
     user    =>  "${gitlab::git_user}",

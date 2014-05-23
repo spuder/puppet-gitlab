@@ -1,9 +1,15 @@
 ##Changelog
 
-2014-April-22: 1.10.1
+2014-May-23: 1.11.0  
+- Adds support for 6-9-stable (using new bundle command for gitlab-shell)
+- Adds check if running on non Ubuntu
+- Adds nginx order dependency to try and aliviate having to restart nginx on first run
+- Fixes blank ldap_base in gitlab 6-8 template
+
+2014-April-22: 1.10.1  
 - Updates tag on git branch (1.10.0 was never pushed to puppet forge)
 
-2014-April-22: 1.10.0
+2014-April-22: 1.10.0  
 
 - Adds custom fact '$hostname_aliases'
 - Adds $hostname_aliases to nginx config for both port 80 and 443
