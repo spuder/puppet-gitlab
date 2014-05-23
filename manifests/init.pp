@@ -107,6 +107,12 @@ class gitlab (
     fail("Module requires puppet 3.0 or greater, you have ${::puppetversion}")
   }
 	
+# Test if running on a non Ubuntu System
+# If running on a debian system, disable the PPA's
+ if $::operatingsystem != 'Ubuntu' {
+   notice("Gitlab is only supported on Ubuntu systems, disabling 'manage packages' as a precaution'")
+   $gitlab_manage_packages = false
+ }
 
 
 

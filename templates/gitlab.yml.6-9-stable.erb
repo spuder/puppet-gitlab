@@ -150,7 +150,7 @@ production: &base
     #
     #   Ex. ou=People,dc=gitlab,dc=example
     #
-    base: ''
+    base: '<%= @ldap_base %>'
 
     # Filter LDAP users
     #

@@ -11,7 +11,6 @@ class gitlab::install inherits gitlab {
     cwd     => "${gitlab::git_home}/gitlab",
     command => "bundle install -j${::processorcount} --deployment --without development test postgres aws",
     unless  => "/usr/bin/test -f ${gitlab::git_home}/.gitlab_setup_done",
-    timeout => 600,
     before  => [
            File["${gitlab::git_home}/.gitlab_setup_done"],
            Exec['setup gitlab database'],
@@ -35,7 +34,7 @@ class gitlab::install inherits gitlab {
     exec { 'install gitlab-shell':
       cwd     => "${gitlab::git_home}/gitlab",
       command => "bundle exec rake gitlab:shell:install[${gitlab::gitlabshell_branch}] REDIS_URL=redis://localhost:6379 RAILS_ENV=production",
-      timeout => 300,
+      creates => "${gitlab::git_home}/repositories",
       user    => 'git',
     }
     
