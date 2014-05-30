@@ -73,7 +73,7 @@ class gitlab (
     # Deprecated in 2.0.0
     $project_public_default = ''
 
-  ) inherits gitlab::params {
+  ) inherits ::gitlab::params {
 
 	case $::osfamily {
 	  Debian: {

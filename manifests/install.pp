@@ -1,5 +1,5 @@
 # init -> packages -> user -> setup -> install -> config -> service
-class gitlab::install inherits gitlab {
+class gitlab::install inherits ::gitlab {
   # Execute all commands as the git user
   Exec {
     user => "${gitlab::git_user}",

@@ -1,5 +1,5 @@
 # init -> packages -> user -> setup -> install -> config -> service  
- class gitlab::setup inherits gitlab {
+ class gitlab::setup inherits ::gitlab {
    
   # Install bundler gem
   package { 'bundler':

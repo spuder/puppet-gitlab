@@ -4,7 +4,7 @@
 # if set to false, you must manually install all the packages below
 
 # init -> packages -> user -> setup -> install -> config -> service
-class gitlab::packages inherits gitlab {
+class gitlab::packages inherits ::gitlab {
   
   include apt
     

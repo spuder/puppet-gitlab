@@ -1,5 +1,5 @@
 # init -> packages -> user -> setup -> install -> config -> service
-class gitlab::user inherits gitlab {
+class gitlab::user inherits ::gitlab {
 
 
   # Sets the user to the following useradd --disabled-login --gecos 'Gitlab' git
