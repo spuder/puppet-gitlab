@@ -1,5 +1,5 @@
 # init -> packages -> user -> setup -> install -> config -> service
-class gitlab::config inherits gitlab {
+class gitlab::config inherits ::gitlab {
 
   # All file resource declarations should be executed as git:git
   File {

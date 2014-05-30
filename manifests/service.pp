@@ -1,5 +1,5 @@
 # init -> packages -> user -> setup -> install -> config -> service
-class gitlab::service inherits gitlab {
+class gitlab::service inherits ::gitlab {
 
   # init script
   file { '/etc/init.d/gitlab':
