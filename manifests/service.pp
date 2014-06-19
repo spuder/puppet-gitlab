@@ -18,6 +18,7 @@ class gitlab::service inherits ::gitlab {
     user    =>  "${gitlab::git_user}",
     path    =>  '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/sbin:/bin',
     unless  =>  "/usr/bin/test -f ${gitlab::git_home}/.precompile_done",
+    timeout =>  1800,
     before  =>  [
                 File["${gitlab::git_home}/.precompile_done"],
                 Service['gitlab'],
