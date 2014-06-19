@@ -1,5 +1,8 @@
 ##Changelog
 
+2014-May-30: 1.11.1  
+-Changes 'gitlab' to '::gitlab' to fix scope issue (Issue #60, thanks nrvale0)
+
 2014-May-23: 1.11.0  
 - Adds support for 6-9-stable (using new bundle command for gitlab-shell)
 - Adds check if running on non Ubuntu
