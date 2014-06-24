@@ -1,5 +1,5 @@
 name    'spuder-gitlab'
-version '1.11.1'
+version '1.11.2'
 source 'https://github.com/spuder/puppet-gitlab'
 author 'spencer owen'
 license 'GPLv3'
@@ -7,6 +7,9 @@ summary 'Puppet GitLab Module'
 description 'gitlab
 =========
 
+# Gitlab 7.0  
+## This module presently only works with gitlab 6.x
+## Major changes are comming in version 2.0.0 which will add support for gitlab 7.x
 
 Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
 Issues - [https://github.com/spuder/puppet-gitlab/issues](https://github.com/spuder/puppet-gitlab/issues)    
