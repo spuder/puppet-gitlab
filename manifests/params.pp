@@ -8,76 +8,51 @@ class gitlab::params {
   # Gitlab server settings
   $gitlab_branch          = '7.0.0'
   $gitlab_release         = 'enterprise' # enterprise or basic
-  # $git_home               = '/home/git'
-  $git_email              = 'example@example.com'
-  $git_comment            = 'GitLab'
-  $git_ssh_port           = '22'
 
-  
-  # Database
-  $gitlab_dbname          = 'gitlabhq_production'
-  $gitlab_dbuser          = 'gitlab'
-  $gitlab_dbpwd           = 'changeme'
-  $gitlab_dbhost          = 'localhost'
-  $gitlab_dbport          = '3306'
 
-  # Web & Security
-  $gitlab_ssl             = false
-  $gitlab_ssl_cert        = '/etc/ssl/certs/ssl-cert-snakeoil.pem'
-  $gitlab_ssl_key         = '/etc/ssl/private/ssl-cert-snakeoil.key'
-  $gitlab_ssl_self_signed = false # Do not use self signed certs in production!
-  $default_servername     = 'gitlab' # example gitlab.foo.com  
 
-  
-  # # LDAP 
-  # $ldap_enabled           = false
-  # $ldap_host              = 'ldap.domain.com'
-  # $ldap_base              = 'dc=domain,dc=com'
-  # $ldap_uid               = 'uid' # Active directory = 'sAMAccountName'
-  # $ldap_port              = '636'
-  # $ldap_method            = 'ssl' # "tls" or "ssl" or "plain"
-  # $ldap_bind_dn           = ''
-  # $ldap_bind_password     = ''
-  
-  # Company Branding
-  $use_custom_login_logo  = false
-  $company_logo_url       = 'http://placepuppy.it/300/110'
-  $use_custom_thumbnail   = false
-  $use_company_link       = false
-  $company_link           = '[Learn more about foo](http://failblog.cheezburger.com)'
-  
-  # User default settings
-  $gitlab_gravatar        = true
-  $user_create_group      = false
-  $user_changename        = false
-  
-  # Project default settings
-  $project_issues         = true
-  $project_merge_request  = true
-  $project_wiki           = true
-  $project_wall           = false
-  $project_snippets       = false
-  $gitlab_projects        = '15'
-  $visibility_level       = 'internal'
-  
-  # # Backup
-  # $backup_path            = 'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
-  # $backup_keep_time       = '0'             # default: 0 (forever) (in seconds), 604800 = 1 week
+#
+# 1. GitLab app settings
+# ==========================
+  gitlab_email_from
+  gitlab_default_projects_limit
+  gitlab_default_can_create_group
+  gitlab_username_changing_enabled
+  gitlab_default_theme
+  gitlab_signup_enabled
+  gitlab_signin_enabled
 
-  #Omnibus configuration
+  gitlab_default_projects_features_issues = true
+  gitlab_default_projects_features_merge_requests = true
+  gitlab_default_projects_features_wiki = true
+  gitlab_default_projects_features_snippets = false
+  gitlab_default_projects_features_visibility_level = 'internal' # public internal or private
 
-  # Define port numbers as strings
-  $redis_port       = undef # 6379
-  $postgresql_port  = undef # 5432
-  $unicorn_port     = undef # 8080
 
-  $git_data_dir     = undef # "/var/opt/gitlab/git-data"  
-  $gitlab_username  = undef # "gitlab"
-  $gitlab_group     = undef # "gitlab"
+  issues_tracker_redmine
+  issues_tracker_redmine_title
+  issues_tracker_redmine_project_url
+  issues_tracker_redmine_issues_url
+  issues_tracker_redmine_new_issue_url
+
+  issues_tracker_jira
+  issues_tracker_jira_title
+  issues_tracker_jira_project_url
+  issues_tracker_jira_issues_url
+  issues_tracker_jira_new_issue_url 
+
+  gravatar_enabled
+  gravatar_plain_url
+  gravatar_ssl_url
+
+
+#
+# 2. Auth settings
+# ==========================
 
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
-  $ldap_enabled   = true
+  $ldap_enabled   = false
   $ldap_host      = 'hostname of LDAP server'
   $ldap_port      = 389 # or 636
   $ldap_uid       = 'sAMAccountName' # or 'uid'
@@ -92,9 +67,74 @@ class gitlab::params {
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  # external_url "https://gitlab.example.com"
+  $omniauth_enabled    = true
+    omniauth_allow_single_sign_on
+    omniauth_block_auto_created_users
+  $omniauth_providers  = '[
+    {
+      "name" => "google_oauth2",
+      "app_id" => "YOUR APP ID",
+      "app_secret" => "YOUR APP SECRET",
+      "args" => { "access_type" => "offline", "approval_prompt" => "" }
+    }
+  ]'
 
-  $redirect_http_to_https   = undef #true
+
+#
+# 3. Advanced settings
+# ==========================
+
+satellites_path
+
+# Backup
+$backup_path            = 'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
+$backup_keep_time       = '0'             # default: 0 (forever) (in seconds), 604800 = 1 week
+
+gitlab_shell_path
+
+gitlab_shell_repos_path
+gitlab_shell_hooks_path
+
+gitlab_shell_upload_pack
+gitlab_shell_receive_pack
+
+gitlab_shell_ssh_port
+
+git_bin_path
+git_max_size
+git_timeout
+
+
+#
+# 4. Extra customization
+# ==========================
+
+extra_google_analytics_id
+extra_google_analytics_id
+
+extra_piwik_url
+extra_piwik_url
+extra_piwik_site_id
+
+extra_sign_in_text
+extra_sign_in_text
+
+
+
+  #Omnibus configuration
+
+
+  $redis_port       = undef # 6379
+  $postgresql_port  = undef # 5432
+  $unicorn_port     = undef # 8080
+
+  $git_data_dir     = undef # "/var/opt/gitlab/git-data"  
+  $gitlab_username  = undef # "gitlab"
+  $gitlab_group     = undef # "gitlab"
+
+
+
+  $redirect_http_to_https   = undef #true or false
   $ssl_certificate          = "/etc/gitlab/ssl/gitlab.crt"
   $ssl_certificate_key      = "/etc/gitlab/ssl/gitlab.key"
 
@@ -120,15 +160,7 @@ class gitlab::params {
   $smtp_authentication       = "login"
   $smtp_enable_starttls_auto = true
 
-  $omniauth_enabled    = true
-  $omniauth_providers  = '[
-    {
-      "name" => "google_oauth2",
-      "app_id" => "YOUR APP ID",
-      "app_secret" => "YOUR APP SECRET",
-      "args" => { "access_type" => "offline", "approval_prompt" => "" }
-    }
-  ]'
+
 
   # Below are the default values
   $svlogd_size = 200 * 1024 * 1024 # rotate after 200 MB of log data

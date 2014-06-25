@@ -1,3 +1,5 @@
+<%# MANAGED BY PUPPET %>
+<%# Changes may be overwritten %>
 <% if @redis_port       -%> redis['port'] = <%= @redis_port %>             <% end %>
 <% if @postgresql_port  -%> posgresql['port'] = <%= @postgresql_port %>     <% end %>
 <% if @unicorn_port     -%> unicorn_port['port'] = <%= @unicorn_port %>     <% end %>
