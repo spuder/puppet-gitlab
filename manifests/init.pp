@@ -1,20 +1,17 @@
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab (
 
-    
+    $puppet_manage_config = $gitlab::params::puppet_manage_config,
     # Gitlab server settings
     $gitlab_branch          = $gitlab::params::gitlab_branch,
-    $gitlabshell_branch     = $gitlab::params::gitlabshell_branch,
+    $gitlab_release         = $gitlab::params::gitlab_release,
     $git_user               = $gitlab::params::git_user,
     $git_home               = $gitlab::params::git_home,
     $git_email              = $gitlab::params::git_email,
     $git_comment            = $gitlab::params::git_comment,
     $git_ssh_port           = $gitlab::params::git_ssh_port,
-    $gitlab_sources         = $gitlab::params::gitlab_sources,
-    $gitlabshell_sources    = $gitlab::params::gitlabshell_sources,
     
     # Database
-    $gitlab_dbtype          = $gitlab::params::gitlab_dbtype,
     $gitlab_dbname          = $gitlab::params::gitlab_dbname,
     $gitlab_dbuser          = $gitlab::params::gitlab_dbuser,
     $gitlab_dbpwd           = $gitlab::params::gitlab_dbpwd,
@@ -64,6 +61,8 @@ class gitlab (
     $backup_keep_time       = $gitlab::params::backup_keep_time, 
 
 
+    $redis_port             = $gitlab::params::redis_port,
+
   ) inherits ::gitlab::params {
 
 
@@ -76,17 +75,33 @@ class gitlab (
     '7.5':   {}
     '6.5':   {}
     default: { warning("${operatingsystem} ${operatingsystemrelease} is not on approved list,\
-      download may fail. See https://about.gitlab.com/downloads/"
+      download may fail. See https://about.gitlab.com/downloads/ for supported OS's"
     ) }
   }
 
 
-    
-  include gitlab::install
+  if $puppet_manage_config == true {
+    notice("Puppet will manage the configuration file because \$puppet_manage_config is true")
+    include gitlab::install
+    include gitlab::config
 
+    anchor { 'gitlab::begin':}
+    anchor { 'gitlab::end':}
+
+    Anchor['gitlab::begin'] ->
+      Class['::gitlab::install'] ->
+      Class['::gitlab::config']  ->
+    Anchor['gitlab::end']
+  }
+  else {
+    notice("Puppet will not manage the configuration file because \$puppet_manage_config is false")
+    include gitlab::install
+  }
+
+
+  if $puppet_manage_backups {
+    include gitlab::backup
+  }
 
 }# end gitlab
-    
-    
-    
-  
+

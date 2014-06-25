@@ -7,6 +7,7 @@
     # git_ssh_port           => '22',
     # gitlab_sources         => 'git://github.com/gitlabhq/gitlabhq.git',
     gitlab_branch          => '7.0.0',
+    puppet_manage_config   => true,
     # gitlabshell_sources    => 'git://github.com/gitlabhq/gitlab-shell.git',
     # gitlabshell_branch     => 'v1.9.4',
     
