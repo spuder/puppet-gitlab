@@ -7,7 +7,7 @@ class gitlab::params {
   
   # Gitlab server settings
   $gitlab_branch          = '7.0.0'
-  $gitlab_release         = 'basic' # enterprise or basic
+  $gitlab_release         = 'enterprise' # enterprise or basic
   # $git_home               = '/home/git'
   $git_email              = 'example@example.com'
   $git_comment            = 'GitLab'
@@ -77,16 +77,16 @@ class gitlab::params {
 
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
-  $ldap_enabled = true
-  $ldap_host = 'hostname of LDAP server'
-  $ldap_port = 389 # or 636
-  $ldap_uid = 'sAMAccountName' # or 'uid'
-  $ldap_method = 'plain' # 'ssl' or 'plain'
-  $ldap_bind_dn = 'CN=query user,CN=Users,DC=mycorp,DC=com'
-  $ldap_password = 'query user password'
+  $ldap_enabled   = true
+  $ldap_host      = 'hostname of LDAP server'
+  $ldap_port      = 389 # or 636
+  $ldap_uid       = 'sAMAccountName' # or 'uid'
+  $ldap_method    = 'plain' # 'ssl' or 'plain'
+  $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
+  $ldap_password  = 'query user password'
 
   $ldap_allow_username_or_email_login = true
-  $ldap_base = 'DC=mycorp,DC=com'
+  $ldap_base                          = 'DC=mycorp,DC=com'
 
   # GitLab Enterprise Edition only
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
@@ -94,16 +94,16 @@ class gitlab::params {
 
   # external_url "https://gitlab.example.com"
 
-  $redirect_http_to_https   = true
+  $redirect_http_to_https   = undef #true
   $ssl_certificate          = "/etc/gitlab/ssl/gitlab.crt"
   $ssl_certificate_key      = "/etc/gitlab/ssl/gitlab.key"
 
-  $git_uid = 1001
-  $git_gid = 1002
+  $git_uid          = 1001
+  $git_gid          = 1002
   $gitlab_redis_uid = 998
   $gitlab_redis_gid = 1003
-  $gitlab_psql_uid = 997
-  $gitlab_psql_gid = 1004
+  $gitlab_psql_uid  = 997
+  $gitlab_psql_gid  = 1004
 
   $aws_enable            = true
   $aws_access_key_id     = 'AKIA1111111111111UA'
