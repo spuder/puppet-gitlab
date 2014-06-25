@@ -1,8 +1,6 @@
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab (
 
-    # Manage packages
-    $gitlab_manage_packages = $gitlab::params::gitlab_manage_packages,
     
     # Gitlab server settings
     $gitlab_branch          = $gitlab::params::gitlab_branch,
@@ -64,104 +62,27 @@ class gitlab (
     # Backup 
     $backup_path            = $gitlab::params::backup_path,
     $backup_keep_time       = $gitlab::params::backup_keep_time, 
-    
-    # Deprecated in 1.0.0
-    $gitlab_repodir   = '',
-    $gitlab_domain    = '',
-    $user_create_team = '',
-    
-    # Deprecated in 2.0.0
-    $project_public_default = ''
+
 
   ) inherits ::gitlab::params {
 
-	case $::osfamily {
-	  Debian: {
-	    debug("A debian os was detected: ${::osfamily}")
-	  }
-	  default: {
-	    fail("${::osfamily} not supported yet")
-	  }
-	}
 
-# Check if removed flags are present
-	if $gitlab_repodir != '' {
-	  fail('The flag, $gitlab_repodir is no longer a valid parameter, please remove from your manifests')
-	}
-  if $gitlab_domain != '' {
-    fail('The flag, $gitlab_domain is no longer a valid parameter, please remove from your manifests')
-  }
-  if $user_create_team != '' {
-    fail('The flag, $user_create_team is no longer a valid parameter, please remove from your manifests')
+  # Gitlab only supplies omnibus downloads for few select operating systems
+  # Warn the user they may be using an unsupported OS
+  # https://about.gitlab.com/downloads/
+  case $operatingsystemrelease {
+    '12.04': {}
+    '14.04': {}
+    '7.5':   {}
+    '6.5':   {}
+    default: { warning("${operatingsystem} ${operatingsystemrelease} is not on approved list,\
+      download may fail. See https://about.gitlab.com/downloads/"
+    ) }
   }
 
-# Check if flags removed in 6-4 are present  
-   if $project_public_default != '' {
-    if $gitlab_branch >= '6-4-stable' {
-      fail('Gitlab 6-4 and newer replaced $project_public_default with $visibility_level, please update your manifests. See http://bit.ly/1egMAW2')
-    }
-  }
-  
-# Test if pupet 3.0, required for scope lookup in erb templates
-  if $::puppetversion <= '3.0.0' {
-    fail("Module requires puppet 3.0 or greater, you have ${::puppetversion}")
-  }
-	
-# Test if running on a non Ubuntu System
-# If running on a debian system, disable the PPA's
- if $::operatingsystem != 'Ubuntu' {
-   notice("Gitlab is only supported on Ubuntu systems, disabling 'manage packages' as a precaution'")
-   $gitlab_manage_packages = false
- }
 
-
-
-# If false, allows user to install nginx, mysql, git ect.. packages separately
-  if $gitlab_manage_packages == true {
-    notice("Gitlab will manage packages because gitlab_manage_packages is: ${gitlab_manage_packages} ")
     
-    include gitlab::packages
-    include gitlab::user
-    include gitlab::setup
-    include gitlab::install
-    include gitlab::config
-    include gitlab::service
-  
-    anchor { 'gitlab::begin':}
-    anchor { 'gitlab::end':}
-    # Installation order
-    Anchor['gitlab::begin']      ->
-     Class['::gitlab::packages'] ->
-     Class['::gitlab::user']     ->
-     Class['::gitlab::setup']    ->
-     Class['::gitlab::install']  ->
-     Class['::gitlab::config']   ->
-     Class['::gitlab::service']  ->
-    Anchor['gitlab::end']
-      
-  }
-  else {
-    notice("You must install packages manually because gitlab_manage_packages is: ${gitlab_manage_packages}, see manifests/packages.pp")
-    
-    include gitlab::user
-    include gitlab::setup
-    include gitlab::install
-    include gitlab::config
-    include gitlab::service
-  
-    anchor { 'gitlab::begin':}
-    anchor { 'gitlab::end':}
-    # Installation order
-    Anchor['gitlab::begin']      ->
-     Class['::gitlab::user']     ->
-     Class['::gitlab::setup']    ->
-     Class['::gitlab::install']  ->
-     Class['::gitlab::config']   ->
-     Class['::gitlab::service']  ->
-    Anchor['gitlab::end']
-  }
-    
-
+  include gitlab::install
 
 
 }# end gitlab

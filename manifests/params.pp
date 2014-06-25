@@ -5,18 +5,15 @@ class gitlab::params {
   $gitlab_manage_packages = true
   
   # Gitlab server settings
-  $gitlab_branch          = '6-9-stable'
-  $gitlabshell_branch     = 'v1.9.4'
+  $gitlab_branch          = '7.0.0'
   $git_user               = 'git'       # only change if you really know what you are doing
   $git_home               = '/home/git'
   $git_email              = 'example@example.com'
   $git_comment            = 'GitLab'
   $git_ssh_port           = '22'
-  $gitlab_sources         = 'git://github.com/gitlabhq/gitlabhq.git'
-  $gitlabshell_sources    = 'git://github.com/gitlabhq/gitlab-shell.git' 
+
   
   # Database
-  $gitlab_dbtype          = 'mysql'
   $gitlab_dbname          = 'gitlabhq_production'
   $gitlab_dbuser          = 'gitlab'
   $gitlab_dbpwd           = 'changeme'
@@ -60,7 +57,6 @@ class gitlab::params {
   $project_wall           = false
   $project_snippets       = false
   $gitlab_projects        = '15'
-  # $project_public_default = Deprecated in 6-4
   $visibility_level       = 'internal'
   
   # Backup
