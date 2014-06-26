@@ -49,9 +49,5 @@
     # project_wiki           => false,
     # project_wall           => false,
     # project_snippets       => true,
-    
+
     }
-    
-    
-  
-  

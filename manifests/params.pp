@@ -67,8 +67,8 @@ class gitlab::params {
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
   $omniauth_enabled                  = undef
-  $omniauth_allow_single_sign_on     = undef
-  $omniauth_block_auto_created_users = undef
+  $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
+  $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
   $omniauth_providers  = '[
     {
       "name" => "google_oauth2",
