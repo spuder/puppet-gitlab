@@ -6,12 +6,12 @@ class gitlab::install inherits ::gitlab {
   case $osfamily {
     'Debian': {
       $omnibus_release = "-omnibus-1_amd64.deb"
-      $url_separator = "_"
+      $url_separator   = "_"
       $package_manager = 'dpkg'
     }
     'RedHat': {
       $omnibus_release = "_omnibus-1.el6x86_64.rpm"
-      $url_separator = "-" 
+      $url_separator   = "-" 
       $package_manager = 'rpm'
 
     }

@@ -14,36 +14,35 @@ class gitlab::params {
 #
 # 1. GitLab app settings
 # ==========================
-  gitlab_email_from
-  gitlab_default_projects_limit
-  gitlab_default_can_create_group
-  gitlab_username_changing_enabled
-  gitlab_default_theme
-  gitlab_signup_enabled
-  gitlab_signin_enabled
+  $gitlab_email_from                 = undef
+  $gitlab_default_projects_limit     = undef
+  $gitlab_default_can_create_group   = undef
+  $gitlab_username_changing_enabled  = undef
+  $gitlab_default_theme              = undef # 1 Basic, 2 Mars, 3 Modern, 4 Gray, 5 Color
+  $gitlab_signup_enabled             = undef
+  $gitlab_signin_enabled             = undef
 
-  gitlab_default_projects_features_issues = true
-  gitlab_default_projects_features_merge_requests = true
-  gitlab_default_projects_features_wiki = true
-  gitlab_default_projects_features_snippets = false
-  gitlab_default_projects_features_visibility_level = 'internal' # public internal or private
+  $gitlab_default_projects_features_issues           = undef # true
+  $gitlab_default_projects_features_merge_requests   = undef # true
+  $gitlab_default_projects_features_wiki             = undef # true
+  $gitlab_default_projects_features_snippets         = undef # false
+  $gitlab_default_projects_features_visibility_level = undef # 'private' # public internal or private
 
+  $issues_tracker_redmine               = undef # true | false
+  $issues_tracker_redmine_title         = undef # 'title'
+  $issues_tracker_redmine_project_url   = undef # 'http://foo/bar'
+  $issues_tracker_redmine_issues_url    = undef # 'http://foo/bar'
+  $issues_tracker_redmine_new_issue_url = undef # 'http://foo/bar'
 
-  issues_tracker_redmine
-  issues_tracker_redmine_title
-  issues_tracker_redmine_project_url
-  issues_tracker_redmine_issues_url
-  issues_tracker_redmine_new_issue_url
+  $issues_tracker_jira               = undef # true | false
+  $issues_tracker_jira_title         = undef # 'foo'
+  $issues_tracker_jira_project_url   = undef # 'http://foo/bar'
+  $issues_tracker_jira_issues_url    = undef # 'http://foo/bar'
+  $issues_tracker_jira_new_issue_url = undef # 'http://foo/bar'
 
-  issues_tracker_jira
-  issues_tracker_jira_title
-  issues_tracker_jira_project_url
-  issues_tracker_jira_issues_url
-  issues_tracker_jira_new_issue_url 
-
-  gravatar_enabled
-  gravatar_plain_url
-  gravatar_ssl_url
+  $gravatar_enabled    = undef # true | false
+  $gravatar_plain_url  = undef # 'http://foo/bar'
+  $gravatar_ssl_url    = undef # 'https://foo/bar'
 
 
 #
@@ -67,9 +66,9 @@ class gitlab::params {
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  $omniauth_enabled    = true
-    omniauth_allow_single_sign_on
-    omniauth_block_auto_created_users
+  $omniauth_enabled                  = undef
+  $omniauth_allow_single_sign_on     = undef
+  $omniauth_block_auto_created_users = undef
   $omniauth_providers  = '[
     {
       "name" => "google_oauth2",
@@ -83,45 +82,43 @@ class gitlab::params {
 #
 # 3. Advanced settings
 # ==========================
-
-satellites_path
-
-# Backup
-$backup_path            = 'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
-$backup_keep_time       = '0'             # default: 0 (forever) (in seconds), 604800 = 1 week
-
-gitlab_shell_path
-
-gitlab_shell_repos_path
-gitlab_shell_hooks_path
-
-gitlab_shell_upload_pack
-gitlab_shell_receive_pack
-
-gitlab_shell_ssh_port
-
-git_bin_path
-git_max_size
-git_timeout
+  
+  $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
+  
+  # Backup
+  $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
+  $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
+  
+  $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
+  
+  $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories'
+  $gitlab_shell_hooks_path     = undef # /opt/gitlab/embedded/service/gitlab-shell/hooks/
+  
+  $gitlab_shell_upload_pack    = undef # true
+  $gitlab_shell_receive_pack   = undef # true
+  
+  $gitlab_shell_ssh_port       = undef # 22
+  
+  $git_bin_path                = undef # /opt/gitlab/embedded/bin/git
+  $git_max_size                = undef # 5242880 (5 MB)
+  $git_timeout                 = undef # 10
 
 
 #
 # 4. Extra customization
 # ==========================
-
-extra_google_analytics_id
-extra_google_analytics_id
-
-extra_piwik_url
-extra_piwik_url
-extra_piwik_site_id
-
-extra_sign_in_text
-extra_sign_in_text
-
-
-
-  #Omnibus configuration
+  
+  $extra_google_analytics_id = undef
+  
+  $extra_piwik_url           = undef
+  $extra_piwik_site_id       = undef
+  
+  $extra_sign_in_text        = undef
+  
+  
+#
+# 5. Omnibus customization
+# ==========================
 
 
   $redis_port       = undef # 6379
@@ -132,26 +129,24 @@ extra_sign_in_text
   $gitlab_username  = undef # "gitlab"
   $gitlab_group     = undef # "gitlab"
 
-
-
   $redirect_http_to_https   = undef #true or false
   $ssl_certificate          = "/etc/gitlab/ssl/gitlab.crt"
   $ssl_certificate_key      = "/etc/gitlab/ssl/gitlab.key"
 
-  $git_uid          = 1001
-  $git_gid          = 1002
-  $gitlab_redis_uid = 998
-  $gitlab_redis_gid = 1003
-  $gitlab_psql_uid  = 997
-  $gitlab_psql_gid  = 1004
+  $git_uid            = undef #1001
+  $git_gid            = undef #1002
+  $gitlab_redis_uid   = undef #998
+  $gitlab_redis_gid   = undef #1003
+  $gitlab_psql_uid    = undef #997
+  $gitlab_psql_gid    = undef #1004
 
-  $aws_enable            = true
-  $aws_access_key_id     = 'AKIA1111111111111UA'
-  $aws_secret_access_key = 'secret'
-  $aws_bucket            = 'my_gitlab_bucket'
-  $aws_region            = 'us-east-1'
+  $aws_enable               = false 
+  $aws_access_key_id        = 'AKIA1111111111111UA'
+  $aws_secret_access_key    = 'secret'
+  $aws_bucket               = 'my_gitlab_bucket'
+  $aws_region               = 'us-east-1'
 
-  $smtp_enable               = true
+  $smtp_enable               = false
   $smtp_address              = "smtp.server"
   $smtp_port                 = 456
   $smtp_user_name            = "smtp user"
@@ -161,14 +156,13 @@ extra_sign_in_text
   $smtp_enable_starttls_auto = true
 
 
-
   # Below are the default values
-  $svlogd_size = 200 * 1024 * 1024 # rotate after 200 MB of log data
-  $svlogd_num = 30 # keep 30 rotated log files
-  $svlogd_timeout = 24 * 60 * 60 # rotate after 24 hours
-  $svlogd_filter = "gzip" # compress logs with gzip
-  $svlogd_udp = nil # transmit log messages via UDP
-  $svlogd_prefix = nil # custom prefix for log messages
+  $svlogd_size      = 200 * 1024 * 1024 # rotate after 200 MB of log data
+  $svlogd_num       = 30 # keep 30 rotated log files
+  $svlogd_timeout   = 24 * 60 * 60 # rotate after 24 hours
+  $svlogd_filter    = "gzip" # compress logs with gzip
+  $svlogd_udp       = nil # transmit log messages via UDP
+  $svlogd_prefix    = nil # custom prefix for log messages
 
   
 }

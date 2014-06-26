@@ -1,12 +1,43 @@
 <%# MANAGED BY PUPPET %>
 <%# Changes may be overwritten %>
-<% if @redis_port       -%> redis['port'] = <%= @redis_port %>             <% end %>
-<% if @postgresql_port  -%> posgresql['port'] = <%= @postgresql_port %>     <% end %>
-<% if @unicorn_port     -%> unicorn_port['port'] = <%= @unicorn_port %>     <% end %>
 
-<% if @git_data_dir     -%> git_data_dir = <%= @git_data_dir  %>              <% end %>
-<% if @gitlab_username  -%> user['username'] = <%= @gitlab_username  %>     <% end %>
-<% if @gitlab_group     -%> user['group'] = <%= @gitlab_group  %>           <% end %>
+#
+# 1. GitLab app settings
+# ==========================
+
+<% if @gitlab_email_from -%>gitlab_rails['gitlab_email_from'] = <%= @gitlab_email_from %> <% end %>
+<% if @gitlab_default_projects_limit -%>gitlab_rails['gitlab_default_projects_limit'] = <%= @gitlab_default_projects_limit %> <% end %>
+<% if @gitlab_default_can_create_group -%>gitlab_rails['gitlab_default_can_create_group'] = <%= @gitlab_default_can_create_group %> <% end %>
+<% if @gitlab_username_changing_enabled -%>gitlab_rails['gitlab_username_changing_enabled'] = <%= @gitlab_username_changing_enabled %> <% end %>
+<% if @gitlab_default_theme -%>gitlab_rails['gitlab_default_theme'] = <%= @gitlab_default_theme %> <% end %>
+<% if @gitlab_signup_enabled -%>gitlab_rails['gitlab_signup_enabled'] = <%= @gitlab_signup_enabled %> <% end %>
+<% if @gitlab_signin_enabled -%>gitlab_rails['gitlab_signin_enabled'] = <%= @gitlab_signin_enabled %> <% end %>
+
+<% if @gitlab_default_projects_features_issues -%>gitlab_rails['gitlab_default_projects_features_issues'] = <%= @gitlab_default_projects_features_issues %> <% end %>
+<% if @gitlab_default_projects_features_merge_requests -%>gitlab_rails['gitlab_default_projects_features_merge_requests'] = <%= @gitlab_default_projects_features_merge_requests %> <% end %>
+<% if @gitlab_default_projects_features_wiki -%>gitlab_rails['gitlab_default_projects_features_wiki'] = <%= @gitlab_default_projects_features_wiki %> <% end %>
+<% if @gitlab_default_projects_features_snippets -%>gitlab_rails['gitlab_default_projects_features_snippets'] = <%= @gitlab_default_projects_features_snippets %> <% end %>
+<% if @gitlab_default_projects_features_visibility_level -%>gitlab_rails['gitlab_default_projects_features_visibility_level'] = <%= @gitlab_default_projects_features_visibility_level %> <% end %>
+
+<% if @issues_tracker_redmine -%>gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %> <% end -%>
+<% if @issues_tracker_redmine_title -%>gitlab_rails['issues_tracker_redmine_title'] = <%= @issues_tracker_redmine_title %> <% end -%>
+<% if @issues_tracker_redmine_project_url -%>gitlab_rails['issues_tracker_redmine_project_url'] = <%= @issues_tracker_redmine_project_url %> <% end -%>
+<% if @issues_tracker_redmine_issues_url -%>gitlab_rails['issues_tracker_redmine_issues_url'] = <%= @issues_tracker_redmine_issues_url %> <% end -%>
+<% if @issues_tracker_redmine_new_issue_url -%>gitlab_rails['issues_tracker_redmine_new_issue_url'] = <%= @issues_tracker_redmine_new_issue_url %> <% end -%>
+
+<% if @issues_tracker_jira -%>gitlab_rails['issues_tracker_jira'] = <%= @issues_tracker_jira %> <% end -%>
+<% if @issues_tracker_jira_title -%>gitlab_rails['issues_tracker_jira_title'] = <%= @issues_tracker_jira_title %> <% end -%>
+<% if @issues_tracker_jira_project_url -%>gitlab_rails['issues_tracker_jira_project_url'] = <%= @issues_tracker_jira_project_url %> <% end -%>
+<% if @issues_tracker_jira_issues_url -%>gitlab_rails['issues_tracker_jira_issues_url'] = <%= @issues_tracker_jira_issues_url %> <% end -%>
+<% if @issues_tracker_jira_new_issue_url -%>gitlab_rails['issues_tracker_jira_new_issue_url'] = <%= @issues_tracker_jira_new_issue_url %> <% end -%>
+
+<% if @gravatar_enabled -%> gitlab_rails['gravatar_enabled'] = <%= @gravatar_enabled %> <% end -%>
+<% if @gravatar_plain_url -%> gitlab_rails['gravatar_plain_url'] = <%= @gravatar_plain_url %> <% end -%>
+<% if @gravatar_ssl_url -%> gitlab_rails['gravatar_ssl_url'] = <%= @gravatar_ssl_url %> <% end -%>
+
+#
+# 2. Auth settings
+# ==========================
 
 <% if @ldap_enabled == true -%>
 gitlab_rails['ldap_enabled'] = <%= @ldap_enabled %>
@@ -16,6 +47,7 @@ gitlab_rails['ldap_uid'] = <%= @ldap_uid %>
 gitlab_rails['ldap_method'] = <%= @ldap_method %>
 gitlab_rails['ldap_bind_dn'] = <%= @ldap_bind_dn %>
 gitlab_rails['ldap_password'] = <%= @ldap_password %>
+ 
 gitlab_rails['ldap_allow_username_or_email_login'] = <%= @ldap_allow_username_or_email_login %>
 gitlab_rails['ldap_base'] = <%= @ldap_base %>
 <% end -%>
@@ -24,35 +56,69 @@ gitlab_rails['ldap_group_base'] = <%= @ldap_group_base %>
 gitlab_rails['ldap_user_filter'] = <%= @ldap_user_filter %>
 <% end -%>
 
-<% if @redirect_http_to_https == true %>
+<% if @omniauth_enabled == true %>
+gitlab_rails['omniauth_enabled'] = <%= @omniauth_enabled %>
+gitlab_rails['omniauth_providers'] = <%= @omniauth_providers %>
+<% end -%>
+
+#
+# 3. Advanced settings
+# ==========================
+
+<% if @satellites_path -%> gitlab_rails['satellites_path'] = <%= @satellites_path %> <% end %>
+
+<% if @backup_path -%> gitlab_rails['backup_path'] = <%= @backup_path %> <% end %>
+<% if @backup_keep_time -%> gitlab_rails['backup_keep_time'] = <%= @backup_keep_time %> <% end %>
+
+<% if @gitlab_shell_path -%> gitlab_rails['gitlab_shell_path'] = <%= @gitlab_shell_path %> <% end %>
+<% if @gitlab_shell_repos_path -%> gitlab_rails['gitlab_shell_repos_path'] = <%= @gitlab_shell_repos_path %> <% end %>
+<% if @gitlab_shell_hooks_path -%> gitlab_rails['gitlab_shell_hooks_path'] = <%= @gitlab_shell_hooks_path %> <% end %>
+<% if @gitlab_shell_upload_pack -%> gitlab_rails['gitlab_shell_upload_pack'] = <%= @gitlab_shell_upload_pack %> <% end %>
+<% if @gitlab_shell_receive_pack -%> gitlab_rails['gitlab_shell_receive_pack'] = <%= @gitlab_shell_receive_pack %> <% end %>
+<% if @gitlab_shell_ssh_port -%> gitlab_rails['gitlab_shell_ssh_port'] = <%= @gitlab_shell_ssh_port %> <% end -%>
+
+<% if @git_bin_path -%> gitlab_rails['git_bin_path'] = <%= @git_bin_path %> <% end %>
+<% if @git_max_size -%> gitlab_rails['git_max_size'] = <%= @git_max_size %> <% end %>
+
+<% if @git_timeout -%> gitlab_rails['git_timeout'] = <%= @git_timeout %> <% end %>
+
+#
+# 4. Extra customization
+# ==========================
+
+<% if @extra_google_analytics_id -%> gitlab_rails['extra_google_analytics_id'] = <%= @extra_google_analytics_id %> <% end -%>
+
+<% if @extra_piwik_url -%> gitlab_rails['extra_piwik_url'] = <%= @extra_piwik_url %> <% end -%>
+<% if @extra_piwik_site_id -%> gitlab_rails['extra_piwik_site_id'] = <%= @extra_piwik_site_id %> <% end -%>
+
+<% if @extra_sign_in_text -%> gitlab_rails['extra_sign_in_text'] = <%= @extra_sign_in_text %> <% end -%>
+<% if @extra_sign_in_text -%> gitlab_rails['extra_sign_in_text'] = <%= @extra_sign_in_text %> <% end -%>
+
+#
+# 5. Omnibus customization
+# ==========================
+
+<% if @redis_port       -%>redis['port'] = <%= @redis_port %>             <% end %>
+<% if @postgresql_port  -%>posgresql['port'] = <%= @postgresql_port %>     <% end %>
+<% if @unicorn_port     -%>unicorn_port['port'] = <%= @unicorn_port %>     <% end %>
+
+<% if @git_data_dir     -%>git_data_dir = <%= @git_data_dir  %>              <% end %>
+<% if @gitlab_username  -%>user['username'] = <%= @gitlab_username  %>     <% end %>
+<% if @gitlab_group     -%>user['group'] = <%= @gitlab_group  %>           <% end %>
+
+
+<% if @redirect_http_to_https == true -%>
 nginx['redirect_http_to_https'] = <%= @redirect_http_to_https %>
-nginx['ssl_certificate'] = <%= @ssl_certificate %> 
+nginx['ssl_certificate'] = <%= @ssl_certificate -%> 
 nginx['ssl_certificate_key'] = <%= @ssl_certificate_key %>
 <% end -%>
 
-<% if @git_uid -%>
-user['uid'] = <%= @git_uid -%>
-<% end -%>
-
-<% if @git_gid -%>
-user['gid'] = <%= git_gid -%>
-<% end -%>
-
-<% if @gitlab_psql_uid -%>
-postgresql['uid'] = <%= @gitlab_psql_uid -%>
-<% end -%>
-
-<% if @gitlab_psql_gid -%>
-postgresql['gid'] = <%= @gitlab_psql_gid -%>
-<% end -%>
-
-<% if @gitlab_redis_uid -%>
-redis['uid'] = <%= @gitlab_redis_uid -%>
-<% end -%>
-
-<% if @gitlab_redis_gid -%>
-redis['gid'] = <%= @gitlab_redis_gid -%>
-<% end -%>
+<% if @git_uid -%>user['uid'] = <%= @git_uid -%><% end %>
+<% if @git_gid -%>user['gid'] = <%= git_gid -%><% end %>
+<% if @gitlab_psql_uid -%>postgresql['uid'] = <%= @gitlab_psql_uid -%><% end %>
+<% if @gitlab_psql_gid -%>postgresql['gid'] = <%= @gitlab_psql_gid -%><% end %>
+<% if @gitlab_redis_uid -%>redis['uid'] = <%= @gitlab_redis_uid -%><% end %>
+<% if @gitlab_redis_gid -%>redis['gid'] = <%= @gitlab_redis_gid -%><% end %>
 
 <% if @aws_enable == true %>
 gitlab_rails['aws_enable'] = <%= @aws_enable %>
@@ -71,11 +137,6 @@ gitlab_rails['smtp_password'] = <%= @smtp_password %>
 gitlab_rails['smtp_domain'] = <%= @smtp_domain %>
 gitlab_rails['smtp_authentication'] = <%= @smtp_authentication %>
 gitlab_rails['smtp_enable_starttls_auto'] = <%= @smtp_enable_starttls_auto %>
-<% end -%>
-
-<% if @omniauth_enabled == true %>
-gitlab_rails['omniauth_enabled'] = <%= @omniauth_enabled %>
-gitlab_rails['omniauth_providers'] = <%= @omniauth_providers %>
 <% end -%>
 
 logging['svlogd_size'] = <%= @svlogd_size %>
