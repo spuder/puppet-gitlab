@@ -10,9 +10,10 @@ class gitlab::install inherits ::gitlab {
       $package_manager = 'dpkg'
     }
     'RedHat': {
-      $omnibus_release = "_omnibus-1.el6x86_64.rpm"
+      $omnibus_release = "_omnibus-1.el6.x86_64.rpm"
       $url_separator   = "-" 
       $package_manager = 'rpm'
+
 
     }
     default: {fail("Only RedHat and Debain OS's are supported, you have: ${operatingsystem} ${operatingsystemrelease} ")}
@@ -38,13 +39,14 @@ class gitlab::install inherits ::gitlab {
   exec { 'download gitlab':
     command => "/usr/bin/wget ${gitlab_url} -O ${download_location}/${omnibus_filename}",
     creates => "${download_location}/${omnibus_filename}",
+    timeout => 1800,
     require => Package['wget'],
   }
-  # package { "${omnibus_filename}":
-  #   ensure   => installed,
-  #   source   => "${download_location}/${omnibus_filename}",
-  #   provider => "${package_manager}",
-  #   require  => Exec['download gitlab'],
-  # }
+   package { 'gitlab':
+     ensure   => installed,
+     source   => "${download_location}/${omnibus_filename}",
+     provider => "${package_manager}",
+     require  => Exec['download gitlab'],
+   }
 
 }

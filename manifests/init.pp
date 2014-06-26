@@ -1,12 +1,13 @@
 # init -> packages -> user -> setup -> install -> config -> service
 class gitlab (
 
-    $puppet_manage_config    = $gitlab::params::puppet_manage_config,
-    $puppet_manage_backups   = $gitlab::params::puppet_manage_backups,
+  $puppet_manage_config    = $gitlab::params::puppet_manage_config,
+  $puppet_manage_backups   = $gitlab::params::puppet_manage_backups,
 
-    $gitlab_branch           = $gitlab::params::gitlab_branch,
-    $gitlab_release          = $gitlab::params::gitlab_release,
+  $gitlab_branch           = $gitlab::params::gitlab_branch,
+  $gitlab_release          = $gitlab::params::gitlab_release,
 
+  $external_url   = $gitlab::params::external_url,
 #
 # 1. GitLab app settings
 # ==========================
@@ -92,7 +93,6 @@ class gitlab (
     $extra_piwik_url           = $gitlab::params::extra_piwik_url,
     $extra_piwik_site_id       = $gitlab::params::extra_piwik_site_id,
     $extra_sign_in_text        = $gitlab::params::extra_sign_in_text,
-    $extra_sign_in_text        = $gitlab::params::extra_sign_in_text,
 
 #
 # 5. Omnibus customization
@@ -143,6 +143,20 @@ class gitlab (
 
   ) inherits ::gitlab::params {
 
+  if $puppetversion < '3.0.0' {
+    fail( "pupet-gitlab requires pupept 3.0 or greater, found: ${puppetversion}")
+  }
+  if $facterversion < '1.7.0' {
+    fail( "puppet-gitlab requires facter 1.7 or grater, found: ${facterversion}")
+  }
+
+  #Only 2 parameters are required, verify they exist
+  if !$external_url {
+    fail ("\$external_url parameter required. See https://github.com/spuder/puppet-gitlab/blob/master/README.md")
+  }
+  if !$gitlab_branch {
+    fail ("\$gitlab_branch parameter required. See https://github.com/spuder/puppet-gitlab/blob/master/README.md")
+  }
 
   # Gitlab only supplies omnibus downloads for few select operating systems
   # Warn the user they may be using an unsupported OS
@@ -157,23 +171,30 @@ class gitlab (
     ) }
   }
 
-
+  # Set the order that the manifests are executed in
   if $puppet_manage_config == true {
     notice("Puppet will manage the configuration file because \$puppet_manage_config is true")
+    include gitlab::prerequisites
     include gitlab::install
     include gitlab::config
-
     anchor { 'gitlab::begin':}
     anchor { 'gitlab::end':}
-
     Anchor['gitlab::begin'] ->
+      Class['::gitlab::prerequisites'] ->
       Class['::gitlab::install'] ->
       Class['::gitlab::config']  ->
     Anchor['gitlab::end']
   }
   else {
     notice("Puppet will not manage the configuration file because \$puppet_manage_config is false")
+    include gitlab::prerequisites
     include gitlab::install
+    anchor { 'gitlab::begin':}
+    anchor { 'gitlab::end':}
+    Anchor['gitlab::begin'] ->
+      Class['::gitlab::prerequisites'] ->
+      Class['::gitlab::install'] ->
+    Anchor['gitlab::end']
   }
 
 

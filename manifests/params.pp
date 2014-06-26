@@ -2,20 +2,19 @@
 class gitlab::params {
   
   # Manage Packages
-  $puppet_manage_config  = undef
-  $puppet_manage_backups = true
+  $puppet_manage_config  = undef  # Overwites /etc/gitlab/gitlab.rb
+  $puppet_manage_backups = true   # Creates cron job to backup at 2am
   
   # Gitlab server settings
-  $gitlab_branch          = '7.0.0'
+  $gitlab_branch          = undef # '7.0.0'
   $gitlab_release         = 'enterprise' # enterprise or basic
-
-  $external_url           = undef
+  $external_url           = undef # 'http://gitlab.example.com'
 
 #
 # 1. GitLab app settings
 # ==========================
-  $gitlab_email_from                 = undef
-  $gitlab_default_projects_limit     = undef
+  $gitlab_email_from                 = undef # 'gitlab.example.com'
+  $gitlab_default_projects_limit     = undef 
   $gitlab_default_can_create_group   = undef
   $gitlab_username_changing_enabled  = undef
   $gitlab_default_theme              = undef # 1 Basic, 2 Mars, 3 Modern, 4 Gray, 5 Color
@@ -26,15 +25,15 @@ class gitlab::params {
   $gitlab_default_projects_features_merge_requests   = undef # true
   $gitlab_default_projects_features_wiki             = undef # true
   $gitlab_default_projects_features_snippets         = undef # false
-  $gitlab_default_projects_features_visibility_level = undef # 'private' # public internal or private
+  $gitlab_default_projects_features_visibility_level = undef # default 'private' # 'public' 'internal' or 'private'
 
-  $issues_tracker_redmine               = undef # true | false
+  $issues_tracker_redmine               = undef # false
   $issues_tracker_redmine_title         = undef # 'title'
   $issues_tracker_redmine_project_url   = undef # 'http://foo/bar'
   $issues_tracker_redmine_issues_url    = undef # 'http://foo/bar'
   $issues_tracker_redmine_new_issue_url = undef # 'http://foo/bar'
 
-  $issues_tracker_jira               = undef # true | false
+  $issues_tracker_jira               = undef # false
   $issues_tracker_jira_title         = undef # 'foo'
   $issues_tracker_jira_project_url   = undef # 'http://foo/bar'
   $issues_tracker_jira_issues_url    = undef # 'http://foo/bar'
@@ -63,6 +62,7 @@ class gitlab::params {
   $ldap_base                          = 'DC=mycorp,DC=com'
 
   # GitLab Enterprise Edition only
+  # Set $gitlab_release to 'enterprise' to enable these features
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
@@ -78,21 +78,20 @@ class gitlab::params {
   
   $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
   
-  # Backup
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
   
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
   
   $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories'
-  $gitlab_shell_hooks_path     = undef # /opt/gitlab/embedded/service/gitlab-shell/hooks/
+  $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/'
   
   $gitlab_shell_upload_pack    = undef # true
   $gitlab_shell_receive_pack   = undef # true
   
   $gitlab_shell_ssh_port       = undef # 22
   
-  $git_bin_path                = undef # /opt/gitlab/embedded/bin/git
+  $git_bin_path                = undef # '/opt/gitlab/embedded/bin/git'
   $git_max_size                = undef # 5242880 (5 MB)
   $git_timeout                 = undef # 10
 
@@ -118,20 +117,20 @@ class gitlab::params {
   $postgresql_port  = undef # 5432
   $unicorn_port     = undef # 8080
 
-  $git_data_dir     = undef # "/var/opt/gitlab/git-data"  
-  $gitlab_username  = undef # "gitlab"
-  $gitlab_group     = undef # "gitlab"
+  $git_data_dir     = undef # '/var/opt/gitlab/git-data'
+  $gitlab_username  = undef # 'gitlab'
+  $gitlab_group     = undef # 'gitlab'
 
   $redirect_http_to_https   = undef #true or false
-  $ssl_certificate          = "/etc/gitlab/ssl/gitlab.crt"
-  $ssl_certificate_key      = "/etc/gitlab/ssl/gitlab.key"
+  $ssl_certificate          = '/etc/gitlab/ssl/gitlab.crt'
+  $ssl_certificate_key      = '/etc/gitlab/ssl/gitlab.key'
 
-  $git_uid            = undef #1001
-  $git_gid            = undef #1002
-  $gitlab_redis_uid   = undef #998
-  $gitlab_redis_gid   = undef #1003
-  $gitlab_psql_uid    = undef #997
-  $gitlab_psql_gid    = undef #1004
+  $git_uid            = undef # 1001
+  $git_gid            = undef # 1002
+  $gitlab_redis_uid   = undef # 998
+  $gitlab_redis_gid   = undef # 1003
+  $gitlab_psql_uid    = undef # 997
+  $gitlab_psql_gid    = undef # 1004
 
   $aws_enable               = false 
   $aws_access_key_id        = 'AKIA1111111111111UA'
@@ -140,12 +139,12 @@ class gitlab::params {
   $aws_region               = 'us-east-1'
 
   $smtp_enable               = false
-  $smtp_address              = "smtp.server"
+  $smtp_address              = 'smtp.server'
   $smtp_port                 = 456
-  $smtp_user_name            = "smtp user"
-  $smtp_password             = "smtp password"
-  $smtp_domain               = "example.com"
-  $smtp_authentication       = "login"
+  $smtp_user_name            = 'smtp user'
+  $smtp_password             = 'smtp password'
+  $smtp_domain               = 'example.com'
+  $smtp_authentication       = 'login'
   $smtp_enable_starttls_auto = true
 
 

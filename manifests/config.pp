@@ -8,6 +8,7 @@ class gitlab::config inherits ::gitlab {
   }
   exec { "/usr/bin/gitlab-ctl reconfigure":
     refreshonly => true,
+    timeout     => 1800,
     subscribe   => File["${gitlab_config_dir}/gitlab.rb"],
   }
 
