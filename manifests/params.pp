@@ -9,7 +9,7 @@ class gitlab::params {
   $gitlab_branch          = '7.0.0'
   $gitlab_release         = 'enterprise' # enterprise or basic
 
-
+  $external_url           = undef
 
 #
 # 1. GitLab app settings

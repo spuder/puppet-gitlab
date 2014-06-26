@@ -4,6 +4,7 @@
 <%# # -%>
 <%# # 1. GitLab app settings -%>
 <%# # ========================== -%>
+<% if @external_url -%> external_url <%= @external_url %> <% end -%>
 
 <% if @gitlab_email_from -%>gitlab_rails['gitlab_email_from'] = <%= @gitlab_email_from %> <% end %>
 <% if @gitlab_default_projects_limit -%>gitlab_rails['gitlab_default_projects_limit'] = <%= @gitlab_default_projects_limit %> <% end %>

@@ -47,5 +47,4 @@ class gitlab::install inherits ::gitlab {
   #   require  => Exec['download gitlab'],
   # }
 
-
 }
