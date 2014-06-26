@@ -65,17 +65,18 @@ class { 'gitlab' :
   ldap_group_base  => '', # Example: 'OU=groups,DC=mycorp,DC=com'
   ldap_user_filter => '', # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  omniauth_enabled                  => true,
-  omniauth_allow_single_sign_on     => true,
-  omniauth_block_auto_created_users => true,
-  omniauth_providers  => '[
-    {
-      "name" => "google_oauth2",
-      "app_id" => "YOUR APP ID",
-      "app_secret" => "YOUR APP SECRET",
-      "args" => { "access_type" => "offline", "approval_prompt" => "" }
-    }
-  ]',
+# TODO: Unable to test this, may not work
+  omniauth_enabled                  => false,
+  # omniauth_allow_single_sign_on     => true,
+  # omniauth_block_auto_created_users => true,
+  # omniauth_providers  => '[
+  #   {
+  #     "name" => "google_oauth2",
+  #     "app_id" => "YOUR APP ID",
+  #     "app_secret" => "YOUR APP SECRET",
+  #     "args" => { "access_type" => "offline", "approval_prompt" => "" }
+  #   }
+  # ]',
 
 
 #
@@ -86,7 +87,7 @@ class { 'gitlab' :
   
   # Backup
   backup_path                 => "/var/opt/gitlab/backups", #'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
-  backup_keep_time            => undef, #'0'             # default: 0 (forever) (in seconds), 604800 = 1 week
+  backup_keep_time            => 0, #'0'             # default: 0 (forever) (in seconds), 604800 = 1 week
   
   gitlab_shell_path           => '/opt/gitlab/embedded/service/gitlab-shell/',
   
@@ -107,12 +108,12 @@ class { 'gitlab' :
 # 4. Extra customization
 # ==========================
   
-  extra_google_analytics_id => undef,
+  extra_google_analytics_id => 'foo',
   
-  extra_piwik_url           => undef,
-  extra_piwik_site_id       => undef,
+  extra_piwik_url           => 'http://foo.bar/',
+  extra_piwik_site_id       => 'foo',
   
-  extra_sign_in_text        => undef,
+  extra_sign_in_text        => 'herp',
   
   
 #
@@ -125,8 +126,8 @@ class { 'gitlab' :
   unicorn_port     => 8080, # 8080
 
   git_data_dir     => '/var/opt/gitlab/git-data', # "/var/opt/gitlab/git-data"  
-  gitlab_username  => gitlab, # "gitlab"
-  gitlab_group     => gitlab, # "gitlab"
+  gitlab_username  => 'gitlab', # "gitlab"
+  gitlab_group     => 'gitlab', # "gitlab"
 
   redirect_http_to_https   => true, #true or false
   ssl_certificate          => "/etc/gitlab/ssl/gitlab.crt",

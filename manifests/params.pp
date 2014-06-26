@@ -2,7 +2,7 @@
 class gitlab::params {
   
   # Manage Packages
-  $puppet_manage_config  = false
+  $puppet_manage_config  = undef
   $puppet_manage_backups = true
   
   # Gitlab server settings
@@ -69,14 +69,7 @@ class gitlab::params {
   $omniauth_enabled                  = undef
   $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
-  $omniauth_providers  = '[
-    {
-      "name" => "google_oauth2",
-      "app_id" => "YOUR APP ID",
-      "app_secret" => "YOUR APP SECRET",
-      "args" => { "access_type" => "offline", "approval_prompt" => "" }
-    }
-  ]'
+  $omniauth_providers  = '[]' #TODO: Untested
 
 
 #
