@@ -1,5 +1,14 @@
 ##Changelog
 
+2015-June : 2.0.0
+- Complete rewrite of puppet module
+- Now uses omnibus installer
+- Works on Cent 6.5, Debian 7.5, Ubuntu 12.04 and Ubuntu 14.04
+- Provides ability to manually configure gitlab or use puppet for configuration
+- Nearly every gitlab configuration option is now exposed as class parameters (see params.pp)
+- 
+
+
 2014-June-22: 1.11.2
 - Increases timeout on bundle (Issue #61, thanks mrparity)
 

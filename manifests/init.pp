@@ -8,154 +8,153 @@ class gitlab (
   $gitlab_release          = $gitlab::params::gitlab_release,
 
   $external_url   = $gitlab::params::external_url,
-#
-# 1. GitLab app settings
-# ==========================
+  #
+  # 1. GitLab app settings
+  # ==========================
 
+  $gitlab_email_from                = $gitlab::params::gitlab_email_from,
+  $gitlab_default_projects_limit    = $gitlab::params::gitlab_default_projects_limit,
+  $gitlab_default_can_create_group  = $gitlab::params::gitlab_default_can_create_group,
+  $gitlab_username_changing_enabled = $gitlab::params::gitlab_username_changing_enabled,
+  $gitlab_default_theme             = $gitlab::params::gitlab_default_theme,
+  $gitlab_signup_enabled            = $gitlab::params::gitlab_signup_enabled,
+  $gitlab_signin_enabled            = $gitlab::params::gitlab_signin_enabled,
 
-    $gitlab_email_from                = $gitlab::params::gitlab_email_from,
-    $gitlab_default_projects_limit    = $gitlab::params::gitlab_default_projects_limit,
-    $gitlab_default_can_create_group  = $gitlab::params::gitlab_default_can_create_group,
-    $gitlab_username_changing_enabled = $gitlab::params::gitlab_username_changing_enabled,
-    $gitlab_default_theme             = $gitlab::params::gitlab_default_theme,
-    $gitlab_signup_enabled            = $gitlab::params::gitlab_signup_enabled,
-    $gitlab_signin_enabled            = $gitlab::params::gitlab_signin_enabled,
+  $gitlab_default_projects_features_issues           = $gitlab::params::gitlab_default_projects_features_issues,
+  $gitlab_default_projects_features_merge_requests   = $gitlab::params::gitlab_default_projects_features_merge_requests,
+  $gitlab_default_projects_features_wiki             = $gitlab::params::gitlab_default_projects_features_wiki,
+  $gitlab_default_projects_features_snippets         = $gitlab::params::gitlab_default_projects_features_snippets,
+  $gitlab_default_projects_features_visibility_level = $gitlab::params::gitlab_default_projects_features_visibility_level,
 
-    $gitlab_default_projects_features_issues           = $gitlab::params::gitlab_default_projects_features_issues,
-    $gitlab_default_projects_features_merge_requests   = $gitlab::params::gitlab_default_projects_features_merge_requests,
-    $gitlab_default_projects_features_wiki             = $gitlab::params::gitlab_default_projects_features_wiki,
-    $gitlab_default_projects_features_snippets         = $gitlab::params::gitlab_default_projects_features_snippets,
-    $gitlab_default_projects_features_visibility_level = $gitlab::params::gitlab_default_projects_features_visibility_level,
+  $issues_tracker_redmine               = $gitlab::params::issues_tracker_redmine,
+  $issues_tracker_redmine_title         = $gitlab::params::issues_tracker_redmine_title,
+  $issues_tracker_redmine_project_url   = $gitlab::params::issues_tracker_redmine_project_url,
+  $issues_tracker_redmine_issues_url    = $gitlab::params::issues_tracker_redmine_issues_url,
+  $issues_tracker_redmine_new_issue_url = $gitlab::params::issues_tracker_redmine_new_issue_url,
 
-    $issues_tracker_redmine               = $gitlab::params::issues_tracker_redmine,
-    $issues_tracker_redmine_title         = $gitlab::params::issues_tracker_redmine_title,
-    $issues_tracker_redmine_project_url   = $gitlab::params::issues_tracker_redmine_project_url,
-    $issues_tracker_redmine_issues_url    = $gitlab::params::issues_tracker_redmine_issues_url,
-    $issues_tracker_redmine_new_issue_url = $gitlab::params::issues_tracker_redmine_new_issue_url,
+  $issues_tracker_jira               = $gitlab::params::issues_tracker_jira,
+  $issues_tracker_jira_title         = $gitlab::params::issues_tracker_jira_title,
+  $issues_tracker_jira_project_url   = $gitlab::params::issues_tracker_jira_project_url,
+  $issues_tracker_jira_issues_url    = $gitlab::params::issues_tracker_jira_issues_url,
+  $issues_tracker_jira_new_issue_url = $gitlab::params::issues_tracker_jira_new_issue_url,
 
-    $issues_tracker_jira               = $gitlab::params::issues_tracker_jira,
-    $issues_tracker_jira_title         = $gitlab::params::issues_tracker_jira_title,
-    $issues_tracker_jira_project_url   = $gitlab::params::issues_tracker_jira_project_url,
-    $issues_tracker_jira_issues_url    = $gitlab::params::issues_tracker_jira_issues_url,
-    $issues_tracker_jira_new_issue_url = $gitlab::params::issues_tracker_jira_new_issue_url,
+  $gravatar_enabled    = $gitlab::params::gravatar_enabled,
+  $gravatar_plain_url  = $gitlab::params::gravatar_plain_url,
+  $gravatar_ssl_url    = $gitlab::params::gravatar_ssl_url,
 
-    $gravatar_enabled    = $gitlab::params::gravatar_enabled,
-    $gravatar_plain_url  = $gitlab::params::gravatar_plain_url,
-    $gravatar_ssl_url    = $gitlab::params::gravatar_ssl_url,
+  #
+  # 2. Auth settings
+  # ==========================
 
-#
-# 2. Auth settings
-# ==========================
+  $ldap_enabled   = $gitlab::params::ldap_enabled,
+  $ldap_host      = $gitlab::params::ldap_host,
+  $ldap_port      = $gitlab::params::ldap_port,
+  $ldap_uid       = $gitlab::params::ldap_uid,
+  $ldap_method    = $gitlab::params::ldap_method,
+  $ldap_bind_dn   = $gitlab::params::ldap_bind_dn,
+  $ldap_password  = $gitlab::params::ldap_password,
+  
+  $ldap_allow_username_or_email_login = $gitlab::params::ldap_allow_username_or_email_login,
+  $ldap_base                          = $gitlab::params::ldap_base,
+  
+  $ldap_group_base  = $gitlab::params::ldap_group_base,
+  $ldap_user_filter = $gitlab::params::ldap_user_filter,
+  
+  $omniauth_enabled                   = $gitlab::params::omniauth_enabled,
+  $omniauth_allow_single_sign_on      = $gitlab::params::omniauth_allow_single_sign_on,
+  $omniauth_block_auto_created_users  = $gitlab::params::omniauth_block_auto_created_users,
+  $omniauth_providers                 = $gitlab::params::omniauth_providers,
 
-    $ldap_enabled   = $gitlab::params::ldap_enabled,
-    $ldap_host      = $gitlab::params::ldap_host,
-    $ldap_port      = $gitlab::params::ldap_port,
-    $ldap_uid       = $gitlab::params::ldap_uid,
-    $ldap_method    = $gitlab::params::ldap_method,
-    $ldap_bind_dn   = $gitlab::params::ldap_bind_dn,
-    $ldap_password  = $gitlab::params::ldap_password,
-    
-    $ldap_allow_username_or_email_login = $gitlab::params::ldap_allow_username_or_email_login,
-    $ldap_base                          = $gitlab::params::ldap_base,
-    
-    $ldap_group_base  = $gitlab::params::ldap_group_base,
-    $ldap_user_filter = $gitlab::params::ldap_user_filter,
-    
-    
-    $omniauth_enabled                   = $gitlab::params::omniauth_enabled,
-    $omniauth_allow_single_sign_on      = $gitlab::params::omniauth_allow_single_sign_on,
-    $omniauth_block_auto_created_users  = $gitlab::params::omniauth_block_auto_created_users,
-    $omniauth_providers                 = $gitlab::params::omniauth_providers,
+  #
+  # 3. Advanced settings
+  # ==========================
 
-#
-# 3. Advanced settings
-# ==========================
+  $satellites_path             = $gitlab::params::satellites_path,
+  
+  $backup_path                 = $gitlab::params::backup_path,
+  $backup_keep_time            = $gitlab::params::backup_keep_time,
+  $gitlab_shell_path           = $gitlab::params::gitlab_shell_path,
+  $gitlab_shell_repos_path     = $gitlab::params::gitlab_shell_repos_path,
+  $gitlab_shell_hooks_path     = $gitlab::params::gitlab_shell_hooks_path,
+  $gitlab_shell_upload_pack    = $gitlab::params::gitlab_shell_upload_pack,
+  $gitlab_shell_receive_pack   = $gitlab::params::gitlab_shell_receive_pack,
+  $gitlab_shell_ssh_port       = $gitlab::params::gitlab_shell_ssh_port,
+  $git_bin_path                = $gitlab::params::git_bin_path,
+  $git_max_size                = $gitlab::params::git_max_size,
+  $git_timeout                 = $gitlab::params::git_timeout,
 
-    $satellites_path             = $gitlab::params::satellites_path,
-    
-    $backup_path                 = $gitlab::params::backup_path,
-    $backup_keep_time            = $gitlab::params::backup_keep_time,
-    $gitlab_shell_path           = $gitlab::params::gitlab_shell_path,
-    $gitlab_shell_repos_path     = $gitlab::params::gitlab_shell_repos_path,
-    $gitlab_shell_hooks_path     = $gitlab::params::gitlab_shell_hooks_path,
-    $gitlab_shell_upload_pack    = $gitlab::params::gitlab_shell_upload_pack,
-    $gitlab_shell_receive_pack   = $gitlab::params::gitlab_shell_receive_pack,
-    $gitlab_shell_ssh_port       = $gitlab::params::gitlab_shell_ssh_port,
-    $git_bin_path                = $gitlab::params::git_bin_path,
-    $git_max_size                = $gitlab::params::git_max_size,
-    $git_timeout                 = $gitlab::params::git_timeout,
+  #
+  # 4. Extra customization
+  # ==========================
 
-#
-# 4. Extra customization
-# ==========================
+  $extra_google_analytics_id = $gitlab::params::extra_google_analytics_id,
+  $extra_piwik_url           = $gitlab::params::extra_piwik_url,
+  $extra_piwik_site_id       = $gitlab::params::extra_piwik_site_id,
+  $extra_sign_in_text        = $gitlab::params::extra_sign_in_text,
 
-    $extra_google_analytics_id = $gitlab::params::extra_google_analytics_id,
-    $extra_piwik_url           = $gitlab::params::extra_piwik_url,
-    $extra_piwik_site_id       = $gitlab::params::extra_piwik_site_id,
-    $extra_sign_in_text        = $gitlab::params::extra_sign_in_text,
+  #
+  # 5. Omnibus customization
+  # ==========================
 
-#
-# 5. Omnibus customization
-# ==========================
-
-    $redis_port       = $gitlab::params::redis_port,
-    $postgresql_port  = $gitlab::params::postgresql_port,
-    $unicorn_port     = $gitlab::params::unicorn_port,
-    
-    $git_data_dir     = $gitlab::params::git_data_dir,
-    $gitlab_username  = $gitlab::params::gitlab_username,
-    $gitlab_group     = $gitlab::params::gitlab_group,
-    
-    $redirect_http_to_https   = $gitlab::params::redirect_http_to_https,
-    $ssl_certificate          = $gitlab::params::ssl_certificate,
-    $ssl_certificate_key      = $gitlab::params::ssl_certificate_key,
-    
-    $git_uid            = $gitlab::params::git_uid,
-    $git_gid            = $gitlab::params::git_gid,
-    $gitlab_redis_uid   = $gitlab::params::gitlab_redis_uid,
-    $gitlab_redis_gid   = $gitlab::params::gitlab_redis_gid,
-    $gitlab_psql_uid    = $gitlab::params::gitlab_psql_uid,
-    $gitlab_psql_gid    = $gitlab::params::gitlab_psql_gid,
-    
-    $aws_enable               = $gitlab::params::aws_enable,
-    $aws_access_key_id        = $gitlab::params::aws_access_key_id,
-    $aws_secret_access_key    = $gitlab::params::aws_secret_access_key,
-    $aws_bucket               = $gitlab::params::aws_bucket,
-    $aws_region               = $gitlab::params::aws_region,
-    
-    $smtp_enable               = $gitlab::params::smtp_enable,
-    $smtp_address              = $gitlab::params::smtp_address,
-    $smtp_port                 = $gitlab::params::smtp_port,
-    $smtp_user_name            = $gitlab::params::smtp_user_name,
-    $smtp_password             = $gitlab::params::smtp_password,
-    $smtp_domain               = $gitlab::params::smtp_domain,
-    $smtp_authentication       = $gitlab::params::smtp_authentication,
-    $smtp_enable_starttls_auto = $gitlab::params::smtp_enable_starttls_auto,
-    
-    
-    $svlogd_size      = $gitlab::params::svlogd_size,
-    $svlogd_num       = $gitlab::params::svlogd_num,
-    $svlogd_timeout   = $gitlab::params::svlogd_timeout,
-    $svlogd_filter    = $gitlab::params::svlogd_filter,
-    $svlogd_udp       = $gitlab::params::svlogd_udp,
-    $svlogd_prefix    = $gitlab::params::svlogd_prefix,
-    
-
+  $redis_port       = $gitlab::params::redis_port,
+  $postgresql_port  = $gitlab::params::postgresql_port,
+  $unicorn_port     = $gitlab::params::unicorn_port,
+  
+  $git_data_dir     = $gitlab::params::git_data_dir,
+  $gitlab_username  = $gitlab::params::gitlab_username,
+  $gitlab_group     = $gitlab::params::gitlab_group,
+  
+  $redirect_http_to_https   = $gitlab::params::redirect_http_to_https,
+  $ssl_certificate          = $gitlab::params::ssl_certificate,
+  $ssl_certificate_key      = $gitlab::params::ssl_certificate_key,
+  
+  $git_uid            = $gitlab::params::git_uid,
+  $git_gid            = $gitlab::params::git_gid,
+  $gitlab_redis_uid   = $gitlab::params::gitlab_redis_uid,
+  $gitlab_redis_gid   = $gitlab::params::gitlab_redis_gid,
+  $gitlab_psql_uid    = $gitlab::params::gitlab_psql_uid,
+  $gitlab_psql_gid    = $gitlab::params::gitlab_psql_gid,
+  
+  $aws_enable               = $gitlab::params::aws_enable,
+  $aws_access_key_id        = $gitlab::params::aws_access_key_id,
+  $aws_secret_access_key    = $gitlab::params::aws_secret_access_key,
+  $aws_bucket               = $gitlab::params::aws_bucket,
+  $aws_region               = $gitlab::params::aws_region,
+  
+  $smtp_enable               = $gitlab::params::smtp_enable,
+  $smtp_address              = $gitlab::params::smtp_address,
+  $smtp_port                 = $gitlab::params::smtp_port,
+  $smtp_user_name            = $gitlab::params::smtp_user_name,
+  $smtp_password             = $gitlab::params::smtp_password,
+  $smtp_domain               = $gitlab::params::smtp_domain,
+  $smtp_authentication       = $gitlab::params::smtp_authentication,
+  $smtp_enable_starttls_auto = $gitlab::params::smtp_enable_starttls_auto,
+  
+  $svlogd_size      = $gitlab::params::svlogd_size,
+  $svlogd_num       = $gitlab::params::svlogd_num,
+  $svlogd_timeout   = $gitlab::params::svlogd_timeout,
+  $svlogd_filter    = $gitlab::params::svlogd_filter,
+  $svlogd_udp       = $gitlab::params::svlogd_udp,
+  $svlogd_prefix    = $gitlab::params::svlogd_prefix,
   ) inherits ::gitlab::params {
 
   if $puppetversion < '3.0.0' {
     fail( "pupet-gitlab requires pupept 3.0 or greater, found: ${puppetversion}")
   }
+  # Only tested with facter >= 1.7.x
+  # Older facter versions don't have facts like $operatingsystemrelease
   if $facterversion < '1.7.0' {
     fail( "puppet-gitlab requires facter 1.7 or grater, found: ${facterversion}")
   }
 
   #Only 2 parameters are required, verify they exist
   if !$external_url {
-    fail ("\$external_url parameter required. See https://github.com/spuder/puppet-gitlab/blob/master/README.md")
+    fail ("\$external_url parameter required. \
+    https://github.com/spuder/puppet-gitlab/blob/master/README.md")
   }
   if !$gitlab_branch {
-    fail ("\$gitlab_branch parameter required. See https://github.com/spuder/puppet-gitlab/blob/master/README.md")
+    fail ("\$gitlab_branch parameter required. \
+    https://github.com/spuder/puppet-gitlab/blob/master/README.md")
   }
 
   # Gitlab only supplies omnibus downloads for few select operating systems
