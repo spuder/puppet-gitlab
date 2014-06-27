@@ -6,8 +6,11 @@ class gitlab::params {
   $puppet_manage_backups = true   # Creates cron job to backup at 2am
   
   # Gitlab server settings
-  $gitlab_branch          = undef # '7.0.0'
-  $gitlab_release         = 'enterprise' # enterprise or basic
+  $gitlab_branch           = undef # '7.0.0'
+  $gitlab_release          = 'enterprise' # enterprise or basic
+  $gitlab_download_prefix  = 'https://downloads-packages.s3.amazonaws.com/' # The url (without filename) from where to download gitlab
+
+
   $external_url           = undef # 'http://gitlab.example.com'
 
 #

@@ -6,6 +6,7 @@ class gitlab (
 
   $gitlab_branch           = $gitlab::params::gitlab_branch,
   $gitlab_release          = $gitlab::params::gitlab_release,
+  $gitlab_download_prefix  = $gitlab::params::gitlab_download_prefix,
 
   $external_url   = $gitlab::params::external_url,
   #

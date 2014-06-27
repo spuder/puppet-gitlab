@@ -5,8 +5,9 @@ class { 'gitlab' :
   puppet_manage_backups => true,
   
   # Gitlab server settings
-  gitlab_branch          => '7.0.0',
-  gitlab_release         => 'enterprise', # enterprise or basic
+  gitlab_branch           => '7.0.0',
+  gitlab_release          => 'enterprise', # enterprise or basic
+  gitlab_download_prefix  => 'https://downloads-packages.s3.amazonaws.com/'
 
 
 

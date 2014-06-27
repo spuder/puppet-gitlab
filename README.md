@@ -13,7 +13,7 @@ Installs Gitlab 7 using the [omnibus installer](https://about.gitlab.com/downloa
 
 Since it uses the omnibus installer, it is incompatible with the previous puppet module 
 
-**Upgrading from gitlab 6 is untested. **   
+**Upgrading from gitlab 6 is untested.**   
 https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md
 
 
@@ -82,11 +82,17 @@ The puppet-gitlab module has limited support for gitlab enterprise installations
     class { 'gitlab' : 
       gitlab_branch   => '7.0.0',
       gitlab_release  => 'enterprise',
+      # The url (without filename) from where to download gitlab
+      gitlab_download_prefix => 'https://downloads-packages.s3.amazonaws.com/'
     }
 
-*Note, Downloading gitlab from the private enterprise url is untested and likely will fail. If you are able to test this feature, please contact owenspencer@gmail.com*
+*Note: Since the author of this module does not have gitlab-enterprise, downloading the enterprise edition is untested and likely will fail. If you are able to test this feature, please contact spuder via github issues, twitter, or irc*
 
-**As a wordkaround manually place the .rpm or .deb in `/var/tmp`**
+- twitter @spencer450   
+- chat.freenode.net #gitlab @spuder
+
+
+**If download fails, manually place the .rpm or .deb in `/var/tmp`**
 
 Example
 
