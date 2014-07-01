@@ -101,7 +101,7 @@ class { 'gitlab' :
   gitlab_shell_ssh_port       => 22,
   
   git_bin_path                => '/opt/gitlab/embedded/bin/git',
-  git_max_size                => 5242880,
+  git_max_size                => 5242880, # 5 MB, Incrase to alow larger commits over https
   git_timeout                 => 10,
 
 
@@ -141,13 +141,13 @@ class { 'gitlab' :
   gitlab_psql_uid    => 997, #997
   gitlab_psql_gid    => 1004, #1004
 
-  aws_enable               => false,
+  aws_enable               => false, # Store images on amazon
   aws_access_key_id        => 'AKIA1111111111111UA',
   aws_secret_access_key    => 'secret',
   aws_bucket               => 'my_gitlab_bucket',
   aws_region               => 'us-east-1',
 
-  smtp_enable               => false,
+  smtp_enable               => false, # Specify your own smtp server
   smtp_address              => "smtp.server",
   smtp_port                 => 456,
   smtp_user_name            => "smtp user",

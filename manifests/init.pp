@@ -177,24 +177,13 @@ class gitlab (
     include gitlab::prerequisites
     include gitlab::install
     include gitlab::config
-    anchor { 'gitlab::begin':}
-    anchor { 'gitlab::end':}
-    Anchor['gitlab::begin'] ->
-      Class['::gitlab::prerequisites'] ->
-      Class['::gitlab::install'] ->
-      Class['::gitlab::config']  ->
-    Anchor['gitlab::end']
+    Class['::gitlab::prerequisites'] -> Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
     notice("Puppet will not manage the configuration file because \$puppet_manage_config is false")
     include gitlab::prerequisites
     include gitlab::install
-    anchor { 'gitlab::begin':}
-    anchor { 'gitlab::end':}
-    Anchor['gitlab::begin'] ->
-      Class['::gitlab::prerequisites'] ->
-      Class['::gitlab::install'] ->
-    Anchor['gitlab::end']
+      Class['::gitlab::prerequisites'] -> Class['::gitlab::install']
   }
 
 

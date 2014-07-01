@@ -7,8 +7,8 @@ class gitlab::params {
   
   # Gitlab server settings
   $gitlab_branch           = undef # '7.0.0'
-  $gitlab_release          = 'enterprise' # enterprise or basic
-  $gitlab_download_prefix  = 'https://downloads-packages.s3.amazonaws.com/' # The url (without filename) from where to download gitlab
+  $gitlab_release          = 'basic' # enterprise or basic
+  $gitlab_download_link  = undef # The url from where to download gitlab, only needed with enterprise
 
 
   $external_url           = undef # 'http://gitlab.example.com'
@@ -17,11 +17,11 @@ class gitlab::params {
 # 1. GitLab app settings
 # ==========================
   $gitlab_email_from                 = undef # 'gitlab.example.com'
-  $gitlab_default_projects_limit     = undef 
+  $gitlab_default_projects_limit     = undef # Default 10, 
   $gitlab_default_can_create_group   = undef
-  $gitlab_username_changing_enabled  = undef
+  $gitlab_username_changing_enabled  = undef # Allow users to change username, may break ldap
   $gitlab_default_theme              = undef # 1 Basic, 2 Mars, 3 Modern, 4 Gray, 5 Color
-  $gitlab_signup_enabled             = undef
+  $gitlab_signup_enabled             = undef # Anyone can create an account
   $gitlab_signin_enabled             = undef
 
   $gitlab_default_projects_features_issues           = undef # true
@@ -60,7 +60,6 @@ class gitlab::params {
   $ldap_method    = 'plain' # 'ssl' or 'plain'
   $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
   $ldap_password  = 'query user password'
-
   $ldap_allow_username_or_email_login = true
   $ldap_base                          = 'DC=mycorp,DC=com'
 
@@ -95,7 +94,7 @@ class gitlab::params {
   $gitlab_shell_ssh_port       = undef # 22
   
   $git_bin_path                = undef # '/opt/gitlab/embedded/bin/git'
-  $git_max_size                = undef # 5242880 (5 MB)
+  $git_max_size                = undef # 5242880 (5 MB) Incrase if large commits fail over https
   $git_timeout                 = undef # 10
 
 
@@ -135,13 +134,13 @@ class gitlab::params {
   $gitlab_psql_uid    = undef # 997
   $gitlab_psql_gid    = undef # 1004
 
-  $aws_enable               = false 
+  $aws_enable               = false  # Store images on amazon
   $aws_access_key_id        = 'AKIA1111111111111UA'
   $aws_secret_access_key    = 'secret'
   $aws_bucket               = 'my_gitlab_bucket'
   $aws_region               = 'us-east-1'
 
-  $smtp_enable               = false
+  $smtp_enable               = false # Connect to external smtp server
   $smtp_address              = 'smtp.server'
   $smtp_port                 = 456
   $smtp_user_name            = 'smtp user'

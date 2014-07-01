@@ -16,7 +16,6 @@ end
   config.vm.hostname  ="gitlab"
   config.vm.network :private_network, ip: "192.168.33.10"
   config.vm.synced_folder ".", "/etc/puppet/modules/gitlab"
-  config.vm.provision :shell, :path => "bootstrap.sh"
   
   config.vm.define "centos", primary: true do |centosbox|
     centosbox.vm.box = "centos-6_5-x64-virtualbox_4_3-plain"
