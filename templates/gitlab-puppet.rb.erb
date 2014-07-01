@@ -1,9 +1,11 @@
-<%# MANAGED BY PUPPET -%>
-<%# Changes may be overwritten -%>
+# MANAGED BY PUPPET
+# Changes may be overwritten
+# You may need to scroll to see all configuration
 
-<%# # -%>
-<%# # 1. GitLab app settings -%>
-<%# # ========================== -%>
+#
+# 1. GitLab app settings
+# ==========================
+
 <% if @external_url -%>external_url '<%= @external_url %>' <% end -%>
 
 <% if @gitlab_email_from -%>gitlab_rails['gitlab_email_from'] = '<%= @gitlab_email_from %>'                                             <% end %>
@@ -37,9 +39,9 @@
 <% if @gravatar_ssl_url     %>gitlab_rails['gravatar_ssl_url'] = '<%= @gravatar_ssl_url %>'        <% end %>
 
 
-<%# # -%>
-<%# # 2. Auth settings -%> 
-<%# # ==========================-%>
+#
+# 2. Auth settings
+# # ==========================
 
 <% if @ldap_enabled == true -%>
 gitlab_rails['ldap_enabled'] = <%= @ldap_enabled %>
@@ -64,9 +66,9 @@ gitlab_rails['omniauth_enabled'] = <%= @omniauth_enabled %>
 gitlab_rails['omniauth_providers'] = '<%= @omniauth_providers %>'
 <% end -%>
 
-<%# # -%>
-<%# # 3. Advanced settings -%>
-<%# # ==========================-%>
+#
+# 3. Advanced settings
+# ==========================
 
 <% if @satellites_path  -%>gitlab_rails['satellites_path'] = '<%= @satellites_path %>'  <% end %>
 
@@ -85,9 +87,9 @@ gitlab_rails['omniauth_providers'] = '<%= @omniauth_providers %>'
 
 <% if @git_timeout -%>gitlab_rails['git_timeout'] = <%= @git_timeout %>         <% end %>
 
-<%# # -%>
-<%# # 4. Extra customization -%>
-<%# # ========================== -%>
+#
+# 4. Extra customization
+# ==========================
 
 <% if @extra_google_analytics_id  -%> gitlab_rails['extra_google_analytics_id'] = '<%= @extra_google_analytics_id %> '   <% end %>
 
@@ -97,9 +99,9 @@ gitlab_rails['omniauth_providers'] = '<%= @omniauth_providers %>'
 <% if @extra_sign_in_text         -%> gitlab_rails['extra_sign_in_text'] = '<%= @extra_sign_in_text %>'                  <% end %>
 <% if @extra_sign_in_text         -%> gitlab_rails['extra_sign_in_text'] = '<%= @extra_sign_in_text %> '                 <% end %>
 
-<%# # -%>
-<%# # 5. Omnibus customization -%>
-<%# # ========================== -%>
+#
+# 5. Omnibus customization
+# ==========================
 
 <% if @redis_port       -%>redis['port'] = <%= @redis_port %>             <% end %>
 <% if @postgresql_port  -%>posgresql['port'] = <%= @postgresql_port %>    <% end %>

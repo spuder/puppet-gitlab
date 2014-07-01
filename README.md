@@ -167,9 +167,7 @@ $ ls /var/tmp
 
 ##Limitations
 
-- Does not manage the firewall
-- /etc/gitlab/gitlab.rb may 'appear' to be blank, when it isn't
-
-If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template. Scroll to the bottom to see every config line.
+1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
+2. If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template, not one after another. This results in a lot of empty lines. 
 
 

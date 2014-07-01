@@ -22,7 +22,7 @@ class gitlab::params {
   $gitlab_username_changing_enabled  = undef # Allow users to change username, may break ldap
   $gitlab_default_theme              = undef # 1 Basic, 2 Mars, 3 Modern, 4 Gray, 5 Color
   $gitlab_signup_enabled             = undef # Anyone can create an account
-  $gitlab_signin_enabled             = undef
+  $gitlab_signin_enabled             = undef # Allows sign in with shortname, eg. 'steve' instead of 'steve@apple.com'
 
   $gitlab_default_projects_features_issues           = undef # true
   $gitlab_default_projects_features_merge_requests   = undef # true
@@ -46,11 +46,9 @@ class gitlab::params {
   $gravatar_plain_url  = undef # 'http://foo/bar'
   $gravatar_ssl_url    = undef # 'https://foo/bar'
 
-
 #
 # 2. Auth settings
 # ==========================
-
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   $ldap_enabled   = false
@@ -73,11 +71,9 @@ class gitlab::params {
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
   $omniauth_providers  = '[]' #TODO: Untested
 
-
 #
 # 3. Advanced settings
 # ==========================
-  
   $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
   
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
@@ -101,7 +97,6 @@ class gitlab::params {
 #
 # 4. Extra customization
 # ==========================
-  
   $extra_google_analytics_id = undef
   
   $extra_piwik_url           = undef
@@ -113,8 +108,6 @@ class gitlab::params {
 #
 # 5. Omnibus customization
 # ==========================
-
-
   $redis_port       = undef # 6379
   $postgresql_port  = undef # 5432
   $unicorn_port     = undef # 8080
@@ -149,7 +142,6 @@ class gitlab::params {
   $smtp_authentication       = 'login'
   $smtp_enable_starttls_auto = true
 
-
   # Below are the default values
   $svlogd_size      = 200 * 1024 * 1024 # rotate after 200 MB of log data
   $svlogd_num       = 30 # keep 30 rotated log files
@@ -158,5 +150,4 @@ class gitlab::params {
   $svlogd_udp       = nil # transmit log messages via UDP
   $svlogd_prefix    = nil # custom prefix for log messages
 
-  
 }

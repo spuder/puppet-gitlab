@@ -56,7 +56,7 @@ class gitlab::install inherits ::gitlab {
           }
         }
     }
-    default: {fail("Only RedHat and Debain OS's are supported, Found: $::operatingsystem $::operatingsystemrelease ")}
+    default: {fail("Only RedHat and Debain OS's are supported, Found: ${::operatingsystem} ${::operatingsystemrelease}")}
   }
 
   # There are 6 combinations of $gitlab_download_link and $gitlab_release, validate them and conditionally set $gitlab_url
@@ -103,18 +103,18 @@ class gitlab::install inherits ::gitlab {
   }
   # Use wget to download gitlab
   exec { 'download gitlab':
-    command => "/usr/bin/wget $gitlab_url",
+    command => "/usr/bin/wget ${gitlab_url}",
     path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin",
-    cwd     => "$download_location",
-    onlyif  => '/bin/find $download_location -type f -name "*$gitlab::gitlab_branch*" 2>/dev/null',
+    cwd     => "${download_location}",
+    creates => "${download_location}/${omnibus_filename}",
     timeout => 1800,
     require => Package['wget'],
   }
   # Install gitlab with the appropriate package manager (rpm or dpkg)
   package { 'gitlab':
      ensure   => installed,
-     source   => "$download_location/$omnibus_filename",
-     provider => "$package_manager",
+     source   => "${download_location}/${omnibus_filename}",
+     provider => "${package_manager}",
      require  => Exec['download gitlab'],
   }
 
