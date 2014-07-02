@@ -2,7 +2,7 @@ class gitlab::prerequisites inherits ::gitlab {
 
   # The install documentation recomends different mail apps for different releases
   # https://about.gitlab.com/downloads/
-  case $operatingsystem {
+  case $::operatingsystem {
     'CentOS': {
       $mail_application = 'postfix'
     }
@@ -13,7 +13,7 @@ class gitlab::prerequisites inherits ::gitlab {
       $mail_application = 'exim4-daemon-light'
     }
     default: {
-      fail("Only Centos, Ubuntu and Debian OS's presently supported, found ${operatingsystem}")
+      fail("Only Centos, Ubuntu and Debian OS's presently supported, found ${::operatingsystem}")
     }
   }
 

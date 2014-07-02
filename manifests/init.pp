@@ -139,13 +139,13 @@ class gitlab (
   $svlogd_prefix    = $gitlab::params::svlogd_prefix,
   ) inherits ::gitlab::params {
 
-  if $puppetversion < '3.0.0' {
-    fail( "pupet-gitlab requires pupept 3.0 or greater, found: ${puppetversion}")
+  if $::puppetversion < '3.0.0' {
+    fail( "pupet-gitlab requires pupept 3.0 or greater, found: ${::puppetversion}")
   }
   # Only tested with facter >= 1.7.x
   # Older facter versions don't have facts like $operatingsystemrelease
-  if $facterversion < '1.7.0' {
-    fail( "puppet-gitlab requires facter 1.7 or grater, found: ${facterversion}")
+  if $::facterversion < '1.7.0' {
+    fail( "puppet-gitlab requires facter 1.7 or grater, found: ${::facterversion}")
   }
 
   #Only 2 parameters are required, verify they exist
@@ -161,12 +161,12 @@ class gitlab (
   # Gitlab only supplies omnibus downloads for few select operating systems
   # Warn the user they may be using an unsupported OS
   # https://about.gitlab.com/downloads/
-  case $operatingsystemrelease {
+  case $::operatingsystemrelease {
     '12.04': {}
     '14.04': {}
     '7.5':   {}
     '6.5':   {}
-    default: { warning("${operatingsystem} ${operatingsystemrelease} is not on approved list,\
+    default: { warning("${::operatingsystem} ${::operatingsystemrelease} is not on approved list,\
       download may fail. See https://about.gitlab.com/downloads/ for supported OS's"
     ) }
   }

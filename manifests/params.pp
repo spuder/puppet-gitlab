@@ -1,15 +1,13 @@
-# init -> packages -> user -> setup -> install -> config -> service
 class gitlab::params {
-  
+
   # Manage Packages
   $puppet_manage_config  = undef  # Overwites /etc/gitlab/gitlab.rb
   $puppet_manage_backups = true   # Creates cron job to backup at 2am
-  
+
   # Gitlab server settings
   $gitlab_branch           = undef # '7.0.0'
   $gitlab_release          = 'basic' # enterprise or basic
   $gitlab_download_link  = undef # The url from where to download gitlab, only needed with enterprise
-
 
   $external_url           = undef # 'http://gitlab.example.com'
 
@@ -146,7 +144,7 @@ class gitlab::params {
   $svlogd_size      = 200 * 1024 * 1024 # rotate after 200 MB of log data
   $svlogd_num       = 30 # keep 30 rotated log files
   $svlogd_timeout   = 24 * 60 * 60 # rotate after 24 hours
-  $svlogd_filter    = "gzip" # compress logs with gzip
+  $svlogd_filter    = 'gzip' # compress logs with gzip
   $svlogd_udp       = nil # transmit log messages via UDP
   $svlogd_prefix    = nil # custom prefix for log messages
 

@@ -1,9 +1,9 @@
-class { 'gitlab' : 
+class { 'gitlab' :
 
- # Manage Packages
+  # Manage Packages
   puppet_manage_config  => true,
   puppet_manage_backups => true,
-  
+
   # Gitlab server settings
   gitlab_branch           => '7.0.0',
   gitlab_release          => 'enterprise', # enterprise or basic
@@ -87,7 +87,7 @@ class { 'gitlab' :
   satellites_path             => '/var/opt/gitlab/git-data/gitlab-satellites',
   
   # Backup
-  backup_path                 => "/var/opt/gitlab/backups", #'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
+  backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   backup_keep_time            => 0, #'0'             # default: 0 (forever) (in seconds), 604800 = 1 week
   
   gitlab_shell_path           => '/opt/gitlab/embedded/service/gitlab-shell/',
