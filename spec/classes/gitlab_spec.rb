@@ -11,7 +11,6 @@ describe 'gitlab', :type => 'class' do
 
     it {
       should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-      # should contain_service('gitlab').with( { 'name' => 'gitlab' } )
     }
   end
 
@@ -24,7 +23,6 @@ describe 'gitlab', :type => 'class' do
 
     it {
       should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-      # should contain_service('gitlab').with( { 'name' => 'gitlab' } )
     }
   end
 
@@ -49,7 +47,6 @@ describe 'gitlab', :type => 'class' do
 
     it {
       should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-      # should contain_service('gitlab').with( { 'name' => 'gitlab' } )
     }
   end
 end
