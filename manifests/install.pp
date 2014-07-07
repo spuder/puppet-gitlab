@@ -1,19 +1,31 @@
-## gitlab::install
-#
-# DO NOT CALL THIS CLASS DIRECTLY, SEE tests/init.pp FOR EXAMPLE
+# == Class: gitlab::install
 #
 # This class downloads and installs gitlab using the apprpriate package manager
 # The download location can be specified by modifying $gitlab::gitlab_download_link
 #
-# === Inherited Variables Used:
-#  
-# $gitlab::gitlab_branch
-# $gitlab::gitlab_release
-# $gitlab::gitlab_download_link
+# === Parameters
 #
-# === Parameters:
-# none
+# === Variables
 #
+# Here you should define a list of variables that this module would require.
+#
+# [*operatingsystem_lowercase*]
+#   A custom fact to get the lowercase os distribution (eg. ubuntu, centos)
+#   Used to generate the download url.
+#   See lib/facter/operatingsystem_lowercase.rb
+#
+# === Examples
+#
+# DO NOT CALL THIS CLASS DIRECTLY, SEE tests/init.pp FOR EXAMPLE
+#
+# === Authors
+#
+# Spencer Owen <owenspencer@gmail.com>
+#
+# === Copyright
+#
+# Copyright 2014 Spencer Owen, unless otherwise noted.
+
 class gitlab::install inherits ::gitlab {
 
   # Sets the download url. Examples for gitlab basic

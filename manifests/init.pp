@@ -1,4 +1,52 @@
-# init -> packages -> user -> setup -> install -> config -> service
+# == Class: gitlab
+#
+# init manifest for gitlab class
+#
+# === Parameters
+#
+# See params.pp for full documentation of parameters
+#
+# [*puppet_manage_config*]
+#   default => true
+#   /etc/gitlab/gitlab.rb will be managed by puppet
+# 
+# [*puppet_manage_backups*]
+#   default => true
+#   Includes backup.pp which sets cron job to run rake task
+# 
+# [*external_url*]
+#   default => undef
+#   Required parameter, specifies the url that end user will navigate to
+#   Example: 'https://gitlab.example.com'
+#
+# [*gitlab_branch*]
+#   default => undef
+#   Required parameter, specifies which gitlab branch to download and install
+#   Example: '7.0.0'
+#
+#
+# === Examples
+#
+# Basic Example with https
+# class { 'gitlab' : 
+#   gitlab_branch          => '7.0.0',
+#   external_url           => 'http://foo.bar',
+#   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
+#   ssl_certificate_key    => '/etc/gitlab/ssl/gitlab.key',
+#   redirect_http_to_https => true,
+#   puppet_manage_backups  => true,
+#   backup_keep_time       => 5184000, # In seconds, 5184000 = 60 days
+#   gitlab_default_projects_limit => 100,
+# }
+#
+# === Authors
+#
+# Spencer Owen <owenspencer@gmail.com>
+#
+# === Copyright
+#
+# Copyright 2014 Spencer Owen, unless otherwise noted.
+#
 class gitlab (
 
   $puppet_manage_config    = $gitlab::params::puppet_manage_config,
@@ -9,6 +57,7 @@ class gitlab (
   $gitlab_download_prefix  = $gitlab::params::gitlab_download_prefix,
 
   $external_url   = $gitlab::params::external_url,
+
   #
   # 1. GitLab app settings
   # ==========================
@@ -148,7 +197,7 @@ class gitlab (
     fail( "puppet-gitlab requires facter 1.7 or grater, found: ${::facterversion}")
   }
 
-  #Only 2 parameters are required, verify they exist
+  # Verify required parameters are provided. 
   if !$external_url {
     fail ("\$external_url parameter required. \
     https://github.com/spuder/puppet-gitlab/blob/master/README.md")
@@ -158,7 +207,7 @@ class gitlab (
     https://github.com/spuder/puppet-gitlab/blob/master/README.md")
   }
 
-  # Gitlab only supplies omnibus downloads for few select operating systems
+  # Gitlab only supplies omnibus downloads for few select operating systems.
   # Warn the user they may be using an unsupported OS
   # https://about.gitlab.com/downloads/
   case $::operatingsystemrelease {

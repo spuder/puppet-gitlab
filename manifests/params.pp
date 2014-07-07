@@ -1,3 +1,23 @@
+# == Class: gitlab
+#
+# init manifest for gitlab class
+#
+# === Parameters
+#
+#  See below for full documentation of parameters
+#
+# === Examples
+#
+# DO NOT CALL THIS CLASS DIRECTLY, it is inherited automatically by init.pp
+#
+# === Authors
+#
+# Spencer Owen <owenspencer@gmail.com>
+#
+# === Copyright
+#
+# Copyright 2014 Spencer Owen, unless otherwise noted.
+#
 class gitlab::params {
 
   # Manage Packages
