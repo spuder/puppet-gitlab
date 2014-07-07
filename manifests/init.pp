@@ -186,6 +186,10 @@ class gitlab (
   $svlogd_filter    = $gitlab::params::svlogd_filter,
   $svlogd_udp       = $gitlab::params::svlogd_udp,
   $svlogd_prefix    = $gitlab::params::svlogd_prefix,
+
+  $udp_log_shipping_host = $gitlab::params::udp_log_shipping_host,
+  $udp_log_shipping_port = $gitlab::params::udp_log_shipping_port,
+
   ) inherits ::gitlab::params {
 
   if $::puppetversion < '3.0.0' {

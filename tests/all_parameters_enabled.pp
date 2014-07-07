@@ -108,15 +108,15 @@ class { 'gitlab' :
 #
 # 4. Extra customization
 # ==========================
-  
+
   extra_google_analytics_id => 'foo',
   
   extra_piwik_url           => 'http://foo.bar/',
   extra_piwik_site_id       => 'foo',
   
   extra_sign_in_text        => 'herp',
-  
-  
+
+
 #
 # 5. Omnibus customization
 # ==========================
@@ -164,5 +164,8 @@ class { 'gitlab' :
   svlogd_filter    => "gzip", # compress logs with gzip
   svlogd_udp       => nil, # transmit log messages via UDP
   svlogd_prefix    => nil, # custom prefix for log messages
+
+  udp_log_shipping_host = '1.2.3.', # '1.2.3.4' Ip of syslog server
+  udp_log_shipping_port = '514', # Optional, defaults to 514 (syslog)
 
 }

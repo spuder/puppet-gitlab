@@ -168,4 +168,9 @@ class gitlab::params {
   $svlogd_udp       = nil # transmit log messages via UDP
   $svlogd_prefix    = nil # custom prefix for log messages
 
+  # Enterprise Only Features
+
+  $udp_log_shipping_host = undef # '1.2.3.4' Ip of syslog server
+  $udp_log_shipping_port = undef # Optional, defaults to 514 (syslog)
+
 }
