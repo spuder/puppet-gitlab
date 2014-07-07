@@ -5,6 +5,7 @@ rvm:
   - 2.0.0
 script: "rake spec"
 branches:
+  only:
     - master
     - travis
 env:
