@@ -192,15 +192,6 @@ class gitlab (
 
   ) inherits ::gitlab::params {
 
-  if $::puppetversion < '3.0.0' {
-    fail( "pupet-gitlab requires pupept 3.0 or greater, found: ${::puppetversion}")
-  }
-  # Only tested with facter >= 1.7.x
-  # Older facter versions don't have facts like $operatingsystemrelease
-  if $::facterversion < '1.7.0' {
-    fail( "puppet-gitlab requires facter 1.7 or grater, found: ${::facterversion}")
-  }
-
   # Verify required parameters are provided. 
   if !$external_url {
     fail ("\$external_url parameter required. \
