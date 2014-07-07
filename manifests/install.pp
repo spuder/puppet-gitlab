@@ -86,7 +86,7 @@ class gitlab::install inherits ::gitlab {
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
-        warning("\$gitlab_release is ${gitlab_release} and \$gitlab_download_link is ${gitlab::gitlab_download_link}, setting a custom url is most likely unneccesary")
+        warning("\$gitlab_release is ${gitlab_release} and \$gitlab_download_link is \'${gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
         info("\$Downloading ${gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${gitlab::gitlab_download_link}"
       }
@@ -95,14 +95,14 @@ class gitlab::install inherits ::gitlab {
         $gitlab_url = "${gitlab::gitlab_download_link}"
       }
       default : {
-        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${gitlab_release}")
+        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${gitlab_release}\'")
       }
     }
   }
   else {
     case $gitlab_release {
       undef, 'basic' : {
-        info("\$gitlab_release is ${gitlab::gitlab_release} and \$gitlab_download_link is ${gitlab::gitlab_download_link}")
+        info("\$gitlab_release is \'${gitlab::gitlab_release}\' and \$gitlab_download_link is \'${gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
@@ -111,7 +111,7 @@ class gitlab::install inherits ::gitlab {
         fail("You must specify \$gitlab_download_link when \$gitlab_release is set to 'enterprise'")
       }
       default : {
-        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${gitlab::gitlab_release}")
+        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${gitlab::gitlab_release}\'")
       }
     }
   }
