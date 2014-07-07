@@ -1,18 +1,11 @@
-#Mac files
-
 .DS_STORE
-
-#Vagrant files
 
 .vagrant/*
 .vagrant/
-#Vagrantfile
-#bootstrap.sh
 
-#Misc files
 .settings
 *.swp
 
-#Private files
+spec/fixtures/*
 tests/adaptive.pp
 tests/enterprise.pp
