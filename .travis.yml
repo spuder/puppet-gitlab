@@ -7,7 +7,6 @@ script: "rake spec"
 branches:
   only:
     - master
-    - travis
 env:
   matrix:
     - PUPPET_VERSION="~> 3.1.0"
