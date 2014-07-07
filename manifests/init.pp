@@ -202,6 +202,14 @@ class gitlab (
     https://github.com/spuder/puppet-gitlab/blob/master/README.md")
   }
 
+  if versioncmp("${::puppetversion}", '3.0.0') < 0 {
+    fail("Gitlab requires puppet 3.0.0 or greater, found: \'$::puppetversion\'")
+  }
+  if versioncmp("${::facterversion}", '1.7.0') < 0 {
+    fail("Gitlab requires facter 1.7.0 or greater, found: \'$::facterversion\'")
+  }
+
+
   # Gitlab only supplies omnibus downloads for few select operating systems.
   # Warn the user they may be using an unsupported OS
   # https://about.gitlab.com/downloads/

@@ -44,8 +44,9 @@ Operating Systems:
 A vagrant file is included to quickly spin up a test vm
 
     $ vagrant up 
-    $ sudo puppet apply /vagrant/tests/init.pp --debug
+    $ sudo puppet apply -e "class { gitlab : puppet_manage_config => true, gitlab_branch => '7.0.0', external_url => 'http://foo.example.com', }" --modulepath=/etc/puppet/modules --verbose
     # navigate to https://192.168.33.10
+*(You could alternativly apply one of the test modules)* `sudo puppet apply /vagrant/tests/init.pp --verbose`
 
 ####Password
 
@@ -76,9 +77,9 @@ BareBones (not recomended)
 
 ```
 class { 'gitlab' : 
+  puppet_manage_config   => false,
   gitlab_branch          => '7.0.0',
   external_url           => 'http://foo.bar',
-  puppet_manage_config   => false,
 }
 ```
 
@@ -86,12 +87,13 @@ Basic Example with https
 
 ```
 class { 'gitlab' : 
+  puppet_manage_config   => true,
+  puppet_manage_backups  => true,
   gitlab_branch          => '7.0.0',
   external_url           => 'http://foo.bar',
   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
   ssl_certificate_key    => '/etc/gitlab/ssl/gitlab.key',
   redirect_http_to_https => true,
-  puppet_manage_backups  => true,
   backup_keep_time       => 5184000, # In seconds, 5184000 = 60 days
   gitlab_default_projects_limit => 100,
 }
@@ -102,6 +104,7 @@ class { 'gitlab' :
 Ldap with Active Directory
 ```
 class { 'gitlab' : 
+    puppet_manage_config    => true,
     puppet_manage_backups   => true,
     gitlab_branch           => '7.0.0',
     external_url            => 'http://foo.bar',
