@@ -9,12 +9,11 @@ Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.c
 
 Installs Gitlab 7 using the [omnibus installer](https://about.gitlab.com/downloads/)
 
-**Version 2.0 is a complete rewrite with many api breaking changes** 
+**Version 2.0.0 is a complete rewrite with many api breaking changes. 
+Since it uses the omnibus installer, it is incompatible with the previous puppet module.**
 
-Since it uses the omnibus installer, it is incompatible with the previous puppet module 
+If upgrading from gitlab 6, it is recomended that you create a fresh install and [migrate the data.](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
-**Upgrading from gitlab 6 is untested.**   
-https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md
 
 
 ##Setup  
@@ -45,7 +44,7 @@ Operating Systems:
 A vagrant file is included to quickly spin up a test vm
 
     $ vagrant up 
-    $ puppet apply /vagrant/tests/init.pp --debug
+    $ sudo puppet apply /vagrant/tests/init.pp --debug
     # navigate to https://192.168.33.10
 
 ####Password
