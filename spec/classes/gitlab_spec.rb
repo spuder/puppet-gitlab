@@ -5,7 +5,7 @@ describe 'gitlab', :type => 'class' do
   context 'on unsupported distributions' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
     let(:facts)  { { :osfamily      => 'Unsupported' }}
-    let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
+    # let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
 
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
@@ -15,7 +15,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'failure to add $gitlab_branch' do
     let(:params) { { :external_url  => 'http://gitlab.example.com'} }
-    let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
+    # let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
 
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
@@ -25,7 +25,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'failure to add $external_url' do
     let(:params) { { :gitlab_branch => '7.0.0'} }
-    let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
+    # let(:facts)  { { :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
 
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
