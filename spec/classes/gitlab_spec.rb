@@ -2,51 +2,15 @@ require 'spec_helper'
 
 describe 'gitlab', :type => 'class' do
 
-  context "On a Debian OS with no package name specified" do
-    let :facts do
-      {
-        :osfamily => 'Debian'
-      }
-    end
 
-    it {
-      should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-    }
+
+  context "with external_url => foo" do
+    let(:params) { { :external_url => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
+    let(:facts) { { :osfamily => 'Debian', :puppetversion => '3.1.0', :facterversion => '1.8.0'} }
+    it do
+      should contain_package('gitlab')
+    end
   end
 
-  context "On a RedHat OS with no package name specified" do
-    let :facts do
-      {
-        :osfamily => 'RedHat'
-      }
-    end
 
-    it {
-      should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-    }
-  end
-
-  context "On an unknown OS with no package name specified" do
-    let :facts do
-      {
-        :osfamily => 'Darwin'
-      }
-    end
-
-    it {
-      expect { should raise_error(Puppet::Error) }
-    }
-  end
-
-  context "With a package name specified" do
-    let :params do
-      {
-        :package_name => 'gitlab'
-      }
-    end
-
-    it {
-      should contain_package('gitlab').with( { 'name' => 'gitlab' } )
-    }
-  end
 end

@@ -74,7 +74,7 @@ class gitlab::install inherits ::gitlab {
           }
         }
     }
-    default: {fail("Only RedHat and Debain OS's are supported, Found: ${::operatingsystem} ${::operatingsystemrelease}")}
+    default: {fail("Only RedHat and Debian os families are supported, Found: \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\'")}
   }
 
   # There are 6 combinations of $gitlab_download_link and $gitlab_release, validate them and conditionally set $gitlab_url
