@@ -203,10 +203,10 @@ class gitlab (
   }
 
   if versioncmp("${::puppetversion}", '3.0.0') < 0 {
-    fail("Gitlab requires puppet 3.0.0 or greater, found: \'$::puppetversion\'")
+    fail("Gitlab requires puppet 3.0.0 or greater, found: \'${::puppetversion}\'")
   }
   if versioncmp("${::facterversion}", '1.7.0') < 0 {
-    fail("Gitlab requires facter 1.7.0 or greater, found: \'$::facterversion\'")
+    fail("Gitlab requires facter 1.7.0 or greater, found: \'${::facterversion}\'")
   }
 
 
@@ -218,21 +218,21 @@ class gitlab (
     '14.04': {}
     '7.5':   {}
     '6.5':   {}
-    default: { warning("${::operatingsystem} ${::operatingsystemrelease} is not on approved list,\
+    default: { warning("\'${::operatingsystem}\' \'${::operatingsystemrelease}\' is not on approved list,\
       download may fail. See https://about.gitlab.com/downloads/ for supported OS's"
     ) }
   }
 
   # Set the order that the manifests are executed in
   if $puppet_manage_config == true {
-    notice("Puppet will manage the configuration file because \$puppet_manage_config is true")
+    notice('Puppet will manage the configuration file because $puppet_manage_config is true')
     include gitlab::prerequisites
     include gitlab::install
     include gitlab::config
     Class['::gitlab::prerequisites'] -> Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
-    notice("Puppet will not manage the configuration file because \$puppet_manage_config is false")
+    notice('Puppet will not manage the configuration file because $puppet_manage_config is false')
     include gitlab::prerequisites
     include gitlab::install
       Class['::gitlab::prerequisites'] -> Class['::gitlab::install']

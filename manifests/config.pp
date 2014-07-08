@@ -1,7 +1,7 @@
 # == Class: gitlab::config
 #
 # Optional class
-# If puppet_manage_config = true, then this module will manage /etc/gitlab/gitlab.rb
+# If $puppet_manage_config = true, then this module will manage /etc/gitlab/gitlab.rb
 # The gitlab.rb config file is generated based on templates/gitlab-puppet.rb.erb
 # if $puppet_manage_config = false, the end user may manually edit /etc/gitlab/gitlab.rb
 #
@@ -33,7 +33,7 @@ class gitlab::config inherits ::gitlab {
     content => template('gitlab/gitlab-puppet.rb.erb'),
     backup  => true,
   }
-  exec { "/usr/bin/gitlab-ctl reconfigure":
+  exec { '/usr/bin/gitlab-ctl reconfigure':
     refreshonly => true,
     timeout     => 1800,
     subscribe   => File["${gitlab_config_dir}/gitlab.rb"],

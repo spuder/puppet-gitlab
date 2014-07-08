@@ -31,7 +31,7 @@ class gitlab::prerequisites inherits ::gitlab {
       $mail_application = 'exim4-daemon-light'
     }
     default: {
-      fail("Only Centos, Ubuntu and Debian OS's presently supported, found ${::operatingsystem} ${::operatingsystemrelease} ")
+      fail("Only Centos, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
     }
   }
 

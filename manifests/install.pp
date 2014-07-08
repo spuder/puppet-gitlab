@@ -34,15 +34,15 @@ class gitlab::install inherits ::gitlab {
   # https://downloads-packages.s3.amazonaws.com/ubuntu-14.04/gitlab_7.0.0-omnibus-1_amd64.deb
   # https://downloads-packages.s3.amazonaws.com/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb
   $download_location = '/var/tmp'
-  $download_prefix   = "https://downloads-packages.s3.amazonaws.com" #Default download prefix for basic edition
+  $download_prefix   = 'https://downloads-packages.s3.amazonaws.com' #Default download prefix for basic edition
 
   # Download links change depending on the OS
   # Filename changes depending if basic or enterprise
   # Set variables to make it easy to define $gitlab_url 
   case $::osfamily {
     'Debian': {
-      $omnibus_release = "omnibus-1_amd64.deb"
-      $url_separator   = "_" #some urls are gitlab-7.0.0 others gitlab_7.0.0
+      $omnibus_release = 'omnibus-1_amd64.deb'
+      $url_separator   = '_' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'dpkg'
 
         case $gitlab::gitlab_release {
@@ -53,13 +53,13 @@ class gitlab::install inherits ::gitlab {
             $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
           }
           default : {
-            fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${gitlab_release}")
+            fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")
           }
         }
     }
     'RedHat': {
-      $omnibus_release = "omnibus-1.el6.x86_64.rpm"
-      $url_separator   = "-" #some urls are gitlab-7.0.0 others gitlab_7.0.0
+      $omnibus_release = 'omnibus-1.el6.x86_64.rpm'
+      $url_separator   = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'rpm'
 
         case $gitlab::gitlab_release {
@@ -70,7 +70,7 @@ class gitlab::install inherits ::gitlab {
             $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}_ee.${omnibus_release}" # eg. gitlab-7.0.0_ee.omnibus-1.el6.x86_64.rpm
           }
           default : {
-            fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${gitlab_release}")
+            fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")
           }
         }
     }
@@ -78,31 +78,31 @@ class gitlab::install inherits ::gitlab {
   }
 
   # There are 6 combinations of $gitlab_download_link and $gitlab_release, validate them and conditionally set $gitlab_url
-  if $gitlab::gitlab_download_link {
-    case $gitlab_release {
+  if ${::gitlab::gitlab_download_link} {
+    case ${::gitlab::gitlab_release} {
       undef : {
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
         info("\$Downloading ${gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
-        warning("\$gitlab_release is ${gitlab_release} and \$gitlab_download_link is \'${gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
+        warning("\$gitlab_release is ${::gitlab::gitlab_release} and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
         info("\$Downloading ${gitlab::gitlab_release} from user specified url")
-        $gitlab_url = "${gitlab::gitlab_download_link}"
+        $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       'enterprise': {
         info("\$Downloading ${gitlab_release} from user specified url")
-        $gitlab_url = "${gitlab::gitlab_download_link}"
+        $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       default : {
-        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${gitlab_release}\'")
+        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
       }
     }
   }
   else {
-    case $gitlab_release {
+    case ${::gitlab::gitlab_release} {
       undef, 'basic' : {
-        info("\$gitlab_release is \'${gitlab::gitlab_release}\' and \$gitlab_download_link is \'${gitlab::gitlab_download_link}\'")
+        info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
@@ -111,7 +111,7 @@ class gitlab::install inherits ::gitlab {
         fail("You must specify \$gitlab_download_link when \$gitlab_release is set to 'enterprise'")
       }
       default : {
-        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${gitlab::gitlab_release}\'")
+        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
       }
     }
   }
