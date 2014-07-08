@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe 'gitlab', :type => 'class' do
 
+# Note, because travis does not export a FACTER_VERSION env variable, hard coding as 2.1.0
+# Hopefully there is a way in the future to get the facter version from the env
+
   context 'when puppet version < 3.0' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
     let(:facts) { { :puppetversion => '2.7.0' , :facterversion => '2.1.0'}}
@@ -12,7 +15,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'when facter version < 1.7' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
-    let(:facts) { { :facter => '1.6.0', :puppetversion => '3.6.0' }}
+    let(:facts)  { { :facterversion => '1.6.0' , :puppetversion => ENV['PUPPET_VERSION'] } }
     it 'we fail' do
       expect { subject }.to raise_error(/Gitlab requires facter 1.7.0 or greater/)
     end
@@ -20,9 +23,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'on unsupported distributions' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
-    let(:facts)  { { :osfamily      => 'Unsupported' }}
-    let(:facts)  { { :puppetversion => '3.6.0', :facterversion => '2.1.0'} }
-
+    let(:facts)  { { :osfamily      => 'Unsupported', :puppetversion => ENV['PUPPET_VERSION'], :facterversion => '2.1.0' } }
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
       expect { subject }.to raise_error(/Only Centos, Ubuntu and Debian presently supported/)
@@ -31,7 +32,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'failure to add $gitlab_branch' do
     let(:params) { { :external_url  => 'http://gitlab.example.com'} }
-    let(:facts)  { { :puppetversion => '3.6.0', :facterversion => '2.1.0'} }
+    let(:facts)  { { :puppetversion => ENV['PUPPET_VERSION'], :facterversion => '2.1.0'} }
 
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
@@ -41,7 +42,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'failure to add $external_url' do
     let(:params) { { :gitlab_branch => '7.0.0'} }
-    let(:facts)  { { :puppetversion => '3.6.0', :facterversion => '2.1.0'} }
+    let(:facts)  { { :puppetversion => ENV['PUPPET_VERSION'], :facterversion => '2.1.0'} }
 
     it 'we fail' do
       # expect { subject }.to raise_error(/Only RedHat and Debian os families are supported/)
