@@ -1,4 +1,5 @@
 # Gitlab 7.0  
+[![Build Status](https://travis-ci.org/spuder/puppet-gitlab.png)](https://travis-ci.org/spuder/puppet-gitlab)
 
 Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
 Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
