@@ -4,7 +4,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'when puppet version < 3.0' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
-    let(:facts) { { :puppetversion => '2.7.0' }}
+    let(:facts) { { :puppetversion => '2.7.0' , :facterversion => '2.1.0'}}
     it 'we fail' do
       expect { subject }.to raise_error(/Gitlab requires puppet 3.0.0 or greater/)
     end
@@ -12,7 +12,7 @@ describe 'gitlab', :type => 'class' do
 
   context 'when facter version < 1.7' do
     let(:params) { { :external_url  => 'http://gitlab.example.com', :gitlab_branch => '7.0.0'} }
-    let(:facts) { { :facter => '1.6.0' }}
+    let(:facts) { { :facter => '1.6.0', :puppetversion => '3.6.0' }}
     it 'we fail' do
       expect { subject }.to raise_error(/Gitlab requires facter 1.7.0 or greater/)
     end
