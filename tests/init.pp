@@ -1,9 +1,9 @@
 class { 'gitlab' :
-  puppet_manage_config => true,
-  gitlab_branch        => '7.0.0',
-  gitlab_release       => 'basic',
-  external_url         => 'http://gitlab.example.com',
+  puppet_manage_config    => true,
+  gitlab_branch           => '7.0.0',
+  gitlab_release          => 'basic',
+  external_url            => 'http://gitlab.example.com',
   
-  #SSL highly recomended
+  # SSL highly recomended
   redirect_http_to_https  => true,
 }

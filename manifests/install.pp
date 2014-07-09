@@ -82,16 +82,16 @@ class gitlab::install inherits ::gitlab {
     case $::gitlab::gitlab_release {
       undef : {
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
-        info("\$Downloading ${gitlab::gitlab_release} from user specified url")
+        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
         warning("\$gitlab_release is ${::gitlab::gitlab_release} and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
-        info("\$Downloading ${gitlab::gitlab_release} from user specified url")
+        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       'enterprise': {
-        info("\$Downloading ${gitlab_release} from user specified url")
+        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       default : {
@@ -108,7 +108,7 @@ class gitlab::install inherits ::gitlab {
         info("Downloading from default url ${gitlab_url}")
       }
       'enterprise': {
-        fail("You must specify \$gitlab_download_link when \$gitlab_release is set to 'enterprise'")
+        fail('You must specify $gitlab_download_link when $gitlab_release is set to \'enterprise\'')
       }
       default : {
         fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
