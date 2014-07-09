@@ -27,9 +27,9 @@ class gitlab::params {
   # Gitlab server settings
   $gitlab_branch           = undef # '7.0.0'
   $gitlab_release          = 'basic' # enterprise or basic
-  $gitlab_download_link  = undef # The url from where to download gitlab, only needed with enterprise
+  $gitlab_download_link    = undef # The url from where to download gitlab, only needed with enterprise
 
-  $external_url           = undef # 'http://gitlab.example.com'
+  $external_url            = undef # 'http://gitlab.example.com'
 
 #
 # 1. GitLab app settings

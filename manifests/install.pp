@@ -78,8 +78,8 @@ class gitlab::install inherits ::gitlab {
   }
 
   # There are 6 combinations of $gitlab_download_link and $gitlab_release, validate them and conditionally set $gitlab_url
-  if ${::gitlab::gitlab_download_link} {
-    case ${::gitlab::gitlab_release} {
+  if $::gitlab::gitlab_download_link {
+    case $::gitlab::gitlab_release {
       undef : {
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
         info("\$Downloading ${gitlab::gitlab_release} from user specified url")
@@ -100,7 +100,7 @@ class gitlab::install inherits ::gitlab {
     }
   }
   else {
-    case ${::gitlab::gitlab_release} {
+    case $::gitlab::gitlab_release {
       undef, 'basic' : {
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
