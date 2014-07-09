@@ -8,12 +8,10 @@ branches:
   only:
     - master
 env:
-  - PUPPET_VERSION=3.1.0
-  - PUPPET_VERSION=3.4.0
-  - PUPPET_VERSION=3.6.0
-  - FACTER_VERSION=1.7.6
-  - FACTER_VERSION=2.0.2
-  - FACTER_VERSION=2.1.0
+  - PUPPET_VERSION=3.1.0 FACTER_VERSION=1.7.6
+  - PUPPET_VERSION=3.4.0 FACTER_VERSION=2.0.2
+  - PUPPET_VERSION=3.6.0 FACTER_VERSION=2.1.0
+  # This are not necessarily the versions of facter that corespond with puppet
 notifications:
   email: false
 gemfile: .gemfile
