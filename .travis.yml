@@ -18,4 +18,4 @@ gemfile: .gemfile
 matrix:
   exclude:
     - rvm: 2.0.0
-      env: - PUPPET_VERSION=3.1.0 FACTER_VERSION=1.7.6 #https://github.com/travis-ci/travis-ci/issues/1237
+      env: PUPPET_VERSION=3.1.0 FACTER_VERSION=1.7.6 #https://github.com/travis-ci/travis-ci/issues/1237
