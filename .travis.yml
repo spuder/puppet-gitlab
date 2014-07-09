@@ -15,3 +15,7 @@ env:
 notifications:
   email: false
 gemfile: .gemfile
+matrix:
+  exclude:
+    - rvm: 2.0.0
+      env: PUPPET_VERSION=3.1.0 #https://github.com/travis-ci/travis-ci/issues/1237
