@@ -19,7 +19,7 @@ If upgrading from gitlab 6, it is recomended that you create a fresh install and
 
 ##Setup  
 
-Requires:
+Supported Versions:
 
     puppet >= 3.0.0
     facter >= 1.7.0
@@ -28,7 +28,7 @@ Module Dependencies:
 
     puppetlabs-stdlib >= 4.0.0
 
-Operating Systems:
+Supported Operating Systems:
 
     Cent 6.5
     Debian 7.5
@@ -47,7 +47,7 @@ A vagrant file is included to quickly spin up a test vm
     $ vagrant up 
     $ sudo puppet apply -e "class { gitlab : puppet_manage_config => true, gitlab_branch => '7.0.0', external_url => 'http://foo.example.com', }" --modulepath=/etc/puppet/modules --verbose
     # navigate to https://192.168.33.10
-*(You could alternativly apply one of the test modules)* `sudo puppet apply /vagrant/tests/init.pp --verbose`
+*(You could alternatively apply one of the test modules)* `sudo puppet apply /vagrant/tests/init.pp --verbose`
 
 ####Password
 
@@ -105,25 +105,22 @@ class { 'gitlab' :
 Ldap with Active Directory
 ```
 class { 'gitlab' : 
-    puppet_manage_config    => true,
-    puppet_manage_backups   => true,
-    gitlab_branch           => '7.0.0',
-    external_url            => 'http://foo.bar',
-    ldap_enabled            => true,
-    ldap_host               => 'foo.example.com',
-    ldap_base               => 'DC=example,DC=com',
-    ldap_port               => '636',
-    ldap_uid                => 'sAMAccountName',
-    ldap_method             => 'ssl',       
-    ldap_bind_dn            => 'CN=foobar,CN=users,DC=example,DC=com', 
-    ldap_password           => 'foobar',
-
-    gitlab_default_projects_features_visibility_level       =>  'internal',
-    
-    gravatar_enabled                     => true,
-    gitlab_default_can_create_group      => false,
-    gitlab_username_changing_enabled     => false,
-    gitlab_signup_enabled                => false,
+    puppet_manage_config              => true,
+    puppet_manage_backups             => true,
+    gitlab_branch                     => '7.0.0',
+    external_url                      => 'http://foo.bar',
+    ldap_enabled                      => true,
+    ldap_host                         => 'foo.example.com',
+    ldap_base                         => 'DC=example,DC=com',
+    ldap_port                         => '636',
+    ldap_uid                          => 'sAMAccountName',
+    ldap_method                       => 'ssl',       
+    ldap_bind_dn                      => 'CN=foobar,CN=users,DC=example,DC=com', 
+    ldap_password                     => 'foobar',    
+    gravatar_enabled                  => true,
+    gitlab_default_can_create_group   => false,
+    gitlab_username_changing_enabled  => false,
+    gitlab_signup_enabled             => false,
     gitlab_default_projects_features_visibility_level => 'internal',
 }
 ```
