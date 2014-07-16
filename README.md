@@ -40,14 +40,17 @@ Supported Operating Systems:
 ##Usage
 
 
-###Get up and running quickly
+###Get up and running quickly - (testing only)
 
-A vagrant file is included to quickly spin up a test vm
+A vagrant file is included to quickly spin up a test vm. **Do not use vagrant for production**
 
     $ vagrant up 
-    $ sudo puppet apply -e "class { gitlab : puppet_manage_config => true, gitlab_branch => '7.0.0', external_url => 'http://foo.example.com', }" --modulepath=/etc/puppet/modules --verbose
-    # navigate to https://192.168.33.10
-*(You could alternatively apply one of the test modules)* `sudo puppet apply /vagrant/tests/init.pp --verbose`
+    $ sudo puppet apply -e "class { gitlab : puppet_manage_config => true, gitlab_branch => '7.0.0', external_url => 'http://192.168.33.10, }" --modulepath=/etc/puppet/modules --verbose
+
+
+192.168.33.10 is the ip address hard coded in the [Vagrantfile](https://github.com/spuder/puppet-gitlab/blob/master/Vagrantfile). You can replace this with an actual hostname as long as it is routable from your workstation.
+
+![gitlab-login](http://cl.ly/image/463I0m2z1H34/Safari.png)
 
 ####Password
 
