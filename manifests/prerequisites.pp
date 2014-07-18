@@ -3,7 +3,7 @@
 # Installs openssh and postfix services
 #
 # === Parameters
-
+#
 # === Examples
 #
 # DO NOT CALL THIS CLASS DIRECTLY, it is included automatically by init.pp

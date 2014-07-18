@@ -22,6 +22,7 @@
 # === Copyright
 #
 # Copyright 2014 Spencer Owen, unless otherwise noted.
+#
 class gitlab::backup inherits ::gitlab {
 
   # Execute rake backup every night at 2 am

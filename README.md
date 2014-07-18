@@ -3,6 +3,7 @@
 
 Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
 Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
+Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md) 
 
 
 
@@ -10,7 +11,7 @@ Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.c
 
 Installs Gitlab 7 using the [omnibus installer](https://about.gitlab.com/downloads/)
 
-**Version 2.0.0 is a complete rewrite with many api breaking changes. 
+**Version 2.x.x is a complete rewrite with many api breaking changes. 
 Since it uses the omnibus installer, it is incompatible with the previous puppet module.**
 
 If upgrading from gitlab 6, it is recomended that you create a fresh install and [migrate the data.](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
@@ -21,19 +22,19 @@ If upgrading from gitlab 6, it is recomended that you create a fresh install and
 
 Supported Versions:
 
-    puppet >= 3.0.0
-    facter >= 1.7.0
+- puppet >= 3.0.0
+- facter >= 1.7.0
 
 Module Dependencies:
 
-    puppetlabs-stdlib >= 4.0.0
+- puppetlabs-stdlib >= 4.0.0
 
 Supported Operating Systems:
 
-    Cent 6.5
-    Debian 7.5
-    Ubuntu 12.04
-    Ubuntu 14.04
+- Cent 6.5
+- Debian 7.5
+- Ubuntu 12.04
+- Ubuntu 14.04
 
 
 
@@ -61,17 +62,17 @@ The default username and password are:
 
 ##Parameters
 
-Nearly every parameter that can be configured in the gitlab config file is available as a module parameter
+**There are over 100 configuration options that can be configured in /etc/gitlab/gitlab.rb. This puppet module exposes nearly all of them as paramters.**
 
-*A full list of parameters is shown in [manifsts/params.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/params.pp)*
+###See the full documentation of parameters here: [manifsts/params.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/params.pp)
 
 
-Mandatory parameters: `$gitlab_branch`, `$external_url`. All other parameters are optional. 
+Mandatory parameters: 
 
-    class { 'gitlab' : 
-      gitlab_branch   => '7.0.0',
-      external_url    => 'http://foo.bar',
-    }
+    $gitlab_branch 
+    $external_url
+
+ All other parameters are optional. 
 
 
 
@@ -141,26 +142,32 @@ class { 'gitlab' :
 More examples can be found in the [tests directory](https://github.com/spuder/puppet-gitlab/blob/master/tests/)
 
 
-[Every Paramter Imaginable](https://github.com/spuder/puppet-gitlab/blob/master/tests/all_parameters_enabled.pp)
+[Example with every parameter enabled](https://github.com/spuder/puppet-gitlab/blob/master/tests/all_parameters_enabled.pp)
 
 
 ###Enterprise
 
 The puppet-gitlab module supports gitlab enterprise installations. You can enable additional enterprise configuration options with the `$gitlab_release` parameter
 
+`$gitlab_download_link` is the full url (including file name) you received when purchasing gitlab enterprise. Required if `$gitlab_release = 'enterprise'`
+
+
+
     class { 'gitlab' : 
       gitlab_branch   => '7.0.0',
       gitlab_release  => 'enterprise',
-      gitlab_download_link => 'http://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb
-      # gitlab_download_link is the full url you received when purchasing gitlab enterprise
-      # gitlab_download_link is required if $gitlab_release = 'enterprise'
+      gitlab_download_link => 'http://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
     }
+
+
+
+
+
 
 
 If for whatever reason you don't want puppet to download the omnibus package automatically, 
 you could manually place it in `/var/tmp` instead. 
 
-Example
 ```
 $ ls /var/tmp
 /var/tmp/gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
@@ -171,6 +178,7 @@ $ ls /var/tmp
 ##Limitations
 
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
-2. If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template, not one after another. This results in a lot of empty lines. 
-
-
+2. If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template, not one after another. This results in a lot of empty lines in /etc/gitlab/gitlb.rb. 
+3. Assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
+4. Omniauth and enterprise are not tested. Please submit a github issue if problems are found.
+5. Only supports postgres database. Gitlabhq discourages mysql. 

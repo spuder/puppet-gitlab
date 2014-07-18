@@ -25,7 +25,7 @@
 # === Copyright
 #
 # Copyright 2014 Spencer Owen, unless otherwise noted.
-
+#
 class gitlab::install inherits ::gitlab {
 
   # Sets the download url. Examples for gitlab basic
@@ -45,12 +45,12 @@ class gitlab::install inherits ::gitlab {
       $url_separator   = '_' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'dpkg'
 
-        case $gitlab::gitlab_release {
+        case $::gitlab::gitlab_release {
           'basic' : {
-            $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}-${omnibus_release}" # eg. gitlab_7.0.0-omnibus-1_amd64.deb
+            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-${omnibus_release}" # eg. gitlab_7.0.0-omnibus-1_amd64.deb
           }
           'enterprise' : {
-            $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
+            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
           }
           default : {
             fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")
@@ -62,12 +62,12 @@ class gitlab::install inherits ::gitlab {
       $url_separator   = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'rpm'
 
-        case $gitlab::gitlab_release {
+        case $::gitlab::gitlab_release {
           'basic' : {
-            $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}_${omnibus_release}" # eg. gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
+            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_${omnibus_release}" # eg. gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
           }
           'enterprise' : {
-            $omnibus_filename = "gitlab${url_separator}${gitlab::gitlab_branch}_ee.${omnibus_release}" # eg. gitlab-7.0.0_ee.omnibus-1.el6.x86_64.rpm
+            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_ee.${omnibus_release}" # eg. gitlab-7.0.0_ee.omnibus-1.el6.x86_64.rpm
           }
           default : {
             fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")

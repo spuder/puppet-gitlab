@@ -87,7 +87,7 @@ class gitlab::params {
   $omniauth_enabled                  = undef
   $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
-  $omniauth_providers  = '[]' #TODO: Untested
+  $omniauth_providers                = '[]'  #TODO: Untested
 
 #
 # 3. Advanced settings
@@ -111,7 +111,6 @@ class gitlab::params {
   $git_max_size                = undef # 5242880 (5 MB) Incrase if large commits fail over https
   $git_timeout                 = undef # 10
 
-
 #
 # 4. Extra customization
 # ==========================
@@ -121,7 +120,6 @@ class gitlab::params {
   $extra_piwik_site_id       = undef
   
   $extra_sign_in_text        = undef
-  
   
 #
 # 5. Omnibus customization
@@ -146,18 +144,18 @@ class gitlab::params {
   $gitlab_psql_gid    = undef # 1004
 
   $aws_enable               = false  # Store images on amazon
-  $aws_access_key_id        = 'AKIA1111111111111UA'
-  $aws_secret_access_key    = 'secret'
-  $aws_bucket               = 'my_gitlab_bucket'
-  $aws_region               = 'us-east-1'
+  $aws_access_key_id        = undef  # 'AKIA1111111111111UA'
+  $aws_secret_access_key    = undef  # 'secret'
+  $aws_bucket               = undef  # 'my_gitlab_bucket'
+  $aws_region               = undef  # 'us-east-1'
 
   $smtp_enable               = false # Connect to external smtp server
-  $smtp_address              = 'smtp.server'
+  $smtp_address              = undef # 'smtp.server'
   $smtp_port                 = 456
-  $smtp_user_name            = 'smtp user'
-  $smtp_password             = 'smtp password'
-  $smtp_domain               = 'example.com'
-  $smtp_authentication       = 'login'
+  $smtp_user_name            = undef # 'smtp user'
+  $smtp_password             = undef # 'smtp password'
+  $smtp_domain               = undef # 'example.com'
+  $smtp_authentication       = undef # 'login'
   $smtp_enable_starttls_auto = true
 
   # Below are the default values
@@ -169,7 +167,6 @@ class gitlab::params {
   $svlogd_prefix    = nil # custom prefix for log messages
 
   # Enterprise Only Features
-
   $udp_log_shipping_host = undef # '1.2.3.4' Ip of syslog server
   $udp_log_shipping_port = undef # Optional, defaults to 514 (syslog)
 
