@@ -21,48 +21,48 @@
 class gitlab::params {
 
   # Manage Packages
-  $puppet_manage_config  = undef  # Overwites /etc/gitlab/gitlab.rb
+  $puppet_manage_config  = undef  # Manages /etc/gitlab/gitlab.rb
   $puppet_manage_backups = true   # Creates cron job to backup at 2am
 
   # Gitlab server settings
-  $gitlab_branch           = undef # '7.0.0'
-  $gitlab_release          = 'basic' # enterprise or basic
-  $gitlab_download_link    = undef # The url from where to download gitlab, only needed with enterprise
+  $gitlab_branch         = undef   # eg. 7.0.0 - Branch to download and install
+  $gitlab_release        = 'basic' # enterprise or basic
+  $gitlab_download_link  = undef   # eg. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
 
-  $external_url            = undef # 'http://gitlab.example.com'
+  $external_url            = undef # eg. 'http://gitlab.example.com' Sets nginx listening address
 
 #
 # 1. GitLab app settings
 # ==========================
   $gitlab_email_from                 = undef # 'gitlab.example.com'
-  $gitlab_default_projects_limit     = undef # Default 10, 
-  $gitlab_default_can_create_group   = undef
-  $gitlab_username_changing_enabled  = undef # Allow users to change username, may break ldap
-  $gitlab_default_theme              = undef # 1 Basic, 2 Mars, 3 Modern, 4 Gray, 5 Color
+  $gitlab_default_projects_limit     = undef # Default 10, How many projects a user can create
+  $gitlab_default_can_create_group   = undef # Default true, users make own groups
+  $gitlab_username_changing_enabled  = undef # Allow users to change own username, not suggested if running ldap
+  $gitlab_default_theme              = undef # Default 2: 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color
   $gitlab_signup_enabled             = undef # Anyone can create an account
   $gitlab_signin_enabled             = undef # Allows sign in with shortname, eg. 'steve' instead of 'steve@apple.com'
 
-  $gitlab_default_projects_features_issues           = undef # true
-  $gitlab_default_projects_features_merge_requests   = undef # true
-  $gitlab_default_projects_features_wiki             = undef # true
-  $gitlab_default_projects_features_snippets         = undef # false
-  $gitlab_default_projects_features_visibility_level = undef # default 'private' # 'public' 'internal' or 'private'
+  $gitlab_default_projects_features_issues           = undef # true, enables light weight issue tracker on projects
+  $gitlab_default_projects_features_merge_requests   = undef # true, enables merge requests on projects
+  $gitlab_default_projects_features_wiki             = undef # true, enables light weight wiki on projects
+  $gitlab_default_projects_features_snippets         = undef # false, similar to github 'gits'
+  $gitlab_default_projects_features_visibility_level = undef # 'private' visibility can be 'public' 'internal' or 'private'
 
-  $issues_tracker_redmine               = undef # false
+  $issues_tracker_redmine               = undef # false, integrate with redmine issue tracker
   $issues_tracker_redmine_title         = undef # 'title'
   $issues_tracker_redmine_project_url   = undef # 'http://foo/bar'
   $issues_tracker_redmine_issues_url    = undef # 'http://foo/bar'
   $issues_tracker_redmine_new_issue_url = undef # 'http://foo/bar'
 
-  $issues_tracker_jira               = undef # false
+  $issues_tracker_jira               = undef # false, integrate with JIRA issue tracker
   $issues_tracker_jira_title         = undef # 'foo'
   $issues_tracker_jira_project_url   = undef # 'http://foo/bar'
   $issues_tracker_jira_issues_url    = undef # 'http://foo/bar'
   $issues_tracker_jira_new_issue_url = undef # 'http://foo/bar'
 
-  $gravatar_enabled    = undef # true | false
-  $gravatar_plain_url  = undef # 'http://foo/bar'
-  $gravatar_ssl_url    = undef # 'https://foo/bar'
+  $gravatar_enabled    = undef # Use user avatar image from Gravatar.com (default: true)
+  $gravatar_plain_url  = undef # default: http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
+  $gravatar_ssl_url    = undef # default: https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
 
 #
 # 2. Auth settings
@@ -77,14 +77,14 @@ class gitlab::params {
   $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
   $ldap_password  = 'query user password'
   $ldap_allow_username_or_email_login = true
-  $ldap_base                          = 'DC=mycorp,DC=com'
+  $ldap_base      = 'DC=mycorp,DC=com'
 
   # GitLab Enterprise Edition only
   # Set $gitlab_release to 'enterprise' to enable these features
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  $omniauth_enabled                  = undef
+  $omniauth_enabled                  = undef # false, Allows login via Google, twitter, ect..
   $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
   $omniauth_providers                = '[]'  #TODO: Untested
@@ -99,8 +99,8 @@ class gitlab::params {
   
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
   
-  $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories'
-  $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/'
+  $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories', Cannot be a symlink
+  $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/', Cannot be a symlikn
   
   $gitlab_shell_upload_pack    = undef # true
   $gitlab_shell_receive_pack   = undef # true
@@ -119,7 +119,7 @@ class gitlab::params {
   $extra_piwik_url           = undef
   $extra_piwik_site_id       = undef
   
-  $extra_sign_in_text        = undef
+  $extra_sign_in_text        = undef # Allows for company logo/ name on login page. 
   
 #
 # 5. Omnibus customization
@@ -132,26 +132,26 @@ class gitlab::params {
   $gitlab_username  = undef # 'gitlab'
   $gitlab_group     = undef # 'gitlab'
 
-  $redirect_http_to_https   = undef #true or false
+  $redirect_http_to_https   = undef #false, recomended to prevent users from connecting insecurely
   $ssl_certificate          = '/etc/gitlab/ssl/gitlab.crt'
   $ssl_certificate_key      = '/etc/gitlab/ssl/gitlab.key'
 
-  $git_uid            = undef # 1001
-  $git_gid            = undef # 1002
-  $gitlab_redis_uid   = undef # 998
-  $gitlab_redis_gid   = undef # 1003
-  $gitlab_psql_uid    = undef # 997
-  $gitlab_psql_gid    = undef # 1004
+  $git_uid            = undef
+  $git_gid            = undef
+  $gitlab_redis_uid   = undef
+  $gitlab_redis_gid   = undef
+  $gitlab_psql_uid    = undef
+  $gitlab_psql_gid    = undef
 
   $aws_enable               = false  # Store images on amazon
-  $aws_access_key_id        = undef  # 'AKIA1111111111111UA'
-  $aws_secret_access_key    = undef  # 'secret'
-  $aws_bucket               = undef  # 'my_gitlab_bucket'
-  $aws_region               = undef  # 'us-east-1'
+  $aws_access_key_id        = undef  # eg. 'AKIA1111111111111UA'
+  $aws_secret_access_key    = undef  # eg. 'secret'
+  $aws_bucket               = undef  # eg. 'my_gitlab_bucket'
+  $aws_region               = undef  # eg. 'us-east-1'
 
   $smtp_enable               = false # Connect to external smtp server
   $smtp_address              = undef # 'smtp.server'
-  $smtp_port                 = 456
+  $smtp_port                 = undef # default: 456
   $smtp_user_name            = undef # 'smtp user'
   $smtp_password             = undef # 'smtp password'
   $smtp_domain               = undef # 'example.com'
