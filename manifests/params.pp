@@ -25,30 +25,30 @@ class gitlab::params {
   $puppet_manage_backups = true   # Creates cron job to backup at 2am
 
   # Gitlab server settings
-  $gitlab_branch         = undef   # eg. 7.0.0 - Branch to download and install
-  $gitlab_release        = 'basic' # enterprise or basic
-  $gitlab_download_link  = undef   # eg. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
+  $gitlab_branch         = undef   # Required: (e.g. '7.0.0') - Branch to download and install
+  $gitlab_release        = 'basic' # 'basic' | 'enterprise' - (default: basic)
+  $gitlab_download_link  = undef   # e.g. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
 
-  $external_url            = undef # eg. 'http://gitlab.example.com' Sets nginx listening address
+  $external_url            = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
 #
 # 1. GitLab app settings
 # ==========================
   $gitlab_email_from                 = undef # 'gitlab.example.com'
-  $gitlab_default_projects_limit     = undef # Default 10, How many projects a user can create
-  $gitlab_default_can_create_group   = undef # Default true, users make own groups
+  $gitlab_default_projects_limit     = undef # How many projects a user can create (default: 10)
+  $gitlab_default_can_create_group   = undef # Allow users to make own groups (default: true)
   $gitlab_username_changing_enabled  = undef # Allow users to change own username, not suggested if running ldap
-  $gitlab_default_theme              = undef # Default 2: 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color
-  $gitlab_signup_enabled             = undef # Anyone can create an account
-  $gitlab_signin_enabled             = undef # Allows sign in with shortname, eg. 'steve' instead of 'steve@apple.com'
+  $gitlab_default_theme              = undef # Color Theme - 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (default: 2)
+  $gitlab_signup_enabled             = undef # Anyone can create an account (default: true)
+  $gitlab_signin_enabled             = undef # Sign in with hortname, eg. 'steve' vs 'steve@apple.com' (default: true)
 
-  $gitlab_default_projects_features_issues           = undef # true, enables light weight issue tracker on projects
-  $gitlab_default_projects_features_merge_requests   = undef # true, enables merge requests on projects
-  $gitlab_default_projects_features_wiki             = undef # true, enables light weight wiki on projects
-  $gitlab_default_projects_features_snippets         = undef # false, similar to github 'gits'
-  $gitlab_default_projects_features_visibility_level = undef # 'private' visibility can be 'public' 'internal' or 'private'
+  $gitlab_default_projects_features_issues           = undef # Enables light weight issue tracker on projects (default: true)
+  $gitlab_default_projects_features_merge_requests   = undef # Enables merge requests on projects (default: true)
+  $gitlab_default_projects_features_wiki             = undef # Enables light weight wiki on projects (default: true)
+  $gitlab_default_projects_features_snippets         = undef # Like github 'gits' (default: true)
+  $gitlab_default_projects_features_visibility_level = undef # Project visibility ['public' | 'internal' | 'private'] (default: 'private')
 
-  $issues_tracker_redmine               = undef # false, integrate with redmine issue tracker
+  $issues_tracker_redmine               = undef # Integrate with redmine issue tracker (default: false)
   $issues_tracker_redmine_title         = undef # 'title'
   $issues_tracker_redmine_project_url   = undef # 'http://foo/bar'
   $issues_tracker_redmine_issues_url    = undef # 'http://foo/bar'
@@ -84,7 +84,7 @@ class gitlab::params {
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  $omniauth_enabled                  = undef # false, Allows login via Google, twitter, ect..
+  $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
   $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
   $omniauth_providers                = '[]'  #TODO: Untested
@@ -102,13 +102,13 @@ class gitlab::params {
   $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories', Cannot be a symlink
   $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/', Cannot be a symlikn
   
-  $gitlab_shell_upload_pack    = undef # true
-  $gitlab_shell_receive_pack   = undef # true
+  $gitlab_shell_upload_pack    = undef # (default: true)
+  $gitlab_shell_receive_pack   = undef # (default: true)
   
-  $gitlab_shell_ssh_port       = undef # 22
+  $gitlab_shell_ssh_port       = undef # (default: 22)
   
   $git_bin_path                = undef # '/opt/gitlab/embedded/bin/git'
-  $git_max_size                = undef # 5242880 (5 MB) Incrase if large commits fail over https
+  $git_max_size                = undef # Incrase if large commits fail over https (default: 5242880) 5242880=5MB
   $git_timeout                 = undef # 10
 
 #
@@ -119,20 +119,20 @@ class gitlab::params {
   $extra_piwik_url           = undef
   $extra_piwik_site_id       = undef
   
-  $extra_sign_in_text        = undef # Allows for company logo/ name on login page. 
+  $extra_sign_in_text        = '[]' # Allows for company logo/name on login page. see 'tests/sign_in_text.pp' for an example
   
 #
 # 5. Omnibus customization
 # ==========================
-  $redis_port       = undef # 6379
-  $postgresql_port  = undef # 5432
-  $unicorn_port     = undef # 8080
+  $redis_port       = undef # (default: 6379)
+  $postgresql_port  = undef # (default: 5432)
+  $unicorn_port     = undef # (default: 8080)
 
   $git_data_dir     = undef # '/var/opt/gitlab/git-data'
-  $gitlab_username  = undef # 'gitlab'
-  $gitlab_group     = undef # 'gitlab'
+  $gitlab_username  = undef # (default: 'gitlab')
+  $gitlab_group     = undef # (default: 'gitlab')
 
-  $redirect_http_to_https   = undef #false, recomended to prevent users from connecting insecurely
+  $redirect_http_to_https   = undef # Rrecomended to prevent users from connecting insecurely (default: false)
   $ssl_certificate          = '/etc/gitlab/ssl/gitlab.crt'
   $ssl_certificate_key      = '/etc/gitlab/ssl/gitlab.key'
 
@@ -167,7 +167,7 @@ class gitlab::params {
   $svlogd_prefix    = nil # custom prefix for log messages
 
   # Enterprise Only Features
-  $udp_log_shipping_host = undef # '1.2.3.4' Ip of syslog server
-  $udp_log_shipping_port = undef # Optional, defaults to 514 (syslog)
+  $udp_log_shipping_host = undef # e.g. '1.2.3.4' Ip of syslog server
+  $udp_log_shipping_port = undef # syslog port (default: 514) 
 
 }

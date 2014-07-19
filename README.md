@@ -159,7 +159,7 @@ class { 'gitlab' :
   puppet_manage_config    => false,
 }
 ```
-
+[Manage /etc/gitlab/gitlab.rb manually](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
 
 
