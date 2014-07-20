@@ -13,7 +13,11 @@ env:
   - PUPPET_VERSION=3.6.0 FACTER_VERSION=2.1.0
   # This are not necessarily the versions of facter that corespond with puppet
 notifications:
-  email: false
+  email:
+    recipients:
+      - owenspencer@gmail.com
+    on_success: [change]
+    on_failure: [change]
 gemfile: .gemfile
 matrix:
   exclude:
