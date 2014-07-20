@@ -85,9 +85,9 @@ class gitlab::params {
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
   $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
-  $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
-  $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
-  $omniauth_providers                = undef
+  $omniauth_allow_single_sign_on     = false # CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
+  $omniauth_block_auto_created_users = true # Lockdown new omniauth accounts until they are approved
+  $omniauth_providers                = undef # See 'tests/omniauth.pp' for examples
 
 #
 # 3. Advanced settings

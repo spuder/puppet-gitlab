@@ -7,9 +7,10 @@ class { 'gitlab' :
 
 # Documented here: http://doc.gitlab.com/ce/integration/omniauth.html
 
-
-  omniauth_enabled => true,
-  omniauth_providers   => [
+  omniauth_enabled                  => true,
+  omniauth_allow_single_sign_on     => true,
+  omniauth_block_auto_created_users => false,
+  omniauth_providers                => [
   '{
     "name"   => "google_oauth2",
     "app_id" => "YOUR APP ID",
@@ -28,5 +29,7 @@ class { 'gitlab' :
     "app_secret" =>  "YOUR APP SECRET",
     "args"  => { "scope" =>  "user:email" }
   }'
-]
+],
+
+
 }
