@@ -63,7 +63,7 @@ gitlab_rails['ldap_user_filter'] = '<%= @ldap_user_filter %>'
 <% if @omniauth_enabled == true -%>
 gitlab_rails['omniauth_enabled'] = <%= @omniauth_enabled %>
 
-gitlab_rails['omniauth_providers'] = '<%= @omniauth_providers %>'
+gitlab_rails['omniauth_providers'] = <%= @omniauth_providers %>
 <% end -%>
 
 #

@@ -87,7 +87,7 @@ class gitlab::params {
   $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
   $omniauth_allow_single_sign_on     = undef #TODO: Implement in erb template
   $omniauth_block_auto_created_users = undef #TODO: Implement in erb template
-  $omniauth_providers                = '[]'  #TODO: Untested
+  $omniauth_providers                = undef
 
 #
 # 3. Advanced settings
@@ -119,7 +119,7 @@ class gitlab::params {
   $extra_piwik_url           = undef
   $extra_piwik_site_id       = undef
   
-  $extra_sign_in_text        = '[]' # Allows for company logo/name on login page. see 'tests/sign_in_text.pp' for an example
+  $extra_sign_in_text        = undef # Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
   
 #
 # 5. Omnibus customization
