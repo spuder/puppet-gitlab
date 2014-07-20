@@ -1,4 +1,8 @@
 ##Changelog
+2015-July-19 2.0.2
+- Fixes Vagrant documentation and updates Readme
+- Clarifies parameters in manifests/params.pp
+- Fixes typos in erb template
 
 2015-July-17: 2.0.1
 - Corrects enterprise download url instructions
