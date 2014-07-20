@@ -6,15 +6,15 @@ class { 'gitlab' :
 
   # Gitlab server settings
   gitlab_branch           => '7.0.0',
-  gitlab_release          => 'enterprise', # enterprise or basic
-  gitlab_download_prefix  => 'https://downloads-packages.s3.amazonaws.com/'
+  gitlab_release          => 'basic', # enterprise or basic
+  gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
-
+  external_url            => 'http://192.168.33.10',
 
 #
 # 1. GitLab app settings
 # ==========================
-  gitlab_email_from                 => 'foobar',
+  gitlab_email_from                 => 'gitlab@example.com',
   gitlab_default_projects_limit     => 10,
   gitlab_default_can_create_group   => true,
   gitlab_username_changing_enabled  => true,
@@ -28,17 +28,17 @@ class { 'gitlab' :
   gitlab_default_projects_features_snippets         => true, # false
   gitlab_default_projects_features_visibility_level => 'public', # 'private' # public internal or private
 
-  issues_tracker_redmine               => true,
-  issues_tracker_redmine_title         => undef,
-  issues_tracker_redmine_project_url   => undef,
-  issues_tracker_redmine_issues_url    => undef,
-  issues_tracker_redmine_new_issue_url => undef,
+  issues_tracker_redmine               => false,
+  issues_tracker_redmine_title         => undef, #'foo',
+  issues_tracker_redmine_project_url   => undef, #'http://foo.example.com',
+  issues_tracker_redmine_issues_url    => undef, #'http://foo.example.com',
+  issues_tracker_redmine_new_issue_url => undef, #'http://foo.example.com',
 
-  issues_tracker_jira               => true,
-  issues_tracker_jira_title         => undef,
-  issues_tracker_jira_project_url   => undef,
-  issues_tracker_jira_issues_url    => undef,
-  issues_tracker_jira_new_issue_url => undef,
+  issues_tracker_jira               => false,
+  issues_tracker_jira_title         => undef, #'foo',
+  issues_tracker_jira_project_url   => undef, #'http://foo.example.com',
+  issues_tracker_jira_issues_url    => undef, #'http://foo.example.com',
+  issues_tracker_jira_new_issue_url => undef, #'http://foo.example.com',
 
   gravatar_enabled    => true,
   gravatar_plain_url  => 'foo',
@@ -176,7 +176,7 @@ class { 'gitlab' :
   svlogd_udp       => nil, # transmit log messages via UDP
   svlogd_prefix    => nil, # custom prefix for log messages
 
-  udp_log_shipping_host = '1.2.3.', # '1.2.3.4' Ip of syslog server
-  udp_log_shipping_port = '514', # Optional, defaults to 514 (syslog)
+  udp_log_shipping_host => '192.0.2.0', # Ip of syslog server
+  udp_log_shipping_port => '514', # Optional, defaults to 514 (syslog)
 
 }

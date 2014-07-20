@@ -34,7 +34,7 @@ class gitlab::params {
 #
 # 1. GitLab app settings
 # ==========================
-  $gitlab_email_from                 = undef # 'gitlab.example.com'
+  $gitlab_email_from                 = undef # 'gitlab@example.com'
   $gitlab_default_projects_limit     = undef # How many projects a user can create (default: 10)
   $gitlab_default_can_create_group   = undef # Allow users to make own groups (default: true)
   $gitlab_username_changing_enabled  = undef # Allow users to change own username, not suggested if running ldap
@@ -167,7 +167,7 @@ class gitlab::params {
   $svlogd_prefix    = nil # custom prefix for log messages
 
   # Enterprise Only Features
-  $udp_log_shipping_host = undef # e.g. '1.2.3.4' Ip of syslog server
+  $udp_log_shipping_host = undef # e.g. '192.0.2.0' Ip of syslog server
   $udp_log_shipping_port = undef # syslog port (default: 514) 
 
 }
