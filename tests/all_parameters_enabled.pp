@@ -1,5 +1,7 @@
 class { 'gitlab' :
 
+# A test to verify that /etc/gitlab/gitlab.rb is generated properly
+
   # Manage Packages
   puppet_manage_config  => true,
   puppet_manage_backups => true,
@@ -28,17 +30,17 @@ class { 'gitlab' :
   gitlab_default_projects_features_snippets         => true, # false
   gitlab_default_projects_features_visibility_level => 'public', # 'private' # public internal or private
 
-  issues_tracker_redmine               => false,
-  issues_tracker_redmine_title         => undef, #'foo',
-  issues_tracker_redmine_project_url   => undef, #'http://foo.example.com',
-  issues_tracker_redmine_issues_url    => undef, #'http://foo.example.com',
-  issues_tracker_redmine_new_issue_url => undef, #'http://foo.example.com',
+  issues_tracker_redmine               => true,
+  issues_tracker_redmine_title         => 'foo',
+  issues_tracker_redmine_project_url   => 'http://foo.example.com',
+  issues_tracker_redmine_issues_url    => 'http://foo.example.com',
+  issues_tracker_redmine_new_issue_url => 'http://foo.example.com',
 
-  issues_tracker_jira               => false,
-  issues_tracker_jira_title         => undef, #'foo',
-  issues_tracker_jira_project_url   => undef, #'http://foo.example.com',
-  issues_tracker_jira_issues_url    => undef, #'http://foo.example.com',
-  issues_tracker_jira_new_issue_url => undef, #'http://foo.example.com',
+  issues_tracker_jira               => true,
+  issues_tracker_jira_title         => 'foo',
+  issues_tracker_jira_project_url   => 'http://foo.example.com',
+  issues_tracker_jira_issues_url    => 'http://foo.example.com',
+  issues_tracker_jira_new_issue_url => 'http://foo.example.com',
 
   gravatar_enabled    => true,
   gravatar_plain_url  => 'foo',
@@ -66,7 +68,7 @@ class { 'gitlab' :
   ldap_group_base  => '', # Example: 'OU=groups,DC=mycorp,DC=com'
   ldap_user_filter => '', # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
- omniauth_enabled                  => true,
+ omniauth_enabled                   => true,
   omniauth_allow_single_sign_on     => true,
   omniauth_block_auto_created_users => false,
   omniauth_providers                => [
@@ -98,8 +100,8 @@ class { 'gitlab' :
   satellites_path             => '/var/opt/gitlab/git-data/gitlab-satellites',
   
   # Backup
-  backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
-  backup_keep_time            => 0, #'0'             # default: 0 (forever) (in seconds), 604800 = 1 week
+  backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'
+  backup_keep_time            => 604800,
   
   gitlab_shell_path           => '/opt/gitlab/embedded/service/gitlab-shell/',
   
@@ -137,28 +139,28 @@ class { 'gitlab' :
   postgresql_port  => 5432, # 5432
   unicorn_port     => 8080, # 8080
 
-  git_data_dir     => '/var/opt/gitlab/git-data', # "/var/opt/gitlab/git-data"  
-  gitlab_username  => 'gitlab', # "gitlab"
-  gitlab_group     => 'gitlab', # "gitlab"
+  git_data_dir     => '/var/opt/gitlab/git-data',
+  gitlab_username  => 'gitlab',
+  gitlab_group     => 'gitlab',
 
-  redirect_http_to_https   => true, #true or false
+  redirect_http_to_https   => true,
   ssl_certificate          => "/etc/gitlab/ssl/gitlab.crt",
   ssl_certificate_key      => "/etc/gitlab/ssl/gitlab.key",
 
-  git_uid            => 1001, #1001
-  git_gid            => 1002, #1002
-  gitlab_redis_uid   => 998, #998
-  gitlab_redis_gid   => 1003, #1003
-  gitlab_psql_uid    => 997, #997
-  gitlab_psql_gid    => 1004, #1004
+  #git_uid            => 1001, 
+  #git_gid            => 1002,
+  #gitlab_redis_uid   => 998,
+  #gitlab_redis_gid   => 1003,
+  #gitlab_psql_uid    => 997,
+  #gitlab_psql_gid    => 1004,
 
-  aws_enable               => false, # Store images on amazon
+  aws_enable               => true, # Store images on amazon
   aws_access_key_id        => 'AKIA1111111111111UA',
   aws_secret_access_key    => 'secret',
   aws_bucket               => 'my_gitlab_bucket',
   aws_region               => 'us-east-1',
 
-  smtp_enable               => false, # Specify your own smtp server
+  smtp_enable               => true, # Specify your own smtp server
   smtp_address              => "smtp.server",
   smtp_port                 => 456,
   smtp_user_name            => "smtp user",
