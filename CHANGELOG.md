@@ -196,23 +196,6 @@ Instead of gitlab.foo.com, user can now make the url git.foo.com or any other su
 
 
 
- 
-
-
-
-
-
-
-  
-
- 
-
-
-
-
-
-
-
 
 
 
