@@ -218,6 +218,13 @@ class gitlab (
     }
   }
 
+  # Verify parameters are valid for the release of gitlab
+  if $gitlab_release != 'enterprise' {
+    if $ldap_sync_ssh_keys {
+      fail("\$ldap_sync_ssh_keys is only available in enterprise edtition, gitlab_release is: \'${gitlab_release}\'")
+    }
+  }
+
   # Gitlab only supplies omnibus downloads for few select operating systems.
   # Warn the user they may be using an unsupported OS
   # https://about.gitlab.com/downloads/
