@@ -21,7 +21,7 @@
 class gitlab::params {
 
   # Manage Packages
-  $puppet_manage_config  = undef  # Manages /etc/gitlab/gitlab.rb
+  $puppet_manage_config  = true  # Manages /etc/gitlab/gitlab.rb
   $puppet_manage_backups = true   # Creates cron job to backup at 2am
 
   # Gitlab server settings

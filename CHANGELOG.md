@@ -1,8 +1,10 @@
 ##Changelog
-2015-July-19 2.0.2
+
+2015-July-22: 2.0.2
 - Fixes Vagrant documentation and updates Readme
 - Clarifies parameters in manifests/params.pp
 - Fixes typos in erb template
+- Sets puppet_manage_config to true by default (was undef) issue #65
 
 2015-July-17: 2.0.1
 - Corrects enterprise download url instructions
@@ -18,7 +20,7 @@
 - Provides ability to manually configure gitlab or use puppet for configuration
 - Nearly every gitlab configuration option is now exposed as class parameters (see params.pp)
 
-
+-------------------------------------------------------------------------------
 
 2014-June-22: 1.11.2
 - Increases timeout on bundle (Issue #61, thanks mrparity)
