@@ -103,13 +103,15 @@ class gitlab (
   $ldap_method    = $::gitlab::params::ldap_method,
   $ldap_bind_dn   = $::gitlab::params::ldap_bind_dn,
   $ldap_password  = $::gitlab::params::ldap_password,
-  
+
   $ldap_allow_username_or_email_login = $::gitlab::params::ldap_allow_username_or_email_login,
   $ldap_base                          = $::gitlab::params::ldap_base,
-  
+
   $ldap_group_base  = $::gitlab::params::ldap_group_base,
   $ldap_user_filter = $::gitlab::params::ldap_user_filter,
-  
+
+  $ldap_sync_ssh_keys = $::gitlab::params::ldap_sync_ssh_keys,
+
   $omniauth_enabled                   = $::gitlab::params::omniauth_enabled,
   $omniauth_allow_single_sign_on      = $::gitlab::params::omniauth_allow_single_sign_on,
   $omniauth_block_auto_created_users  = $::gitlab::params::omniauth_block_auto_created_users,
@@ -207,6 +209,13 @@ class gitlab (
   }
   if versioncmp("${::facterversion}", '1.7.0') < 0 {
     fail("Gitlab requires facter 1.7.0 or greater, found: \'${::facterversion}\'")
+  }
+
+  # Verify prameters are valid for the version of gitlab
+  if versioncmp("${gitlab_branch}", '7.1.0') < 0 {
+    if $ldap_sync_ssh_keys {
+      fail("\$ldap_sync_ssh_keys is only available in gitlab 7.1.0 or greater, found: \'${gitlab_branch}\'")
+    }
   }
 
   # Gitlab only supplies omnibus downloads for few select operating systems.

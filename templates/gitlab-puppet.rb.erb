@@ -53,7 +53,9 @@ gitlab_rails['omniauth_allow_single_sign_on'] = <%= @omniauth_allow_single_sign_
 gitlab_rails['omniauth_block_auto_created_users']  = <%= @omniauth_block_auto_created_users %>
 gitlab_rails['omniauth_providers'] = <%= @omniauth_providers %>
 <% end -%>
-#
+<% if @ldap_sync_ssh_keys and @gitlab_release == 'enterprise' %>
+gitlab_rails['ldap_sync_ssh_keys'] = 'sshpublickey'
+<% end -%>
 # 3. Advanced settings
 # ==========================
 <% if @satellites_path  -%>gitlab_rails['satellites_path'] = '<%= @satellites_path %>'  <% end %>

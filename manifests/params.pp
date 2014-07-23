@@ -84,6 +84,9 @@ class gitlab::params {
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
   $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
+  # GitLab Enterprise Edition only (Requires 7.1.0 or greater)
+  $ldap_sync_ssh_keys = undef # e.g. 'sshpublickey' - The object name in ldap where ssh keys are stored
+
   $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
   $omniauth_allow_single_sign_on     = false # CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
   $omniauth_block_auto_created_users = true # Lockdown new omniauth accounts until they are approved

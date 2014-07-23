@@ -158,7 +158,7 @@ describe 'gitlab', :type => 'class' do
       {
         :gitlab_branch => '7.0.0',
         :external_url  => 'http://gitlab.example.com',
-        :puppet_manage_backups => false,
+        :puppet_manage_config => true,
       }
     }
     let(:facts) {
@@ -170,7 +170,7 @@ describe 'gitlab', :type => 'class' do
         :operatingsystemrelease => '6.5'
       }
     }
-    it { should_not contain_class('gitlab::config') }
+    it { should contain_class('gitlab::config') }
   end
 
 # Expect class gitlab::config absent when $puppet_manage_config is false
@@ -179,7 +179,7 @@ describe 'gitlab', :type => 'class' do
       {
         :gitlab_branch => '7.0.0',
         :external_url  => 'http://gitlab.example.com',
-        :puppet_manage_backups => false,
+        :puppet_manage_config => false,
       }
     }
     let(:facts) {
@@ -204,7 +204,6 @@ describe 'gitlab', :type => 'class' do
         :external_url  => 'http://gitlab.example.com',
         :gitlab_download_link => 'https://foo.example.com',
         :gitlab_release => 'undef',
-        :puppet_manage_backups => false,
       }
     }
     let(:facts) {
@@ -228,7 +227,6 @@ describe 'gitlab', :type => 'class' do
         :gitlab_branch => '7.0.0',
         :external_url  => 'http://gitlab.example.com',
         :gitlab_release => 'enterprise',
-        :puppet_manage_backups => false,
       }
     }
     let(:facts) {
@@ -252,7 +250,6 @@ describe 'gitlab', :type => 'class' do
         :gitlab_branch => '7.0.0',
         :external_url  => 'http://gitlab.example.com',
         :gitlab_release => 'undef',
-        :puppet_manage_backups => false,
       }
     }
     let(:facts) {
@@ -269,6 +266,29 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
+# Expect failure when user sets ldap_sync_ssh_keys but running gitlab < 7.1.0
+    context 'when $ldap_sync_ssh_keys is provided, but gitlab_branch is less than 7.1.0' do
+    let(:params) {
+      {
+        :gitlab_branch => '7.0.0',
+        :external_url  => 'http://gitlab.example.com',
+        :gitlab_release => 'undef',
+        :ldap_sync_ssh_keys => 'fake-ssh-key',
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion => ENV['PUPPET_VERSION'], 
+        :facterversion => ENV['FACTER_VERSION'],
+        :osfamily => 'RedHat',
+        :operatingsystem => 'CentOS',
+        :operatingsystemrelease => '6.5'
+      }
+    }
+    it 'we fail' do
+      expect { subject }.to raise_error(/ldap_sync_ssh_keys is only available in gitlab 7.1.0 or greater/)
+    end
+  end
 
 
 
