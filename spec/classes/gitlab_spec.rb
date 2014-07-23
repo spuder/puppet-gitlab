@@ -114,17 +114,17 @@ describe 'gitlab', :type => 'class' do
   context 'when $puppet_manage_backups is true' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch         => '7.0.0',
+        :external_url          => 'http://gitlab.example.com',
         :puppet_manage_backups => true,
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -135,17 +135,17 @@ describe 'gitlab', :type => 'class' do
   context 'when $puppet_manage_backups is false' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch         => '7.0.0',
+        :external_url          => 'http://gitlab.example.com',
         :puppet_manage_backups => false,
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -156,17 +156,17 @@ describe 'gitlab', :type => 'class' do
     context 'when $puppet_manage_config is true' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
         :puppet_manage_config => true,
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -177,17 +177,17 @@ describe 'gitlab', :type => 'class' do
     context 'when $puppet_manage_config is false' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
         :puppet_manage_config => false,
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -200,18 +200,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $gitlab_download_link is provided, but gitlab_release is undef' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
         :gitlab_download_link => 'https://foo.example.com',
-        :gitlab_release => 'undef',
+        :gitlab_release       => 'undef',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -224,17 +224,17 @@ describe 'gitlab', :type => 'class' do
     context 'when $gitlab_download_link is provided, but gitlab_release is undef' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch  => '7.0.0',
+        :external_url   => 'http://gitlab.example.com',
         :gitlab_release => 'enterprise',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -247,17 +247,17 @@ describe 'gitlab', :type => 'class' do
     context 'when $gitlab_download_link is provided, but gitlab_release is undef' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
+        :gitlab_branch  => '7.0.0',
+        :external_url   => 'http://gitlab.example.com',
         :gitlab_release => 'undef',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -270,18 +270,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $ldap_sync_ssh_keys is provided, but gitlab_branch is less than 7.1.0' do
     let(:params) {
       {
-        :gitlab_branch => '7.0.0',
-        :external_url  => 'http://gitlab.example.com',
-        :gitlab_release => 'enterprise',
+        :gitlab_branch      => '7.0.0',
+        :external_url       => 'http://gitlab.example.com',
+        :gitlab_release     => 'enterprise',
         :ldap_sync_ssh_keys => 'fake-ssh-key',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -294,18 +294,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $ldap_sync_ssh_keys is provided, but gitlab_branch is less than 7.1.0' do
     let(:params) {
       {
-        :gitlab_branch => '7.1.0',
-        :external_url  => 'http://gitlab.example.com',
-        :gitlab_release => 'basic',
+        :gitlab_branch      => '7.1.0',
+        :external_url       => 'http://gitlab.example.com',
+        :gitlab_release     => 'basic',
         :ldap_sync_ssh_keys => 'fake-ssh-key',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -318,18 +318,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $ldap_sync_ssh_keys is provided, but gitlab_branch is less than 7.1.0' do
     let(:params) {
       {
-        :gitlab_branch => '7.1.0',
-        :external_url  => 'http://gitlab.example.com',
-        :gitlab_release => 'undef',
+        :gitlab_branch      => '7.1.0',
+        :external_url       => 'http://gitlab.example.com',
+        :gitlab_release     => 'undef',
         :ldap_sync_ssh_keys => 'fake-ssh-key',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -342,18 +342,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $ldap_admin_group is provided, but gitlab_branch is less than 7.1.0' do
     let(:params) {
       {
-        :gitlab_branch => '7.1.0',
-        :external_url  => 'http://gitlab.example.com',
-        :gitlab_release => 'basic',
+        :gitlab_branch    => '7.1.0',
+        :external_url     => 'http://gitlab.example.com',
+        :gitlab_release   => 'basic',
         :ldap_admin_group => 'GitLab administrators',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }
@@ -366,18 +366,18 @@ describe 'gitlab', :type => 'class' do
     context 'when $ldap_admin_group is provided, but gitlab_branch is less than 7.1.0' do
     let(:params) {
       {
-        :gitlab_branch => '7.1.0',
-        :external_url  => 'http://gitlab.example.com',
-        :gitlab_release => 'undef',
+        :gitlab_branch    => '7.1.0',
+        :external_url     => 'http://gitlab.example.com',
+        :gitlab_release   => 'undef',
         :ldap_admin_group => 'GitLab administrators',
       }
     }
     let(:facts) {
       {
-        :puppetversion => ENV['PUPPET_VERSION'], 
-        :facterversion => ENV['FACTER_VERSION'],
-        :osfamily => 'RedHat',
-        :operatingsystem => 'CentOS',
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5'
       }
     }

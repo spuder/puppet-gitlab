@@ -90,7 +90,7 @@ class gitlab::params {
 
   $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
   $omniauth_allow_single_sign_on     = false # CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
-  $omniauth_block_auto_created_users = true # Lockdown new omniauth accounts until they are approved
+  $omniauth_block_auto_created_users = true  # Lockdown new omniauth accounts until they are approved
   $omniauth_providers                = undef # See 'tests/omniauth.pp' for examples
 
 #
