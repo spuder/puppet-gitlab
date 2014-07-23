@@ -130,7 +130,7 @@ class gitlab::install inherits ::gitlab {
   }
   # Install gitlab with the appropriate package manager (rpm or dpkg)
   package { 'gitlab':
-    ensure   => installed,
+    ensure   => latest,
     source   => "${download_location}/${omnibus_filename}",
     provider => "${package_manager}",
     require  => Exec['download gitlab'],

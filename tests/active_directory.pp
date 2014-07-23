@@ -1,7 +1,7 @@
 class { 'gitlab' : 
     puppet_manage_config              => true,
     puppet_manage_backups             => true,
-    gitlab_branch                     => '7.0.0',
+    gitlab_branch                     => '7.1.0',
     external_url                      => 'http://192.168.33.10',
     ldap_enabled                      => true,
     ldap_host                         => 'foo.example.com',

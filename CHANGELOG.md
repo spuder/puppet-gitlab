@@ -1,10 +1,12 @@
 ##Changelog
 
-2015-July-22: 2.0.2
+2015-July-23: 2.0.2
 - Fixes Vagrant documentation and updates Readme
 - Clarifies parameters in manifests/params.pp
 - Fixes typos in erb template
 - Sets puppet_manage_config to true by default (was undef) issue #65
+- Puppet ensures latest available package is installed (change gitlab_branch to update)
+- Adds support for 7.1.0 featurs: ldap_sync_ssh_keys and ldap_admin_group
 
 2015-July-17: 2.0.1
 - Corrects enterprise download url instructions
