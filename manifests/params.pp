@@ -86,6 +86,7 @@ class gitlab::params {
 
   # GitLab Enterprise Edition only (Requires 7.1.0 or greater)
   $ldap_sync_ssh_keys = undef # e.g. 'sshpublickey' - The object name in ldap where ssh keys are stored
+  $ldap_admin_group   = undef # e.g. 'GitLab administrators' - The object name in ldap that matches administrator
 
   $omniauth_enabled                  = undef # Allows login via Google, twitter, Github ect..
   $omniauth_allow_single_sign_on     = false # CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9

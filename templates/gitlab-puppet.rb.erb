@@ -54,8 +54,12 @@ gitlab_rails['omniauth_block_auto_created_users']  = <%= @omniauth_block_auto_cr
 gitlab_rails['omniauth_providers'] = <%= @omniauth_providers %>
 <% end -%>
 <% if @ldap_sync_ssh_keys and @gitlab_release == 'enterprise' %>
-gitlab_rails['ldap_sync_ssh_keys'] = 'sshpublickey'
+gitlab_rails['ldap_sync_ssh_keys'] = '<%= @ldap_sync_ssh_keys %>'
 <% end -%>
+<% if @ldap_admin_group and @gitlab_release == 'enterprise' %>
+gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
+<% end -%>
+
 # 3. Advanced settings
 # ==========================
 <% if @satellites_path  -%>gitlab_rails['satellites_path'] = '<%= @satellites_path %>'  <% end %>

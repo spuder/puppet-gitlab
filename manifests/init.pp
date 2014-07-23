@@ -111,6 +111,7 @@ class gitlab (
   $ldap_user_filter = $::gitlab::params::ldap_user_filter,
 
   $ldap_sync_ssh_keys = $::gitlab::params::ldap_sync_ssh_keys,
+  $ldap_admin_group   = $::gitlab::params::ldap_admin_group,
 
   $omniauth_enabled                   = $::gitlab::params::omniauth_enabled,
   $omniauth_allow_single_sign_on      = $::gitlab::params::omniauth_allow_single_sign_on,
@@ -216,12 +217,18 @@ class gitlab (
     if $ldap_sync_ssh_keys {
       fail("\$ldap_sync_ssh_keys is only available in gitlab 7.1.0 or greater, found: \'${gitlab_branch}\'")
     }
+    if $ldap_admin_group {
+      fail("\$ldap_admin_group is only available in gitlab 7.1.0 or greater, found: \'${gitlab_branch}\'")
+    }
   }
 
   # Verify parameters are valid for the release of gitlab
   if $gitlab_release != 'enterprise' {
     if $ldap_sync_ssh_keys {
       fail("\$ldap_sync_ssh_keys is only available in enterprise edtition, gitlab_release is: \'${gitlab_release}\'")
+    }
+    if $ldap_admin_group {
+      fail("\$ldap_admin_group is only available in enterprise edtition, gitlab_release is: \'${gitlab_release}\'")
     }
   }
 
