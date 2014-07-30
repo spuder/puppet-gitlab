@@ -57,7 +57,7 @@ Use Vagrant to quickly spin up a non production, test vm.
 
 The default username and password are:
 
-    admin@local.host
+    root
     5iveL!fe
 
 ####Download
@@ -178,9 +178,17 @@ This puppet module supports gitlab enterprise installations. You can enable addi
     }
 
 
+## Upgrade
 
+Puppet will always ensure that the latest version of the gitlab package is installed. 
+To upgrade:
 
+1. Verify a current backup is present. See [Offical Instructions](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
+2. Change the `gitlab_branch` parameter to the new version (e.g. 7.1.0 -> 7.2.0)
+3. Wait for next puppet run
+4. You may need to restart gitlab `sudo gitlab-ctl restart`
 
+*Note: Puppet can automatically manage backups if* `puppet_manage_backups => true`
 ##Limitations
 
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
