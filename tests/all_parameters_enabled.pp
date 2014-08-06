@@ -68,8 +68,8 @@ class { 'gitlab' :
   ldap_group_base  => '', # Example: 'OU=groups,DC=mycorp,DC=com'
   ldap_user_filter => '', # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
-  ldap_sync_ssh_keys => undef # e.g. 'sshpublickey' - The object name in ldap where ssh keys are stored
-  ldap_admin_group   => undef # e.g. 'GitLab administrators' - The object name in ldap that matches administrator
+  ldap_sync_ssh_keys => undef, # e.g. 'sshpublickey' - The object name in ldap where ssh keys are stored
+  ldap_admin_group   => undef, # e.g. 'GitLab administrators' - The object name in ldap that matches administrator
 
   omniauth_enabled                   => true,
   omniauth_allow_single_sign_on     => true,
