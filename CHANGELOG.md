@@ -1,5 +1,9 @@
 ##Changelog
 
+2015-xxx-xx: 2.?.?
+- Fixes missing commas in all_parameters_enabled
+- Code documentation improvements
+
 2015-July-23: 2.0.2
 - Fixes Vagrant documentation and updates Readme
 - Clarifies parameters in manifests/params.pp

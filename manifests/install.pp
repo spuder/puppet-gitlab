@@ -78,39 +78,48 @@ class gitlab::install inherits ::gitlab {
   }
 
   # There are 6 combinations of $gitlab_download_link and $gitlab_release, validate them and conditionally set $gitlab_url
+  # If user specified $gitlab_download_link:
   if $::gitlab::gitlab_download_link {
     case $::gitlab::gitlab_release {
       undef : {
+        # User did not set $gitlab_release, assume basic
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
+        # Basic version, use user supplied url, less common configuration
         warning("\$gitlab_release is ${::gitlab::gitlab_release} and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       'enterprise': {
+        # Enterprise verison, use user supplied url. This is the only valid configuration for enterprise users
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = "${::gitlab::gitlab_download_link}"
       }
       default : {
+        # $gitlab_release is neither basic nor enterprise, invalid input
         fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
       }
     }
   }
+  # If user did not specify $gitlab_download_link
   else {
     case $::gitlab::gitlab_release {
       undef, 'basic' : {
+        # Basic version, use default derived url. This is the most common configuration
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
         $gitlab_url = "${download_prefix}/${::operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
       }
       'enterprise': {
+        # Enterprise version requires the url be provided, fail
         fail('You must specify $gitlab_download_link when $gitlab_release is set to \'enterprise\'')
       }
       default : {
+        # $gitlab_release is neither basic nor enterprise, invalid input
         fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
       }
     }
