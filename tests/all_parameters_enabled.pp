@@ -1,6 +1,10 @@
 class { 'gitlab' :
 
-# A test to verify that /etc/gitlab/gitlab.rb is generated properly
+# Don't blindly apply this class. It is only used for 2 purposes:
+
+# 1. For development to verify that all parameters are incorperated into the erb template properly
+# 2. As reference to show *how* to implement each parameter
+
 
   # Manage Packages
   puppet_manage_config  => true,
