@@ -16,7 +16,7 @@
 #
 # Copyright 2014 Spencer Owen, unless otherwise noted.
 #
-class gitlab::prerequisites inherits ::gitlab {
+class gitlab::packages inherits ::gitlab {
 
   # The install documentation recomends different mail apps for different releases
   # https://about.gitlab.com/downloads/

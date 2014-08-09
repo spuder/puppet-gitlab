@@ -51,6 +51,8 @@ class gitlab (
 
   $puppet_manage_config    = $::gitlab::params::puppet_manage_config,
   $puppet_manage_backups   = $::gitlab::params::puppet_manage_backups,
+  $puppet_manage_packages  = $::gitlab::params::puppet_manage_packages,
+
 
   $gitlab_branch           = $::gitlab::params::gitlab_branch,
   $gitlab_release          = $::gitlab::params::gitlab_release,
@@ -246,23 +248,38 @@ class gitlab (
   }
 
   # Set the order that the manifests are executed in
-  if $puppet_manage_config == true {
+  if $puppet_manage_config  == true {
     notice('Puppet will manage the configuration file because $puppet_manage_config is true')
-    include ::gitlab::prerequisites
     include ::gitlab::install
     include ::gitlab::config
-    Class['::gitlab::prerequisites'] -> Class['::gitlab::install'] -> Class['::gitlab::config']
+    Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
-    notice('Puppet will not manage the configuration file because $puppet_manage_config is false')
-    include ::gitlab::prerequisites
-    include ::gitlab::install
-      Class['::gitlab::prerequisites'] -> Class['::gitlab::install']
+    info('Puppet is not manageing /opt/gitlab/gitlab.rb because $puppet_manage_config is true')
   }
 
-  if $puppet_manage_backups {
-    include ::gitlab::backup
+  if $puppet_manage_packages == true {
+    notice('Puppet will manage packages because $puppet_manage_packages is true')
+    include ::gitlab::install
+    include ::gitlab::packages
+    Class['::gitlab::packages'] -> Class['::gitlab::install']
   }
+  else {
+    warning('$puppet_manage_packages is false, assuming postfix and openssl are already present ')
+  }
+
+  if $puppet_manage_backups == true {
+    notice('Puppet will manage backups because $puppet_manage_backups is true')
+    include ::gitlab::install
+    include ::gitlab::backup
+    Class['::gitlab::install'] -> Class['::gitlab::backup']
+  }
+  else {
+    warning('Puppet is not creating gitlab backups, recomend setting $puppet_manage_backups => true')
+  }
+
+  # If all 3 $puppet_manage_* parametrs are false, then just install gitlab
+  include ::gitlab::install
 
 }# end gitlab
 

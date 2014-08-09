@@ -109,6 +109,7 @@ Basic Example with https
 class { 'gitlab' : 
   puppet_manage_config   => true,
   puppet_manage_backups  => true,
+  puppet_manage_packages => true,
   gitlab_branch          => '7.0.0',
   external_url           => 'http://gitlab.example.com',
   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
@@ -126,6 +127,7 @@ Ldap with Active Directory
 class { 'gitlab' : 
     puppet_manage_config              => true,
     puppet_manage_backups             => true,
+    puppet_manage_packages            => true,
     gitlab_branch                     => '7.0.0',
     external_url                      => 'http://gitlab.example.com',
     ldap_enabled                      => true,
@@ -143,6 +145,18 @@ class { 'gitlab' :
     gitlab_default_projects_features_visibility_level => 'internal',
 }
 ```
+
+Manage packages, backups and config file manually
+```
+class { 'gitlab' : 
+  puppet_manage_config   => false,
+  puppet_manage_backups  => false,
+  puppet_manage_packages => false,
+  gitlab_branch          => '7.0.0',
+  external_url           => 'http://foo.bar',
+}
+```
+
 
 More examples can be found in the [tests directory](https://github.com/spuder/puppet-gitlab/blob/master/tests/). User submitted examples are welcome. 
 
@@ -189,6 +203,7 @@ To upgrade:
 4. You may need to restart gitlab `sudo gitlab-ctl restart`
 
 *Note: Puppet can automatically manage backups if* `puppet_manage_backups => true`
+
 ##Limitations
 
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
