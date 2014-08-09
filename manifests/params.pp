@@ -30,7 +30,7 @@ class gitlab::params {
   $gitlab_release        = 'basic' # 'basic' | 'enterprise' - (default: basic)
   $gitlab_download_link  = undef   # e.g. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
 
-  $external_url            = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
+  $external_url          = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
 #
 # 1. GitLab app settings
