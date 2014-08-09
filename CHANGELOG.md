@@ -1,8 +1,12 @@
 ##Changelog
 
-2015-xxx-xx: 2.?.?
-- Fixes missing commas in all_parameters_enabled
+2015-Aug-9: 2.1.0
+- Adds $gitlab_manage_packages parameter (issue #69)
+- Fixes problem where unable to set values false (issue #68)
+- Fixes missing commas in all_parameters_enabled.pp
 - Code documentation improvements
+- Renames prerequisites.pp to packages.pp
+- Adds Contributing.md
 
 2015-July-23: 2.0.2
 - Fixes Vagrant documentation and updates Readme
