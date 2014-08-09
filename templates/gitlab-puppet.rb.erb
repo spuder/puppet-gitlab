@@ -17,15 +17,19 @@
 <% if defined?(@gitlab_default_projects_features_wiki) -%>gitlab_rails['gitlab_default_projects_features_wiki'] = <%= @gitlab_default_projects_features_wiki %><% end %>
 <% if defined?(@gitlab_default_projects_features_snippets) -%>gitlab_rails['gitlab_default_projects_features_snippets'] = <%= @gitlab_default_projects_features_snippets %>  <% end %>
 <% if @gitlab_default_projects_features_visibility_level -%>gitlab_rails['gitlab_default_projects_features_visibility_level'] = '<%= @gitlab_default_projects_features_visibility_level %>'<% end %>
-<% if defined?(@issues_tracker_redmine)               -%>gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %>                                  <% end %>
-<% if @issues_tracker_redmine_title         -%>gitlab_rails['issues_tracker_redmine_title'] = '<%= @issues_tracker_redmine_title %>'                    <% end %>
-<% if @issues_tracker_redmine_project_url   -%>gitlab_rails['issues_tracker_redmine_project_url'] = '<%= @issues_tracker_redmine_project_url %>'        <% end %>
-<% if @issues_tracker_redmine_issues_url    -%>gitlab_rails['issues_tracker_redmine_issues_url'] = '<%= @issues_tracker_redmine_issues_url %>'          <% end %>
-<% if @issues_tracker_redmine_new_issue_url -%>gitlab_rails['issues_tracker_redmine_new_issue_url'] = '<%= @issues_tracker_redmine_new_issue_url %>'    <% end %>
-<% if defined?(@issues_tracker_jira)                  -%>gitlab_rails['issues_tracker_jira'] = <%= @issues_tracker_jira %>                                <% end %>
-<% if @issues_tracker_jira_title            -%>gitlab_rails['issues_tracker_jira_title'] = '<%= @issues_tracker_jira_title %>'                  <% end %>
-<% if @issues_tracker_jira_project_url      -%>gitlab_rails['issues_tracker_jira_project_url'] = '<%= @issues_tracker_jira_project_url %>'      <% end %>
-<% if @issues_tracker_jira_issues_url       -%>gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issues_url %>'        <% end %>
+<% if @issues_tracker_redmine == true %>
+gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %>                                  
+gitlab_rails['issues_tracker_redmine_title'] = '<%= @issues_tracker_redmine_title %>'                    
+gitlab_rails['issues_tracker_redmine_project_url'] = '<%= @issues_tracker_redmine_project_url %>'        
+gitlab_rails['issues_tracker_redmine_issues_url'] = '<%= @issues_tracker_redmine_issues_url %>'          
+gitlab_rails['issues_tracker_redmine_new_issue_url'] = '<%= @issues_tracker_redmine_new_issue_url %>'    
+<% end %>
+<% if @issues_tracker_jira == true -%>
+gitlab_rails['issues_tracker_jira'] = <%= @issues_tracker_jira %>
+gitlab_rails['issues_tracker_jira_title'] = '<%= @issues_tracker_jira_title %>'
+gitlab_rails['issues_tracker_jira_project_url'] = '<%= @issues_tracker_jira_project_url %>'
+gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issues_url %>'        
+<% end %>
 <% if defined?(@gravatar_enabled)     %>gitlab_rails['gravatar_enabled'] = <%= @gravatar_enabled %>          <% end %>
 <% if @gravatar_plain_url   %>gitlab_rails['gravatar_plain_url'] = '<%= @gravatar_plain_url %>'    <% end %>
 <% if @gravatar_ssl_url     %>gitlab_rails['gravatar_ssl_url'] = '<%= @gravatar_ssl_url %>'        <% end %>
@@ -77,7 +81,7 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 #
 # 4. Extra customization
 # ==========================
-<% if @extra_google_analytics_id  -%>gitlab_rails['extra_google_analytics_id'] = '<%= @extra_google_analytics_id %> ' <% end %>
+<% if @extra_google_analytics_id  -%>gitlab_rails['extra_google_analytics_id'] = '<%= @extra_google_analytics_id %>'  <% end %>
 <% if @extra_piwik_url            -%>gitlab_rails['extra_piwik_url'] = '<%= @extra_piwik_url %> '                     <% end %>
 <% if @extra_piwik_site_id        -%>gitlab_rails['extra_piwik_site_id'] = '<%= @extra_piwik_site_id %>'              <% end %>
 <% if @extra_sign_in_text         -%>gitlab_rails['extra_sign_in_text'] = '<%= @extra_sign_in_text %>'                <% end %>
