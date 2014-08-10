@@ -18,6 +18,9 @@
 - Create branch (e.g `git checkout -b issue42` )
 - Add spec tests to `spec/classes/gitlab_spec.rb`   
 Additional information [can be found here](http://puppetlabs.com/blog/the-next-generation-of-puppet-module-testing)
+
+ ```gem install puppetlabs_spec_helper```
+    
 - Run rake tests
 
     ```
