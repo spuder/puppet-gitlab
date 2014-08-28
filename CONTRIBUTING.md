@@ -1,8 +1,7 @@
-##Pull requests of all kinds are encouraged
+Pull requests of all kinds are encouraged
 
 
-
-### Average Joe Pull Request Procedure:
+## Average Joe Pull Request Procedure:
 
 - Fork project
 - Write code
@@ -10,7 +9,7 @@
 
 ---
 
-### Rockstar Pull Request Procedure:
+## Rockstar Pull Request Procedure:
 
 
 - Fork project
@@ -30,3 +29,13 @@ Additional information [can be found here](http://puppetlabs.com/blog/the-next-g
     ```
     
 - If tests pass, create merge request
+
+--- 
+
+## OCD
+
+If you have OCD, and you modify the erb template, the init.pp or the params.pp, try and keep them in the same order and with the same amount of spacing between lines as the official gitlab config files. 
+
+https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/templates/default/gitlab.yml.erb  
+
+https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/attributes/default.rb
