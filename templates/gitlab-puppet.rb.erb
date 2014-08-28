@@ -18,21 +18,27 @@
 <% if defined?(@gitlab_default_projects_features_snippets) -%>gitlab_rails['gitlab_default_projects_features_snippets'] = <%= @gitlab_default_projects_features_snippets %>  <% end %>
 <% if @gitlab_default_projects_features_visibility_level -%>gitlab_rails['gitlab_default_projects_features_visibility_level'] = '<%= @gitlab_default_projects_features_visibility_level %>'<% end %>
 <% if @issues_tracker_redmine == true %>
-gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %>                                  
-gitlab_rails['issues_tracker_redmine_title'] = '<%= @issues_tracker_redmine_title %>'                    
-gitlab_rails['issues_tracker_redmine_project_url'] = '<%= @issues_tracker_redmine_project_url %>'        
-gitlab_rails['issues_tracker_redmine_issues_url'] = '<%= @issues_tracker_redmine_issues_url %>'          
-gitlab_rails['issues_tracker_redmine_new_issue_url'] = '<%= @issues_tracker_redmine_new_issue_url %>'    
+gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %>
+gitlab_rails['issues_tracker_redmine_title'] = '<%= @issues_tracker_redmine_title %>'
+gitlab_rails['issues_tracker_redmine_project_url'] = '<%= @issues_tracker_redmine_project_url %>'
+gitlab_rails['issues_tracker_redmine_issues_url'] = '<%= @issues_tracker_redmine_issues_url %>'
+gitlab_rails['issues_tracker_redmine_new_issue_url'] = '<%= @issues_tracker_redmine_new_issue_url %>'
 <% end %>
 <% if @issues_tracker_jira == true -%>
 gitlab_rails['issues_tracker_jira'] = <%= @issues_tracker_jira %>
 gitlab_rails['issues_tracker_jira_title'] = '<%= @issues_tracker_jira_title %>'
 gitlab_rails['issues_tracker_jira_project_url'] = '<%= @issues_tracker_jira_project_url %>'
-gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issues_url %>'        
+gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issues_url %>'
 <% end %>
 <% if defined?(@gravatar_enabled)     %>gitlab_rails['gravatar_enabled'] = <%= @gravatar_enabled %>          <% end %>
 <% if @gravatar_plain_url   %>gitlab_rails['gravatar_plain_url'] = '<%= @gravatar_plain_url %>'    <% end %>
 <% if @gravatar_ssl_url     %>gitlab_rails['gravatar_ssl_url'] = '<%= @gravatar_ssl_url %>'        <% end %>
+
+#
+# High availability
+#
+<% if defined?(@high_availability_mountpoint) %>high_availability['mountpoint'] = '<%= @high_availability_mountpoint %>'<% end %>
+
 #
 # 2. Auth settings
 # # ==========================
@@ -96,7 +102,7 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 <% if @gitlab_group     -%>user['group'] = '<%= @gitlab_group  %>'       <% end %>
 <% if @redirect_http_to_https == true -%>
 nginx['redirect_http_to_https'] = <%= @redirect_http_to_https %>
-nginx['ssl_certificate'] = '<%= @ssl_certificate -%>' 
+nginx['ssl_certificate'] = '<%= @ssl_certificate -%>'
 nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
 <% end -%>
 <% if @git_uid          -%>user['uid'] = <%= @git_uid -%>               <% end %>
