@@ -11,7 +11,7 @@ class { 'gitlab' :
   puppet_manage_backups => true,
 
   # Gitlab server settings
-  gitlab_branch           => '7.0.0',
+  gitlab_branch           => '7.2.0',
   gitlab_release          => 'basic', # enterprise or basic
   gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
@@ -187,5 +187,7 @@ class { 'gitlab' :
 
   udp_log_shipping_host => '192.0.2.0', # Ip of syslog server
   udp_log_shipping_port => '514', # Optional, defaults to 514 (syslog)
+
+  high_availability_mountpoint => '/var/foo',
 
 }

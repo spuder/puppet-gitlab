@@ -1,5 +1,8 @@
 ##Changelog
 
+2015-xxx-x: 2.2.0
+- Adds $high_availability_mountpoint (issue #70, thanks itguy614)
+
 2015-Aug-9: 2.1.0
 - Adds $gitlab_manage_packages parameter (issue #69)
 - Fixes problem where unable to set values false (issue #68)

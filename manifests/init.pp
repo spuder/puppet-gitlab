@@ -195,6 +195,8 @@ class gitlab (
   $udp_log_shipping_host = $::gitlab::params::udp_log_shipping_host,
   $udp_log_shipping_port = $::gitlab::params::udp_log_shipping_port,
 
+  $high_availability_mountpoint = $::gitlab::params::high_availability_mountpoint,
+
   ) inherits gitlab::params {
 
   # Verify required parameters are provided. 
@@ -276,6 +278,13 @@ class gitlab (
   }
   else {
     warning('Puppet is not creating gitlab backups, recomend setting $puppet_manage_backups => true')
+  }
+
+  # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
+  if $high_availability_mountpoint {
+    if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
+      fail('high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_release\'')
+    }
   }
 
   # If all 3 $puppet_manage_* parametrs are false, then just install gitlab

@@ -175,4 +175,6 @@ class gitlab::params {
   $udp_log_shipping_host = undef # e.g. '192.0.2.0' Ip of syslog server
   $udp_log_shipping_port = undef # syslog port (default: 514) 
 
+  $high_availability_mountpoint = undef # Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
+
 }

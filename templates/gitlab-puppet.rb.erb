@@ -130,3 +130,8 @@ logging['svlogd_udp'] =  <%= @svlogd_udp %>
 logging['svlogd_prefix'] =  <%= @svlogd_prefix %>
 <% if @udp_log_shipping_host and @gitlab_release == 'enterprise' %>logging['udp_log_shipping_host'] = '<%= @udp_log_shipping_host %>'<% end -%>
 <% if @udp_log_shipping_port and @gitlab_release == 'enterprise' %>logging['udp_log_shipping_port'] = '<%= @udp_log_shipping_port %>'<% end -%>
+
+
+<% if defined?(@high_availability_mountpoint) %>high_availability['mountpoint'] = '<%= @high_availability_mountpoint %>'<% end %>
+
+
