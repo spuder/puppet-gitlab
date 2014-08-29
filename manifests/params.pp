@@ -41,7 +41,7 @@ class gitlab::params {
   $gitlab_username_changing_enabled  = undef # Allow users to change own username, not suggested if running ldap
   $gitlab_default_theme              = undef # Color Theme - 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (default: 2)
   $gitlab_signup_enabled             = undef # Anyone can create an account (default: true)
-  $gitlab_signin_enabled             = undef # Sign in with hortname, eg. 'steve' vs 'steve@apple.com' (default: true)
+  $gitlab_signin_enabled             = undef # Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (default: true)
 
   $gitlab_default_projects_features_issues           = undef # Enables light weight issue tracker on projects (default: true)
   $gitlab_default_projects_features_merge_requests   = undef # Enables merge requests on projects (default: true)
