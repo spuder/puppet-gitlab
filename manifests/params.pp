@@ -32,6 +32,8 @@ class gitlab::params {
 
   $external_url          = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
+  $high_availability_mountpoint      = undef # If you want to prevent omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted, add the following
+
 #
 # 1. GitLab app settings
 # ==========================
@@ -98,20 +100,20 @@ class gitlab::params {
 # 3. Advanced settings
 # ==========================
   $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
-  
+
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
-  
+
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
-  
+
   $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories', Cannot be a symlink
   $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/', Cannot be a symlikn
-  
+
   $gitlab_shell_upload_pack    = undef # (default: true)
   $gitlab_shell_receive_pack   = undef # (default: true)
-  
+
   $gitlab_shell_ssh_port       = undef # (default: 22)
-  
+
   $git_bin_path                = undef # '/opt/gitlab/embedded/bin/git'
   $git_max_size                = undef # Incrase if large commits fail over https (default: 5242880) 5242880=5MB
   $git_timeout                 = undef # 10
@@ -120,12 +122,12 @@ class gitlab::params {
 # 4. Extra customization
 # ==========================
   $extra_google_analytics_id = undef
-  
+
   $extra_piwik_url           = undef
   $extra_piwik_site_id       = undef
-  
+
   $extra_sign_in_text        = undef # Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
-  
+
 #
 # 5. Omnibus customization
 # ==========================
@@ -173,7 +175,7 @@ class gitlab::params {
 
   # Enterprise Only Features
   $udp_log_shipping_host = undef # e.g. '192.0.2.0' Ip of syslog server
-  $udp_log_shipping_port = undef # syslog port (default: 514) 
+  $udp_log_shipping_port = undef # syslog port (default: 514)
 
   $high_availability_mountpoint = undef # Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 
