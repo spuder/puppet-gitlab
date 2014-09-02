@@ -244,8 +244,9 @@ class gitlab (
   case $::operatingsystemrelease {
     '12.04': {}
     '14.04': {}
-    '7.5':   {}
+    '7.6':   {}
     '6.5':   {}
+    '7.0':   {}
     default: { warning("\'${::operatingsystem}\' \'${::operatingsystemrelease}\' is not on approved list,\
       download may fail. See https://about.gitlab.com/downloads/ for supported OS's"
     ) }
