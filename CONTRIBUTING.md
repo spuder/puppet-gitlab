@@ -36,6 +36,6 @@ Additional information [can be found here](http://puppetlabs.com/blog/the-next-g
 
 If you have OCD, and you modify the erb template, the init.pp or the params.pp, try and keep them in the same order and with the same amount of spacing between lines as the official gitlab config files. 
 
-https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/templates/default/gitlab.yml.erb  
+[gitlab.yml.erb](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/templates/default/gitlab.yml.erb)  
 
-https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/attributes/default.rb
+[default.rb](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/attributes/default.rb)
