@@ -105,6 +105,8 @@ class gitlab (
   $ldap_method    = $::gitlab::params::ldap_method,
   $ldap_bind_dn   = $::gitlab::params::ldap_bind_dn,
   $ldap_password  = $::gitlab::params::ldap_password,
+  
+  $ldap_sync_time = $::gitlab::params::ldap_sync_time,
 
   $ldap_allow_username_or_email_login = $::gitlab::params::ldap_allow_username_or_email_login,
   $ldap_base                          = $::gitlab::params::ldap_base,
@@ -283,10 +285,17 @@ class gitlab (
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
   if $high_availability_mountpoint {
     if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
-      fail('high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_release\'')
+      fail("high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_release}\'")
     }
   }
-
+ 
+  # Ensure ldap_sync_time is only used with gitlab > 7.2.x
+  if $ldap_sync_time {
+    if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
+      fail("ldap_sync_time is only available in gitlab >= 7.2.0, found \'${gitlab_release}\'")
+    }
+  }
+  
   # If all 3 $puppet_manage_* parametrs are false, then just install gitlab
   include ::gitlab::install
 

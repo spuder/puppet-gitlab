@@ -44,6 +44,7 @@ gitlab_rails['ldap_uid'] = '<%= @ldap_uid %>'
 gitlab_rails['ldap_method'] = '<%= @ldap_method %>'
 gitlab_rails['ldap_bind_dn'] = '<%= @ldap_bind_dn %>'
 gitlab_rails['ldap_password'] = '<%= @ldap_password %>'
+<% if @ldap_sync_time -%>gitlab_rails['ldap_sync_time'] = <%= @ldap_sync_time %> <% end %>
 gitlab_rails['ldap_allow_username_or_email_login'] = <%= @ldap_allow_username_or_email_login %>
 gitlab_rails['ldap_base'] = '<%= @ldap_base %>'
 <% end -%>

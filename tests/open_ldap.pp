@@ -19,4 +19,6 @@ class { 'gitlab' :
     gitlab_username_changing_enabled  => false,
     gitlab_signup_enabled             => false,
     gitlab_default_projects_features_visibility_level => 'internal',
+    ldap_sync_time                    => 3600,
+    
 }

@@ -64,6 +64,7 @@ class { 'gitlab' :
   ldap_method    => 'plain', # 'ssl' or 'plain'
   ldap_bind_dn   => 'CN=query user,CN=Users,DC=mycorp,DC=com',
   ldap_password  => 'query user password',
+  ldap_sync_time => 3600,
 
   ldap_allow_username_or_email_login => true,
   ldap_base                          => 'DC=mycorp,DC=com',

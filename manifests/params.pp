@@ -80,6 +80,8 @@ class gitlab::params {
   $ldap_allow_username_or_email_login = true
   $ldap_base      = 'DC=mycorp,DC=com'
 
+  $ldap_sync_time = undef # Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
+  
   # GitLab Enterprise Edition only
   # Set $gitlab_release to 'enterprise' to enable these features
   $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
