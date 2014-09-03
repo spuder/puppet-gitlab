@@ -106,7 +106,8 @@ class { 'gitlab' :
 # ==========================
   
   satellites_path             => '/var/opt/gitlab/git-data/gitlab-satellites',
-  
+  satellites_timeout          => 60,
+
   # Backup
   backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'
   backup_keep_time            => 604800,

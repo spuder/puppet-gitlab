@@ -127,7 +127,8 @@ class gitlab (
   # ==========================
 
   $satellites_path             = $::gitlab::params::satellites_path,
-  
+  $satellites_timeout          = $::gitlab::params::satellites_timeout,
+
   $backup_path                 = $::gitlab::params::backup_path,
   $backup_keep_time            = $::gitlab::params::backup_keep_time,
   $gitlab_shell_path           = $::gitlab::params::gitlab_shell_path,

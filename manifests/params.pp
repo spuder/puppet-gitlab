@@ -100,7 +100,8 @@ class gitlab::params {
 # 3. Advanced settings
 # ==========================
   $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
-  
+  $satellites_timeout          = undef # Increase if merge requests timeout (seconds=> default: 30)
+
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
   

@@ -68,6 +68,8 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 # 3. Advanced settings
 # ==========================
 <% if @satellites_path  -%>gitlab_rails['satellites_path'] = '<%= @satellites_path %>'  <% end %>
+<% if @satellites_timeout  -%>gitlab_rails['satellites_timeout'] = '<%= @satellites_timeout %>'  <% end %>
+
 <% if @backup_path      -%>gitlab_rails['backup_path'] = '<%= @backup_path %>'          <% end %>
 <% if @backup_keep_time -%>gitlab_rails['backup_keep_time'] = <%= @backup_keep_time %>  <% end %>
 <% if @gitlab_shell_path            -%>gitlab_rails['gitlab_shell_path'] = '<%= @gitlab_shell_path %>'                  <% end %>
