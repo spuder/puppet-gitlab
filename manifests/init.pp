@@ -286,14 +286,14 @@ class gitlab (
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
   if $high_availability_mountpoint {
     if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
-      fail("high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_release}\'")
+      fail("high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }
  
   # Ensure ldap_sync_time is only used with gitlab > 7.2.x
   if $ldap_sync_time {
     if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
-      fail("ldap_sync_time is only available in gitlab >= 7.2.0, found \'${gitlab_release}\'")
+      fail("ldap_sync_time is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }
   
