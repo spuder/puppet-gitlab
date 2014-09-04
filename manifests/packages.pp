@@ -23,12 +23,40 @@ class gitlab::packages inherits ::gitlab {
   case $::operatingsystem {
     'CentOS': {
       $mail_application = 'postfix'
+      $ssh_service_name = 'sshd'
+      
+      case $::operatingsystemrelease {
+        '6': {
+            exec {"chkconfig ${mail_application} on":
+              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              command => "chkconfig ${mail_application} on",
+              require => [ Package["${mail_application}"] ],
+            }
+        }
+        '7': {
+	          exec {'systemctl enable sshd':
+	            path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+	            command => "systemctl enable ${ssh_service_name}",
+	            require => [ Package['openssh-server'] ],
+	          }
+	          exec {"systemctl start ${mail_application}":
+	            path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+	            command => "systemctl enable ${mail_application}",
+	            require => [ Package['openssh-server'] ], 
+	          }
+        }
+
+      }
     }
     'Ubuntu': {
       $mail_application = 'postfix'
+      $ssh_service_name = 'ssh'
+
     }
     'Debian': {
-      $mail_application = 'exim4-daemon-light'
+      $mail_application = 'postfix'
+      $ssh_service_name = 'ssh'
+
     }
     default: {
       fail("Only Centos, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
@@ -41,6 +69,13 @@ class gitlab::packages inherits ::gitlab {
   package { "${mail_application}":
     ensure => latest,
   }
-
+  service { "${mail_application}":
+    ensure  => running,
+    require => Package['openssh-server'],
+  }
+  service { "${ssh_service_name}":
+    ensure => running,
+    require => Package['openssh-server'],
+  }
 
 }
