@@ -1,11 +1,15 @@
 ##Changelog
 
-2015-xxx-x: 2.2.0
+2015-Aug-4: 2.2.0
 - Adds $high_availability_mountpoint (issue #70, thanks itguy614)
 - Adds $satellite_timeout
 - Updates metadata.json to conform to new style guides
 - Adds supported puppet versions to metadata.json
 - Adds support for centos 7
+- Debian => Changes from exim to postfix for default mailer
+- Vagrantfile changes name to gitlab-test
+- Adds hiera example
+- Packages now make sure ssh and postfix start automatically at boot
 
 2015-Aug-9: 2.1.0
 - Adds $gitlab_manage_packages parameter (issue #69)
