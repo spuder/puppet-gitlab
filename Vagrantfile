@@ -13,7 +13,7 @@ config.vm.provider "virtualbox" do |vb|
 end
 
 
-  config.vm.hostname  ="gitlab"
+  config.vm.hostname  ="gitlab-test"
   config.vm.network :private_network, ip: "192.168.33.10"
   config.vm.synced_folder ".", "/etc/puppet/modules/gitlab"
   
