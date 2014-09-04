@@ -35,16 +35,18 @@ class gitlab::packages inherits ::gitlab {
             }
         }
         '7': {
-	          exec {'systemctl enable sshd':
-	            path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
-	            command => "systemctl enable ${ssh_service_name}",
-	            require => [ Package['openssh-server'] ],
-	          }
-	          exec {"systemctl start ${mail_application}":
-	            path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
-	            command => "systemctl enable ${mail_application}",
-	            require => [ Package['openssh-server'] ], 
-	          }
+            exec {'systemctl enable sshd':
+              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              command => "systemctl enable ${ssh_service_name}",
+              unless  => "systemctl is-enabled ${ssh_service_name}",
+              require => [ Package['openssh-server'] ],
+            }
+            exec {"systemctl start ${mail_application}":
+              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              command => "systemctl enable ${mail_application}",
+              unless  => "systemctl is-enabled ${mail_application}",
+              require => [ Package['openssh-server'] ], 
+            }
         }
 
       }
