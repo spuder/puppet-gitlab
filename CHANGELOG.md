@@ -1,8 +1,8 @@
 ##Changelog
 
 2015-Aug-4: 2.2.0
-- Adds $high_availability_mountpoint (issue #70, thanks itguy614)
-- Adds $satellite_timeout
+- Adds 7.2.x parameter $high_availability_mountpoint (issue #70, thanks itguy614)
+- Adds 7.2.x parameter $satellite_timeout
 - Updates metadata.json to conform to new style guides
 - Adds supported puppet versions to metadata.json
 - Adds support for centos 7

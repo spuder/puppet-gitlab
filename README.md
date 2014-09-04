@@ -62,8 +62,13 @@ The default username and password are:
 
 ####Download
 
-This puppet module will automatically download the appropriate gitlab package based on `$gitlab_branch` and detected operatingsystem.  
-Gitlab enterprise specific downloads are covered later in this readme.
+This puppet module will attempt to download the correct version of gitlab from [the gitlab downloads page](https://about.gitlab.com/downloads/)
+
+If using Gitlab enterprise, or wish to download from an alterative location, populate the `$gitlab_download_link` parameter
+
+    gitlab_download_link => 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
+
+Additional Gitlab enterprise specific download information is covered later in this readme.
 
 
 If for whatever reason you don't want puppet to download the omnibus package automatically, 
@@ -84,8 +89,8 @@ $ ls /var/tmp
 
 Mandatory parameters: 
 
-    $gitlab_branch 
-    $external_url
+    gitlab_branch 
+    external_url
 
  All other parameters are optional. 
 
@@ -99,7 +104,7 @@ BareBones (not recomended)
 class { 'gitlab' : 
   puppet_manage_config   => false,
   gitlab_branch          => '7.0.0',
-  external_url           => 'http://foo.bar',
+  external_url           => 'http://gitlab.example.com',
 }
 ```
 
@@ -118,7 +123,6 @@ class { 'gitlab' :
   backup_keep_time       => 5184000, # In seconds, 5184000 = 60 days
   gitlab_default_projects_limit => 100,
 }
-
 ```
 
 
@@ -137,7 +141,7 @@ class { 'gitlab' :
     ldap_uid                          => 'sAMAccountName',
     ldap_method                       => 'ssl',       
     ldap_bind_dn                      => 'CN=foobar,CN=users,DC=example,DC=com', 
-    ldap_password                     => 'foobar',    
+    ldap_password                     => 'correct-horse-battery-staple',    
     gravatar_enabled                  => true,
     gitlab_default_can_create_group   => false,
     gitlab_username_changing_enabled  => false,
@@ -153,7 +157,7 @@ class { 'gitlab' :
   puppet_manage_backups  => false,
   puppet_manage_packages => false,
   gitlab_branch          => '7.0.0',
-  external_url           => 'http://foo.bar',
+  external_url           => 'http://gitlab.example.com',
 }
 ```
 More parameter examples can be found in the [tests directory](https://github.com/spuder/puppet-gitlab/blob/master/tests/).  
@@ -179,7 +183,7 @@ external_url: gitlab.example.com
 ldap_enabled: true
 ldap_password: correct-horse-battery-staple
  ```
-[An example hiera config file:](https://github.com/spuder/puppet-gitlab/tree/master/tests/hiera.example.com.yaml)
+[Example hiera config file:](https://github.com/spuder/puppet-gitlab/tree/master/tests/hiera.example.com.yaml)
 
 
 
@@ -202,17 +206,27 @@ class { 'gitlab' :
 
 ###Enterprise
 
-This puppet module supports gitlab enterprise installations. You can enable additional enterprise configuration options with the `$gitlab_release` parameter
+This puppet module supports gitlab enterprise installations. There are several parameters only available when `gitlab_release => enterprise`
 
 **Enterprise users must specify the secret download link and filename provided by gitlabhq.**
 
 **Example**  
 
-    class { 'gitlab' : 
-      gitlab_branch   => '7.0.0',
-      gitlab_release  => 'enterprise',
-      gitlab_download_link => 'http://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
-    }
+```
+class { 'gitlab' : 
+  gitlab_branch        => '7.0.0',
+  gitlab_release       => 'enterprise',
+  gitlab_download_link => 'http://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
+  
+  # Enterprise only features
+  ldap_group_base       => 'OU=groups,DC=mycorp,DC=com',
+  ldap_user_filter      => '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)',
+  ldap_sync_ssh_keys    => 'sshpublickey',
+  udp_log_shipping_host => '192.0.2.0',
+  udp_log_shipping_port => '1234',
+}
+```
+
 
 
 ## Upgrade
@@ -231,7 +245,7 @@ To upgrade:
 
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
 2. If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template, not one after another. This results in a lot of empty lines in /etc/gitlab/gitlb.rb. 
-3. Assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
+3. When attempting to autodownload, assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
 4. Omniauth and enterprise are not tested. Please submit a github issue if problems are found.
 5. Only supports omnibus provided nginx and postgres services. Apache and MySQL are not available. 
 
