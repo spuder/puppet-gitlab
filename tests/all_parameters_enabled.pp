@@ -11,7 +11,7 @@ class { 'gitlab' :
   puppet_manage_backups => true,
 
   # Gitlab server settings
-  gitlab_branch           => '7.2.0',
+  gitlab_branch           => '7.2.1',
   gitlab_release          => 'basic', # enterprise or basic
   gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
