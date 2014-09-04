@@ -30,6 +30,7 @@ class gitlab::packages inherits ::gitlab {
             exec {"chkconfig ${mail_application} on":
               path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
               command => "chkconfig ${mail_application} on",
+              unless  => "chkconfig --list ${mail_application} | grep -q 'on' 2>/dev/null ",
               require => [ Package["${mail_application}"] ],
             }
         }
