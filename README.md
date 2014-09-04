@@ -156,9 +156,32 @@ class { 'gitlab' :
   external_url           => 'http://foo.bar',
 }
 ```
+More parameter examples can be found in the [tests directory](https://github.com/spuder/puppet-gitlab/blob/master/tests/).  
+User submitted examples are welcome. 
 
 
-More examples can be found in the [tests directory](https://github.com/spuder/puppet-gitlab/blob/master/tests/). User submitted examples are welcome. 
+### Wrapper classes & hiera
+
+The parameters above are typically placed inside a wrapper puppet module, or inside the nodes.pp file. 
+
+You can alternativly put the parameters inside hiera. This has the advantage of keeping your wrapper puppet module (or nodes.pp file) clean, and also keeps things like passwords outside of version control. 
+
+gitlab.example.com.yaml
+```
+---
+# Example gitlab hiera config file
+puppet_manage_config:   true
+puppet_manage_backups:  true
+puppet_manage_packages: true
+gitlab_branch: 7.2.0
+gitlab_release: basic
+external_url: gitlab.example.com
+ldap_enabled: true
+ldap_password: correct-horse-battery-staple
+ ```
+[An example hiera config file:](https://github.com/spuder/puppet-gitlab/tree/master/tests/hiera.example.com.yaml)
+
+
 
 ## Configuration  
  
