@@ -219,6 +219,11 @@ class gitlab (
     fail("Gitlab requires facter 1.7.0 or greater, found: \'${::facterversion}\'")
   }
 
+  # Verify the fact $operatingsystemmajrelease is available in facter
+  unless $operatingsystemmajrelease {
+    fail("Failed to retrieve fact \$operatingsystemmajrelease, found: \'${::operatingsystemmajrelease}\'. Perhaps upgrade facter? ${::facterversion}")
+  }
+
   # Verify prameters are valid for the version of gitlab
   if versioncmp($gitlab_branch, '7.1.0') < 0 {
     if $ldap_sync_ssh_keys {
