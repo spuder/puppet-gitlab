@@ -29,10 +29,19 @@ class gitlab::config inherits ::gitlab {
 
   $gitlab_config_dir = '/etc/gitlab'
 
+  file { "${gitlab_config_dir}": 
+    ensure => directory,
+    mode => 0755,
+    owner => 'root',
+    group => 'root',
+  }
+
   file { "${gitlab_config_dir}/gitlab.rb":
     content => template('gitlab/gitlab-puppet.rb.erb'),
     backup  => true,
+    require => File["${gitlab_config_dif"],
   }
+  
   exec { '/usr/bin/gitlab-ctl reconfigure':
     refreshonly => true,
     timeout     => 1800,
