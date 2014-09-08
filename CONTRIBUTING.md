@@ -1,21 +1,38 @@
 Pull requests of all kinds are encouraged
 
+Please try and keep 1 commit / issue per merge request
 
 ## Average Joe Pull Request Procedure:
 
 - Fork project
 - Write code
+- Test code
+
+    ```
+    puppet parser validate foo.pp  	
+    gem install puppet-lint  
+    puppet-lint --no-80chars-check foo.pp  
+    ```
+
 - Create merge request
 
----
 
 ## Rockstar Pull Request Procedure:
 
 
 - Fork project
 - Create github issue describing problem / improvement
-- Create branch (e.g `git checkout -b issue42` )
-- Add spec tests to `spec/classes/gitlab_spec.rb`   
+- Create branch (e.g `git checkout -b issue42` )  
+- Write Code
+- Quick tests
+
+    ```
+    puppet parser validate foo.pp  
+    gem install puppet-lint  
+    puppet-lint --no-80chars-check manifests/*.pp  
+    ```
+
+- Add spec tests to `spec/classes/gitlab_spec.rb` 
 Additional information [can be found here](http://puppetlabs.com/blog/the-next-generation-of-puppet-module-testing)
 
  ```gem install puppetlabs_spec_helper```
@@ -30,11 +47,10 @@ Additional information [can be found here](http://puppetlabs.com/blog/the-next-g
     
 - If tests pass, create merge request
 
---- 
 
 ## OCD
 
-If you have OCD, and you modify the erb template, the init.pp or the params.pp, try and keep them in the same order and with the same amount of spacing between lines as the official gitlab config files. 
+Try and keep the order and spacing of parameters in the init.pp and params.pp the same as the official gitlab config files. 
 
 [gitlab.yml.erb](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/templates/default/gitlab.yml.erb)  
 
