@@ -49,7 +49,7 @@ class gitlab::packages inherits ::gitlab {
             }
         }
         default: {
-          fail("Only Centos 6 and 7 are presently supported, found: ${::osfamily}-${operatingsystemmajrelease}:${::operatingsystem}-${::operatingsystemrelease} ")
+          fail("Only Centos 6 and 7 are presently supported, found: ${::osfamily}-${::operatingsystemmajrelease}:${::operatingsystem}-${::operatingsystemrelease} ")
         }
       }
     }

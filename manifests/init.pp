@@ -220,7 +220,7 @@ class gitlab (
   }
 
   # Verify the fact $operatingsystemmajrelease is available in facter
-  unless $operatingsystemmajrelease {
+  unless $::operatingsystemmajrelease {
     fail("Failed to retrieve fact \$operatingsystemmajrelease, found: \'${::operatingsystemmajrelease}\'. Perhaps upgrade facter? ${::facterversion}")
   }
 
