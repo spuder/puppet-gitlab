@@ -1,6 +1,7 @@
 ##Changelog
 
 2015-Sep-x: 2.2.1
+- Fixes crash when external_url contains no 'http://' (issue #73, thanks minnorOffense)
 - Fixes typo in config.pp (thanks minnorOffense)
 - Fixes hiera examples to use gitlab scope
 - Fixes incorrect date in changelog

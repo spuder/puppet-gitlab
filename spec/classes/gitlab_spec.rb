@@ -60,6 +60,30 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
+# Verify $external_url contains http:// or https://
+  context 'when external_url contains no http:// or https://' do
+    let(:params) { 
+      {
+        :external_url  => 'gitlab.example.com', 
+        :gitlab_branch => '7.2.0'
+      }
+    }
+    let(:facts)  {
+      {
+        :puppetversion => ENV['PUPPET_VERSION'],
+        :facterversion => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
+      }
+    }
+    it 'we fail' do
+      expect { subject }.to raise_error(/external_url must contain string/)
+    end
+  end
+
+
 
 # Expect error when paramter $gitlab_branch is missing
   context 'failure to add $gitlab_branch' do

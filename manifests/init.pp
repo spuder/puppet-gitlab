@@ -244,6 +244,11 @@ class gitlab (
     }
   }
 
+  # Verify title includes http:// or https://
+  if $external_url {
+    validate_re($external_url, 'http(s)?://', 'external_url must contain string http:// or https://')
+  }
+
   # Gitlab only supplies omnibus downloads for few select operating systems.
   # Warn the user they may be using an unsupported OS
   # https://about.gitlab.com/downloads/
@@ -254,8 +259,8 @@ class gitlab (
     '6.5':   {}
     '7.0':   {}
     default: { warning("\'${::operatingsystem}\' \'${::operatingsystemrelease}\' is not on approved list,\
-      download may fail. See https://about.gitlab.com/downloads/ for supported OS's"
-    ) }
+      download may fail. See https://about.gitlab.com/downloads/ for supported OS's")
+    }
   }
 
   # Set the order that the manifests are executed in
