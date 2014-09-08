@@ -17,7 +17,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should contain_class('gitlab::backup') }
@@ -38,7 +39,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should_not contain_class('gitlab::backup') }

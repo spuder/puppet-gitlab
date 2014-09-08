@@ -17,7 +17,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it do
@@ -41,7 +42,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it do

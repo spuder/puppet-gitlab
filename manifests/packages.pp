@@ -25,7 +25,7 @@ class gitlab::packages inherits ::gitlab {
       $mail_application = 'postfix'
       $ssh_service_name = 'sshd'
       
-      case $::operatingsystemrelease {
+      case $::operatingsystemmajrelease {
         '6': {
             exec {"chkconfig ${mail_application} on":
               path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
@@ -49,7 +49,7 @@ class gitlab::packages inherits ::gitlab {
             }
         }
         default: {
-          fail("Only Centos 6 and 7 are presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
+          fail("Only Centos 6 and 7 are presently supported, found: ${::osfamily}-${operatingsystemmajrelease}:${::operatingsystem}-${::operatingsystemrelease} ")
         }
       }
     }

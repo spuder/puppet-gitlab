@@ -40,6 +40,26 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
+# Verify $operatingsystemmajrelease is a valid fact (not true in all version of facter)
+  context 'when operatingsystemmajrelease is undefined fact' do
+    let(:params) { 
+      {
+        :external_url  => 'http://gitlab.example.com', 
+        :gitlab_branch => '7.0.0'
+      }
+    }
+    let(:facts)  {
+      {
+        :puppetversion => ENV['PUPPET_VERSION'],
+        :facterversion => ENV['FACTER_VERSION'],
+        :operatingsystemmajrelease => ''
+      }
+    }
+    it 'we fail' do
+      expect { subject }.to raise_error(/Failed to retrieve fact/)
+    end
+  end
+
 
 # Expect error when paramter $gitlab_branch is missing
   context 'failure to add $gitlab_branch' do
@@ -110,7 +130,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should contain_class('gitlab::config') }
@@ -131,7 +152,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should_not contain_class('gitlab::config') }
@@ -152,7 +174,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should contain_class('gitlab::packages') }
@@ -173,7 +196,8 @@ describe 'gitlab', :type => 'class' do
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6'
       }
     }
     it { should_not contain_class('gitlab::packages') }
