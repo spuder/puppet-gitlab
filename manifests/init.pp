@@ -244,7 +244,7 @@ class gitlab (
     }
   }
 
-  # Verify title includes http:// or https://
+  # Verify external_url includes http:// or https://
   if $external_url {
     validate_re($external_url, 'http(s)?://', 'external_url must contain string http:// or https://')
   }
