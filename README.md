@@ -173,16 +173,16 @@ You can alternativly put the parameters inside hiera. This has the advantage of 
 gitlab.example.com.yaml
 ```
 ---
-# Example gitlab hiera config file
-puppet_manage_config:   true
-puppet_manage_backups:  true
-puppet_manage_packages: true
-gitlab_branch: 7.2.0
-gitlab_release: basic
-external_url: gitlab.example.com
-ldap_enabled: true
-ldap_password: correct-horse-battery-staple
- ```
+gitlab:
+  puppet_manage_config:   true
+  puppet_manage_backups:  true
+  puppet_manage_packages: true
+  gitlab_branch: 7.2.0
+  gitlab_release: basic
+  external_url: gitlab.example.com
+  ldap_enabled: true
+  ldap_password: correct-horse-battery-staple
+```
 [Example hiera config file:](https://github.com/spuder/puppet-gitlab/tree/master/tests/hiera.example.com.yaml)
 
 
