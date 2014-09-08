@@ -11,7 +11,7 @@ Please try and keep 1 commit / issue per merge request
     ```
     puppet parser validate foo.pp  	
     gem install puppet-lint  
-    puppet-lint --no-80chars-check foo.pp  
+    puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
     ```
 
 - Create merge request
@@ -29,7 +29,7 @@ Please try and keep 1 commit / issue per merge request
     ```
     puppet parser validate foo.pp  
     gem install puppet-lint  
-    puppet-lint --no-80chars-check manifests/*.pp  
+    puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
     ```
 
 - Add spec tests to `spec/classes/gitlab_spec.rb` 
