@@ -39,7 +39,7 @@ class gitlab::config inherits ::gitlab {
   file { "${gitlab_config_dir}/gitlab.rb":
     content => template('gitlab/gitlab-puppet.rb.erb'),
     backup  => true,
-    require => File["${gitlab_config_dif"],
+    require => File["${gitlab_config_dir"],
   }
   
   exec { '/usr/bin/gitlab-ctl reconfigure':
