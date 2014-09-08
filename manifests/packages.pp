@@ -31,7 +31,7 @@ class gitlab::packages inherits ::gitlab {
               path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
               command => "chkconfig ${mail_application} on",
               unless  => "chkconfig --list ${mail_application} | grep -q 'on' 2>/dev/null ",
-              require => [ Package["${mail_application}"] ],
+              require => [ Package[$mail_application] ],
             }
         }
         '7': {
@@ -45,10 +45,12 @@ class gitlab::packages inherits ::gitlab {
               path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
               command => "systemctl enable ${mail_application}",
               unless  => "systemctl is-enabled ${mail_application}",
-              require => [ Package['openssh-server'] ], 
+              require => [ Package['openssh-server'] ],
             }
         }
-
+        default: {
+          fail("Only Centos 6 and 7 are presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
+        }
       }
     }
     'Ubuntu': {
@@ -69,15 +71,15 @@ class gitlab::packages inherits ::gitlab {
   package { 'openssh-server':
     ensure => latest,
   }
-  package { "${mail_application}":
+  package { $mail_application:
     ensure => latest,
   }
-  service { "${mail_application}":
+  service { $mail_application:
     ensure  => running,
     require => Package['openssh-server'],
   }
-  service { "${ssh_service_name}":
-    ensure => running,
+  service { $ssh_service_name:
+    ensure  => running,
     require => Package['openssh-server'],
   }
 

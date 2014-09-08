@@ -212,15 +212,15 @@ class gitlab (
     https://github.com/spuder/puppet-gitlab/blob/master/README.md")
   }
 
-  if versioncmp("${::puppetversion}", '3.0.0') < 0 {
+  if versioncmp($::puppetversion, '3.0.0') < 0 {
     fail("Gitlab requires puppet 3.0.0 or greater, found: \'${::puppetversion}\'")
   }
-  if versioncmp("${::facterversion}", '1.7.0') < 0 {
+  if versioncmp($::facterversion, '1.7.0') < 0 {
     fail("Gitlab requires facter 1.7.0 or greater, found: \'${::facterversion}\'")
   }
 
   # Verify prameters are valid for the version of gitlab
-  if versioncmp("${gitlab_branch}", '7.1.0') < 0 {
+  if versioncmp($gitlab_branch, '7.1.0') < 0 {
     if $ldap_sync_ssh_keys {
       fail("\$ldap_sync_ssh_keys is only available in gitlab 7.1.0 or greater, found: \'${gitlab_branch}\'")
     }
@@ -286,14 +286,14 @@ class gitlab (
 
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
   if $high_availability_mountpoint {
-    if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
+    if versioncmp( $gitlab_branch, '7.2.0') < 0 {
       fail("high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }
- 
+
   # Ensure ldap_sync_time is only used with gitlab > 7.2.x
   if $ldap_sync_time {
-    if versioncmp( "${gitlab_branch}", '7.2.0') < 0 {
+    if versioncmp( $gitlab_branch, '7.2.0') < 0 {
       fail("ldap_sync_time is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }

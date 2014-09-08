@@ -91,12 +91,12 @@ class gitlab::install inherits ::gitlab {
         # Basic version, use user supplied url, less common configuration
         warning("\$gitlab_release is ${::gitlab::gitlab_release} and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
-        $gitlab_url = "${::gitlab::gitlab_download_link}"
+        $gitlab_url = $::gitlab::gitlab_download_link
       }
       'enterprise': {
         # Enterprise verison, use user supplied url. This is the only valid configuration for enterprise users
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
-        $gitlab_url = "${::gitlab::gitlab_download_link}"
+        $gitlab_url = $::gitlab::gitlab_download_link
       }
       default : {
         # $gitlab_release is neither basic nor enterprise, invalid input
@@ -132,7 +132,7 @@ class gitlab::install inherits ::gitlab {
   exec { 'download gitlab':
     command => "/usr/bin/wget ${gitlab_url}",
     path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin',
-    cwd     => "${download_location}",
+    cwd     => $download_location,
     creates => "${download_location}/${omnibus_filename}",
     timeout => 1800,
     require => Package['wget'],
@@ -141,7 +141,7 @@ class gitlab::install inherits ::gitlab {
   package { 'gitlab':
     ensure   => latest,
     source   => "${download_location}/${omnibus_filename}",
-    provider => "${package_manager}",
+    provider => $package_manager,
     require  => Exec['download gitlab'],
   }
 

@@ -1,4 +1,4 @@
-# == Class: gitlab::prerequisites
+# == Class: gitlab::backup
 #
 #  Optional Class, creates cron job to backup gitlab at 2 am every night.
 #  Set $gitlab_manage_backups to 'false' in class declaration if you wish to 

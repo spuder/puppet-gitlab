@@ -1,6 +1,14 @@
 ##Changelog
 
-2015-Aug-4: 2.2.0
+2015-Sep-x: 2.2.1
+- Fixes typo in config.pp (thanks minnorOffense)
+- Fixes hiera examples to use gitlab scope
+- Fixes incorrect date in changelog
+- Puppet lint improvements
+- Contributing.md improvements
+- Adds fail statement if running on centos != 6 or 7
+
+2015-Sep-4: 2.2.0
 - Adds 7.2.x parameter $high_availability_mountpoint (issue #70, thanks itguy614)
 - Adds 7.2.x parameter $satellite_timeout
 - Updates metadata.json to conform to new style guides
