@@ -13,8 +13,8 @@ notifications:
   email:
     recipients:
       - owenspencer@gmail.com
-    on_success: [change]
-    on_failure: [change]
+    on_success: never
+    on_failure: change
 gemfile: .gemfile
 matrix:
   exclude:
