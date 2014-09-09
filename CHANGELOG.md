@@ -1,6 +1,7 @@
 ##Changelog
 
 2015-Sep-x: 2.2.1
+- Adds dependency on puppetlabs/stdlib module >= 3.x.x
 - Fixes crash when external_url contains no 'http://' (issue #73, thanks minnorOffense)
 - Fixes typo in config.pp (thanks minnorOffense)
 - Fixes hiera examples to use gitlab scope
