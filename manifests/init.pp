@@ -165,6 +165,7 @@ class gitlab (
   $redirect_http_to_https   = $::gitlab::params::redirect_http_to_https,
   $ssl_certificate          = $::gitlab::params::ssl_certificate,
   $ssl_certificate_key      = $::gitlab::params::ssl_certificate_key,
+  $listen_addresses         = $::gitlab::params::listen_addresses,
   
   $git_uid            = $::gitlab::params::git_uid,
   $git_gid            = $::gitlab::params::git_gid,
@@ -298,6 +299,13 @@ class gitlab (
   if $high_availability_mountpoint {
     if versioncmp( $gitlab_branch, '7.2.0') < 0 {
       fail("high_availability_mountpoint is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
+    }
+  }
+
+  # Ensure listen_addresses is only used with gitlab > 7.2.x
+  if $listen_addresses {
+    if versioncmp( $gitlab_branch, '7.2.0') < 0 {
+      fail("listen_addresses is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }
 

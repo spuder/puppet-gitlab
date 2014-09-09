@@ -98,7 +98,11 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 nginx['redirect_http_to_https'] = <%= @redirect_http_to_https %>
 nginx['ssl_certificate'] = '<%= @ssl_certificate -%>'
 nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
-<% end -%><% if @git_uid          -%>user['uid'] = <%= @git_uid -%>
+<% end -%>
+<% if @listen_addresses -%>
+nginx['listen_addresses'] = ["<%= @listen_addresses.join('","') %>"]
+<% end %>
+<% if @git_uid          -%>user['uid'] = <%= @git_uid -%>
 <% end %><% if @git_gid          -%>user['gid'] = <%= @git_gid -%>
 <% end %><% if @gitlab_psql_uid  -%>postgresql['uid'] = <%= @gitlab_psql_uid -%>
 <% end %><% if @gitlab_psql_gid  -%>postgresql['gid'] = <%= @gitlab_psql_gid -%>
