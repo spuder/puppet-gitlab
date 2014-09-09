@@ -9,6 +9,7 @@
 - Puppet lint improvements
 - Contributing.md improvements
 - Adds fail statement if running on centos != 6 or 7
+- Changes default values for $svlogd_udp and $svlogd_prefix from 'nil' to undef
 
 2015-Sep-4: 2.2.0
 - Adds 7.2.x parameter $high_availability_mountpoint (issue #70, thanks itguy614)

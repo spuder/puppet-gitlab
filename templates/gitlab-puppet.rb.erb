@@ -121,15 +121,15 @@ gitlab_rails['smtp_domain'] = '<%= @smtp_domain %>'
 gitlab_rails['smtp_authentication'] = '<%= @smtp_authentication %>'
 gitlab_rails['smtp_enable_starttls_auto'] = <%= @smtp_enable_starttls_auto %>
 <% end -%>
-logging['svlogd_size'] = <%= @svlogd_size %>
-logging['svlogd_num'] =  <%= @svlogd_num %>
-logging['svlogd_timeout'] =  <%= @svlogd_timeout %>
-logging['svlogd_filter'] =  '<%= @svlogd_filter %>'
-logging['svlogd_udp'] =  <%= @svlogd_udp %>
-logging['svlogd_prefix'] =  <%= @svlogd_prefix %>
+<% if @svlogd_size -%>logging['svlogd_size'] = <%= @svlogd_size %>
+<% end %><%if @svlogd_num -%>logging['svlogd_num'] =  <%= @svlogd_num %>
+<% end %><%if @svlogd_timeout -%>logging['svlogd_timeout'] =  <%= @svlogd_timeout %>
+<% end %><%if @svlogd_filter -%>logging['svlogd_filter'] =  '<%= @svlogd_filter %>'
+<% end %><%if @svlogd_udp -%>logging['svlogd_udp'] =  <%= @svlogd_udp %>
+<% end %><%if @svlogd_prefix -%>logging['svlogd_prefix'] =  <%= @svlogd_prefix %>
+<% end %>
 <% if @udp_log_shipping_host and @gitlab_release == 'enterprise' %>logging['udp_log_shipping_host'] = '<%= @udp_log_shipping_host %>'
-<% end -%><% if @udp_log_shipping_port and @gitlab_release == 'enterprise' %>logging['udp_log_shipping_port'] = '<%= @udp_log_shipping_port %>'
+<% end -%><% if @udp_log_shipping_port and @gitlab_release == 'enterprise' -%>logging['udp_log_shipping_port'] = '<%= @udp_log_shipping_port %>'
 <% end -%>
-
-<% if defined?(@high_availability_mountpoint) %>high_availability['mountpoint'] = '<%= @high_availability_mountpoint %>'
+<% if defined?(@high_availability_mountpoint) -%>high_availability['mountpoint'] = '<%= @high_availability_mountpoint %>'
 <% end %>

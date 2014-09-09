@@ -171,8 +171,8 @@ class gitlab::params {
   $svlogd_num       = 30 # keep 30 rotated log files
   $svlogd_timeout   = 24 * 60 * 60 # rotate after 24 hours
   $svlogd_filter    = 'gzip' # compress logs with gzip
-  $svlogd_udp       = nil # transmit log messages via UDP
-  $svlogd_prefix    = nil # custom prefix for log messages
+  $svlogd_udp       = undef # transmit log messages via UDP
+  $svlogd_prefix    = undef # custom prefix for log messages
 
   # Enterprise Only Features
   $udp_log_shipping_host = undef # e.g. '192.0.2.0' Ip of syslog server
