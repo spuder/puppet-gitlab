@@ -28,7 +28,7 @@ class gitlab::packages inherits ::gitlab {
       case $::operatingsystemmajrelease {
         '6': {
             exec {"chkconfig ${mail_application} on":
-              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
               command => "chkconfig ${mail_application} on",
               unless  => "chkconfig --list ${mail_application} | grep -q 'on' 2>/dev/null ",
               require => [ Package[$mail_application] ],
@@ -36,13 +36,13 @@ class gitlab::packages inherits ::gitlab {
         }
         '7': {
             exec {'systemctl enable sshd':
-              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
               command => "systemctl enable ${ssh_service_name}",
               unless  => "systemctl is-enabled ${ssh_service_name}",
               require => [ Package['openssh-server'] ],
             }
             exec {"systemctl start ${mail_application}":
-              path    => '/usr:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin',
+              path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
               command => "systemctl enable ${mail_application}",
               unless  => "systemctl is-enabled ${mail_application}",
               require => [ Package['openssh-server'] ],
