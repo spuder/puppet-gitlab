@@ -7,13 +7,14 @@ class { 'gitlab' :
 
 
   # Manage Packages
-  puppet_manage_config  => true,
-  puppet_manage_backups => true,
+  puppet_manage_config   => true,  # If true, puppet will manage /etc/gitlab/gitlab.rb
+  puppet_manage_backups  => true,  # If true, puppet will manage cron job to backup at 2am
+  puppet_manage_packages => true,  # If true, Puppet will manage openssl and postfix packages
 
   # Gitlab server settings
   gitlab_branch           => '7.2.1',
   gitlab_release          => 'basic', # enterprise or basic
-  gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
+  # gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
   external_url            => 'http://192.168.33.10',
 
