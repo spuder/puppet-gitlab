@@ -32,10 +32,10 @@ Module Dependencies:
 Supported Operating Systems:
 
 - Cent 6.5
+- Cent 7
 - Debian 7.5
 - Ubuntu 12.04
 - Ubuntu 14.04
-
 
 
 ##Usage
@@ -244,10 +244,9 @@ To upgrade:
 ##Limitations
 
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
-2. If `puppet_manage_config = true` (the default setting), then /etc/gitlab/gitlab.rb is configured with an .erb template. Because of the way .erb templates work, lines are inserted at their actual line numbers of the template, not one after another. This results in a lot of empty lines in /etc/gitlab/gitlb.rb. 
-3. When attempting to autodownload, assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
-4. Omniauth and enterprise are not tested. Please submit a github issue if problems are found.
-5. Only supports omnibus provided nginx and postgres services. Apache and MySQL are not available. 
+2. When attempting to autodownload, assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
+3. Omniauth and enterprise are not tested. Please submit a github issue if problems are found.
+4. Only supports omnibus provided nginx and postgres services. Apache and MySQL are not available. 
 
 #### Contact  
 twitter => [@spencer450](https://twitter.com/spencer450)   
