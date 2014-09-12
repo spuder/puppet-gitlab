@@ -156,6 +156,7 @@ class { 'gitlab' :
   redirect_http_to_https   => true,
   ssl_certificate          => "/etc/gitlab/ssl/gitlab.crt",
   ssl_certificate_key      => "/etc/gitlab/ssl/gitlab.key",
+  listen_addresses         => ["0.0.0.0", "[::]"],
 
   #git_uid            => 1001, 
   #git_gid            => 1002,
