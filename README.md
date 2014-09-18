@@ -47,7 +47,7 @@ Use Vagrant to quickly spin up a non production, test vm.
 
     $ vagrant up 
     $ vagrant ssh
-    $ sudo puppet apply -e "class { gitlab : puppet_manage_config => true, gitlab_branch => '7.0.0', external_url => 'http://192.168.33.10', }" --modulepath=/etc/puppet/modules --verbose
+    $ sudo puppet apply -e "class { gitlab : gitlab_branch => '7.2.0', external_url => 'http://192.168.33.10', }" --verbose
 
 192.168.33.10 is the default ip address in the [Vagrantfile](https://github.com/spuder/puppet-gitlab/blob/master/Vagrantfile).
 
