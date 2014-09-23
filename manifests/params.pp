@@ -71,10 +71,10 @@ class gitlab::params {
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   $ldap_enabled   = false
-  $ldap_host      = 'hostname of LDAP server'
-  $ldap_port      = 389 # or 636
+  $ldap_host      = 'server.example.com'
+  $ldap_port      =  636 # or 389 for non ssl
   $ldap_uid       = 'sAMAccountName' # or 'uid'
-  $ldap_method    = 'plain' # 'ssl' or 'plain'
+  $ldap_method    = 'ssl' # 'ssl' or 'plain'
   $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
   $ldap_password  = 'query user password'
   $ldap_allow_username_or_email_login = true
