@@ -37,7 +37,6 @@
 #    Required paramter, the url configured in nginx
 #    Example: 'http://gitlab.example.com'
 #
-#
 # 1. Gitlab app settings
 # ======================
 #
@@ -201,9 +200,316 @@
 #     default => ''
 #     Enterprise only feature, filter ldap group
 #     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
-
-
-
+#
+# [*ldap_sync_ssh_keys*]
+#     default => undef
+#     Enterprise only feature, The bject name in ldap where ssh keys are stored
+#     Example: 'sshpublickey'
+#
+# [*ldap_admin_group*]
+#     default => undef
+#     Enterprise only feature, The object name in ldap that matches administrators
+#     Example: 'GitLab administrators'
+#
+# [*omniauth_enabled*]
+#     default => undef
+#     Allows login via Google, twitter, Github ect..
+#     Example: true
+#
+# [*omniauth_allow_single_sign_on*]
+#     default => false
+#     CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
+#     Example: 'sshpublickey'
+#
+# [*omniauth_block_auto_created_users*]
+#     default => true
+#     Lockdown new omniauth accounts until they are approved
+#     Example: true
+#
+# [*omniauth_providers*]
+#     default => undef
+#     Allows user to authenticate with Twitter, Google, Github ect... 
+#     Example: [ '{
+#         "name"   => "google_oauth2",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" => "YOUR APP SECRET",
+#         "args"   => { "access_type" => "offline", "approval_prompt" => "" }
+#       }',
+#       ',',
+#       '{ 
+#         "name"   => "twitter",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" =>  "YOUR APP SECRET"
+#       }',
+#       ',',
+#       '{ "name"   => "github",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" =>  "YOUR APP SECRET",
+#         "args"  => { "scope" =>  "user:email" }
+#       }'
+#     ],
+#     See tests/ominiauth.pp for more information
+#
+# 3. Advanced settings
+# ==========================
+#
+# [*satellites_path*]
+#     default => undef
+#     Where satellite scripts are run
+#     Example: /var/opt/gitlab/git-data/gitlab-satellites
+#
+# [*satellites_timeout*]
+#     default => undef
+#     Increase if merge requests timeout (gitlab default: 30)
+#     Example: 120
+#
+# [*backup_path*]
+#     default => undef
+#     Location for backups (relative to rails root) 
+#     Example: '/var/opt/gitlab/backups'
+#
+# [*backup_keep_time*]
+#     default => undef
+#     Number of seconds to keep backups. gitlab default: 0 (forever)
+#     Example: 604800     # 1 week
+#
+# [*gitlab_shell_path*]
+#     default => undef
+#     Where gitlab-shell is located
+#     Example: /opt/gitlab/embedded/service/gitlab-shell/
+#
+# [*gitlab_shell_repos_path*]
+#     default => undef
+#     Path where gitlab shell repos are stored
+#     Example: '/var/opt/gitlab/git-data/repositories' # Cannot be a symlink
+#
+# [*gitlab_shell_hooks_path*]
+#     default => undef
+#     Path for git hooks
+#     Example: '/opt/gitlab/embedded/service/gitlab-shell/hooks/' # Cannot be a symlink
+#
+# [*gitlab_shell_upload_pack*]
+#     default => undef
+#     Run shell upload pack on git repos
+#     Example: true
+#
+# [*gitlab_shell_receive_pack*]
+#     default => undef
+#     Run shell recieve pack on git repos
+#     Example: true
+#
+# [*gitlab_shell_ssh_port*]
+#     default => undef
+#     Port ssh runs on
+#     Example: 22
+#
+# [*git_bin_path*]
+#     default => undef
+#     Path to git repo, Make sure you know what you are doing
+#     Example: '/opt/bin/gitlab/embedded/bin/git'
+#
+# [*git_max_size*]
+#     default => undef
+#     Maximum size of https packets. Increase if large commits fail. (git default 5242880 [5mb)
+#     Example: 25600
+#
+# [*git_timeout*]
+#     default => undef
+#     Timeout (in seconds) for git shell
+#     Example: 10
+#
+# 4. Extra customization
+# ==========================
+#
+# [*extra_google_analytics_id*]
+#     default => undef
+#
+# [*extra_piwik_url*]
+#     default => undef
+#
+# [*extra_sign_in_text*]
+#     default => undef
+#     Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
+#
+# 5. Omnibus customization
+# ==========================
+#
+# [*redis_port*]
+#     default => undef
+#     Port redis runs on
+#     Example: 6379
+#
+# [*postgresql_port*]
+#     default => undef
+#     Port postgres runs on
+#     Example: 5432
+#
+# [*unicorn_port*]
+#     default => undef
+#     Port unicorn runs on
+#     Example: 8080
+#
+# [*git_data_dir*]
+#     default => undef
+#     Example: '/var/opt/gitlab/git-data'
+#
+# [*gitlab_username*]
+#     default => undef
+#     Local username
+#     Example: 'gitlab'
+#
+# [*gitlab_group*]
+#     default => undef
+#     Local groupname
+#     Example: 'gitlab'
+#
+# [*redirect_http_to_https*]
+#     default => undef
+#     Sets nginx 301 redirect from http to https urls. Requires ssl be enabled (gitlab default: false)
+#     Example: true
+#
+# [*ssl_certificate*]
+#     default => '/etc/gitlab/ssl/gitlab.crt'
+#     Location of ssl certificate
+#     Example: '/etc/gitlab/ssl/gitlab.crt'
+#
+# [*ssl_certificate_key*]
+#     default => '/etc/gitlab/ssl/gitlab.key'
+#     Location of ssl key
+#     Example: '/etc/gitlab/ssl/gitlab.key'
+#
+# [*listen_addres*]
+#     default => undef
+#     Array of ipv4 and ipv6 address nginx listens on
+#     Example: ["0.0.0.0","[::]"]
+#
+# [*git_uid*]
+#     default => undef
+#     uid of git user, (the user gitlab-shell runs under)
+#     Example: 42
+#
+# [*git_gid*]
+#     default => undef
+#     gid of git user, (the user gitlab-shell runs under)
+#     Example: 42
+#
+# [*gitlab_redis_uid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_redis_gid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_psql_uid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_psql_gid*]
+#     default => undef
+#     Example: 42
+#
+# [*aws_enable*]
+#     default => false
+#     Store images on amazon
+#     Example: true
+#
+# [*aws_access_key_id*]
+#     default => undef
+#     Example: 'AKIA1111111111111UA'
+#
+# [*aws_secret_access_key*]
+#     default => undef
+#     Example: 'secret'
+#
+# [*aws_bucket*]
+#     default => undef
+#     Example: 'my_gitlab_bucket'
+#
+# [*aws_region*]
+#     default => undef
+#     Example: 'us-east-1'
+#
+# [*smtp_enable*]
+#     default => false
+#     Connect to external smtp server
+#     Example: true
+#
+# [*smtp_address*]
+#     default => undef
+#     smtp server hostname
+#     Example: 'smtp.example.com'
+#
+# [*smtp_port*]
+#     default => undef
+#     Example: 456
+#
+# [*smtp_user_name*]
+#     default => undef
+#     Example: 'smtp user'
+#
+# [*smtp_password*]
+#     default => undef
+#     Example: 'correct-horse-battery-staple'
+#
+# [*smtp_domain*]
+#     default => undef
+#     Example: 'example.com'
+#
+# [*smtp_authentication*]
+#     default => undef
+#     How smtp authorizes
+#     Example: 'login'
+#
+# [*smtp_enable_starttls_auto*]
+#     default => true
+#     Use tls on smtp server
+#     Example: true
+#
+# [*svlogd_size*]
+#     default => 200 * 1024 * 1024
+#     Rotate after x number of bytes
+#     Example: 200 * 1024 * 1024 # 200MB
+#
+# [*svlogd_num*]
+#     default => 30
+#     Number of rotated logs to keep
+#     Example: 60
+#
+# [*svlogd_timeout*]
+#     default => 24 * 60 * 60
+#     How long between log rotations (minutes)
+#     Example: 24 * 60 * 60 # 24hours
+#
+# [*svlogd_filter*]
+#     default => 'gzip'
+#     Compress logs
+#
+# [*svlogd_udp*]
+#     default => undef
+#     Transmit logs via UDP
+#     Example: #TODO: find example
+#
+# [*svlogd_prefix*]
+#     default => undef
+#     Custom prefix for log messages
+#     Example: #TODO: find example
+#
+# [*udp_log_shipping_host*]
+#     default => undef
+#     Enterprise Edition Only - ip of syslog server
+#     Example: '192.0.2.0'
+#
+# [*udp_log_shipping_port*]
+#     default => undef
+#     Enterprise Edition Only - port of syslog server
+#     Example: 514
+#
+# [*high_availability_mountpoint*]
+#     default => undef
+#     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
+#     Example: '/tmp'
+#
 # === Examples
 #
 # Basic Example with https
