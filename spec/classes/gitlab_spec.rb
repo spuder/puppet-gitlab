@@ -21,44 +21,6 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
-# Verify using facter 1.7 or greater
-  context 'when facter version < 1.7' do
-    let(:params) { 
-      {
-        :external_url  => 'http://gitlab.example.com', 
-        :gitlab_branch => '7.0.0'
-      }
-    }
-    let(:facts)  {
-      {
-        :facterversion => '1.6.0',
-        :puppetversion => ENV['PUPPET_VERSION']
-      }
-    }
-    it 'we fail' do
-      expect { subject }.to raise_error(/Gitlab requires facter 1.7.0 or greater/)
-    end
-  end
-
-# Verify $operatingsystemmajrelease is a valid fact (not true in all version of facter)
-  context 'when operatingsystemmajrelease is undefined fact' do
-    let(:params) { 
-      {
-        :external_url  => 'http://gitlab.example.com', 
-        :gitlab_branch => '7.0.0'
-      }
-    }
-    let(:facts)  {
-      {
-        :puppetversion => ENV['PUPPET_VERSION'],
-        :facterversion => ENV['FACTER_VERSION'],
-        :operatingsystemmajrelease => ''
-      }
-    }
-    it 'we fail' do
-      expect { subject }.to raise_error(/Failed to retrieve fact/)
-    end
-  end
 
 # Verify $external_url contains http:// or https://
   context 'when external_url contains no http:// or https://' do
@@ -75,7 +37,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it 'we fail' do
@@ -155,7 +116,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it { should contain_class('gitlab::config') }
@@ -177,7 +137,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it { should_not contain_class('gitlab::config') }
@@ -199,7 +158,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it { should contain_class('gitlab::packages') }
@@ -221,13 +179,33 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it { should_not contain_class('gitlab::packages') }
   end
 
-
+# Expect error when runnong on cent 5
+    context 'when centos is 5' do
+    let(:params) {
+      {
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
+        :puppet_manage_packages => true,
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '5.5',
+      }
+    }
+    it do
+      expect { subject }.to raise_error(/Only CentOS 6 and 7 are presently supported, found:/)
+    end
+  end
 
 
 
