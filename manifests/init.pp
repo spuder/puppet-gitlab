@@ -4,8 +4,6 @@
 #
 # === Parameters
 #
-# See params.pp for full documentation of parameters
-#
 # [*puppet_manage_config*]
 #   default => true
 #   /etc/gitlab/gitlab.rb will be managed by puppet
@@ -24,7 +22,164 @@
 #   Required parameter, specifies which gitlab branch to download and install
 #   Example: '7.0.0'
 #
+# [*gitlab_release*]
+#    default => 'basic'
+#    specifies 'basic' or 'enterprise' version to download, some parameters are disabled if basid
+#    Example: 'enterprise'
 #
+# [*gitlab_download_link*]
+#    default => undef 
+#    specifies url to download gitlab from, optional if gitlab_release = basic
+#    Example: 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
+#
+# [*external_url*]
+#    default => undef
+#    Required paramter, the url configured in nginx
+#    Example: 'http://gitlab.example.com'
+#
+#
+# 1. Gitlab app settings
+# ======================
+#
+# [*gitlab_email_from*]
+#    default => undef
+#    Example: 'gitlab@example.com' 
+#
+# [*gitlab_default_projects_limit*]
+#    default => undef
+#    How many projects a user can create
+#    Example: 42
+#
+# [*gitlab_default_can_create_group*]
+#    default => undef
+#    Allow users to make own groups, (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_username_changing_enabled*]
+#    default => undef
+#    Allow users to change own username, not suggested if running ldap
+#    Example: false
+#
+# [*gitlab_default_theme*]
+#    default => undef
+#    Color Theme:  1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (gitlab default: 2)
+#    Example: 3
+#
+# [*gitlab_signup_enabled*]
+#    default => undef
+#    Anyone can create an account (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_signin_enabled*]
+#    default => undef
+#    Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_issues*]
+#    default => undef
+#    Enables light weight issue tracker on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_merge_requests*]
+#    default => undef
+#    Enables merge requests on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_wiki*]
+#    default => undef
+#    Enables light weight wiki on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_snippets*]
+#    default => undef
+#    Like github 'gits' (default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_visibility_level*]
+#    default => undef
+#    Project visibility ['public' | 'internal' | 'private'] (gitlab default: 'private')
+#    Example: false
+#
+# [*issues_tracker_redmine*]
+#    default => undef
+#    Integrate with redmine issue tracker (gitlab default: false)
+#    Example: false
+#
+# [*issues_tracker_redmine_title*]
+#    default => undef
+#    Example: 'title'
+#
+# [*issues_tracker_redmine_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_redmine_issues_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_redmine_new_issue_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira*]
+#    default => undef
+#    Example: false
+#
+# [*issues_tracker_jira_title*]
+#    default => undef
+#    Example: 'foo'
+#
+# [*issues_tracker_jira_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira_new_issue_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*gravatar_enabled*]
+#    default => undef
+#    Use user avatar image from Gravatar.com (gitlab default: true)
+#    Example: true
+#
+# [*gravatar_plain_url*]
+#    default => undef
+#    Example: 'http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
+#
+# [*gravatar_ssl_url*]
+#    default => undef
+#    Example: 'https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
+#
+# 2. Auth settings
+# ==========================
+#
+# [*ldap_enabled*]
+#    default => false
+#
+# [*ldap_host*]
+#    default => 'server.example.com'
+#    
+# [*ldap_port*]
+#     default => 636
+#     Example: 389
+#    
+# [*ldap_uid*]
+#     default => 'sAMAccountName'
+#     Example: 'uid'
+#
+# [*ldap_method*]
+#     default => 'ssl'
+#     Example: 'ssl'
+# 
+# [*ldap_bind_dn*]
+#     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
+
+
+
 # === Examples
 #
 # Basic Example with https
