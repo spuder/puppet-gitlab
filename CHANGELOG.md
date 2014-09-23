@@ -1,5 +1,8 @@
 ##Changelog
 
+2015-Sep-23: 2.3.1
+- Removes dependency on $operatingsystemmajrelease (issue #80)
+
 2015-Sep-12: 2.3.0
 - Adds dependency on puppetlabs/stdlib module >= 3.x.x
 - Fixes crash when external_url contains no 'http://' (issue #73, thanks minnorOffense)

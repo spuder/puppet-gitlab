@@ -25,8 +25,8 @@ class gitlab::packages inherits ::gitlab {
       $mail_application = 'postfix'
       $ssh_service_name = 'sshd'
       
-      case $::operatingsystemmajrelease {
-        '6': {
+      case $::operatingsystemrelease {
+        /^6/: {
             exec {"chkconfig ${mail_application} on":
               path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
               command => "chkconfig ${mail_application} on",
@@ -34,7 +34,7 @@ class gitlab::packages inherits ::gitlab {
               require => [ Package[$mail_application] ],
             }
         }
-        '7': {
+        /^7/: {
             exec {'systemctl enable sshd':
               path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
               command => "systemctl enable ${ssh_service_name}",
@@ -49,7 +49,7 @@ class gitlab::packages inherits ::gitlab {
             }
         }
         default: {
-          fail("Only Centos 6 and 7 are presently supported, found: ${::osfamily}-${::operatingsystemmajrelease}:${::operatingsystem}-${::operatingsystemrelease} ")
+          fail("Only CentOS 6 and 7 are presently supported, found: ${::osfamily}-${::operatingsystem}-${::operatingsystemrelease} ")
         }
       }
     }
@@ -64,7 +64,7 @@ class gitlab::packages inherits ::gitlab {
 
     }
     default: {
-      fail("Only Centos, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
+      fail("Only CentOS, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
     }
   }
 

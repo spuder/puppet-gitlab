@@ -18,7 +18,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it do
@@ -43,7 +42,6 @@ describe 'gitlab', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.5',
-        :operatingsystemmajrelease => '6'
       }
     }
     it do
