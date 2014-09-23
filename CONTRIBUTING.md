@@ -10,11 +10,9 @@ Checkout the [README.md](https://github.com/spuder/puppet-gitlab/blob/master/REA
 - Write code
 - Test code
 
-    ```
-    puppet parser validate foo.pp  	
+    puppet parser validate foo.pp  
     gem install puppet-lint  
     puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
-    ```
 
 - Create merge request
 
@@ -28,26 +26,24 @@ Checkout the [README.md](https://github.com/spuder/puppet-gitlab/blob/master/REA
 - Write Code
 - Quick tests
 
-    ```
+
     puppet parser validate foo.pp  
     gem install puppet-lint  
     puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
-    ```
+
 
 - Add spec tests to `spec/classes/gitlab_spec.rb` 
 Additional information [can be found here](http://puppetlabs.com/blog/the-next-generation-of-puppet-module-testing)
 
- ```gem install puppetlabs_spec_helper```
+```gem install puppetlabs_spec_helper```
     
 - Run rake tests
 
-    ```
     export PUPPET_VERSION=$(facter puppetversion)  
     export FACTER_VERSION=$(facter facterversion)
     export STRICT_VARIABLES=yes
     rake spec
-    ```
-    
+
 - If tests pass, create merge request
 
 

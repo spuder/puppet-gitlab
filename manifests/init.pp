@@ -177,6 +177,30 @@
 # 
 # [*ldap_bind_dn*]
 #     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
+#
+# [*ldap_password*]
+#     default => 'correct-horse-battery-staple'
+#
+# [*ldap_allow_username_or_email_login*]
+#     default => true
+#     Login with email prefix or full email. e.g. steve vs steve@apple.com
+#
+# [*ldap_base*]
+#     default => DC=mycorp,DC=com
+#
+# [*ldap_sync_time*]
+#     default => undef
+#     Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
+#
+# [*ldap_group_base*]
+#     default => ''
+#     Enterprise only feature, Ldap groups map to gitlab groups
+#     Example: 'OU=groups,DC=mycorp,DC=com'
+#
+# [*ldap_user_filter*]
+#     default => ''
+#     Enterprise only feature, filter ldap group
+#     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
 
 
 

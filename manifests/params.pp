@@ -76,7 +76,7 @@ class gitlab::params {
   $ldap_uid       = 'sAMAccountName' # or 'uid'
   $ldap_method    = 'ssl' # 'ssl' or 'plain'
   $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
-  $ldap_password  = 'query user password'
+  $ldap_password  = 'correct-horse-battery-staple'
   $ldap_allow_username_or_email_login = true
   $ldap_base      = 'DC=mycorp,DC=com'
 
