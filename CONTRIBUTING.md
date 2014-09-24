@@ -55,4 +55,17 @@ Try and keep the order and spacing of parameters in the init.pp and params.pp th
 
 [default.rb](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/attributes/default.rb)
 
+## Guard
+
+A Guardfile has been provided for your convenience
+
+    gem install guard
+    gem install guard-rake
+
+    export PUPPET_VERSION=$(facter puppetversion)  
+    export FACTER_VERSION=$(facter facterversion)
+    export STRICT_VARIABLES=yes
+    guard
+
+Now any changes made to manifests/*.pp will trigger the guard process to run `rake spec`
  
