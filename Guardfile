@@ -25,7 +25,7 @@ guard :shell do
             retval = $?.to_i
             case retval
                 when 0
-                    puts 'puppet parser validate passed'.green
+                    puts '1. Puppet Parser Validate: passed!'.green
                     n "#{m[0]} Parser can parse!", 'Puppet-Parser'
                     guard_shell_exit = 0
                 else
@@ -42,12 +42,11 @@ guard :shell do
                 when 0
                     if lint.length > 0 then
                         puts lint.red
-                        puts "guard_shell_exit: #{guard_shell_exit}"
                         n "#{m[0]} You can do better, warnings left on Terminal!", 'Puppet-Lint', :pending
                         guard_shell_exit = 1
                     else
                         puts lint
-                        puts 'lint tests pass'.green
+                        puts '2. Puppet-Lint: passed!'.green
                         n "#{m[0]} Fully lintified!", 'Puppet-Lint', :success
                         guard_shell_exit = 0
                     end
@@ -75,12 +74,12 @@ guard :shell do
                     guard_shell_exit = 0
 
                 end
-                puts 'spec test passed'.green
+                puts '3. Rake Spec: passed!'.green
             else
-                puts 'spec tests failed'.red
+                puts '3. Rake Spec: failed!'.red
             end
+            puts "============================\n"
         end
-
     end
 
     # watch(%r{^templates\/.*\.erb$}) do |m|
