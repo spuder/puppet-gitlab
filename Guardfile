@@ -11,11 +11,14 @@
 # - .rb syntax check
 require 'colorize'
 
+def puppet_parser_validate()
 
+end
 
 
 guard :shell do
 
+    # Watch all files in the manifests directory that end in .pp
     watch(%r{^manifests\/.+\.pp$}) do |m|
         guard_shell_exit = nil
 
@@ -82,28 +85,31 @@ guard :shell do
         end
     end
 
-    # watch(%r{^templates\/.*\.erb$}) do |m|
-    # # watch /(.*\.erb$)/ do |m|
-    #     # Verify erb syntax
-    #     case system "cat #{m[0]} | erb -P -x -T - | ruby -c"
-    #         when true
-    #             n "#{m[0]} is valid", 'ERB-Check'
-    #         when false
-    #             n "#{m[0]} is invalid", 'ERB-Check', :failed
-    #     end
-    # end
+    # Watch all files in templates directory that end in .erb
+    watch(%r{^templates\/.*\.erb$}) do |m|
+        # Verify .erb template syntax
+        case system "cat #{m[0]} | erb -P -x -T - | ruby -c"
+            when true
+                puts 'ERB Check: passed!'.green
+                n "#{m[0]} is valid", 'ERB-Check'
+            when false
+                puts 'ERB Check: failed!'.red
+                n "#{m[0]} is invalid", 'ERB-Check', :failed
+        end
+    end
 
-
-    # watch /(.*\.rb$)/ do |m|
-
-    #     # Verify .rb file syntax
-    #     case system "ruby -c #{m[0]}"
-    #         when true
-    #             n "#{m[0]} is valid", 'Ruby-Syntax-Check'
-    #         when false
-    #             n "#{m[0]} is invalid", 'Ruby-Syntax-Check', :failed
-    #     end
-    # end
+    # Watch all files that end in .rb
+    watch /(.*\.rb$)/ do |m|
+        # Verify .rb file syntax
+        case system "ruby -c #{m[0]}"
+            when true
+                puts 'Ruby Check: passed!'.green
+                n "#{m[0]} is valid", 'Ruby-Syntax-Check'
+            when false
+                puts 'Ruby Check: failed!'.red
+                n "#{m[0]} is invalid", 'Ruby-Syntax-Check', :failed
+        end
+    end
 
 end
 
