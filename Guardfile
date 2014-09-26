@@ -11,11 +11,6 @@
 # - .rb syntax check
 require 'colorize'
 
-def puppet_parser_validate()
-
-end
-
-
 guard :shell do
 
     # Watch all files in the manifests directory that end in .pp
@@ -24,6 +19,7 @@ guard :shell do
 
         # Run puppet parser validate
         if guard_shell_exit != 1
+            puts "Running puppet parser verify....".blue
             parser = `puppet parser validate --color=true #{m[0]}`
             retval = $?.to_i
             case retval
@@ -39,6 +35,7 @@ guard :shell do
 
         # Run puppet lint
         if guard_shell_exit != 1
+            puts "Running puppet-lint....".blue
             lint = `puppet-lint --no-autoloader_layout-check --no-80chars-check --with-filename #{m[0]}`
             retval = $?.to_i
             case retval
@@ -62,7 +59,9 @@ guard :shell do
 
         # Run Rake Spec
         if guard_shell_exit != 1
-            spec = `rake spec`
+            puts "Running rake spec....".blue
+            spec = `script -q /dev/null rake spec`
+            # spec = `time rake spec`
             retval = $?.to_i
             case retval
             when 0
@@ -81,7 +80,7 @@ guard :shell do
             else
                 puts '3. Rake Spec: failed!'.red
             end
-            puts "============================\n"
+            print "============================"
         end
     end
 
@@ -98,25 +97,20 @@ guard :shell do
         end
     end
 
-    # Watch all files that end in .rb
-    watch /(.*\.rb$)/ do |m|
-        # Verify .rb file syntax
-        case system "ruby -c #{m[0]}"
-            when true
-                puts 'Ruby Check: passed!'.green
-                n "#{m[0]} is valid", 'Ruby-Syntax-Check'
-            when false
-                puts 'Ruby Check: failed!'.red
-                n "#{m[0]} is invalid", 'Ruby-Syntax-Check', :failed
-        end
-    end
+    # Commenting out because I don't need it, and doesn't always work
+    # # Watch all files that end in .rb
+    # watch /(.*\.rb$)/ do |m|
+    #     # Verify .rb file syntax
+    #     case system "ruby -c #{m[0]}"
+    #         when true
+    #             puts 'Ruby Check: passed!'.green
+    #             n "#{m[0]} is valid", 'Ruby-Syntax-Check'
+    #         when false
+    #             puts 'Ruby Check: failed!'.red
+    #             n "#{m[0]} is invalid", 'Ruby-Syntax-Check', :failed
+    #     end
+    # end
 
 end
-
-# guard 'rake', :task => 'spec' do
-#   watch(%r{^manifests\/.+\.pp$})
-#   watch(%r{^spec\/^classes\/.+_spec\.rb$})
-# end
-
 
 # vim: set syntax=ruby
