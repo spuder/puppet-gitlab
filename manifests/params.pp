@@ -132,7 +132,7 @@ class gitlab::params {
 #
 # 5. Omnibus customization
 # ==========================
-  $redis_port       = undef # (default: 6379)
+  $redis_port       = undef # (default: 6379), Deprecated in 7.3
   $postgresql_port  = undef # (default: 5432)
   $unicorn_port     = undef # (default: 8080)
 
