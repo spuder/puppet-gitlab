@@ -32,9 +32,9 @@ class gitlab::params {
 
   $external_url          = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
-#
-# 1. GitLab app settings
-# ==========================
+  #
+  # 1. GitLab app settings
+  # ==========================
   $gitlab_email_from                 = undef # 'gitlab@example.com'
   $gitlab_default_projects_limit     = undef # How many projects a user can create (default: 10)
   $gitlab_default_can_create_group   = undef # Allow users to make own groups (default: true)
@@ -65,9 +65,9 @@ class gitlab::params {
   $gravatar_plain_url  = undef # default: http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
   $gravatar_ssl_url    = undef # default: https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
 
-#
-# 2. Auth settings
-# ==========================
+  #
+  # 2. Auth settings
+  # ==========================
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   $ldap_enabled   = false
@@ -96,9 +96,9 @@ class gitlab::params {
   $omniauth_block_auto_created_users = true  # Lockdown new omniauth accounts until they are approved
   $omniauth_providers                = undef # See 'tests/omniauth.pp' for examples
 
-#
-# 3. Advanced settings
-# ==========================
+  #
+  # 3. Advanced settings
+  # ==========================
   $satellites_path             = undef # /var/opt/gitlab/git-data/gitlab-satellites
   $satellites_timeout          = undef # Increase if merge requests timeout (seconds=> default: 30)
 
@@ -119,9 +119,9 @@ class gitlab::params {
   $git_max_size                = undef # Incrase if large commits fail over https (default: 5242880) 5242880=5MB
   $git_timeout                 = undef # 10
 
-#
-# 4. Extra customization
-# ==========================
+  #
+  # 4. Extra customization
+  # ==========================
   $extra_google_analytics_id = undef
   
   $extra_piwik_url           = undef
@@ -129,9 +129,9 @@ class gitlab::params {
   
   $extra_sign_in_text        = undef # Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
   
-#
-# 5. Omnibus customization
-# ==========================
+  #
+  # 5. Omnibus customization
+  # ==========================
   $redis_port       = undef # (default: 6379)
   $postgresql_port  = undef # (default: 5432)
   $unicorn_port     = undef # (default: 8080)
