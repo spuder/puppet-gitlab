@@ -336,7 +336,7 @@
 #
 # [*redis_port*]
 #     default => undef
-#     Port redis runs on
+#     Deprecated in 7.3: Port redis runs on
 #     Example: 6379
 #
 # [*postgresql_port*]
@@ -792,8 +792,15 @@ class gitlab (
       fail("ldap_sync_time is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
     }
   }
-  
-  # If all 3 $puppet_manage_* parametrs are false, then just install gitlab
+
+  # Warn if redis_port is defined, and using gitlab > 7.3
+  if $redis_port {
+    if versioncmp( $gitlab_branch, '7.3.0') >= 0 {
+      warn('$redis_port has been deprecated in gitlab 7.3, please remove. http://bit.ly/1DEI9m2')
+    }
+  }
+
+  # If all 3 $puppet_manage_* parameters are false, then just install gitlab
   include ::gitlab::install
 
 }# end gitlab

@@ -7,6 +7,7 @@
 - Removes custom fact operatingsystem_lowercase
 - Removes custom fact hostname_alias
 - Now passes strict variable checking
+- Deprecation warning if using redis_port on 7.3
 
 2015-Sep-23: 2.3.1
 - Removes dependency on $operatingsystemmajrelease (issue #80)
