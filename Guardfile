@@ -36,7 +36,7 @@ guard :shell do
         # Run puppet lint
         if guard_shell_exit != 1
             puts "Running puppet-lint....".blue
-            lint = `puppet-lint --no-autoloader_layout-check --no-80chars-check --with-filename #{m[0]}`
+            lint = `puppet-lint --no-autoloader_layout-check --no-80chars-check --no-class_inherits_from_params_class-check --with-filename #{m[0]}`
             retval = $?.to_i
             case retval
                 when 0
@@ -60,8 +60,7 @@ guard :shell do
         # Run Rake Spec
         if guard_shell_exit != 1
             puts "Running rake spec....".blue
-            spec = `script -q /dev/null rake spec`
-            # spec = `time rake spec`
+            spec = `rake spec`
             retval = $?.to_i
             case retval
             when 0
