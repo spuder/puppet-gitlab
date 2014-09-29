@@ -207,11 +207,4 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
-
-
-
-
-
-
-
 end

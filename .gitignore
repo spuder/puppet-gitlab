@@ -9,3 +9,5 @@
 spec/fixtures/*
 tests/adaptive.pp
 tests/enterprise.pp
+
+gitlab-*.rpm

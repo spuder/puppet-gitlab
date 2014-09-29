@@ -21,7 +21,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it { should contain_class('gitlab::backup') }
-    end
+  end
 
 # Expect class gitlab::backups absent when $puppet_manage_backups is false
   context 'when $puppet_manage_backups is false' do

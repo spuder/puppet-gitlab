@@ -8,7 +8,7 @@ class { 'gitlab' :
   gitlab_release          => 'basic',
   external_url            => 'http://192.168.33.10',
 
-  # SSL highly recomended
+  # SSL highly recommended
   # redirect_http_to_https  => true,
   listen_addresses         => ["0.0.0.0", "[::]"],
 

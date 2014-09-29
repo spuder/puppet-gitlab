@@ -8,6 +8,7 @@
 - Removes custom fact hostname_alias
 - Now passes strict variable checking
 - Deprecation warning if using redis_port on 7.3
+- Automatically stops gitlab if upgrading package (issue #81)
 
 2015-Sep-29: 2.3.2
 - Updates README warning users to run gitlab-ctl stop before upgrading (issue #81)
