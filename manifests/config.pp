@@ -31,9 +31,8 @@ class gitlab::config inherits ::gitlab {
 
   file { $gitlab_config_dir:
     ensure => directory,
-    owner  => 'root', 
+    owner  => 'root',
     group  => 'root',
-    mode   => '0775',
   }
   file { "${gitlab_config_dir}/gitlab.rb":
     content => template('gitlab/gitlab-puppet.rb.erb'),
@@ -44,7 +43,8 @@ class gitlab::config inherits ::gitlab {
     refreshonly => true,
     timeout     => 1800,
     require     => File["${gitlab_config_dir}/gitlab.rb"],
-    subscribe   => File["${gitlab_config_dir}/gitlab.rb"],
+    subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'] ],
   }
+
 
 }
