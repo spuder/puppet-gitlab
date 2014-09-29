@@ -1,6 +1,6 @@
 ##Changelog
 
-2015-Sep-xx: ?.?.?
+2015-Sep-29: 2.3.3
 - Change default ldap_host value
 - Changes default ldap_port value
 - Changes default ldap_method value
