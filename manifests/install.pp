@@ -80,7 +80,7 @@ class gitlab::install inherits ::gitlab {
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         # $operatingsystem_lowercase = downcase($::operatingsystem)
-        $operatingsystem_lowercase=downcase("${::operatingsystem}")
+        $operatingsystem_lowercase=downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
@@ -108,7 +108,7 @@ class gitlab::install inherits ::gitlab {
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
         # $operatingsystem_lowercase = downcase($::operatingsystem)
-        $operatingsystem_lowercase=downcase("${::operatingsystem}")
+        $operatingsystem_lowercase=downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
       }

@@ -31,7 +31,7 @@ class gitlab::config inherits ::gitlab {
 
   file { $gitlab_config_dir:
     ensure => directory,
-    owner  => 'root',
+    owner  => 'root', 
     group  => 'root',
     mode   => '0775',
   }
