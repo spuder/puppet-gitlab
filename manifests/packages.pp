@@ -18,7 +18,7 @@
 #
 class gitlab::packages inherits ::gitlab {
 
-  # The install documentation recomends different mail apps for different releases
+  # The install documentation recommends different mail apps for different releases
   # https://about.gitlab.com/downloads/
   case $::operatingsystem {
     'CentOS': {

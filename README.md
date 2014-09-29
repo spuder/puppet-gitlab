@@ -14,7 +14,7 @@ Installs Gitlab 7 using the [omnibus installer](https://about.gitlab.com/downloa
 **Version 2.x.x is a complete rewrite with many api breaking changes. 
 Since it uses the omnibus installer, it is incompatible with the previous puppet module.**
 
-If upgrading from Gitlab 6.x, it is recomended that you create a fresh install and [migrate the data.](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
+If upgrading from Gitlab 6.x, it is recommended that you create a fresh install and [migrate the data.](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
 
 
@@ -199,6 +199,8 @@ class { 'gitlab' :
   puppet_manage_config    => false,
 }
 ```
+*Note: If manually managing the gitlab.rb file, you will likely also need to start the service manually with `gitlab-ctl start`*
+
 [Manage /etc/gitlab/gitlab.rb manually](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
 
@@ -234,7 +236,6 @@ Puppet will always ensure that the latest version of the gitlab package is insta
 To upgrade:
 
 1. Verify a current backup is present. See [Offical Instructions](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
-2. Stop gitlab with `gitlab-ctl stop` see [issue #7902](https://github.com/gitlabhq/gitlabhq/issues/7902)
 2. Change the `gitlab_branch` parameter to the new version (e.g. 7.1.0 -> 7.2.0)
 3. Wait for next puppet run
 4. You may need to restart gitlab `sudo gitlab-ctl restart`

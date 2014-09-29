@@ -749,7 +749,7 @@ class gitlab (
     Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
-    info('Puppet is not manageing /opt/gitlab/gitlab.rb because $puppet_manage_config is true')
+    info('Puppet is not managing /opt/gitlab/gitlab.rb because $puppet_manage_config is false')
   }
 
   if $puppet_manage_packages == true {
@@ -769,7 +769,7 @@ class gitlab (
     Class['::gitlab::install'] -> Class['::gitlab::backup']
   }
   else {
-    warning('Puppet is not creating gitlab backups, recomend setting $puppet_manage_backups => true')
+    warning('Puppet is not creating gitlab backups, recommend setting $puppet_manage_backups => true')
   }
 
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
