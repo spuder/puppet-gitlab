@@ -142,12 +142,5 @@ class gitlab::install inherits ::gitlab {
     provider => $package_manager,
     require  => Exec['download gitlab'],
   }
-  # Some versions of gitlab require nginx to be stopped before upgrading: https://github.com/gitlabhq/gitlabhq/issues/7902
-  exec { 'stop gitlab':
-    refreshonly => true,
-    timeout     => 1800,
-    command     => '/usr/bin/gitlab-ctl stop',
-    subscribe   => Package['gitlab'],
-  }
 
 }

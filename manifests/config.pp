@@ -39,11 +39,24 @@ class gitlab::config inherits ::gitlab {
     backup  => true,
     require => File[$gitlab_config_dir],
   }
+    # Some versions of gitlab require nginx to be stopped before upgrading: https://github.com/gitlabhq/gitlabhq/issues/7902
+  exec { 'stop gitlab':
+    refreshonly => true,
+    timeout     => 1800,
+    command     => '/usr/bin/gitlab-ctl stop nginx',
+    subscribe   => Package['gitlab'],
+    notify      => Exec['/usr/bin/gitlab-ctl reconfigure'],
+    before      => [ Exec['/usr/bin/gitlab-ctl reconfigure'], Exec['start gitlab'] ],
+  }
   exec { '/usr/bin/gitlab-ctl reconfigure':
     refreshonly => true,
     timeout     => 1800,
     require     => File["${gitlab_config_dir}/gitlab.rb"],
-    subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'] ],
+    subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'], Package['gitlab'] ],
+    before      => Exec['start gitlab'],
+  }  
+  exec { 'start gitlab':
+    command => '/usr/bin/gitlab-ctl start',
   }
 
 

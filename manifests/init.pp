@@ -746,8 +746,7 @@ class gitlab (
     notice('Puppet will manage the configuration file because $puppet_manage_config is true')
     include ::gitlab::install
     include ::gitlab::config
-    include ::gitlab::service
-    Class['::gitlab::install'] -> Class['::gitlab::config'] -> Class['gitlab::service']
+    Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
     info('Puppet is not managing /opt/gitlab/gitlab.rb because $puppet_manage_config is false')

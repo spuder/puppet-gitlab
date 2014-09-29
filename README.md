@@ -47,7 +47,7 @@ Use Vagrant to quickly spin up a non production, test vm.
 
     $ vagrant up 
     $ vagrant ssh
-    $ sudo puppet apply -e "class { gitlab : gitlab_branch => '7.2.0', external_url => 'http://192.168.33.10', }" --verbose
+    $ sudo puppet apply -e "class { gitlab : gitlab_branch => '7.3.0', external_url => 'http://192.168.33.10', }" --debug
 
 192.168.33.10 is the default ip address in the [Vagrantfile](https://github.com/spuder/puppet-gitlab/blob/master/Vagrantfile).
 
@@ -238,7 +238,6 @@ To upgrade:
 1. Verify a current backup is present. See [Offical Instructions](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
 2. Change the `gitlab_branch` parameter to the new version (e.g. 7.1.0 -> 7.2.0)
 3. Wait for next puppet run
-4. You may need to restart gitlab `sudo gitlab-ctl restart`
 
 *Note: Puppet can automatically manage backups if* `puppet_manage_backups => true`
 
