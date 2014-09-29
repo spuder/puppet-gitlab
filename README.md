@@ -235,6 +235,7 @@ Puppet will always ensure that the latest version of the gitlab package is insta
 To upgrade:
 
 1. Verify a current backup is present. See [Offical Instructions](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
+2. Stop gitlab with `gitlab-ctl stop` see [issue #7902](https://github.com/gitlabhq/gitlabhq/issues/7902)
 2. Change the `gitlab_branch` parameter to the new version (e.g. 7.1.0 -> 7.2.0)
 3. Wait for next puppet run
 4. You may need to restart gitlab `sudo gitlab-ctl restart`
