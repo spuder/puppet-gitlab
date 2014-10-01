@@ -103,11 +103,11 @@ nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
 nginx['listen_addresses'] = ["<%= @listen_addresses.join('","') %>"]
 <% end %>
 <% if @git_uid          -%>user['uid'] = <%= @git_uid -%>
-<% end %><% if @git_gid          -%>user['gid'] = <%= @git_gid -%>
-<% end %><% if @gitlab_psql_uid  -%>postgresql['uid'] = <%= @gitlab_psql_uid -%>
-<% end %><% if @gitlab_psql_gid  -%>postgresql['gid'] = <%= @gitlab_psql_gid -%>
-<% end %><% if @gitlab_redis_uid -%>redis['uid'] = <%= @gitlab_redis_uid -%>
-<% end %><% if @gitlab_redis_gid -%>redis['gid'] = <%= @gitlab_redis_gid -%>
+<% end %><% if @git_gid          -%>user['gid'] = <%= @git_gid %>
+<% end %><% if @gitlab_psql_uid  -%>postgresql['uid'] = <%= @gitlab_psql_uid %>
+<% end %><% if @gitlab_psql_gid  -%>postgresql['gid'] = <%= @gitlab_psql_gid %>
+<% end %><% if @gitlab_redis_uid -%>redis['uid'] = <%= @gitlab_redis_uid %>
+<% end %><% if @gitlab_redis_gid -%>redis['gid'] = <%= @gitlab_redis_gid %>
 <% end %><% if @aws_enable == true -%>
 gitlab_rails['aws_enable'] = <%= @aws_enable %>
 gitlab_rails['aws_access_key_id'] = '<%= @aws_access_key_id %>'

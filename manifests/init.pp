@@ -796,7 +796,7 @@ class gitlab (
   # Warn if redis_port is defined, and using gitlab > 7.3
   if $redis_port {
     if versioncmp( $gitlab_branch, '7.3.0') >= 0 {
-      warn('$redis_port has been deprecated in gitlab 7.3, please remove. http://bit.ly/1DEI9m2')
+      warning('$redis_port has been deprecated in gitlab 7.3, please remove. http://bit.ly/1DEI9m2')
     }
   }
 

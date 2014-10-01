@@ -12,7 +12,7 @@ class { 'gitlab' :
   puppet_manage_packages => true,  # If true, Puppet will manage openssl and postfix packages
 
   # Gitlab server settings
-  gitlab_branch           => '7.2.1',
+  gitlab_branch           => '7.3.0',
   gitlab_release          => 'basic', # enterprise or basic
   # gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
@@ -145,7 +145,7 @@ class { 'gitlab' :
 # ==========================
 
 
-  redis_port       => 6379, # 6379
+#  redis_port       => 6379, # 6379 # Deprecated in 7.3.0
   postgresql_port  => 5432, # 5432
   unicorn_port     => 8080, # 8080
 
