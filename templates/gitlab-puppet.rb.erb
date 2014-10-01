@@ -102,7 +102,7 @@ nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
 <% if @listen_addresses -%>
 nginx['listen_addresses'] = ["<%= @listen_addresses.join('","') %>"]
 <% end %>
-<% if @git_uid          -%>user['uid'] = <%= @git_uid -%>
+<% if @git_uid          -%>user['uid'] = <%= @git_uid %>
 <% end %><% if @git_gid          -%>user['gid'] = <%= @git_gid %>
 <% end %><% if @gitlab_psql_uid  -%>postgresql['uid'] = <%= @gitlab_psql_uid %>
 <% end %><% if @gitlab_psql_gid  -%>postgresql['gid'] = <%= @gitlab_psql_gid %>
