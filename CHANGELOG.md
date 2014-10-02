@@ -1,5 +1,8 @@
 ##Changelog
 
+2015-Oct-2: 2.3.4
+- Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
+
 2015-Sep-29: 2.3.3
 - Change default ldap_host value
 - Changes default ldap_port value

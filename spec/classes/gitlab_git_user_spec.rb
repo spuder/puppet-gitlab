@@ -20,7 +20,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it do
-      should contain_file('/etc/gitlab/gitlab.rb').with_content(/user['username'] = 'herp'/)
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/user\[\'username\'\] = \'herp\'/)
     end
   end
 
@@ -30,7 +30,7 @@ describe 'gitlab', :type => 'class' do
       {
         :gitlab_branch    => '7.2.0',
         :external_url     => 'http://gitlab.example.com',
-        :git_groupname     => 'derp',
+        :git_groupname    => 'derp',
       }
     }
     let(:facts) {
@@ -43,7 +43,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it do
-      should contain_file('/etc/gitlab/gitlab.rb').with_content(/user['group'] = 'derp'/)
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/user\[\'group\'\] = \'derp\'/)
     end
   end
 
