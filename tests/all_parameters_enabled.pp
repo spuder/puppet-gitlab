@@ -158,6 +158,8 @@ class { 'gitlab' :
   ssl_certificate_key      => "/etc/gitlab/ssl/gitlab.key",
   listen_addresses         => ["0.0.0.0", "[::]"],
 
+  git_username        => 'git',
+  git_groupname       => 'git',
   #git_uid            => 1001, 
   #git_gid            => 1002,
   #gitlab_redis_uid   => 998,

@@ -378,10 +378,20 @@
 #     Location of ssl key
 #     Example: '/etc/gitlab/ssl/gitlab.key'
 #
-# [*listen_addres*]
+# [*listen_address*]
 #     default => undef
 #     Array of ipv4 and ipv6 address nginx listens on
 #     Example: ["0.0.0.0","[::]"]
+#
+# [*git_username*]
+#     default => undef
+#     name of git user users authenticate as. (default: 'git' ) Used as the ssh user name e.g git@gitlab.com
+#     Example: 'git'
+#
+# [*git_groupname*]
+#     default => undef
+#     name of git group (default: 'git' ) 
+#     Example: 42
 #
 # [*git_uid*]
 #     default => undef
@@ -652,6 +662,8 @@ class gitlab (
   $ssl_certificate_key      = $::gitlab::params::ssl_certificate_key,
   $listen_addresses         = $::gitlab::params::listen_addresses,
   
+  $git_username       = $::gitlab::params::git_username,
+  $git_groupname      = $::gitlab::params::git_groupname,
   $git_uid            = $::gitlab::params::git_uid,
   $git_gid            = $::gitlab::params::git_gid,
   $gitlab_redis_uid   = $::gitlab::params::gitlab_redis_uid,

@@ -101,6 +101,8 @@ nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
 <% end -%>
 <% if @listen_addresses -%>
 nginx['listen_addresses'] = ["<%= @listen_addresses.join('","') %>"]
+<% end %><% if @git_username -%>user['username'] = '<%= @git_username %>'
+<% end %><% if @git_groupname -%>user['group'] = '<%= @git_groupname %>'
 <% end %>
 <% if @git_uid          -%>user['uid'] = <%= @git_uid %>
 <% end %><% if @git_gid          -%>user['gid'] = <%= @git_gid %>

@@ -18,13 +18,10 @@ class { 'gitlab' :
 
   external_url            => 'http://192.168.33.10',
 
-
-
-
-
-
-  git_uid            => 1001, 
-  git_gid            => 1002,
+  git_username       => 'herp',
+  git_groupname      => 'derp',
+  #git_uid            => 2001, 
+  #git_gid            => 2104,
   #gitlab_redis_uid   => 998,
   #gitlab_redis_gid   => 1003,
   #gitlab_psql_uid    => 997,

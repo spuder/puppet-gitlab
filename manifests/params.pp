@@ -145,6 +145,8 @@ class gitlab::params {
   $ssl_certificate_key      = '/etc/gitlab/ssl/gitlab.key'
   $listen_addresses         = undef # Array of ip4v and ipv6 address nginx listens on  (e.g.  ["0.0.0.0","[::]"]  )
 
+  $git_username       = undef # (default: git)
+  $git_groupname      = undef # (default: git)
   $git_uid            = undef
   $git_gid            = undef
   $gitlab_redis_uid   = undef
