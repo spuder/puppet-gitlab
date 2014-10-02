@@ -20,7 +20,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it do
-      should contain_file('/etc/gitlab/gitlab.rb').with_content(/listen_addresses/)
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/nginx\[\'listen_addresses\'\] =/)
     end
   end
 
