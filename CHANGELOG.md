@@ -1,7 +1,8 @@
 ##Changelog
 
-2015-Oct-2: 2.3.4
+2015-Oct-6: 2.3.4
 - Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
+- Removes extra '=' in gitlab.rb (issue #84)
 
 2015-Sep-29: 2.3.3
 - Change default ldap_host value
