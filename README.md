@@ -1,5 +1,5 @@
-# Gitlab 7.0  
-[![Build Status](https://travis-ci.org/spuder/puppet-gitlab.png)](https://travis-ci.org/spuder/puppet-gitlab)
+# Gitlab 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/spuder/gitlab.svg)](https://forge.puppetlabs.com/spuder/gitlab) [![Build Status](https://travis-ci.org/spuder/puppet-gitlab.png)](https://travis-ci.org/spuder/puppet-gitlab)
 
 Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
 Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
@@ -12,7 +12,7 @@ Changelog - [https://github.com/spuder/puppet-gitlab/blob/master/CHANGELOG.md](h
 Installs Gitlab 7 using the [omnibus installer](https://about.gitlab.com/downloads/)
 
 **Version 2.x.x is a complete rewrite with many api breaking changes. 
-Since it uses the omnibus installer, it is incompatible with the previous puppet module.**
+Since it uses the omnibus installer, it is incompatible with the previous (<=1.x.x) puppet module.**
 
 If upgrading from Gitlab 6.x, it is recommended that you create a fresh install and [migrate the data.](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
@@ -90,7 +90,7 @@ $ ls /var/tmp
     gitlab_branch 
     external_url
 
- All other parameters are optional. They are documented at the bottom of the readme. 
+ All other parameters are optional. They are documented in the [init.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/init.pp) and [params.pp](https://github.com/spuder/puppet-gitlab/blob/master/manifests/params.pp) files
 
 
 
@@ -165,22 +165,21 @@ User submitted examples are welcome.
 
 ### Wrapper classes & hiera
 
-The parameters above are typically placed inside a wrapper puppet module, or inside the nodes.pp file. 
+The parameters above are typically placed inside a wrapper puppet module, or inside the nodes.pp file. [(Additional information)](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/)
 
 You can alternativly put the parameters inside hiera. This has the advantage of keeping your wrapper puppet module (or nodes.pp file) clean, and also keeps things like passwords outside of version control. 
 
 gitlab.example.com.yaml
 ```
 ---
-gitlab:
-  puppet_manage_config:   true
-  puppet_manage_backups:  true
-  puppet_manage_packages: true
-  gitlab_branch: 7.2.0
-  gitlab_release: basic
-  external_url: gitlab.example.com
-  ldap_enabled: true
-  ldap_password: correct-horse-battery-staple
+  gitlab::puppet_manage_config:   true
+  gitlab::puppet_manage_backups:  true
+  gitlab::puppet_manage_packages: true
+  gitlab::gitlab_branch: 7.2.0
+  gitlab::gitlab_release: basic
+  gitlab::external_url: gitlab.example.com
+  gitlab::ldap_enabled: true
+  gitlab::ldap_password: correct-horse-battery-staple
 ```
 [Example hiera config file:](https://github.com/spuder/puppet-gitlab/tree/master/tests/hiera.example.com.yaml)
 
