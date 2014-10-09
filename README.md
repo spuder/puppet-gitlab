@@ -115,7 +115,7 @@ class { 'gitlab' :
   puppet_manage_backups  => true,
   puppet_manage_packages => true,
   gitlab_branch          => '7.0.0',
-  external_url           => 'http://gitlab.example.com',
+  external_url           => 'https://gitlab.example.com',
   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
   ssl_certificate_key    => '/etc/gitlab/ssl/gitlab.key',
   redirect_http_to_https => true,
