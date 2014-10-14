@@ -1,5 +1,5 @@
 # Gitlab 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/spuder/gitlab.svg)](https://forge.puppetlabs.com/spuder/gitlab) [![Build Status](https://travis-ci.org/spuder/puppet-gitlab.png)](https://travis-ci.org/spuder/puppet-gitlab)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/spuder/gitlab.svg)](https://forge.puppetlabs.com/spuder/gitlab) [![Build Status](https://travis-ci.org/spuder/puppet-gitlab.png)](https://travis-ci.org/spuder/puppet-gitlab) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/spuder/puppet-gitlab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Source - [https://github.com/spuder/puppet-gitlab](https://github.com/spuder/puppet-gitlab)  
 Forge  - [https://forge.puppetlabs.com/spuder/gitlab](https://forge.puppetlabs.com/spuder/gitlab)   
