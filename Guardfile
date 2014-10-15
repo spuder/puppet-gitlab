@@ -96,6 +96,31 @@ guard :shell do
         end
     end
 
+    # Watch all files in the spec directory that end in .rb
+    watch(%r{^spec/classes\/.+\.rb$}) do |m|
+        puts "Running rake spec....".blue
+        spec = `rake spec`
+        retval = $?.to_i
+        case retval
+        when 0
+            if spec.length > 0 then
+                puts spec
+                n "#{m[0]} Tests Failed!", 'Rake Spec', :pending
+                guard_shell_exit = 1
+
+            else
+                puts spec.green
+                n "#{m[0]} Tests Passed!", 'Rake Spec', :pending
+                guard_shell_exit = 0
+
+            end
+            puts '3. Rake Spec: passed!'.green
+        else
+            puts '3. Rake Spec: failed!'.red
+        end
+        print "============================"
+    end
+
     # Commenting out because I don't need it, and doesn't always work
     # # Watch all files that end in .rb
     # watch /(.*\.rb$)/ do |m|
