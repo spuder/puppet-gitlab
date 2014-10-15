@@ -16,6 +16,7 @@ gitlab::gitlab_username_changing_enabled:   false
 gitlab::gitlab_default_theme:               4
 gitlab::gitlab_signup_enabled:              false
 gitlab::gitlab_signin_enabled:              true
+gitlab::gitlab_ssh_host:                    192.168.33.10
 
 gitlab::gitlab_default_projects_features_issues:            true
 gitlab::gitlab_default_projects_features_merge_requests:    true

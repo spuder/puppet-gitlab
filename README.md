@@ -327,6 +327,10 @@ irc     => spuder
     Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (gitlab default: true)
     Example: false
 
+ [*gitlab_ssh_host*]
+   default => undef
+   Example: 'gitlab.example.com'
+
  [*gitlab_default_projects_features_issues*]
     default => undef
     Enables light weight issue tracker on projects (gitlab default: true)

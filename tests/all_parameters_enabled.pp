@@ -28,6 +28,7 @@ class { 'gitlab' :
   gitlab_default_theme              => 3,
   gitlab_signup_enabled             => true,
   gitlab_signin_enabled             => true,
+  gitlab_ssh_host                   => '192.168.33.10',
 
   gitlab_default_projects_features_issues           => true, # true
   gitlab_default_projects_features_merge_requests   => true, # true
