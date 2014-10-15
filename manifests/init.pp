@@ -74,6 +74,10 @@
 #    Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (gitlab default: true)
 #    Example: false
 #
+# [*gitlab_ssh_host*]
+#    default => undef
+#    Example: 'gitlab.example.com'
+#
 # [*gitlab_default_projects_features_issues*]
 #    default => undef
 #    Enables light weight issue tracker on projects (gitlab default: true)
@@ -566,6 +570,7 @@ class gitlab (
   $gitlab_default_theme             = $::gitlab::params::gitlab_default_theme,
   $gitlab_signup_enabled            = $::gitlab::params::gitlab_signup_enabled,
   $gitlab_signin_enabled            = $::gitlab::params::gitlab_signin_enabled,
+  $gitlab_ssh_host                  = $::gitlab::params::gitlab_ssh_host,
 
   $gitlab_default_projects_features_issues           = $::gitlab::params::gitlab_default_projects_features_issues,
   $gitlab_default_projects_features_merge_requests   = $::gitlab::params::gitlab_default_projects_features_merge_requests,
