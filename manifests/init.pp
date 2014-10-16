@@ -796,7 +796,7 @@ class gitlab (
     }
   }
 
-  # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
+  # Ensure gitlab_ssh_host is only used with gitlab > 7.2.x
   if $gitlab_ssh_host {
     if versioncmp( $gitlab_branch, '7.2.0') < 0 {
       fail("gitlab_ssh_host is only available in gitlab >= 7.2.0, found \'${gitlab_branch}\'")
