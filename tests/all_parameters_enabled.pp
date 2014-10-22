@@ -149,6 +149,9 @@ class { 'gitlab' :
   # Backup
   backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'
   backup_keep_time            => 604800,
+
+  backup_upload_connection    => 'foobar',
+  backup_upload_remote_directory => 'foobar',
   
   gitlab_shell_path           => '/opt/gitlab/embedded/service/gitlab-shell/',
   

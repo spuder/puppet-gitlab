@@ -281,6 +281,14 @@
 #     Number of seconds to keep backups. gitlab default: 0 (forever)
 #     Example: 604800     # 1 week
 #
+# [*backup_upload_connection*]
+#    default => undef
+#    Backup with fog, see http://bit.ly/1t5nAv5
+#
+# [*backup_upload_remote_directory*]
+#    default => undef
+#    Location to backup to in fog http://bit.ly/1t5nAv5
+#
 # [*gitlab_shell_path*]
 #     default => undef
 #     Where gitlab-shell is located
@@ -636,6 +644,8 @@ class gitlab (
 
   $backup_path                 = $::gitlab::params::backup_path,
   $backup_keep_time            = $::gitlab::params::backup_keep_time,
+  $backup_upload_connection    = $::gitlab::params::backup_upload_connection,
+  $backup_upload_remote_directory = $::gitlab::params::backup_upload_remote_directory,
   $gitlab_shell_path           = $::gitlab::params::gitlab_shell_path,
   $gitlab_shell_repos_path     = $::gitlab::params::gitlab_shell_repos_path,
   $gitlab_shell_hooks_path     = $::gitlab::params::gitlab_shell_hooks_path,

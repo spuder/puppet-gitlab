@@ -107,6 +107,8 @@ class gitlab::params {
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
   
+  $backup_upload_connection    = undef # Backup to fog http://bit.ly/1t5nAv5
+  $backup_upload_remote_directory = undef # Where to store backups in fog http://bit.ly/1t5nAv5
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
   
   $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories', Cannot be a symlink

@@ -69,6 +69,8 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 
 <% end %><% if @backup_path      -%>gitlab_rails['backup_path'] = '<%= @backup_path %>'
 <% end %><% if @backup_keep_time -%>gitlab_rails['backup_keep_time'] = <%= @backup_keep_time %>
+<% end %><% if @backup_upload_connection -%>gitlab_rails['backup_upload_connection'] = <%= @backup_upload_connection %>
+<% end %><% if @backup_upload_remote_directory -%>gitlab_rails['backup_upload_remote_directory'] = <%= @backup_upload_remote_directory %>
 <% end %><% if @gitlab_shell_path            -%>gitlab_rails['gitlab_shell_path'] = '<%= @gitlab_shell_path %>'
 <% end %><% if @gitlab_shell_repos_path      -%>gitlab_rails['gitlab_shell_repos_path'] = '<%= @gitlab_shell_repos_path %>'
 <% end %><% if @gitlab_shell_hooks_path      -%>gitlab_rails['gitlab_shell_hooks_path'] = '<%= @gitlab_shell_hooks_path %>'
