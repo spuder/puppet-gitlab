@@ -44,6 +44,53 @@ describe 'gitlab', :type => 'class' do
     it { should_not contain_class('gitlab::backup') }
   end
 
+# Expect backup_upload_connection to be present in gitlab.rb
+    context 'backup_upload_connection is set' do
+    let(:params) {
+      {
+        :gitlab_branch    => '7.4.0',
+        :external_url     => 'http://gitlab.example.com',
+        :backup_upload_connection => 'foobar',
+        :puppet_manage_backups => true,
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/backup_upload_connection/)
+    end
+  end
+
+# Expect backup_upload_connection to be present in gitlab.rb
+  context 'backup_upload_remote_directory is set' do
+    let(:params) {
+      {
+        :gitlab_branch    => '7.4.0',
+        :external_url     => 'http://gitlab.example.com',
+        :backup_upload_remote_directory => 'foobar',
+        :puppet_manage_backups => true,
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/backup_upload_remote_directory/)
+    end
+  end
 
 
 end
