@@ -36,21 +36,22 @@ gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issue
 #
 # 2. Auth settings
 # # ==========================
-<% if @ldap_enabled == true -%>
-<% if @ldap_servers -%>gitlab_rails['ldap_servers'] = <%= @ldap_servers %> <% end %>
 gitlab_rails['ldap_enabled'] = <%= @ldap_enabled %>
-gitlab_rails['ldap_host'] = '<%= @ldap_host %>'
-gitlab_rails['ldap_port'] = <%= @ldap_port %>
-gitlab_rails['ldap_uid'] = '<%= @ldap_uid %>'
-gitlab_rails['ldap_method'] = '<%= @ldap_method %>'
-gitlab_rails['ldap_bind_dn'] = '<%= @ldap_bind_dn %>'
-gitlab_rails['ldap_password'] = '<%= @ldap_password %>'
+<% if @ldap_servers -%>gitlab_rails['ldap_servers'] = <%= @ldap_servers %> <% end %>
+<% if  @ldap_host -%>gitlab_rails['ldap_host'] = '<%= @ldap_host %>' 
+<% end %><% if @ldap_port -%>gitlab_rails['ldap_port'] = <%= @ldap_port %>
+<% end %><% if @ldap_uid -%>gitlab_rails['ldap_uid'] = '<%= @ldap_uid %>'
+<% end %><% if @ldap_method -%>gitlab_rails['ldap_method'] = '<%= @ldap_method %>'
+<% end %><% if @ldap_bind_dn -%>gitlab_rails['ldap_bind_dn'] = '<%= @ldap_bind_dn %>'
+<% end %><% if @ldap_password -%>gitlab_rails['ldap_password'] = '<%= @ldap_password %>'
+<% end %>
 <% if @ldap_sync_time -%>gitlab_rails['ldap_sync_time'] = <%= @ldap_sync_time %> <% end %>
-gitlab_rails['ldap_allow_username_or_email_login'] = <%= @ldap_allow_username_or_email_login %>
-gitlab_rails['ldap_base'] = '<%= @ldap_base %>'
+<% if @ldap_allow_username_or_email_login %>gitlab_rails['ldap_allow_username_or_email_login'] = <%= @ldap_allow_username_or_email_login %>
+<% end -%><% if @ldap_base -%>gitlab_rails['ldap_base'] = '<%= @ldap_base %>'
 <% end -%><% if @ldap_enabled ==true and @gitlab_release == 'enterprise' %>
-gitlab_rails['ldap_group_base'] = '<%= @ldap_group_base %>'
-gitlab_rails['ldap_user_filter'] = '<%= @ldap_user_filter %>'
+<% if @ldap_group_base -%>gitlab_rails['ldap_group_base'] = '<%= @ldap_group_base %>'
+<% end %><% if @ldap_user_filter -%>gitlab_rails['ldap_user_filter'] = '<%= @ldap_user_filter %>'
+<% end %>
 <% end -%><% if @omniauth_enabled == true -%>
 gitlab_rails['omniauth_enabled'] = <%= @omniauth_enabled %>
 gitlab_rails['omniauth_allow_single_sign_on'] = <%= @omniauth_allow_single_sign_on %>

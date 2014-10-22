@@ -72,22 +72,21 @@ class gitlab::params {
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   $ldap_enabled   = false
-  $ldap_servers   = undef
-  $ldap_host      = 'server.example.com'
-  $ldap_port      =  636 # or 389 for non ssl
-  $ldap_uid       = 'sAMAccountName' # or 'uid'
-  $ldap_method    = 'ssl' # 'ssl' or 'plain'
-  $ldap_bind_dn   = 'CN=query user,CN=Users,DC=mycorp,DC=com'
-  $ldap_password  = 'correct-horse-battery-staple'
-  $ldap_allow_username_or_email_login = true
-  $ldap_base      = 'DC=mycorp,DC=com'
+  $ldap_servers   = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_host      = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_port      = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_uid       = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_method    = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_bind_dn   = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_password  = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_allow_username_or_email_login = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_base      = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 
   $ldap_sync_time = undef # Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
   
   # GitLab Enterprise Edition only
-  # Set $gitlab_release to 'enterprise' to enable these features
-  $ldap_group_base  = '' # Example: 'OU=groups,DC=mycorp,DC=com'
-  $ldap_user_filter = '' # Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
+  $ldap_group_base  = undef # Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+  $ldap_user_filter = undef # Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 
   # GitLab Enterprise Edition only (Requires 7.1.0 or greater)
   $ldap_sync_ssh_keys = undef # e.g. 'sshpublickey' - The object name in ldap where ssh keys are stored

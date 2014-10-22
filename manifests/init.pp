@@ -165,59 +165,72 @@
 #
 # [*ldap_servers*]
 #   default => undef
-#   Gitlab 7.4 enterprise feature. Allows for multiple ldap servers https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
+#   Introduced in Gitlab 7.4, replaces all other parameters http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_host*]
 #    default => 'server.example.com'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #    
 # [*ldap_port*]
 #     default => 636
 #     Example: 389
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #    
 # [*ldap_uid*]
 #     default => 'sAMAccountName'
 #     Example: 'uid'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_method*]
 #     default => 'ssl'
 #     Example: 'ssl'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 # 
 # [*ldap_bind_dn*]
 #     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_password*]
 #     default => 'correct-horse-battery-staple'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_allow_username_or_email_login*]
 #     default => true
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #     Login with email prefix or full email. e.g. steve vs steve@apple.com
 #
 # [*ldap_base*]
 #     default => DC=mycorp,DC=com
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_sync_time*]
 #     default => undef
 #     Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_group_base*]
 #     default => ''
 #     Enterprise only feature, Ldap groups map to gitlab groups
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #     Example: 'OU=groups,DC=mycorp,DC=com'
 #
 # [*ldap_user_filter*]
 #     default => ''
 #     Enterprise only feature, filter ldap group
 #     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_sync_ssh_keys*]
 #     default => undef
 #     Enterprise only feature, The bject name in ldap where ssh keys are stored
 #     Example: 'sshpublickey'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*ldap_admin_group*]
 #     default => undef
 #     Enterprise only feature, The object name in ldap that matches administrators
 #     Example: 'GitLab administrators'
+#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 #
 # [*omniauth_enabled*]
 #     default => undef
@@ -844,10 +857,17 @@ class gitlab (
     if versioncmp( $gitlab_branch, '7.4.0') < 0 {
       fail("ldap_servers is only available in gitlab >= 7.4.0, found \'${gitlab_branch}\'")
     }
-    if $gitlab_release != 'enterprise' {
-      fail("ldap_servers is only available in gitlab enterprise edition")
+  }
+
+  # Fail if attempting to use ldap parameters with gitlab 7.4
+  # https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
+  # https://gitlab.com/gitlab-org/gitlab-ce/blob/a0a826ebdcb783c660dd40d8cb217db28a9d4998/config/gitlab.yml.example
+  if versioncmp( $gitlab_branch, '7.4.0') >=0 {
+    if $ldap_host or $ldap_port or $ldap_uid or $ldap_method or $ldap_bind_dn or $ldap_password or $ldap_allow_username_or_email_login or $ldap_base or $ldap_group_base or $ldap_user_filter{ 
+      fail('Gitlab 7.4 introduced new syntax for ldap configurations, http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G')
     }
   }
+
 
   # If all 3 $puppet_manage_* parameters are false, then just install gitlab
   include ::gitlab::install
