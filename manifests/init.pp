@@ -163,6 +163,10 @@
 # [*ldap_enabled*]
 #    default => false
 #
+# [*ldap_servers*]
+#   default => undef
+#   Gitlab 7.4 enterprise feature. Allows for multiple ldap servers https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
+#
 # [*ldap_host*]
 #    default => 'server.example.com'
 #    
@@ -599,6 +603,7 @@ class gitlab (
   # ==========================
 
   $ldap_enabled   = $::gitlab::params::ldap_enabled,
+  $ldap_servers   = $::gitlab::params::ldap_servers,
   $ldap_host      = $::gitlab::params::ldap_host,
   $ldap_port      = $::gitlab::params::ldap_port,
   $ldap_uid       = $::gitlab::params::ldap_uid,
@@ -820,7 +825,17 @@ class gitlab (
   # Warn if redis_port is defined, and using gitlab > 7.3
   if $redis_port {
     if versioncmp( $gitlab_branch, '7.3.0') >= 0 {
-      warning('$redis_port has been deprecated in gitlab 7.3, please remove. http://bit.ly/1DEI9m2')
+      warning('redis_port has been deprecated in gitlab 7.3, please remove. http://bit.ly/1DEI9m2')
+    }
+  }
+
+  # Fail if attempting to use ldap_servers on old versions of gitlab, or on non enterprise editions
+  if $ldap_servers {
+    if versioncmp( $gitlab_branch, '7.4.0') < 0 {
+      fail("ldap_servers is only available in gitlab >= 7.4.0, found \'${gitlab_branch}\'")
+    }
+    if $gitlab_release != 'enterprise' {
+      fail("ldap_servers is only available in gitlab enterprise edition")
     }
   }
 

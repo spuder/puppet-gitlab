@@ -39,7 +39,7 @@ Additional information [can be found here](http://puppetlabs.com/blog/the-next-g
     
 - Run rake tests
 
-    export PUPPET_VERSION=$(facter puppetversion)  
+    export PUPPET_VERSION=$(facter puppetversion)
     export FACTER_VERSION=$(facter facterversion)
     export STRICT_VARIABLES=yes
     rake spec

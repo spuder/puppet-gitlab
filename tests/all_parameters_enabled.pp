@@ -12,7 +12,7 @@ class { 'gitlab' :
   puppet_manage_packages => true,  # If true, Puppet will manage openssl and postfix packages
 
   # Gitlab server settings
-  gitlab_branch           => '7.3.0',
+  gitlab_branch           => '7.4.0',
   gitlab_release          => 'basic', # enterprise or basic
   # gitlab_download_link  => '', #'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb',
 
@@ -60,6 +60,42 @@ class { 'gitlab' :
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   ldap_enabled   => true,
+  ldap_servers   => ['
+{
+  "main" => {
+    "label" => "LDAP",
+    "host" => "hostname of LDAP server",
+    "port" => 389,
+    "uid" => "sAMAccountName",
+    "method" => "plain",
+    "bind_dn" => "CN=query user,CN=Users,DC=mycorp,DC=com",
+    "password" => "query user password",
+    "active_directory" => true,
+    "allow_username_or_email_login" => true,
+    "base" => "DC=mycorp,DC=com",
+    "group_base" => "OU=groups,DC=mycorp,DC=com",
+    "admin_group" => "",
+    "sync_ssh_keys" => false,
+    "sync_time" => 3600
+  }
+}',
+',',
+'{
+  "secondary" => {
+    "label" => "LDAP 2",
+    "host" => "hostname of LDAP server 2",
+    "port" => 389,
+    "uid" => "sAMAccountName",
+    "method" => "plain",
+    "bind_dn" => "CN=query user,CN=Users,DC=mycorp,DC=com",
+    "password" => "query user password",
+    "active_directory" => true,
+    "allow_username_or_email_login" => true,
+    "base" => "DC=mycorp,DC=com",
+    "group_base" => "OU=groups,DC=mycorp,DC=com",
+    "sync_ssh_keys" => false
+  }
+}'],
   ldap_host      => 'hostname of LDAP server',
   ldap_port      => 389, # or 636
   ldap_uid       => 'sAMAccountName', # or 'uid'

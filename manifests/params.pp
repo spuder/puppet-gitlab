@@ -72,6 +72,7 @@ class gitlab::params {
   # These settings are documented in more detail at
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
   $ldap_enabled   = false
+  $ldap_servers   = undef
   $ldap_host      = 'server.example.com'
   $ldap_port      =  636 # or 389 for non ssl
   $ldap_uid       = 'sAMAccountName' # or 'uid'

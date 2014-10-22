@@ -37,6 +37,7 @@ gitlab_rails['issues_tracker_jira_issues_url'] = '<%= @issues_tracker_jira_issue
 # 2. Auth settings
 # # ==========================
 <% if @ldap_enabled == true -%>
+<% if @ldap_servers -%>gitlab_rails['ldap_servers'] = <%= @ldap_servers %> <% end %>
 gitlab_rails['ldap_enabled'] = <%= @ldap_enabled %>
 gitlab_rails['ldap_host'] = '<%= @ldap_host %>'
 gitlab_rails['ldap_port'] = <%= @ldap_port %>
