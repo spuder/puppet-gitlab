@@ -57,6 +57,7 @@ class gitlab::config inherits ::gitlab {
   }  
   exec { 'start gitlab':
     command => '/usr/bin/gitlab-ctl start',
+    unless  => '/usr/bin/gitlab-ctl status',
   }
 
 

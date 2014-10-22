@@ -142,8 +142,8 @@ class gitlab::params {
   $gitlab_group     = undef # (default: 'gitlab')
 
   $redirect_http_to_https   = undef # Recommended to prevent users from connecting insecurely (default: false)
-  $ssl_certificate          = '/etc/gitlab/ssl/gitlab.crt'
-  $ssl_certificate_key      = '/etc/gitlab/ssl/gitlab.key'
+  $ssl_certificate          = undef
+  $ssl_certificate_key      = undef
   $listen_addresses         = undef # Array of ip4v and ipv6 address nginx listens on  (e.g.  ["0.0.0.0","[::]"]  )
 
   $git_username       = undef # (default: git)

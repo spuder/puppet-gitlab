@@ -1,5 +1,10 @@
 ##Changelog
 
+2015-Oct-22: 2.3.5
+- Adds $gitlab_ssh_host parameter (thanks DavidS, issue #88)
+- Fixes bug where gitlab would attempt to start every time (issue #89)
+- Removes default parameters for $ssl_certificate to prevent bug in 'the foreman' from applying values
+
 2015-Oct-6: 2.3.4
 - Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
 - Removes extra '=' in gitlab.rb (issue #84)
