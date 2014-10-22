@@ -416,6 +416,10 @@ irc     => spuder
  [*ldap_enabled*]
     default => false
 
+ [*ldap_servers*]
+   default => undef
+   Gitlab 7.4 enterprise feature. Allows for multiple ldap servers https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
+
  [*ldap_host*]
     default => 'server.example.com'
     
@@ -529,6 +533,14 @@ irc     => spuder
      default => undef
      Number of seconds to keep backups. gitlab default: 0 (forever)
      Example: 604800     # 1 week
+
+ [*backup_upload_connection*]
+    default => undef
+    Backup with fog, see http://bit.ly/1t5nAv5
+
+ [*backup_upload_remote_directory*]
+    default => undef
+    Location to backup to in fog http://bit.ly/1t5nAv5
 
  [*gitlab_shell_path*]
      default => undef
