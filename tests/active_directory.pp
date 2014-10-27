@@ -5,23 +5,30 @@ class { 'gitlab' :
     external_url                      => 'http://192.168.33.10',
     ldap_enabled                      => true,
 
-# These were the parameters that were used on versions < 7.4.0
-    # ldap_host                         => 'foo.example.com',
-    # ldap_base                         => 'DC=example,DC=com',
-    # ldap_port                         => '636',
-    # ldap_uid                          => 'sAMAccountName',
-    # ldap_method                       => 'ssl',       
-    # ldap_bind_dn                      => 'CN=foobar,CN=users,DC=example,DC=com', 
-    # ldap_password                     => 'foobar',    
-    # gravatar_enabled                  => true,
-    # gitlab_default_can_create_group   => false,
-    # gitlab_username_changing_enabled  => false,
-    # gitlab_signup_enabled             => false,
-    # gitlab_default_projects_features_visibility_level => 'internal',
-    # ldap_sync_time                    => 3600,
+# Gitlab 7.4.x added a new syntax for specifying ldap hosts, additional information:
+#https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/integration/ldap.md
+#http://bit.ly/1vOlT5Q
+#http://bit.ly/1CXbx3G
 
-# Gitlab 7.4.x ldap syntax
+# The older syntax should still work on gitlab 7.4.x, however this module will print deprecation warnings. 
+# If both the old syntax and the new syntax are present in the gitlab.rb file, then gitlab will use the old
 
+# Gitlab >7.4.x ldap syntax
+  ldap_host                         => 'foo.example.com',
+  ldap_base                         => 'DC=example,DC=com',
+  ldap_port                         => '636',
+  ldap_uid                          => 'sAMAccountName',
+  ldap_method                       => 'ssl',       
+  ldap_bind_dn                      => 'CN=foobar,CN=users,DC=example,DC=com', 
+  ldap_password                     => 'foobar',    
+  gravatar_enabled                  => true,
+  gitlab_default_can_create_group   => false,
+  gitlab_username_changing_enabled  => false,
+  gitlab_signup_enabled             => false,
+  gitlab_default_projects_features_visibility_level => 'internal',
+  ldap_sync_time                    => 3600,
+
+# Gitlab >=7.4.x ldap syntax
   ldap_servers   => ['
 {
   "main" => {
@@ -43,3 +50,20 @@ class { 'gitlab' :
 }'],
 
 }
+
+# If using gitlab enterprise, you can optionally specify multiple ldap servers. Separate each entry with a comma
+#   ldap_servers   => ['
+# {
+#   "main" => {
+#     "label" => "LDAP1",
+#     ...
+#   }
+# }',
+# ',',
+# '{
+#   "main" => {
+#     "label" => "LDAP2",
+#     ...
+#   }
+# }'],
+

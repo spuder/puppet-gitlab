@@ -1,13 +1,13 @@
 ##Changelog
 
-2015-Oct-22: 2.4.0
-- IMPORTANT!: All ldap parameters are deprecated in 7.4, adds new ldap_server parameter. More information here:
+2015-Oct-27: 2.4.0
+- Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
 http://bit.ly/1vOlT5Q
 http://bit.ly/1CXbx3G
 - Adds $gitlab_ssh_host parameter (thanks DavidS, issue #88)
 - Fixes bug where gitlab would attempt to start every time (issue #89)
 - Removes default parameters for $ssl_certificate to prevent bug in 'the foreman' from applying values
-- Adds deprecation warnings for all ldap parameters if running 7.4
+- Adds deprecation notice for all ldap parameters if running 7.4
 
 2015-Oct-6: 2.3.4
 - Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
