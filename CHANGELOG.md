@@ -1,6 +1,6 @@
 ##Changelog
 
-2015-Oct-27: 2.3.5
+2014-Oct-27: 2.3.5
 - Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
 http://bit.ly/1vOlT5Q
 http://bit.ly/1CXbx3G
@@ -9,11 +9,11 @@ http://bit.ly/1CXbx3G
 - Removes default parameters for $ssl_certificate to prevent bug in 'the foreman' from applying values
 - Adds deprecation notice for all ldap parameters if running 7.4
 
-2015-Oct-6: 2.3.4
+2014-Oct-6: 2.3.4
 - Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
 - Removes extra '=' in gitlab.rb (issue #84)
 
-2015-Sep-29: 2.3.3
+2014-Sep-29: 2.3.3
 - Change default ldap_host value
 - Changes default ldap_port value
 - Changes default ldap_method value
@@ -23,13 +23,13 @@ http://bit.ly/1CXbx3G
 - Deprecation warning if using redis_port on 7.3
 - Automatically stops gitlab if upgrading package (issue #81)
 
-2015-Sep-29: 2.3.2
+2014-Sep-29: 2.3.2
 - Updates README warning users to run gitlab-ctl stop before upgrading (issue #81)
 
-2015-Sep-23: 2.3.1
+2014-Sep-23: 2.3.1
 - Removes dependency on $operatingsystemmajrelease (issue #80)
 
-2015-Sep-12: 2.3.0
+2014-Sep-12: 2.3.0
 - Adds dependency on puppetlabs/stdlib module >= 3.x.x
 - Fixes crash when external_url contains no 'http://' (issue #73, thanks minnorOffense)
 - Rewrites erb template without extra whitespace (issue #76, thanks minnorOffense
@@ -42,7 +42,7 @@ http://bit.ly/1CXbx3G
 - Adds nginx `$listen_addresses` parameter
 - Changes default values for `$svlogd_udp` and `$svlogd_prefix` from `nil` to `undef`
 
-2015-Sep-4: 2.2.0
+2014-Sep-4: 2.2.0
 - Adds 7.2.x parameter `$high_availability_mountpoint` (issue #70, thanks itguy614)
 - Adds 7.2.x parameter `$satellite_timeout`
 - Updates metadata.json to conform to new style guides
@@ -53,7 +53,7 @@ http://bit.ly/1CXbx3G
 - Adds hiera example
 - Packages now make sure ssh and postfix start automatically at boot
 
-2015-Aug-9: 2.1.0
+2014-Aug-9: 2.1.0
 - Adds $gitlab_manage_packages parameter (issue #69)
 - Fixes problem where unable to set values false (issue #68)
 - Fixes missing commas in all_parameters_enabled.pp
@@ -61,7 +61,7 @@ http://bit.ly/1CXbx3G
 - Renames prerequisites.pp to packages.pp
 - Adds Contributing.md
 
-2015-July-23: 2.0.2
+2014-July-23: 2.0.2
 - Fixes Vagrant documentation and updates Readme
 - Clarifies parameters in manifests/params.pp
 - Fixes typos in erb template
@@ -69,14 +69,14 @@ http://bit.ly/1CXbx3G
 - Puppet ensures latest available package is installed (change gitlab_branch to update)
 - Adds support for 7.1.0 featurs: ldap_sync_ssh_keys and ldap_admin_group
 
-2015-July-17: 2.0.1
+2014-July-17: 2.0.1
 - Corrects enterprise download url instructions
 - Changes gitlab::params to global scope ::gitlab::params
 - Updates readme with additional limitations
 - Minor puppet-lint and comment improvements
 - Sets amazon default values to undef
 
-2015-July-16: 2.0.0
+2014-July-16: 2.0.0
 - Complete rewrite of puppet module
 - Now uses omnibus installer
 - Works on Cent 6.5, Debian 7.5, Ubuntu 12.04 and Ubuntu 14.04
