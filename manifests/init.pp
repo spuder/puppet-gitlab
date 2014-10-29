@@ -12,6 +12,11 @@
 #   default => true
 #   Includes backup.pp which sets cron job to run rake task
 # 
+# [*puppet_manage_packages*]
+#   default => true
+#   Includes packages.pp which installs postfix and openssh
+#   Gitlab packages will be managed regardless if this parameter is true or false
+#
 # [*external_url*]
 #   default => undef
 #   Required parameter, specifies the url that end user will navigate to
@@ -165,72 +170,71 @@
 #
 # [*ldap_servers*]
 #   default => undef
-#   Introduced in Gitlab 7.4, replaces all other parameters http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#   Introduced in Gitlab 7.4, see tests/active_directory.pp for more info
 #
 # [*ldap_host*]
 #    default => 'server.example.com'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 #    
 # [*ldap_port*]
 #     default => 636
 #     Example: 389
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 #    
 # [*ldap_uid*]
 #     default => 'sAMAccountName'
 #     Example: 'uid'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 #
 # [*ldap_method*]
 #     default => 'ssl'
 #     Example: 'ssl'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 # 
 # [*ldap_bind_dn*]
 #     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 #
 # [*ldap_password*]
 #     default => 'correct-horse-battery-staple'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#    See tests/active_directory.pp for more info
 #
 # [*ldap_allow_username_or_email_login*]
 #     default => true
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
-#     Login with email prefix or full email. e.g. steve vs steve@apple.com
+#     See tests/active_directory.pp for more info
 #
 # [*ldap_base*]
 #     default => DC=mycorp,DC=com
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #
 # [*ldap_sync_time*]
 #     default => undef
 #     Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #
 # [*ldap_group_base*]
 #     default => ''
 #     Enterprise only feature, Ldap groups map to gitlab groups
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #     Example: 'OU=groups,DC=mycorp,DC=com'
 #
 # [*ldap_user_filter*]
 #     default => ''
 #     Enterprise only feature, filter ldap group
 #     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #
 # [*ldap_sync_ssh_keys*]
 #     default => undef
 #     Enterprise only feature, The bject name in ldap where ssh keys are stored
 #     Example: 'sshpublickey'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #
 # [*ldap_admin_group*]
 #     default => undef
 #     Enterprise only feature, The object name in ldap that matches administrators
 #     Example: 'GitLab administrators'
-#    deprecated in 7.4. http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
+#     See tests/active_directory.pp for more info
 #
 # [*omniauth_enabled*]
 #     default => undef

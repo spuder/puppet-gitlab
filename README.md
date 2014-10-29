@@ -272,526 +272,555 @@ irc     => spuder
 
 
 ```
- [*puppet_manage_config*]
-   default => true
-   /etc/gitlab/gitlab.rb will be managed by puppet
- 
- [*puppet_manage_backups*]
-   default => true
-   Includes backup.pp which sets cron job to run rake task
- 
- [*external_url*]
-   default => undef
-   Required parameter, specifies the url that end user will navigate to
-   Example: 'https://gitlab.example.com'
-
- [*gitlab_branch*]
-   default => undef
-   Required parameter, specifies which gitlab branch to download and install
-   Example: '7.0.0'
-
- [*gitlab_release*]
-    default => 'basic'
-    specifies 'basic' or 'enterprise' version to download, some parameters are disabled if basid
-    Example: 'enterprise'
-
- [*gitlab_download_link*]
-    default => undef 
-    specifies url to download gitlab from, optional if gitlab_release = basic
-    Example: 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
-
- [*external_url*]
-    default => undef
-    Required paramter, the url configured in nginx
-    Example: 'http://gitlab.example.com'
-
- 1. Gitlab app settings
- ======================
-
- [*gitlab_email_from*]
-    default => undef
-    Example: 'gitlab@example.com' 
-
- [*gitlab_default_projects_limit*]
-    default => undef
-    How many projects a user can create
-    Example: 42
-
- [*gitlab_default_can_create_group*]
-    default => undef
-    Allow users to make own groups, (gitlab default: true)
-    Example: false
-
- [*gitlab_username_changing_enabled*]
-    default => undef
-    Allow users to change own username, not suggested if running ldap
-    Example: false
-
- [*gitlab_default_theme*]
-    default => undef
-    Color Theme:  1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (gitlab default: 2)
-    Example: 3
-
- [*gitlab_signup_enabled*]
-    default => undef
-    Anyone can create an account (gitlab default: true)
-    Example: false
-
- [*gitlab_signin_enabled*]
-    default => undef
-    Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (gitlab default: true)
-    Example: false
-
- [*gitlab_ssh_host*]
-   default => undef
-   Example: 'gitlab.example.com'
-
- [*gitlab_default_projects_features_issues*]
-    default => undef
-    Enables light weight issue tracker on projects (gitlab default: true)
-    Example: false
-
- [*gitlab_default_projects_features_merge_requests*]
-    default => undef
-    Enables merge requests on projects (gitlab default: true)
-    Example: false
-
- [*gitlab_default_projects_features_wiki*]
-    default => undef
-    Enables light weight wiki on projects (gitlab default: true)
-    Example: false
-
- [*gitlab_default_projects_features_snippets*]
-    default => undef
-    Like github 'gits' (default: true)
-    Example: false
-
- [*gitlab_default_projects_features_visibility_level*]
-    default => undef
-    Project visibility ['public' | 'internal' | 'private'] (gitlab default: 'private')
-    Example: false
-
- [*issues_tracker_redmine*]
-    default => undef
-    Integrate with redmine issue tracker (gitlab default: false)
-    Example: false
-
- [*issues_tracker_redmine_title*]
-    default => undef
-    Example: 'title'
-
- [*issues_tracker_redmine_project_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*issues_tracker_redmine_issues_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*issues_tracker_redmine_new_issue_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*issues_tracker_jira*]
-    default => undef
-    Example: false
-
- [*issues_tracker_jira_title*]
-    default => undef
-    Example: 'foo'
-
- [*issues_tracker_jira_project_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*issues_tracker_jira_project_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*issues_tracker_jira_new_issue_url*]
-    default => undef
-    Example: 'http://foo.example.com'
-
- [*gravatar_enabled*]
-    default => undef
-    Use user avatar image from Gravatar.com (gitlab default: true)
-    Example: true
-
- [*gravatar_plain_url*]
-    default => undef
-    Example: 'http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
-
- [*gravatar_ssl_url*]
-    default => undef
-    Example: 'https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
-
- 2. Auth settings
- ==========================
-
- [*ldap_enabled*]
-    default => false
-
- [*ldap_servers*]
-   default => undef
-   Gitlab 7.4 enterprise feature. Allows for multiple ldap servers https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
-
- [*ldap_host*]
-    default => 'server.example.com'
-    
- [*ldap_port*]
-     default => 636
-     Example: 389
-    
- [*ldap_uid*]
-     default => 'sAMAccountName'
-     Example: 'uid'
-
- [*ldap_method*]
-     default => 'ssl'
-     Example: 'ssl'
- 
- [*ldap_bind_dn*]
-     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
-
- [*ldap_password*]
-     default => 'correct-horse-battery-staple'
-
- [*ldap_allow_username_or_email_login*]
-     default => true
-     Login with email prefix or full email. e.g. steve vs steve@apple.com
-
- [*ldap_base*]
-     default => DC=mycorp,DC=com
-
- [*ldap_sync_time*]
-     default => undef
-     Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
-
- [*ldap_group_base*]
-     default => ''
-     Enterprise only feature, Ldap groups map to gitlab groups
-     Example: 'OU=groups,DC=mycorp,DC=com'
-
- [*ldap_user_filter*]
-     default => ''
-     Enterprise only feature, filter ldap group
-     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
-
- [*ldap_sync_ssh_keys*]
-     default => undef
-     Enterprise only feature, The bject name in ldap where ssh keys are stored
-     Example: 'sshpublickey'
-
- [*ldap_admin_group*]
-     default => undef
-     Enterprise only feature, The object name in ldap that matches administrators
-     Example: 'GitLab administrators'
-
- [*omniauth_enabled*]
-     default => undef
-     Allows login via Google, twitter, Github ect..
-     Example: true
-
- [*omniauth_allow_single_sign_on*]
-     default => false
-     CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
-     Example: 'sshpublickey'
-
- [*omniauth_block_auto_created_users*]
-     default => true
-     Lockdown new omniauth accounts until they are approved
-     Example: true
-
- [*omniauth_providers*]
-     default => undef
-     Allows user to authenticate with Twitter, Google, Github ect... 
-     Example: [ '{
-         "name"   => "google_oauth2",
-         "app_id" => "YOUR APP ID",
-         "app_secret" => "YOUR APP SECRET",
-         "args"   => { "access_type" => "offline", "approval_prompt" => "" }
-       }',
-       ',',
-       '{ 
-         "name"   => "twitter",
-         "app_id" => "YOUR APP ID",
-         "app_secret" =>  "YOUR APP SECRET"
-       }',
-       ',',
-       '{ "name"   => "github",
-         "app_id" => "YOUR APP ID",
-         "app_secret" =>  "YOUR APP SECRET",
-         "args"  => { "scope" =>  "user:email" }
-       }'
-     ],
-     See tests/ominiauth.pp for more information
-
- 3. Advanced settings
- ==========================
-
- [*satellites_path*]
-     default => undef
-     Where satellite scripts are run
-     Example: /var/opt/gitlab/git-data/gitlab-satellites
-
- [*satellites_timeout*]
-     default => undef
-     Increase if merge requests timeout (gitlab default: 30)
-     Example: 120
-
- [*backup_path*]
-     default => undef
-     Location for backups (relative to rails root) 
-     Example: '/var/opt/gitlab/backups'
-
- [*backup_keep_time*]
-     default => undef
-     Number of seconds to keep backups. gitlab default: 0 (forever)
-     Example: 604800     # 1 week
-
- [*backup_upload_connection*]
-    default => undef
-    Backup with fog, see http://bit.ly/1t5nAv5
-
- [*backup_upload_remote_directory*]
-    default => undef
-    Location to backup to in fog http://bit.ly/1t5nAv5
-
- [*gitlab_shell_path*]
-     default => undef
-     Where gitlab-shell is located
-     Example: /opt/gitlab/embedded/service/gitlab-shell/
-
- [*gitlab_shell_repos_path*]
-     default => undef
-     Path where gitlab shell repos are stored
-     Example: '/var/opt/gitlab/git-data/repositories' # Cannot be a symlink
-
- [*gitlab_shell_hooks_path*]
-     default => undef
-     Path for git hooks
-     Example: '/opt/gitlab/embedded/service/gitlab-shell/hooks/' # Cannot be a symlink
-
- [*gitlab_shell_upload_pack*]
-     default => undef
-     Run shell upload pack on git repos
-     Example: true
-
- [*gitlab_shell_receive_pack*]
-     default => undef
-     Run shell recieve pack on git repos
-     Example: true
-
- [*gitlab_shell_ssh_port*]
-     default => undef
-     Port ssh runs on
-     Example: 22
-
- [*git_bin_path*]
-     default => undef
-     Path to git repo, Make sure you know what you are doing
-     Example: '/opt/bin/gitlab/embedded/bin/git'
-
- [*git_max_size*]
-     default => undef
-     Maximum size of https packets. Increase if large commits fail. (git default 5242880 [5mb)
-     Example: 25600
-
- [*git_timeout*]
-     default => undef
-     Timeout (in seconds) for git shell
-     Example: 10
-
- 4. Extra customization
- ==========================
-
- [*extra_google_analytics_id*]
-     default => undef
-
- [*extra_piwik_url*]
-     default => undef
-
- [*extra_sign_in_text*]
-     default => undef
-     Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
-
- 5. Omnibus customization
- ==========================
-
- [*redis_port*]
-     default => undef
-     Port redis runs on
-     Example: 6379
-
- [*postgresql_port*]
-     default => undef
-     Port postgres runs on
-     Example: 5432
-
- [*unicorn_port*]
-     default => undef
-     Port unicorn runs on
-     Example: 8080
-
- [*git_data_dir*]
-     default => undef
-     Example: '/var/opt/gitlab/git-data'
-
- [*gitlab_username*]
-     default => undef
-     Local username
-     Example: 'gitlab'
-
- [*gitlab_group*]
-     default => undef
-     Local groupname
-     Example: 'gitlab'
-
- [*redirect_http_to_https*]
-     default => undef
-     Sets nginx 301 redirect from http to https urls. Requires ssl be enabled (gitlab default: false)
-     Example: true
-
- [*ssl_certificate*]
-     default => '/etc/gitlab/ssl/gitlab.crt'
-     Location of ssl certificate
-     Example: '/etc/gitlab/ssl/gitlab.crt'
-
- [*ssl_certificate_key*]
-     default => '/etc/gitlab/ssl/gitlab.key'
-     Location of ssl key
-     Example: '/etc/gitlab/ssl/gitlab.key'
-
- [*listen_addres*]
-     default => undef
-     Array of ipv4 and ipv6 address nginx listens on
-     Example: ["0.0.0.0","[::]"]
-
- [*git_uid*]
-     default => undef
-     uid of git user, (the user gitlab-shell runs under)
-     Example: 42
-
- [*git_gid*]
-     default => undef
-     gid of git user, (the user gitlab-shell runs under)
-     Example: 42
-
- [*gitlab_redis_uid*]
-     default => undef
-     Example: 42
-
- [*gitlab_redis_gid*]
-     default => undef
-     Example: 42
-
- [*gitlab_psql_uid*]
-     default => undef
-     Example: 42
-
- [*gitlab_psql_gid*]
-     default => undef
-     Example: 42
-
- [*aws_enable*]
-     default => false
-     Store images on amazon
-     Example: true
-
- [*aws_access_key_id*]
-     default => undef
-     Example: 'AKIA1111111111111UA'
-
- [*aws_secret_access_key*]
-     default => undef
-     Example: 'secret'
-
- [*aws_bucket*]
-     default => undef
-     Example: 'my_gitlab_bucket'
-
- [*aws_region*]
-     default => undef
-     Example: 'us-east-1'
-
- [*smtp_enable*]
-     default => false
-     Connect to external smtp server
-     Example: true
-
- [*smtp_address*]
-     default => undef
-     smtp server hostname
-     Example: 'smtp.example.com'
-
- [*smtp_port*]
-     default => undef
-     Example: 456
-
- [*smtp_user_name*]
-     default => undef
-     Example: 'smtp user'
-
- [*smtp_password*]
-     default => undef
-     Example: 'correct-horse-battery-staple'
-
- [*smtp_domain*]
-     default => undef
-     Example: 'example.com'
-
- [*smtp_authentication*]
-     default => undef
-     How smtp authorizes
-     Example: 'login'
-
- [*smtp_enable_starttls_auto*]
-     default => true
-     Use tls on smtp server
-     Example: true
-
- [*svlogd_size*]
-     default => 200 * 1024 * 1024
-     Rotate after x number of bytes
-     Example: 200 * 1024 * 1024 # 200MB
-
- [*svlogd_num*]
-     default => 30
-     Number of rotated logs to keep
-     Example: 60
-
- [*svlogd_timeout*]
-     default => 24 * 60 * 60
-     How long between log rotations (minutes)
-     Example: 24 * 60 * 60 # 24hours
-
- [*svlogd_filter*]
-     default => 'gzip'
-     Compress logs
-
- [*svlogd_udp*]
-     default => undef
-     Transmit logs via UDP
-     Example: #TODO: find example
-
- [*svlogd_prefix*]
-     default => undef
-     Custom prefix for log messages
-     Example: #TODO: find example
-
- [*udp_log_shipping_host*]
-     default => undef
-     Enterprise Edition Only - ip of syslog server
-     Example: '192.0.2.0'
-
- [*udp_log_shipping_port*]
-     default => undef
-     Enterprise Edition Only - port of syslog server
-     Example: 514
-
- [*high_availability_mountpoint*]
-     default => undef
-     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
-     Example: '/tmp'
-
+# === Parameters
+#
+# [*puppet_manage_config*]
+#   default => true
+#   /etc/gitlab/gitlab.rb will be managed by puppet
+# 
+# [*puppet_manage_backups*]
+#   default => true
+#   Includes backup.pp which sets cron job to run rake task
+# 
+# [*puppet_manage_packages*]
+#   default => true
+#   Includes packages.pp which installs postfix and openssh
+#   Gitlab packages will be managed regardless if this parameter is true or false
+#
+# [*external_url*]
+#   default => undef
+#   Required parameter, specifies the url that end user will navigate to
+#   Example: 'https://gitlab.example.com'
+#
+# [*gitlab_branch*]
+#   default => undef
+#   Required parameter, specifies which gitlab branch to download and install
+#   Example: '7.0.0'
+#
+# [*gitlab_release*]
+#    default => 'basic'
+#    specifies 'basic' or 'enterprise' version to download, some parameters are disabled if basid
+#    Example: 'enterprise'
+#
+# [*gitlab_download_link*]
+#    default => undef 
+#    specifies url to download gitlab from, optional if gitlab_release = basic
+#    Example: 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
+#
+# [*external_url*]
+#    default => undef
+#    Required paramter, the url configured in nginx
+#    Example: 'http://gitlab.example.com'
+#
+# 1. Gitlab app settings
+# ======================
+#
+# [*gitlab_email_from*]
+#    default => undef
+#    Example: 'gitlab@example.com' 
+#
+# [*gitlab_default_projects_limit*]
+#    default => undef
+#    How many projects a user can create
+#    Example: 42
+#
+# [*gitlab_default_can_create_group*]
+#    default => undef
+#    Allow users to make own groups, (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_username_changing_enabled*]
+#    default => undef
+#    Allow users to change own username, not suggested if running ldap
+#    Example: false
+#
+# [*gitlab_default_theme*]
+#    default => undef
+#    Color Theme:  1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (gitlab default: 2)
+#    Example: 3
+#
+# [*gitlab_signup_enabled*]
+#    default => undef
+#    Anyone can create an account (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_signin_enabled*]
+#    default => undef
+#    Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_ssh_host*]
+#    default => undef
+#    Example: 'gitlab.example.com'
+#
+# [*gitlab_default_projects_features_issues*]
+#    default => undef
+#    Enables light weight issue tracker on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_merge_requests*]
+#    default => undef
+#    Enables merge requests on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_wiki*]
+#    default => undef
+#    Enables light weight wiki on projects (gitlab default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_snippets*]
+#    default => undef
+#    Like github 'gits' (default: true)
+#    Example: false
+#
+# [*gitlab_default_projects_features_visibility_level*]
+#    default => undef
+#    Project visibility ['public' | 'internal' | 'private'] (gitlab default: 'private')
+#    Example: false
+#
+# [*issues_tracker_redmine*]
+#    default => undef
+#    Integrate with redmine issue tracker (gitlab default: false)
+#    Example: false
+#
+# [*issues_tracker_redmine_title*]
+#    default => undef
+#    Example: 'title'
+#
+# [*issues_tracker_redmine_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_redmine_issues_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_redmine_new_issue_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira*]
+#    default => undef
+#    Example: false
+#
+# [*issues_tracker_jira_title*]
+#    default => undef
+#    Example: 'foo'
+#
+# [*issues_tracker_jira_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira_project_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*issues_tracker_jira_new_issue_url*]
+#    default => undef
+#    Example: 'http://foo.example.com'
+#
+# [*gravatar_enabled*]
+#    default => undef
+#    Use user avatar image from Gravatar.com (gitlab default: true)
+#    Example: true
+#
+# [*gravatar_plain_url*]
+#    default => undef
+#    Example: 'http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
+#
+# [*gravatar_ssl_url*]
+#    default => undef
+#    Example: 'https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
+#
+# 2. Auth settings
+# ==========================
+#
+# [*ldap_enabled*]
+#    default => false
+#
+# [*ldap_servers*]
+#   default => undef
+#   Introduced in Gitlab 7.4, see tests/active_directory.pp for more info
+#
+# [*ldap_host*]
+#    default => 'server.example.com'
+#    See tests/active_directory.pp for more info
+#    
+# [*ldap_port*]
+#     default => 636
+#     Example: 389
+#    See tests/active_directory.pp for more info
+#    
+# [*ldap_uid*]
+#     default => 'sAMAccountName'
+#     Example: 'uid'
+#    See tests/active_directory.pp for more info
+#
+# [*ldap_method*]
+#     default => 'ssl'
+#     Example: 'ssl'
+#    See tests/active_directory.pp for more info
+# 
+# [*ldap_bind_dn*]
+#     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
+#    See tests/active_directory.pp for more info
+#
+# [*ldap_password*]
+#     default => 'correct-horse-battery-staple'
+#    See tests/active_directory.pp for more info
+#
+# [*ldap_allow_username_or_email_login*]
+#     default => true
+#     See tests/active_directory.pp for more info
+#
+# [*ldap_base*]
+#     default => DC=mycorp,DC=com
+#     See tests/active_directory.pp for more info
+#
+# [*ldap_sync_time*]
+#     default => undef
+#     Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
+#     See tests/active_directory.pp for more info
+#
+# [*ldap_group_base*]
+#     default => ''
+#     Enterprise only feature, Ldap groups map to gitlab groups
+#     See tests/active_directory.pp for more info
+#     Example: 'OU=groups,DC=mycorp,DC=com'
+#
+# [*ldap_user_filter*]
+#     default => ''
+#     Enterprise only feature, filter ldap group
+#     Example: '(memberOf=CN=my department,OU=groups,DC=mycorp,DC=com)'
+#     See tests/active_directory.pp for more info
+#
+# [*ldap_sync_ssh_keys*]
+#     default => undef
+#     Enterprise only feature, The bject name in ldap where ssh keys are stored
+#     Example: 'sshpublickey'
+#     See tests/active_directory.pp for more info
+#
+# [*ldap_admin_group*]
+#     default => undef
+#     Enterprise only feature, The object name in ldap that matches administrators
+#     Example: 'GitLab administrators'
+#     See tests/active_directory.pp for more info
+#
+# [*omniauth_enabled*]
+#     default => undef
+#     Allows login via Google, twitter, Github ect..
+#     Example: true
+#
+# [*omniauth_allow_single_sign_on*]
+#     default => false
+#     CAUTION: Lets anyone with twitter/github/google account to authenticate. http://bit.ly/Uimqh9
+#     Example: 'sshpublickey'
+#
+# [*omniauth_block_auto_created_users*]
+#     default => true
+#     Lockdown new omniauth accounts until they are approved
+#     Example: true
+#
+# [*omniauth_providers*]
+#     default => undef
+#     Allows user to authenticate with Twitter, Google, Github ect... 
+#     Example: [ '{
+#         "name"   => "google_oauth2",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" => "YOUR APP SECRET",
+#         "args"   => { "access_type" => "offline", "approval_prompt" => "" }
+#       }',
+#       ',',
+#       '{ 
+#         "name"   => "twitter",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" =>  "YOUR APP SECRET"
+#       }',
+#       ',',
+#       '{ "name"   => "github",
+#         "app_id" => "YOUR APP ID",
+#         "app_secret" =>  "YOUR APP SECRET",
+#         "args"  => { "scope" =>  "user:email" }
+#       }'
+#     ],
+#     See tests/ominiauth.pp for more information
+#
+# 3. Advanced settings
+# ==========================
+#
+# [*satellites_path*]
+#     default => undef
+#     Where satellite scripts are run
+#     Example: /var/opt/gitlab/git-data/gitlab-satellites
+#
+# [*satellites_timeout*]
+#     default => undef
+#     Increase if merge requests timeout (gitlab default: 30)
+#     Example: 120
+#
+# [*backup_path*]
+#     default => undef
+#     Location for backups (relative to rails root) 
+#     Example: '/var/opt/gitlab/backups'
+#
+# [*backup_keep_time*]
+#     default => undef
+#     Number of seconds to keep backups. gitlab default: 0 (forever)
+#     Example: 604800     # 1 week
+#
+# [*backup_upload_connection*]
+#    default => undef
+#    Backup with fog, see http://bit.ly/1t5nAv5
+#
+# [*backup_upload_remote_directory*]
+#    default => undef
+#    Location to backup to in fog http://bit.ly/1t5nAv5
+#
+# [*gitlab_shell_path*]
+#     default => undef
+#     Where gitlab-shell is located
+#     Example: /opt/gitlab/embedded/service/gitlab-shell/
+#
+# [*gitlab_shell_repos_path*]
+#     default => undef
+#     Path where gitlab shell repos are stored
+#     Example: '/var/opt/gitlab/git-data/repositories' # Cannot be a symlink
+#
+# [*gitlab_shell_hooks_path*]
+#     default => undef
+#     Path for git hooks
+#     Example: '/opt/gitlab/embedded/service/gitlab-shell/hooks/' # Cannot be a symlink
+#
+# [*gitlab_shell_upload_pack*]
+#     default => undef
+#     Run shell upload pack on git repos
+#     Example: true
+#
+# [*gitlab_shell_receive_pack*]
+#     default => undef
+#     Run shell recieve pack on git repos
+#     Example: true
+#
+# [*gitlab_shell_ssh_port*]
+#     default => undef
+#     Port ssh runs on
+#     Example: 22
+#
+# [*git_bin_path*]
+#     default => undef
+#     Path to git repo, Make sure you know what you are doing
+#     Example: '/opt/bin/gitlab/embedded/bin/git'
+#
+# [*git_max_size*]
+#     default => undef
+#     Maximum size of https packets. Increase if large commits fail. (git default 5242880 [5mb)
+#     Example: 25600
+#
+# [*git_timeout*]
+#     default => undef
+#     Timeout (in seconds) for git shell
+#     Example: 10
+#
+# 4. Extra customization
+# ==========================
+#
+# [*extra_google_analytics_id*]
+#     default => undef
+#
+# [*extra_piwik_url*]
+#     default => undef
+#
+# [*extra_sign_in_text*]
+#     default => undef
+#     Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
+#
+# 5. Omnibus customization
+# ==========================
+#
+# [*redis_port*]
+#     default => undef
+#     Deprecated in 7.3: Port redis runs on
+#     Example: 6379
+#
+# [*postgresql_port*]
+#     default => undef
+#     Port postgres runs on
+#     Example: 5432
+#
+# [*unicorn_port*]
+#     default => undef
+#     Port unicorn runs on
+#     Example: 8080
+#
+# [*git_data_dir*]
+#     default => undef
+#     Example: '/var/opt/gitlab/git-data'
+#
+# [*gitlab_username*]
+#     default => undef
+#     Local username
+#     Example: 'gitlab'
+#
+# [*gitlab_group*]
+#     default => undef
+#     Local groupname
+#     Example: 'gitlab'
+#
+# [*redirect_http_to_https*]
+#     default => undef
+#     Sets nginx 301 redirect from http to https urls. Requires ssl be enabled (gitlab default: false)
+#     Example: true
+#
+# [*ssl_certificate*]
+#     default => '/etc/gitlab/ssl/gitlab.crt'
+#     Location of ssl certificate
+#     Example: '/etc/gitlab/ssl/gitlab.crt'
+#
+# [*ssl_certificate_key*]
+#     default => '/etc/gitlab/ssl/gitlab.key'
+#     Location of ssl key
+#     Example: '/etc/gitlab/ssl/gitlab.key'
+#
+# [*listen_address*]
+#     default => undef
+#     Array of ipv4 and ipv6 address nginx listens on
+#     Example: ["0.0.0.0","[::]"]
+#
+# [*git_username*]
+#     default => undef
+#     name of git user users authenticate as. (default: 'git' ) Used as the ssh user name e.g git@gitlab.com
+#     Example: 'git'
+#
+# [*git_groupname*]
+#     default => undef
+#     name of git group (default: 'git' ) 
+#     Example: 42
+#
+# [*git_uid*]
+#     default => undef
+#     uid of git user, (the user gitlab-shell runs under)
+#     Example: 42
+#
+# [*git_gid*]
+#     default => undef
+#     gid of git user, (the user gitlab-shell runs under)
+#     Example: 42
+#
+# [*gitlab_redis_uid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_redis_gid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_psql_uid*]
+#     default => undef
+#     Example: 42
+#
+# [*gitlab_psql_gid*]
+#     default => undef
+#     Example: 42
+#
+# [*aws_enable*]
+#     default => false
+#     Store images on amazon
+#     Example: true
+#
+# [*aws_access_key_id*]
+#     default => undef
+#     Example: 'AKIA1111111111111UA'
+#
+# [*aws_secret_access_key*]
+#     default => undef
+#     Example: 'secret'
+#
+# [*aws_bucket*]
+#     default => undef
+#     Example: 'my_gitlab_bucket'
+#
+# [*aws_region*]
+#     default => undef
+#     Example: 'us-east-1'
+#
+# [*smtp_enable*]
+#     default => false
+#     Connect to external smtp server
+#     Example: true
+#
+# [*smtp_address*]
+#     default => undef
+#     smtp server hostname
+#     Example: 'smtp.example.com'
+#
+# [*smtp_port*]
+#     default => undef
+#     Example: 456
+#
+# [*smtp_user_name*]
+#     default => undef
+#     Example: 'smtp user'
+#
+# [*smtp_password*]
+#     default => undef
+#     Example: 'correct-horse-battery-staple'
+#
+# [*smtp_domain*]
+#     default => undef
+#     Example: 'example.com'
+#
+# [*smtp_authentication*]
+#     default => undef
+#     How smtp authorizes
+#     Example: 'login'
+#
+# [*smtp_enable_starttls_auto*]
+#     default => true
+#     Use tls on smtp server
+#     Example: true
+#
+# [*svlogd_size*]
+#     default => 200 * 1024 * 1024
+#     Rotate after x number of bytes
+#     Example: 200 * 1024 * 1024 # 200MB
+#
+# [*svlogd_num*]
+#     default => 30
+#     Number of rotated logs to keep
+#     Example: 60
+#
+# [*svlogd_timeout*]
+#     default => 24 * 60 * 60
+#     How long between log rotations (minutes)
+#     Example: 24 * 60 * 60 # 24hours
+#
+# [*svlogd_filter*]
+#     default => 'gzip'
+#     Compress logs
+#
+# [*svlogd_udp*]
+#     default => undef
+#     Transmit logs via UDP
+#     Example: #TODO: find example
+#
+# [*svlogd_prefix*]
+#     default => undef
+#     Custom prefix for log messages
+#     Example: #TODO: find example
+#
+# [*udp_log_shipping_host*]
+#     default => undef
+#     Enterprise Edition Only - ip of syslog server
+#     Example: '192.0.2.0'
+#
+# [*udp_log_shipping_port*]
+#     default => undef
+#     Enterprise Edition Only - port of syslog server
+#     Example: 514
+#
+# [*high_availability_mountpoint*]
+#     default => undef
+#     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
+#     Example: '/tmp'
+#
 ```

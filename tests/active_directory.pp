@@ -1,9 +1,9 @@
 class { 'gitlab' : 
-    puppet_manage_config              => true,
-    puppet_manage_backups             => true,
-    gitlab_branch                     => '7.4.0',
-    external_url                      => 'http://192.168.33.10',
-    ldap_enabled                      => true,
+  puppet_manage_config              => true,
+  puppet_manage_backups             => true,
+  gitlab_branch                     => '7.4.0',
+  external_url                      => 'http://192.168.33.10',
+  ldap_enabled                      => true,
 
 # Gitlab 7.4.x added a new syntax for specifying ldap hosts, additional information:
 #https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/integration/ldap.md
