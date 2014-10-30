@@ -84,8 +84,7 @@ class gitlab::install inherits ::gitlab {
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
-        # Basic version, use user supplied url, less common configuration
-        warning("\$gitlab_release is ${::gitlab::gitlab_release} and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\', setting a custom url is most likely unneccesary")
+        # Basic version, use user supplied url
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
         $gitlab_url = $::gitlab::gitlab_download_link
       }
