@@ -7,7 +7,7 @@ describe 'gitlab', :type => 'class' do
       {
         :gitlab_branch    => '7.4.0',
         :gitlab_release   => 'enterprise',
-        :gitlab_download_link => 'http://example.com',
+        :gitlab_download_link => 'https://downloads-packages.s3.amazonaws.com/centos-6.5/gitlab-7.4.0_omnibus.1-1.el6.x86_64.rpm',
         :external_url     => 'http://gitlab.example.com',
         :ldap_enabled     => true,
         :ldap_servers     => '[{"main"=> {"label" => "LDAP", "host" => "example.com"}}]',

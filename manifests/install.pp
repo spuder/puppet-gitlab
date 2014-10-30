@@ -41,10 +41,30 @@ class gitlab::install inherits ::gitlab {
 
         case $::gitlab::gitlab_release {
           'basic' : {
-            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-${omnibus_release}" # eg. gitlab_7.0.0-omnibus-1_amd64.deb
+            #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
+            if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
+              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              $omnibus_filename = $1
+              notice("User provided a download url: ${::gitlab::gitlab_download_link}")
+            }
+            else {
+              # Use default package name
+              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-${omnibus_release}" # eg. gitlab_7.0.0-omnibus-1_amd64.deb
+              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+            }
           }
           'enterprise' : {
-            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
+            #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
+            if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
+              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              $omnibus_filename = $1
+              notice("User provided a download url: ${::gitlab::gitlab_download_link}")
+            }
+            else {
+              # Use default package name
+              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
+              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+            }
           }
           default : {
             fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")
@@ -58,10 +78,30 @@ class gitlab::install inherits ::gitlab {
 
         case $::gitlab::gitlab_release {
           'basic' : {
-            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_${omnibus_release}" # eg. gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
+            #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
+            if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
+              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              $omnibus_filename = $1
+              notice("User provided a download url: ${::gitlab::gitlab_download_link}")
+            }
+            else {
+              # Use default package name
+              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_${omnibus_release}" # eg. gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
+              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+            }
           }
           'enterprise' : {
-            $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_ee.${omnibus_release}" # eg. gitlab-7.0.0_ee.omnibus-1.el6.x86_64.rpm
+            #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
+            if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
+              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              $omnibus_filename = $1
+              notice("User provided a download url: ${::gitlab::gitlab_download_link}")
+            }
+            else {
+              # Use default package name
+              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}_ee.${omnibus_release}" # eg. gitlab-7.0.0_ee.omnibus-1.el6.x86_64.rpm
+              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+            }
           }
           default : {
             fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: ${::gitlab::gitlab_release}")
@@ -78,19 +118,19 @@ class gitlab::install inherits ::gitlab {
       undef : {
         # User did not set $gitlab_release, assume basic
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
-        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
+        info("\$Downloading ${::gitlab::gitlab_release} from user specified url: ${::gitlab::gitlab_download_link}")
         # $operatingsystem_lowercase = downcase($::operatingsystem)
         $operatingsystem_lowercase=downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
         # Basic version, use user supplied url
-        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
+        info("Downloading ${::gitlab::gitlab_release} from user specified url: ${::gitlab::gitlab_download_link}")
         $gitlab_url = $::gitlab::gitlab_download_link
       }
       'enterprise': {
         # Enterprise verison, use user supplied url. This is the only valid configuration for enterprise users
-        info("\$Downloading ${::gitlab::gitlab_release} from user specified url")
+        info("Downloading ${::gitlab::gitlab_release} from user specified url: ${::gitlab::gitlab_download_link}")
         $gitlab_url = $::gitlab::gitlab_download_link
       }
       default : {
@@ -121,6 +161,10 @@ class gitlab::install inherits ::gitlab {
       }
     }
   }
+
+  validate_string($omnibus_filename)
+  validate_string($download_location)
+  notice("omnibus_filename is \'$omnibus_filename\'")
 
   package {'wget':
     ensure => present,

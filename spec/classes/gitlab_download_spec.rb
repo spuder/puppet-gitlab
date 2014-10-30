@@ -74,4 +74,28 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
+# Exepct error when gitlab_download_link has invalid url
+  context 'gitlab_download_link is invalid' do
+    let(:params) {
+      {
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
+        :gitlab_download_link => 'https://downloads-packages.s3.amazonaws.com/centos-6.5/gitlab-7.4.3_omnibus.1-1.el6.x86_64.bad',
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      expect { subject }.to raise_error(Puppet::Error, /gitlab_download_link must end in .rpm or .deb/)
+    end
+  end
+
+
 end

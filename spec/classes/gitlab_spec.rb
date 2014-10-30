@@ -143,7 +143,7 @@ describe 'gitlab', :type => 'class' do
   end
 
 # Expect class gitlab::config present when $puppet_manage_config is true
-    context 'when $puppet_manage_packages is true' do
+  context 'when $puppet_manage_packages is true' do
     let(:params) {
       {
         :gitlab_branch        => '7.0.0',
@@ -164,7 +164,7 @@ describe 'gitlab', :type => 'class' do
   end
 
 # Expect class gitlab::config absent when $puppet_manage_config is false
-    context 'when $puppet_manage_packages is false' do
+  context 'when $puppet_manage_packages is false' do
     let(:params) {
       {
         :gitlab_branch        => '7.0.0',
@@ -185,7 +185,7 @@ describe 'gitlab', :type => 'class' do
   end
 
 # Expect error when runnong on cent 5
-    context 'when centos is 5' do
+  context 'when centos is 5' do
     let(:params) {
       {
         :gitlab_branch        => '7.0.0',
