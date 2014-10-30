@@ -72,7 +72,7 @@ class gitlab::install inherits ::gitlab {
         }
     }
     'RedHat': {
-      $omnibus_release = 'omnibus-1.el6.x86_64.rpm'
+      $omnibus_release = "omnibus-1.el${operatingsystemmajrelease}.x86_64.rpm"
       $url_separator   = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'rpm'
 
