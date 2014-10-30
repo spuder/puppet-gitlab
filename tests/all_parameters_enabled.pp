@@ -21,14 +21,15 @@ class { 'gitlab' :
 #
 # 1. GitLab app settings
 # ==========================
-  gitlab_email_from                 => 'gitlab@example.com',
-  gitlab_default_projects_limit     => 10,
-  gitlab_default_can_create_group   => true,
-  gitlab_username_changing_enabled  => true,
-  gitlab_default_theme              => 3,
-  gitlab_signup_enabled             => true,
-  gitlab_signin_enabled             => true,
-  gitlab_ssh_host                   => '192.168.33.10',
+  gitlab_email_from                   => 'gitlab@example.com',
+  gitlab_default_projects_limit       => 10,
+  gitlab_default_can_create_group     => true,
+  gitlab_username_changing_enabled    => true,
+  gitlab_default_theme                => 3,
+  gitlab_signup_enabled               => true,
+  gitlab_signin_enabled               => true,
+  gitlab_ssh_host                     => '192.168.33.10',
+  gitlab_restricted_visibility_levels => ['public', 'internal'],
 
   gitlab_default_projects_features_issues           => true, # true
   gitlab_default_projects_features_merge_requests   => true, # true

@@ -35,14 +35,15 @@ class gitlab::params {
   #
   # 1. GitLab app settings
   # ==========================
-  $gitlab_email_from                 = undef # 'gitlab@example.com'
-  $gitlab_default_projects_limit     = undef # How many projects a user can create (default: 10)
-  $gitlab_default_can_create_group   = undef # Allow users to make own groups (default: true)
-  $gitlab_username_changing_enabled  = undef # Allow users to change own username, not suggested if running ldap
-  $gitlab_default_theme              = undef # Color Theme - 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (default: 2)
-  $gitlab_signup_enabled             = undef # Anyone can create an account (default: true)
-  $gitlab_signin_enabled             = undef # Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (default: true)
-  $gitlab_ssh_host                   = undef # which hostname should be used for creating ssh URLs. uses the fqdn by default
+  $gitlab_email_from                   = undef # 'gitlab@example.com'
+  $gitlab_default_projects_limit       = undef # How many projects a user can create (default: 10)
+  $gitlab_default_can_create_group     = undef # Allow users to make own groups (default: true)
+  $gitlab_username_changing_enabled    = undef # Allow users to change own username, not suggested if running ldap
+  $gitlab_default_theme                = undef # Color Theme - 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (default: 2)
+  $gitlab_signup_enabled               = undef # Anyone can create an account (default: true)
+  $gitlab_signin_enabled               = undef # Sign in with shortname, eg. 'steve' vs 'steve@apple.com' (default: true)
+  $gitlab_ssh_host                     = undef # which hostname should be used for creating ssh URLs. uses the fqdn by default
+  $gitlab_restricted_visibility_levels = undef # which visibility levels are not available to non-admin users (default: none)
 
   $gitlab_default_projects_features_issues           = undef # Enables light weight issue tracker on projects (default: true)
   $gitlab_default_projects_features_merge_requests   = undef # Enables merge requests on projects (default: true)

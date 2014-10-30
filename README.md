@@ -353,6 +353,11 @@ irc     => spuder
 #    default => undef
 #    Example: 'gitlab.example.com'
 #
+# [*gitlab_restricted_visibility_levels*]
+#    default => undef
+#    Array of visibility levels that are not available to non-admin users (gitlab default: none)
+#    Example: ['public', 'internal']
+#
 # [*gitlab_default_projects_features_issues*]
 #    default => undef
 #    Enables light weight issue tracker on projects (gitlab default: true)

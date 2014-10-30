@@ -83,6 +83,11 @@
 #    default => undef
 #    Example: 'gitlab.example.com'
 #
+# [*gitlab_restricted_visibility_levels*]
+#    default => undef
+#    Array of visibility levels that are not available to non-admin users (gitlab default: none)
+#    Example: ['public', 'internal']
+#
 # [*gitlab_default_projects_features_issues*]
 #    default => undef
 #    Enables light weight issue tracker on projects (gitlab default: true)
@@ -592,14 +597,15 @@ class gitlab (
   # 1. GitLab app settings
   # ==========================
 
-  $gitlab_email_from                = $::gitlab::params::gitlab_email_from,
-  $gitlab_default_projects_limit    = $::gitlab::params::gitlab_default_projects_limit,
-  $gitlab_default_can_create_group  = $::gitlab::params::gitlab_default_can_create_group,
-  $gitlab_username_changing_enabled = $::gitlab::params::gitlab_username_changing_enabled,
-  $gitlab_default_theme             = $::gitlab::params::gitlab_default_theme,
-  $gitlab_signup_enabled            = $::gitlab::params::gitlab_signup_enabled,
-  $gitlab_signin_enabled            = $::gitlab::params::gitlab_signin_enabled,
-  $gitlab_ssh_host                  = $::gitlab::params::gitlab_ssh_host,
+  $gitlab_email_from                   = $::gitlab::params::gitlab_email_from,
+  $gitlab_default_projects_limit       = $::gitlab::params::gitlab_default_projects_limit,
+  $gitlab_default_can_create_group     = $::gitlab::params::gitlab_default_can_create_group,
+  $gitlab_username_changing_enabled    = $::gitlab::params::gitlab_username_changing_enabled,
+  $gitlab_default_theme                = $::gitlab::params::gitlab_default_theme,
+  $gitlab_signup_enabled               = $::gitlab::params::gitlab_signup_enabled,
+  $gitlab_signin_enabled               = $::gitlab::params::gitlab_signin_enabled,
+  $gitlab_ssh_host                     = $::gitlab::params::gitlab_ssh_host,
+  $gitlab_restricted_visibility_levels = $::gitlab::params::gitlab_restricted_visibility_levels,
 
   $gitlab_default_projects_features_issues           = $::gitlab::params::gitlab_default_projects_features_issues,
   $gitlab_default_projects_features_merge_requests   = $::gitlab::params::gitlab_default_projects_features_merge_requests,
