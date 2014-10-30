@@ -207,4 +207,27 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
+# Expect gitlab_restricted_visibility_levels parameter to be present in gitlab.rb
+    context 'gitlab_restricted_visibility_levels is true' do
+    let(:params) {
+      {
+        :gitlab_branch    => '7.4.3',
+        :external_url     => 'http://gitlab.example.com',
+        :gitlab_restricted_visibility_levels => ['public','internal'],
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/gitlab_restricted_visibility_levels/)
+    end
+  end
+
 end
