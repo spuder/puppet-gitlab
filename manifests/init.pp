@@ -35,6 +35,7 @@
 # [*gitlab_download_link*]
 #    default => undef 
 #    specifies url to download gitlab from, optional if gitlab_release = basic
+#    string must end in '.deb' or '.rpm'
 #    Example: 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
 #
 # [*external_url*]
