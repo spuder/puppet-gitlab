@@ -1,6 +1,6 @@
 ##Changelog
 
-2014-Oct-30: 2.3.5
+2014-Oct-31: 2.3.5
 - Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
 http://bit.ly/1vOlT5Q
 http://bit.ly/1CXbx3G
@@ -8,6 +8,8 @@ http://bit.ly/1CXbx3G
 - Fixes bug where gitlab would attempt to start every time (issue #89)
 - Fixes bug when gitlab_download_link is set (issue #94, thanks tdb)
 - Removes default parameters for $ssl_certificate to prevent bug in 'the foreman' from applying values
+- Decreases log levels to make module quieter (issue #97)
+- Updates ldap examples (issue #98)
 
 2014-Oct-6: 2.3.4
 - Adds $git_groupname and $git_username parameters for when a 'git' user or group already exists
