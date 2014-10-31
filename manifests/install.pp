@@ -43,27 +43,27 @@ class gitlab::install inherits ::gitlab {
           'basic' : {
             #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
             if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
-              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              validate_re($1, ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
               $omnibus_filename = $1
               info("gitlab_release is: ${gitlab_release}, user provided a download url: ${::gitlab::gitlab_download_link}, omnibus_filename is: ${omnibus_filename}")
             }
             else {
               # Use default package name
               $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-${omnibus_release}" # eg. gitlab_7.0.0-omnibus-1_amd64.deb
-              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+              info("gitlab_release is: ${gitlab_release}, using default omnibus_filename: ${omnibus_filename}")
             }
           }
           'enterprise' : {
             #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
             if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
-              validate_re("$1", ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
+              validate_re($1, ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
               $omnibus_filename = $1
               info("gitlab_release is: ${gitlab_release}, user provided a download url: ${::gitlab::gitlab_download_link}, omnibus_filename is: ${omnibus_filename}")
             }
             else {
               # Use default package name
               $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
-              info("gitlab_release is: $gitlab_release, using default omnibus_filename: $omnibus_filename")
+              info("gitlab_release is: ${gitlab_release}, using default omnibus_filename: ${omnibus_filename}")
             }
           }
           default : {
@@ -82,8 +82,7 @@ class gitlab::install inherits ::gitlab {
         default => undef,
       }
       # Fail if cent maj version is not one of the following numbers
-      validate_re("${cent_maj_version}",['5','6','7','8'],'Can not determine CentOS major version')
- 
+      validate_re($cent_maj_version,['5','6','7','8'],'Can not determine CentOS major version')
       info("RedHat major version is ${cent_maj_version}")
 
       # The default rpm name if user doesn't specify $gitlab_download_link
@@ -161,8 +160,7 @@ class gitlab::install inherits ::gitlab {
         # Basic version, use default derived url. This is the most common configuration
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
-        # $operatingsystem_lowercase = downcase($::operatingsystem)
-        $operatingsystem_lowercase=downcase($::operatingsystem)
+        $operatingsystem_lowercase = downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
       }
@@ -182,7 +180,7 @@ class gitlab::install inherits ::gitlab {
   info("omnibus_filename is \'${omnibus_filename}\'")
 
   package {'wget':
-    ensure => present,
+    ensure  => present,
   }
   # Use wget to download gitlab
   exec { 'download gitlab':
