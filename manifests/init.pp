@@ -876,7 +876,6 @@ class gitlab (
   if versioncmp( $gitlab_branch, '7.4.0') >=0 {
     if $ldap_host or $ldap_port or $ldap_uid or $ldap_method or $ldap_bind_dn or $ldap_password or $ldap_allow_username_or_email_login or $ldap_base or $ldap_group_base or $ldap_user_filter{
       notice('Gitlab 7.4 introduced new syntax for ldap configurations, https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/integration/ldap.md, http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G')
-      notify{'Gitlab 7.4 introduced new syntax for ldap configurations, https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/integration/ldap.md, http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G':}
     }
   }
 

@@ -134,11 +134,57 @@ class { 'gitlab' :
     gitlab_branch                     => '7.0.0',
     external_url                      => 'http://gitlab.example.com',
     ldap_enabled                      => true,
-    # Gitlab 7.4 deprecated the old parameters, and replaced with 'ldap_servers'
-    # See http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G 
+    ldap_host                         => 'foo.example.com',
+    ldap_base                         => 'DC=example,DC=com',
+    ldap_port                         => '636',
+    ldap_uid                          => 'sAMAccountName',
+    ldap_method                       => 'ssl',       
+    ldap_bind_dn                      => 'CN=foobar,CN=users,DC=example,DC=com', 
+    ldap_password                     => 'correct-horse-battery-staple',    
+    gravatar_enabled                  => true,
+    gitlab_default_can_create_group   => false,
+    gitlab_username_changing_enabled  => false,
+    gitlab_signup_enabled             => false,
+    gitlab_default_projects_features_visibility_level => 'internal',
+    ldap_sync_time                    => 3600,
+}
+```
+
+Ldap with Active Directory (Gitlab >=7.4)
+```
+# Gitlab 7.4 introduced a new ldap_servers parameter
+# It combines all ldap settings into one json string, and also supports multiple ldap servers. 
+# Both the old and syntax will continue to work. If using both simultainously, gitlab will prefer the older syntax. 
+# See tests/active_directory.pp for more information
+class { 'gitlab' : 
+    puppet_manage_config              => true,
+    puppet_manage_backups             => true,
+    puppet_manage_packages            => true,
+    gitlab_branch                     => '7.4.0',
+    external_url                      => 'http://gitlab.example.com',
+    ldap_enabled                      => true, 
     ldap_servers   => ['
 {
-  "main" => {
+  "primary" => {
+    "label" => "LDAP",
+    "host" => "hostname of LDAP server",
+    "port" => 389,
+    "uid" => "sAMAccountName",
+    "method" => "plain",
+    "bind_dn" => "CN=query user,CN=Users,DC=mycorp,DC=com",
+    "password" => "query user password",
+    "active_directory" => true,
+    "allow_username_or_email_login" => true,
+    "base" => "DC=mycorp,DC=com",
+    "group_base" => "OU=groups,DC=mycorp,DC=com",
+    "admin_group" => "",
+    "sync_ssh_keys" => false,
+    "sync_time" => 3600
+  }
+}',
+',',
+'{
+  "secondary" => {
     "label" => "LDAP",
     "host" => "hostname of LDAP server",
     "port" => 389,
@@ -156,13 +202,8 @@ class { 'gitlab' :
   }
 }'],
 
-    gravatar_enabled                  => true,
-    gitlab_default_can_create_group   => false,
-    gitlab_username_changing_enabled  => false,
-    gitlab_signup_enabled             => false,
-    gitlab_default_projects_features_visibility_level => 'internal',
-}
 ```
+
 
 Manage packages, backups and config file manually
 ```
