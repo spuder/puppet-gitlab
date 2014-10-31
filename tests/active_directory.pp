@@ -42,16 +42,16 @@ class { 'gitlab' :
     "active_directory" => true,
     "allow_username_or_email_login" => true,
     "base" => "DC=mycorp,DC=com",
-    "group_base" => "OU=groups,DC=mycorp,DC=com",
     "admin_group" => "",
     "sync_ssh_keys" => false,
-    "sync_time" => 3600
+    "sync_time" => 3600,
+    "group_base" => "OU=groups,DC=mycorp,DC=com"
   }
 }'],
 
 }
 
-# If using gitlab enterprise, you can optionally specify multiple ldap servers. Separate each entry with a comma
+## If using gitlab enterprise, you can optionally specify multiple ldap servers. Separate each entry with a quoted comma[',']
 #   ldap_servers   => ['
 # {
 #   "main" => {
@@ -67,3 +67,24 @@ class { 'gitlab' :
 #   }
 # }'],
 
+## You can alternativly use the yaml syntax https://github.com/spuder/puppet-gitlab/issues/98
+# $ldapservers = 'YAML.load <<-EOS
+# main:
+#   label: "LDAP"
+#   host: "hostname of LDAP server"
+#   port: 389
+#   uid: "sAMAccountName"
+#   method: "plain"
+#   bind_dn: "CN=query user,CN=users,DC=mycorp,DC=com"
+#   password: "query user password"
+#   active_directory: true
+#   allow_username_or_email_login: true
+#   base: "DC=mycorp,DC=com"
+# EOS
+# '
+
+# class { 'gitlab':
+#   ...
+#   ldap_servers => $ldapservers,
+#   ...
+# }
