@@ -97,5 +97,25 @@ describe 'gitlab', :type => 'class' do
     end
   end
 
-
+# Exepct error when not not running cent 5,6,7
+  context 'gitlab_download_link is invalid' do
+    let(:params) {
+      {
+        :gitlab_branch        => '7.0.0',
+        :external_url         => 'http://gitlab.example.com',
+      }
+    }
+    let(:facts) {
+      {
+        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :facterversion          => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '0',
+      }
+    }
+    it do
+      expect { subject }.to raise_error(Puppet::Error, /Can not determine CentOS major version/)
+    end
+  end
 end

@@ -72,7 +72,20 @@ class gitlab::install inherits ::gitlab {
         }
     }
     'RedHat': {
-      $omnibus_release = 'omnibus-1.el6.x86_64.rpm'
+      # Get the operatingsystem major release, used to determine rpm name e.g. omnibus-1.el6.x86_64.rpm
+      # unfortunatly $::operatingsystemmajrelease is only availabe in facter >=1.8
+      $cent_maj_version = $operatingsystemrelease ? {
+        /^5/ => '5',
+        /^6/ => '6',
+        /^7/ => '7',
+        /^8/ => '8',
+        default => undef,
+      }
+      # Fail if cent maj version is not one of the following numbers
+      validate_re("${cent_maj_version}",['5','6','7','8'],'Can not determine CentOS major version')
+ 
+      $omnibus_release = "omnibus-1.el${cent_maj_version}.x86_64.rpm"
+      info("RedHat omnibus_release is: \'$omnibus_release\'")
       $url_separator   = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager = 'rpm'
 
