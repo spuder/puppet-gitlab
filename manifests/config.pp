@@ -54,7 +54,7 @@ class gitlab::config inherits ::gitlab {
     require     => File["${gitlab_config_dir}/gitlab.rb"],
     subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'], Package['gitlab'] ],
     before      => Exec['start gitlab'],
-  }  
+  }
   exec { 'start gitlab':
     command => '/usr/bin/gitlab-ctl start',
     unless  => '/usr/bin/gitlab-ctl status',

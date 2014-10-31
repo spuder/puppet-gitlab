@@ -1,4 +1,4 @@
-# == Class: gitlab::prerequisites
+# == Class: gitlab::packages
 #
 # Installs openssh and postfix services
 #
