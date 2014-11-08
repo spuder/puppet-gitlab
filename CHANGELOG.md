@@ -1,5 +1,8 @@
 ##Changelog
 
+2014-???-??: ?.?.?
+- Adds wget_timeout parameter (issue #82)
+
 2014-Oct-31: 2.3.5
 - Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
 http://bit.ly/1vOlT5Q

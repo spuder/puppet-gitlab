@@ -559,19 +559,9 @@
 #     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 #     Example: '/tmp'
 #
-# === Examples
-#
-# Basic Example with https
-# class { 'gitlab' : 
-#   gitlab_branch          => '7.0.0',
-#   external_url           => 'http://foo.bar',
-#   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
-#   ssl_certificate_key    => '/etc/gitlab/ssl/gitlab.key',
-#   redirect_http_to_https => true,
-#   puppet_manage_backups  => true,
-#   backup_keep_time       => 5184000, # In seconds, 5184000 = 60 days
-#   gitlab_default_projects_limit => 100,
-# }
+# [*wget_timeout*]
+#     default => 300
+#     Number of seconds to wait for gitlab package download
 #
 # === Authors
 #
@@ -591,6 +581,7 @@ class gitlab (
   $gitlab_branch           = $::gitlab::params::gitlab_branch,
   $gitlab_release          = $::gitlab::params::gitlab_release,
   $gitlab_download_link    = $::gitlab::params::gitlab_download_link,
+
 
   $external_url   = $::gitlab::params::external_url,
 
@@ -742,6 +733,12 @@ class gitlab (
 
   $high_availability_mountpoint = $::gitlab::params::high_availability_mountpoint,
 
+  #
+  # Additional Settings
+  # ====================
+
+  $wget_timeout   = $::gitlab::params::wget_timeout
+
   ) inherits gitlab::params {
 
   # Verify required parameters are provided. 
@@ -870,7 +867,7 @@ class gitlab (
     }
   }
 
-  # Fail if attempting to use ldap parameters with gitlab 7.4
+  # Give alert if using old ldap parameters on gitlab > 7.4.x
   # https://about.gitlab.com/2014/10/22/gitlab-7-4-released/
   # https://gitlab.com/gitlab-org/gitlab-ce/blob/a0a826ebdcb783c660dd40d8cb217db28a9d4998/config/gitlab.yml.example
   if versioncmp( $gitlab_branch, '7.4.0') >=0 {

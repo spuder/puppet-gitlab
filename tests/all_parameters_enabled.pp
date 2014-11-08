@@ -240,4 +240,6 @@ class { 'gitlab' :
 
   high_availability_mountpoint => '/var/foo',
 
+  wget_timeout => 1800,
+
 }

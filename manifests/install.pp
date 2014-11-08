@@ -188,7 +188,7 @@ class gitlab::install inherits ::gitlab {
     path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin',
     cwd     => $download_location,
     creates => "${download_location}/${omnibus_filename}",
-    timeout => 1800,
+    timeout => "${::gitlab::wget_timeout}",
     require => Package['wget'],
   }
   # Install gitlab with the appropriate package manager (rpm or dpkg)

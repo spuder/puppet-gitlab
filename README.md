@@ -869,4 +869,7 @@ irc     => spuder
 #     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 #     Example: '/tmp'
 #
+# [*wget_timeout*]
+#     default => 300
+#     Number of seconds to wait for gitlab package download
 ```

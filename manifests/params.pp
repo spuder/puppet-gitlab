@@ -187,4 +187,10 @@ class gitlab::params {
 
   $high_availability_mountpoint = undef # Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 
+  #
+  # Additional Settings
+  # ====================
+   
+  $wget_timeout = 1800
+
 }
