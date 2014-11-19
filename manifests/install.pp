@@ -182,7 +182,7 @@ class gitlab::install inherits ::gitlab {
   if $::gitlab::puppet_manage_packages {
     package {'curl':
       ensure => present,
-      before => Exec['download gitlab]',
+      before => Exec['download gitlab'],
     }
   }
   # Use curl to download gitlab
