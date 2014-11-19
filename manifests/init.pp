@@ -14,7 +14,7 @@
 # 
 # [*puppet_manage_packages*]
 #   default => true
-#   Includes packages.pp which installs postfix and openssh
+#   Includes packages.pp which installs curl, postfix and openssh
 #   Gitlab packages will be managed regardless if this parameter is true or false
 #
 # [*external_url*]
