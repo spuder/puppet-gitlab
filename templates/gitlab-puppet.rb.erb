@@ -94,8 +94,16 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 #
 # 5. Omnibus customization
 # ==========================
-<% if @redis_port       -%>redis['port'] = <%= @redis_port %>
-<% end %><% if @postgresql_port  -%>postgresql['port'] = <%= @postgresql_port %>
+gitlab_rails['postgres'] = <%= @postgresql_enable %>
+<% if @mysql_enable -%>
+gitlab_rails['db_adapter'] = 'mysql2'
+gitlab_rails['db_encoding'] = 'utf8'
+gitlab_rails['db_host'] = '<%= @mysql_host %>'
+gitlab_rails['db_port'] = '<%= @mysql_port %>'
+gitlab_rails['db_username'] = '<%= @mysql_username %>'
+gitlab_rails['db_password'] = '<%= @mysql_password %>'
+<% end -%><% if @redis_port      -%>redis['port'] = <%= @redis_port %>
+<% end -%><% if @postgresql_port -%>postgresql['port'] = <%= @postgresql_port %>
 <% end %><% if @unicorn_port     -%>unicorn['port'] = <%= @unicorn_port %>
 <% end %><% if @git_data_dir     -%>git_data_dir = '<%= @git_data_dir  %>'
 <% end %><% if @gitlab_username  -%>user['username'] = '<%= @gitlab_username  %>'

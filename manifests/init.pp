@@ -373,6 +373,34 @@
 # 5. Omnibus customization
 # ==========================
 #
+# [*postgresql_enable*]
+#     default => undef
+#     Set to false if using MySQL or if managing postgreSQL outside of Omnibus
+#
+# [*mysql_enable*]
+#     default => false
+#     For enterprise only, use MySQL instead of PostgreSQL
+#
+# [*mysql_host*]
+#     default => '127.0.0.1'
+#     MySQL hostname
+#     Example: 'mysql.example.com'
+#
+# [*mysql_port*]
+#     default => '3306
+#     For enterprise only, use MySQL instead of PostgreSQL
+#     Example: '3306'
+#
+# [*mysql_username*]
+#     default => 'git'
+#     The MySQL username
+#     Example: 'gitlab'
+#
+# [*mysql_password*]
+#     default => undef
+#     The MySQL password
+#     Example: 'secret_password'
+#
 # [*redis_port*]
 #     default => undef
 #     Deprecated in 7.3: Port redis runs on
@@ -693,6 +721,13 @@ class gitlab (
   # 5. Omnibus customization
   # ==========================
 
+  $postgresql_enable  = $::gitlab::params::postgresql_enable,
+  $mysql_enable       = $::gitlab::params::mysql_enable,
+  $mysql_host         = $::gitlab::params::mysql_host,
+  $mysql_port         = $::gitlab::params::mysql_port,
+  $mysql_username     = $::gitlab::params::mysql_username,
+  $mysql_password     = $::gitlab::params::mysql_password,
+
   $redis_port       = $::gitlab::params::redis_port,
   $postgresql_port  = $::gitlab::params::postgresql_port,
   $unicorn_port     = $::gitlab::params::unicorn_port,
@@ -771,10 +806,13 @@ class gitlab (
   # Verify parameters are valid for the release of gitlab
   if $gitlab_release != 'enterprise' {
     if $ldap_sync_ssh_keys {
-      fail("\$ldap_sync_ssh_keys is only available in enterprise edtition, gitlab_release is: \'${gitlab_release}\'")
+      fail("\$ldap_sync_ssh_keys is only available in enterprise edition, gitlab_release is: \'${gitlab_release}\'")
     }
     if $ldap_admin_group {
-      fail("\$ldap_admin_group is only available in enterprise edtition, gitlab_release is: \'${gitlab_release}\'")
+      fail("\$ldap_admin_group is only available in enterprise edition, gitlab_release is: \'${gitlab_release}\'")
+    }
+    if $mysql_enable {
+      fail("\$mysql_enable is only available in enterprise edition, gitlab_release is: \'${gitlab_release}\'")
     }
   }
 
@@ -826,6 +864,12 @@ class gitlab (
   }
   else {
     warning('Puppet is not creating gitlab backups, recommend setting $puppet_manage_backups => true')
+  }
+
+  if $mysql_enable {
+    if $postgresql_enable != false {
+      fail('postgresql_enable must be false if mysql_enable is true')
+    }
   }
 
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
