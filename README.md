@@ -298,10 +298,11 @@ class { 'gitlab' :
   # Disable postgresql and enable mysql
   postgresql_enable                 => false,
   mysql_enable                      => true,
-  mysql_host                        => '127.0.0.1',
-  mysql_port                        => '3306',
-  mysql_username                    => 'gitlab',
-  mysql_password                    => 'super_secret',
+  db_adapter                        => 'mysql2',
+  db_host                           => '127.0.0.1',
+  db_port                           => '3306',
+  db_username                       => 'gitlab',
+  db_password                       => 'super_secret',
 }
 ```
 
