@@ -136,6 +136,13 @@ class gitlab::params {
   #
   # 5. Omnibus customization
   # ==========================
+  $postgresql_enable  = undef # (default: true)
+  $mysql_enable       = false
+  $mysql_host         = '127.0.0.1'
+  $mysql_port         = '3306'
+  $mysql_username     = 'git'
+  $mysql_password     = undef
+
   $redis_port       = undef # (default: 6379)
   $postgresql_port  = undef # (default: 5432)
   $unicorn_port     = undef # (default: 8080)

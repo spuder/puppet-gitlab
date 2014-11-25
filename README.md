@@ -283,7 +283,27 @@ class { 'gitlab' :
 }
 ```
 
+Enterprise Omnibus packages supports MySQL and includes the `mysql2` gem. This
+module supports MySQL, but does not manage the installation and configuration
+of MySQL directly. The user is responsible for configuring MySQL and setting up
+the database and database user. Then pass the proper host, port, username, and
+password to this module to configure GitLab.
 
+```
+class { 'gitlab' :
+  gitlab_branch                     => '7.0.0',
+  gitlab_release                    => 'enterprise',
+  gitlab_download_link              => 'http://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
+
+  # Disable postgresql and enable mysql
+  postgresql_enable                 => false,
+  mysql_enable                      => true,
+  mysql_host                        => '127.0.0.1',
+  mysql_port                        => '3306',
+  mysql_username                    => 'gitlab',
+  mysql_password                    => 'super_secret',
+}
+```
 
 ## Upgrade
 

@@ -46,7 +46,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it 'we fail' do
-      expect { subject }.to raise_error(/ldap_sync_ssh_keys is only available in enterprise edtition, gitlab_release is/)
+      expect { subject }.to raise_error(/ldap_sync_ssh_keys is only available in enterprise edition, gitlab_release is/)
     end
   end
 
@@ -70,7 +70,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it 'we fail' do
-      expect { subject }.to raise_error(/ldap_sync_ssh_keys is only available in enterprise edtition, gitlab_release is/)
+      expect { subject }.to raise_error(/ldap_sync_ssh_keys is only available in enterprise edition, gitlab_release is/)
     end
   end
 
@@ -94,7 +94,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it 'we fail' do
-      expect { subject }.to raise_error(/ldap_admin_group is only available in enterprise edtition, gitlab_release is/)
+      expect { subject }.to raise_error(/ldap_admin_group is only available in enterprise edition, gitlab_release is/)
     end
   end
 
@@ -118,7 +118,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it 'we fail' do
-      expect { subject }.to raise_error(/ldap_admin_group is only available in enterprise edtition, gitlab_release is/)
+      expect { subject }.to raise_error(/ldap_admin_group is only available in enterprise edition, gitlab_release is/)
     end
   end
 
