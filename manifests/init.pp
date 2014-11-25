@@ -374,37 +374,60 @@
 # ==========================
 #
 # [*postgresql_enable*]
-#     default => undef
+#     default => true
 #     Set to false if using MySQL or if managing postgreSQL outside of Omnibus
 #
 # [*mysql_enable*]
 #     default => false
 #     For enterprise only, use MySQL instead of PostgreSQL
 #
-# [*mysql_host*]
-#     default => '127.0.0.1'
-#     MySQL hostname
-#     Example: 'mysql.example.com'
+# [*db_encoding*]
+#     default => undef
+#     The database encoding. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'unicode'
 #
-# [*mysql_port*]
-#     default => '3306
-#     For enterprise only, use MySQL instead of PostgreSQL
-#     Example: '3306'
+# [*db_database*]
+#     default => undef
+#     The database name. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'gitlabhq_production'
 #
-# [*mysql_username*]
+# [*db_pool*]
+#     default => 10
+#     The database pool size. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 20
+#
+# [*db_username*]
 #     default => 'git'
-#     The MySQL username
+#     The database username. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
 #     Example: 'gitlab'
 #
-# [*mysql_password*]
+# [*db_password*]
 #     default => undef
-#     The MySQL password
+#     The database password. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
 #     Example: 'secret_password'
 #
-# [*redis_port*]
+# [*db_host*]
 #     default => undef
-#     Deprecated in 7.3: Port redis runs on
-#     Example: 6379
+#     The database hostname. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: '127.0.0.1'
+#
+# [*db_socket*]
+#     default => undef
+#     Specify a database socket to use instead of a port. Only available if
+#     `postgresql_enable` is false or `mysql_enable` is true.
+#     Example: 'unix://path/to/db/socket.sock'
+#
+# [*db_port*]
+#     default => undef
+#     The database port. This value must be set to match `postgresql_port` if
+#     that value is changed,
+#     Example: 5432
 #
 # [*postgresql_port*]
 #     default => undef
@@ -723,10 +746,15 @@ class gitlab (
 
   $postgresql_enable  = $::gitlab::params::postgresql_enable,
   $mysql_enable       = $::gitlab::params::mysql_enable,
-  $mysql_host         = $::gitlab::params::mysql_host,
-  $mysql_port         = $::gitlab::params::mysql_port,
-  $mysql_username     = $::gitlab::params::mysql_username,
-  $mysql_password     = $::gitlab::params::mysql_password,
+  $db_adapter         = $::gitlab::params::db_adapter,
+  $db_encoding        = $::gitlab::params::db_encoding,
+  $db_database        = $::gitlab::params::db_database,
+  $db_username        = $::gitlab::params::db_username,
+  $db_password        = $::gitlab::params::db_password,
+  $db_pool            = $::gitlab::params::db_pool,
+  $db_host            = $::gitlab::params::db_host,
+  $db_port            = $::gitlab::params::db_port,
+  $db_socket          = $::gitlab::params::db_socket,
 
   $redis_port       = $::gitlab::params::redis_port,
   $postgresql_port  = $::gitlab::params::postgresql_port,
@@ -870,6 +898,19 @@ class gitlab (
     if $postgresql_enable != false {
       fail('postgresql_enable must be false if mysql_enable is true')
     }
+    if $db_adapter != 'mysql2' {
+      fail('db_adapter must be mysql2 if mysql_enable is true')
+    }
+  }
+
+  if ($db_adapter or $db_encoding or $db_database or $db_pool or $db_username
+    or $db_password or $db_host or $db_socket)
+    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
+    fail('db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+  }
+
+  if $postgresql_port and !$db_port {
+    fail('if postgresql_port is specified, db_port must match')
   }
 
   # Ensure high_availability_mountpoint is only used with gitlab > 7.2.x
