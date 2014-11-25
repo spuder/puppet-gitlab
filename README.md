@@ -321,7 +321,6 @@ To upgrade:
 1. Does not manage the firewall, run `lokkit -s https -s ssh` or edit iptables. 
 2. When attempting to autodownload, assumes that the release number is always 1 in the file name. eg. `gitlab_7.0.0-omnibus-1_amd64.deb`
 3. Omniauth and enterprise are not tested. Please submit a github issue if problems are found.
-4. Only supports omnibus provided nginx and postgres services. Apache and MySQL are not available. 
 
 #### Contact  
 twitter => [@spencer450](https://twitter.com/spencer450)   
