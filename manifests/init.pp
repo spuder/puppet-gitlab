@@ -805,6 +805,20 @@ class gitlab (
 
   $high_availability_mountpoint = $::gitlab::params::high_availability_mountpoint,
 
+  #
+  # 6. GitLab CI customization
+  # ==========================
+
+  $ci_external_url         = $::gitlab::params::ci_external_url,
+  $gitlab_ci_email_from    = $::gitlab::params::gitlab_ci_email_from,
+  $gitlab_ci_support_email = $::gitlab::params::gitlab_ci_support_email,
+  $gitlab_server_urls      = $::gitlab::params::gitlab_server_urls,
+
+  $ci_redirect_http_to_https = $::gitlab::params::ci_redirect_http_to_https,
+  $ci_ssl_certificate        = $::gitlab::params::ci_ssl_certificate,
+  $ci_ssl_certificate_key    = $::gitlab::params::ci_ssl_certificate_key,
+  $ci_listen_addresses       = $::gitlab::params::ci_listen_addresses,
+
   ) inherits gitlab::params {
 
   # Verify required parameters are provided. 
