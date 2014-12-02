@@ -74,7 +74,7 @@ Additional Gitlab enterprise specific download information is covered later in t
 If for whatever reason you don't want puppet to download the omnibus package automatically, 
 you could manually place it in `/var/tmp` instead. 
 
-```
+```puppet
 $ ls /var/tmp
 /var/tmp/gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
 /var/tmp/gitlab_7.0.0-omnibus-1_amd64.deb
@@ -99,7 +99,7 @@ $ ls /var/tmp
 
 BareBones (not recomended)
 
-```
+```puppet
 class { 'gitlab' : 
   puppet_manage_config   => false,
   gitlab_branch          => '7.0.0',
@@ -109,7 +109,7 @@ class { 'gitlab' :
 
 Basic Example with https
 
-```
+```puppet
 class { 'gitlab' : 
   puppet_manage_config   => true,
   puppet_manage_backups  => true,
@@ -126,7 +126,7 @@ class { 'gitlab' :
 
 
 Ldap with Active Directory
-```
+```puppet
 class { 'gitlab' : 
     puppet_manage_config              => true,
     puppet_manage_backups             => true,
@@ -151,7 +151,7 @@ class { 'gitlab' :
 ```
 
 Ldap with Active Directory (Gitlab >=7.4)
-```
+```puppet
 # Gitlab 7.4 introduced a new ldap_servers parameter
 # It combines all ldap settings into one json string, and also supports multiple ldap servers. 
 # Both the old and syntax will continue to work. If using both simultainously, gitlab will prefer the older syntax. 
@@ -206,7 +206,7 @@ class { 'gitlab' :
 
 
 Manage packages, backups and config file manually
-```
+```puppet
 class { 'gitlab' : 
   puppet_manage_config   => false,
   puppet_manage_backups  => false,
@@ -226,7 +226,7 @@ The parameters above are typically placed inside a wrapper puppet module, or ins
 You can alternativly put the parameters inside hiera. This has the advantage of keeping your wrapper puppet module (or nodes.pp file) clean, and also keeps things like passwords outside of version control. 
 
 gitlab.example.com.yaml
-```
+```YAML
 ---
   gitlab::puppet_manage_config:   true
   gitlab::puppet_manage_backups:  true
@@ -247,7 +247,7 @@ gitlab.example.com.yaml
 This puppet module manages the `/etc/gitlab/gitlab.rb` file and leverages omnibus to apply the configuration. Nearly all of the config options are available as puppet class parameters. 
   
 If you would rather manage `/etc/gitlab/gitlab.rb` manually, set `$puppet_manage_config` to false
-```
+```puppet
 class { 'gitlab' :
   gitlab_branch           => '7.0.0',
   external_url            => 'http://foo.bar',
@@ -268,7 +268,7 @@ This puppet module supports gitlab enterprise installations. There are several p
 
 **Example**  
 
-```
+```puppet
 class { 'gitlab' : 
   gitlab_branch        => '7.0.0',
   gitlab_release       => 'enterprise',
@@ -289,7 +289,7 @@ of MySQL directly. The user is responsible for configuring MySQL and setting up
 the database and database user. Then pass the proper host, port, username, and
 password to this module to configure GitLab.
 
-```
+```puppet
 class { 'gitlab' :
   gitlab_branch                     => '7.0.0',
   gitlab_release                    => 'enterprise',
@@ -332,7 +332,7 @@ irc     => spuder
 ## Parameters Continued
 
 
-```
+```puppet
 # === Parameters
 #
 # [*puppet_manage_config*]
