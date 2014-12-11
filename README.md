@@ -258,7 +258,40 @@ class { 'gitlab' :
 
 [Manage /etc/gitlab/gitlab.rb manually](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md)
 
+## Custom Hooks
 
+As of GitLab 7.5 and GitLab Shell 2.1.0, users can create custom `pre-receive`, `post-receive` and `update` hooks
+on the filesystem for each project. These hooks act just as normal server-side git hooks but are configured in
+a little different way by placing the file in `custom_hooks` instead of `hooks`.
+
+This module supports managing these custom hooks through a defined-type. A hook of each type (`pre-receive`,
+`post-receive` and `update`) can be created for each project in GitLab. See
+[GitLab Custom Hook documentation](https://github.com/gitlabhq/gitlabhq/blob/master/doc/hooks/custom_hooks.md)
+for more information.
+
+Pass the script contents as a string
+
+```puppet
+gitlab::custom_hook { 'project1_custom_hook':
+  namespace             => 'group1',
+  project               => 'my_project',
+  type                  => 'post-receive',
+  content               => "#!/bin/bash
+
+echo 'This is a post-receive hook!'",
+}
+```
+
+Pass a file as a source
+
+```puppet
+gitlab::custom_hook { 'project1_custom_hook':
+  namespace             => 'group1',
+  project               => 'my_project',
+  type                  => 'post-receive',
+  source                => 'puppet:///modules/my_module/post-receive',
+}
+```
 
 ###Enterprise
 
