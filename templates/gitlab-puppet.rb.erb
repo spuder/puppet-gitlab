@@ -157,3 +157,18 @@ gitlab_rails['smtp_enable_starttls_auto'] = <%= @smtp_enable_starttls_auto %>
 <% end -%>
 <% if defined?(@high_availability_mountpoint) -%>high_availability['mountpoint'] = '<%= @high_availability_mountpoint %>'
 <% end %>
+#
+# 6. GitLab CI customization
+# ==========================
+<% if @ci_external_url -%>ci_external_url '<%= @ci_external_url %>'
+<% end %><% if @gitlab_ci_email_from -%>gitlab_ci['gitlab_ci_email_from'] = '<%= @gitlab_ci_email_from %>'
+<% end %><% if @gitlab_ci_support_email -%>gitlab_ci['gitlab_ci_support_email'] = '<%= @gitlab_ci_support_email %>'
+<% end %><% if @gitlab_server_urls -%>
+gitlab_ci['gitlab_server_urls'] = ["<%= @gitlab_server_urls.join('","') %>"]
+<% end %><% if @ci_redirect_http_to_https == true -%>
+ci_nginx['redirect_http_to_https'] = <%= @ci_redirect_http_to_https %>
+ci_nginx['ssl_certificate'] = '<%= @ci_ssl_certificate -%>'
+ci_nginx['ssl_certificate_key'] = '<%= @ci_ssl_certificate_key %>'
+<% end -%><% if @ci_listen_addresses -%>
+ci_nginx['listen_addresses'] = ["<%= @ci_listen_addresses.join('","') %>"]
+<% end %>

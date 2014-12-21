@@ -199,4 +199,16 @@ class gitlab::params {
 
   $high_availability_mountpoint = undef # Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 
+  #
+  # 6. GitLab CI customization
+  # ==========================
+  $ci_external_url         = undef
+  $gitlab_ci_email_from    = undef
+  $gitlab_ci_support_email = undef
+  $gitlab_server_urls      = undef
+
+  $ci_redirect_http_to_https = undef
+  $ci_ssl_certificate        = undef
+  $ci_ssl_certificate_key    = undef
+  $ci_listen_addresses       = undef
 }
