@@ -179,12 +179,6 @@ class gitlab::install inherits ::gitlab {
   validate_string($download_location)
   info("omnibus_filename is \'${omnibus_filename}\'")
 
-  if $::gitlab::puppet_manage_packages {
-    package {'curl':
-      ensure => present,
-      before => Exec['download gitlab'],
-    }
-  }
   # Use curl to download gitlab
   exec { 'download gitlab':
     command => "/usr/bin/curl -o ${download_location}/${omnibus_filename} ${gitlab_url}",

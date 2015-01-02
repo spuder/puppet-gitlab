@@ -74,6 +74,9 @@ class gitlab::packages inherits ::gitlab {
   package { $mail_application:
     ensure => latest,
   }
+  package {'curl':
+    ensure => present,
+  }
   service { $mail_application:
     ensure  => running,
     require => Package['openssh-server'],
