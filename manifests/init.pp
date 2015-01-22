@@ -114,6 +114,12 @@
 #    Project visibility ['public' | 'internal' | 'private'] (gitlab default: 'private')
 #    Example: false
 #
+# [*webhook_timeout*]
+#   default => undef
+#   Number of seconds to wait for HTTP response after sending webhook HTTP POST
+#   request (default: 10)
+#   Example: 10
+#
 # [*issues_tracker_redmine*]
 #    default => undef
 #    Integrate with redmine issue tracker (gitlab default: false)
@@ -664,6 +670,8 @@ class gitlab (
   $gitlab_default_projects_features_wiki             = $::gitlab::params::gitlab_default_projects_features_wiki,
   $gitlab_default_projects_features_snippets         = $::gitlab::params::gitlab_default_projects_features_snippets,
   $gitlab_default_projects_features_visibility_level = $::gitlab::params::gitlab_default_projects_features_visibility_level,
+
+  $webhook_timeout = $::gitlab::params::webhook_timeout,
 
   $issues_tracker_redmine               = $::gitlab::params::issues_tracker_redmine,
   $issues_tracker_redmine_title         = $::gitlab::params::issues_tracker_redmine_title,

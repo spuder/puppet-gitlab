@@ -51,6 +51,8 @@ class gitlab::params {
   $gitlab_default_projects_features_snippets         = undef # Like github 'gits' (default: true)
   $gitlab_default_projects_features_visibility_level = undef # Project visibility ['public' | 'internal' | 'private'] (default: 'private')
 
+  $webhook_timeout = undef # Number of seconds to wait for HTTP response after sending webhook HTTP POST request (default: 10)
+
   $issues_tracker_redmine               = undef # Integrate with redmine issue tracker (default: false)
   $issues_tracker_redmine_title         = undef # 'title'
   $issues_tracker_redmine_project_url   = undef # 'http://foo/bar'

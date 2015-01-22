@@ -477,6 +477,12 @@ irc     => spuder
 #    Project visibility ['public' | 'internal' | 'private'] (gitlab default: 'private')
 #    Example: false
 #
+# [*webhook_timeout*]
+#   default => undef
+#   Number of seconds to wait for HTTP response after sending webhook HTTP POST
+#   request (default: 10)
+#   Example: 10
+#
 # [*issues_tracker_redmine*]
 #    default => undef
 #    Integrate with redmine issue tracker (gitlab default: false)

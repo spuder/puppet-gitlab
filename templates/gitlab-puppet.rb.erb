@@ -19,6 +19,7 @@
 <% end %><% if defined?(@gitlab_default_projects_features_wiki) -%>gitlab_rails['gitlab_default_projects_features_wiki'] = <%= @gitlab_default_projects_features_wiki %>
 <% end %><% if defined?(@gitlab_default_projects_features_snippets) -%>gitlab_rails['gitlab_default_projects_features_snippets'] = <%= @gitlab_default_projects_features_snippets %>
 <% end %><% if @gitlab_default_projects_features_visibility_level -%>gitlab_rails['gitlab_default_projects_features_visibility_level'] = '<%= @gitlab_default_projects_features_visibility_level %>'
+<% end %><% if defined?(@webhook_timeout) -%>gitlab_rails['webhook_timeout'] = <%= @webhook_timeout %>
 <% end %><% if @issues_tracker_redmine == true %>
 gitlab_rails['issues_tracker_redmine'] = <%= @issues_tracker_redmine %>
 gitlab_rails['issues_tracker_redmine_title'] = '<%= @issues_tracker_redmine_title %>'
