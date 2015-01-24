@@ -203,7 +203,7 @@ describe 'gitlab', :type => 'class' do
       }
     }
     it do
-      expect { subject }.to raise_error(/Only CentOS 6 and 7 are presently supported, found:/)
+      expect { subject }.to raise_error(/Only CentOS\/OracleLinux 6 and 7 are presently supported, found:/)
     end
   end
 

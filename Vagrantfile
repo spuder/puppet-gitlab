@@ -46,6 +46,10 @@ Vagrant.configure("2") do |config|
     debianbox.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/debian-73-x64-virtualbox-puppet.box"
   end
 
-
+  # Oracle Linux 6.5
+  config.vm.define "oraclelinux6", autostart: false do |oraclelinuxbox|
+    oraclelinuxbox.vm.box = "oraclelinux-6_5-x64-virtualbox_4_3-plain"
+    oraclelinuxbox.vm.box_url = "https://storage.us2.oraclecloud.com/v1/istoilis-istoilis/vagrant/oel65-64.box"
+  end
   
 end

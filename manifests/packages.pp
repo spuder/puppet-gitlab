@@ -21,7 +21,7 @@ class gitlab::packages inherits ::gitlab {
   # The install documentation recommends different mail apps for different releases
   # https://about.gitlab.com/downloads/
   case $::operatingsystem {
-    'CentOS': {
+    'CentOS', 'OracleLinux': {
       $mail_application = 'postfix'
       $ssh_service_name = 'sshd'
       
@@ -49,7 +49,7 @@ class gitlab::packages inherits ::gitlab {
             }
         }
         default: {
-          fail("Only CentOS 6 and 7 are presently supported, found: ${::osfamily}-${::operatingsystem}-${::operatingsystemrelease} ")
+          fail("Only CentOS/OracleLinux 6 and 7 are presently supported, found: ${::osfamily}-${::operatingsystem}-${::operatingsystemrelease} ")
         }
       }
     }
@@ -64,7 +64,7 @@ class gitlab::packages inherits ::gitlab {
 
     }
     default: {
-      fail("Only CentOS, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
+      fail("Only CentOS/OracleLinux, Ubuntu and Debian presently supported, found \'${::osfamily}\':\'${::operatingsystem}\'-\'${::operatingsystemrelease}\' ")
     }
   }
 
