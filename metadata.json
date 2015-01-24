@@ -33,7 +33,15 @@
             "operatingsystemrelease": [
                 "7"
             ]
+        },
+        {
+            "operatingsystem": "OracleLinux",
+            "operatingsystemrelease": [
+                "6.5",
+                "7"
+            ]
         }
+
     ]
 
 }
