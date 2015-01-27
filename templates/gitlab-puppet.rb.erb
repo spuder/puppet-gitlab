@@ -178,7 +178,7 @@ gitlab_ci['gitlab_server'] = <%= @gitlab_server %>
 <% end %><% if @ci_db_socket -%>gitlab_ci['db_socket'] = <%= @ci_mysql_socket %>
 <% end %><% if @ci_db_port -%>gitlab_ci['db_port'] = '<%= @ci_db_port %>'
 <% end -%>
-<% if @ci_redirect_http_to_https == true -%>
+<% end %><% if @ci_redirect_http_to_https == true -%>
 ci_nginx['redirect_http_to_https'] = <%= @ci_redirect_http_to_https %>
 ci_nginx['ssl_certificate'] = '<%= @ci_ssl_certificate -%>'
 ci_nginx['ssl_certificate_key'] = '<%= @ci_ssl_certificate_key %>'
