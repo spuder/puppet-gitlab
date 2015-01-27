@@ -616,6 +616,58 @@
 #     Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 #     Example: '/tmp'
 #
+# 6. CI customization
+# ==========================
+#
+# [*ci_db_encoding*]
+#     default => undef
+#     The database encoding. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'unicode'
+#
+# [*ci_db_database*]
+#     default => undef
+#     The database name. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'gitlabci_production'
+#
+# [*ci_db_pool*]
+#     default => 10
+#     The database pool size. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 20
+#
+# [*ci_db_username*]
+#     default => 'git'
+#     The database username. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'gitlab_ci'
+#
+# [*ci_db_password*]
+#     default => undef
+#     The database password. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: 'secret_password'
+#
+# [*ci_db_host*]
+#     default => undef
+#     The database hostname. Only available if `postgresql_enable` is false
+#     or `mysql_enable` is true.
+#     Example: '127.0.0.1'
+#
+# [*ci_db_socket*]
+#     default => undef
+#     Specify a database socket to use instead of a port. Only available if
+#     `postgresql_enable` is false or `mysql_enable` is true.
+#     Example: 'unix://path/to/db/socket.sock'
+#
+# [*ci_db_port*]
+#     default => undef
+#     The database port. This value must be set to match `postgresql_port` if
+#     that value is changed,
+#     Example: 5432
+#
+#
 # === Examples
 #
 # Basic Example with https
@@ -820,12 +872,22 @@ class gitlab (
   $ci_external_url         = $::gitlab::params::ci_external_url,
   $gitlab_ci_email_from    = $::gitlab::params::gitlab_ci_email_from,
   $gitlab_ci_support_email = $::gitlab::params::gitlab_ci_support_email,
-  $gitlab_server_urls      = $::gitlab::params::gitlab_server_urls,
+  $gitlab_server           = $::gitlab::params::gitlab_server,
 
   $ci_redirect_http_to_https = $::gitlab::params::ci_redirect_http_to_https,
   $ci_ssl_certificate        = $::gitlab::params::ci_ssl_certificate,
   $ci_ssl_certificate_key    = $::gitlab::params::ci_ssl_certificate_key,
   $ci_listen_addresses       = $::gitlab::params::ci_listen_addresses,
+
+  $ci_db_adapter         = $::gitlab::params::ci_db_adapter,
+  $ci_db_encoding        = $::gitlab::params::ci_db_encoding,
+  $ci_db_database        = $::gitlab::params::ci_db_database,
+  $ci_db_username        = $::gitlab::params::ci_db_username,
+  $ci_db_password        = $::gitlab::params::ci_db_password,
+  $ci_db_pool            = $::gitlab::params::ci_db_pool,
+  $ci_db_host            = $::gitlab::params::ci_db_host,
+  $ci_db_port            = $::gitlab::params::ci_db_port,
+  $ci_db_socket          = $::gitlab::params::ci_db_socket,
 
   ) inherits gitlab::params {
 
@@ -929,6 +991,12 @@ class gitlab (
     or $db_password or $db_host or $db_socket)
     and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
     fail('db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+  }
+
+  if ($ci_db_adapter or $ci_db_encoding or $ci_db_database or $ci_db_pool or $ci_db_username
+    or $ci_db_password or $ci_db_host or $ci_db_socket)
+    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
+    fail('ci_db_adapter, ci_db_encoding, ci_db_database, ci_db_pool, ci_db_username, ci_db_password, ci_db_host, and ci_db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
   }
 
   if $postgresql_port and !$db_port {
