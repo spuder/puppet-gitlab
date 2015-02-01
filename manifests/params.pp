@@ -207,10 +207,20 @@ class gitlab::params {
   $ci_external_url         = undef
   $gitlab_ci_email_from    = undef
   $gitlab_ci_support_email = undef
-  $gitlab_server_urls      = undef
+  $gitlab_server           = undef
 
   $ci_redirect_http_to_https = undef
   $ci_ssl_certificate        = undef
   $ci_ssl_certificate_key    = undef
   $ci_listen_addresses       = undef
+
+  $ci_db_adapter         = undef # (default: 'postgresql')
+  $ci_db_encoding        = undef # (default: 'unicode')
+  $ci_db_database        = undef # (default: 'gitlab_ci_production')
+  $ci_db_pool            = undef # (default: 10)
+  $ci_db_username        = undef # (default: 'gitlab_ci')
+  $ci_db_password        = undef # (default: nil)
+  $ci_db_host            = undef # (default: nil)
+  $ci_db_port            = undef # (default: 5432)
+  $ci_db_socket          = undef # (default: nil)
 }

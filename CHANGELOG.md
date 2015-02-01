@@ -4,6 +4,7 @@
 - Changes wget to curl (issue #102, thanks fvoges)
 - Adds support for mysql backend (issue #105, thanks dblessing)
 - Adds defined type for gitlab webhooks (issue #107, thanks dblessing)
+- Changes gitlab_server_url paramter to gitlab_server (issue #111, thanks dblessing)
 
 2014-Oct-31: 2.3.5
 - Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
