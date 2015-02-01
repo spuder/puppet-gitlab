@@ -35,9 +35,10 @@ class gitlab::install inherits ::gitlab {
   # Set variables to make it easy to define $gitlab_url 
   case $::osfamily {
     'Debian': {
-      $omnibus_release = 'omnibus-1_amd64.deb'
-      $url_separator   = '_' #some urls are gitlab-7.0.0 others gitlab_7.0.0
-      $package_manager = 'dpkg'
+      $omnibus_release           = 'omnibus-1_amd64.deb'
+      $url_separator             = '_' #some urls are gitlab-7.0.0 others gitlab_7.0.0
+      $package_manager           = 'dpkg'
+      $operatingsystem_lowercase = downcase($::operatingsystem)
 
         case $::gitlab::gitlab_release {
           'basic' : {
@@ -86,9 +87,10 @@ class gitlab::install inherits ::gitlab {
       info("RedHat major version is ${cent_maj_version}")
 
       # The default rpm name if user doesn't specify $gitlab_download_link
-      $omnibus_release = "omnibus-1.el${cent_maj_version}.x86_64.rpm"
-      $url_separator   = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
-      $package_manager = 'rpm'
+      $omnibus_release           = "omnibus-1.el${cent_maj_version}.x86_64.rpm"
+      $url_separator             = '-' #some urls are gitlab-7.0.0 others gitlab_7.0.0
+      $package_manager           = 'rpm'
+      $operatingsystem_lowercase = 'centos'
 
         case $::gitlab::gitlab_release {
           'basic' : {
@@ -133,8 +135,6 @@ class gitlab::install inherits ::gitlab {
         # User did not set $gitlab_release, assume basic
         warning("\$gitlab_release is undefined, yet \$gitlab_download_link is set, assuming gitlab basic")
         info("\$Downloading ${::gitlab::gitlab_release} from user specified url: ${::gitlab::gitlab_download_link}")
-        # $operatingsystem_lowercase = downcase($::operatingsystem)
-        $operatingsystem_lowercase=downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
       }
       'basic' : {
@@ -160,7 +160,6 @@ class gitlab::install inherits ::gitlab {
         # Basic version, use default derived url. This is the most common configuration
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
         # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
-        $operatingsystem_lowercase = downcase($::operatingsystem)
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
       }

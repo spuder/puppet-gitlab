@@ -36,7 +36,8 @@ Supported Operating Systems:
 - Debian 7.5
 - Ubuntu 12.04
 - Ubuntu 14.04
-
+- Oracle Linux 6.5
+- Oracle Linux 7
 
 ##Usage
 
