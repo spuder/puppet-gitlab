@@ -1,18 +1,21 @@
 Pull requests of all kinds are encouraged
 
-Please try and keep 1 commit / issue per merge request. Here is [an example commit](Here is an [example commit](https://github.com/spuder/puppet-gitlab/commit/c4fafbfe4058bf5d346a744dfbd1a9eed9791e88) which adds a new paramter to all relevant files.) to add a new parameter. 
+Please try and keep 1 commit / issue per merge request. Here is [an example commit](https://github.com/spuder/puppet-gitlab/commit/c4fafbfe4058bf5d346a744dfbd1a9eed9791e88) to add a new parameter. 
 
 Checkout the [README.md](https://github.com/spuder/puppet-gitlab/blob/master/README.md) for instrutions on spinning up a test vm in Vagrant. 
 
 ## Average Joe Pull Request Procedure:
 
 - Fork project
+- Write test
 - Write code
 - Test code
 
-    puppet parser validate foo.pp  
-    gem install puppet-lint  
-    puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
+```bash
+puppet parser validate foo.pp  
+gem install puppet-lint  
+puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
+```
 
 - Create merge request
 
@@ -27,10 +30,11 @@ Checkout the [README.md](https://github.com/spuder/puppet-gitlab/blob/master/REA
 - Quick tests
 
 
-    puppet parser validate foo.pp  
-    gem install puppet-lint  
-    puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
-
+```bash
+puppet parser validate foo.pp  
+gem install puppet-lint  
+puppet-lint --no-80chars-check --no-class_inherits_from_params_class-check --no-autoloader_layout-check manifests/*.pp 
+```
 
 - Add spec tests to `spec/classes/gitlab_spec.rb` 
 Additional information [can be found here](http://puppetlabs.com/blog/the-next-generation-of-puppet-module-testing)
@@ -39,10 +43,12 @@ Additional information [can be found here](http://puppetlabs.com/blog/the-next-g
     
 - Run rake tests
 
-    export PUPPET_VERSION=$(facter puppetversion)
-    export FACTER_VERSION=$(facter facterversion)
-    export STRICT_VARIABLES=yes
-    rake spec
+```bash
+export PUPPET_VERSION=$(facter puppetversion)
+export FACTER_VERSION=$(facter facterversion)
+export STRICT_VARIABLES=yes
+rake spec
+```
 
 - If tests pass, create merge request
 
