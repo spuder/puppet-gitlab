@@ -1,47 +1,49 @@
 {
-    "name": "spuder-gitlab",
-    "version": "2.3.5",
-    "summary": "Installs and configures gitlab 7 using omnibus installer",
-    "author": "Spencer Owen",
-    "dependencies": [ { "name": "puppetlabs/stdlib", "version_requirement": ">=3.0.0" } ],
-    "source": "https://github.com/spuder/puppet-gitlab",
-    "project_page": "https://github.com/spuder/puppet-gitlab/blob/master/README.md",
-    "license": "GPLv3",
-    "requirements": [
-        {
-            "name": "puppet",
-            "version_requirement": "3.x"
-        }
-    ],
-    "operatingsystem_support": [
-        {
-            "operatingsystem": "RedHat",
-            "operatingsystemrelease": [
-                "6",
-                "7"
-            ]
-        },
-        {
-            "operatingsystem": "Ubuntu",
-            "operatingsystemrelease": [
-                "12.04",
-                "14.04"
-            ]
-        },
-        {
-            "operatingsystem": "Debian",
-            "operatingsystemrelease": [
-                "7"
-            ]
-        },
-        {
-            "operatingsystem": "OracleLinux",
-            "operatingsystemrelease": [
-                "6.5",
-                "7"
-            ]
-        }
-
-    ]
-
+  "name": "spuder-gitlab",
+  "version": "2.3.5",
+  "author": "Spencer Owen",
+  "summary": "Installs and configures gitlab 7 using omnibus installer",
+  "license": "GPLv3",
+  "source": "https://github.com/spuder/puppet-gitlab",
+  "project_page": "https://github.com/spuder/puppet-gitlab/blob/master/README.md",
+  "issues_url": "https://github.com/spuder/puppet-gitlab/issues",
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6.5",
+        "7"
+      ]
+    }
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">=3.0.0"},
+    {"name":"maestrodev/wget","version_requirement":">=1.1.0"}
+  ]
 }
