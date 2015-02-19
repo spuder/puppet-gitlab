@@ -6,6 +6,7 @@
 - Adds defined type for gitlab webhooks (issue #107, thanks dblessing)
 - Changes gitlab_server_url paramter to gitlab_server (issue #111, thanks dblessing)
 - Adds support for Oracle Linux (issue #113, thanks hjjacobs)
+- Silences backups (issue #118, thanks webratz)
 
 2014-Oct-31: 2.3.5
 - Adds new ldap_server parameter. More information in tests/active_directory.pp and the following links:
