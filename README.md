@@ -419,6 +419,11 @@ irc     => spuder
 #    How many projects a user can create
 #    Example: 42
 #
+# [*gitlab_time_zone*]
+#    default => undef
+#    What timezone to use
+#    Example: 'Asia/Vladivostok'
+#
 # [*gitlab_default_can_create_group*]
 #    default => undef
 #    Allow users to make own groups, (gitlab default: true)

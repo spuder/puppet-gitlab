@@ -37,6 +37,7 @@ class gitlab::params {
   # ==========================
   $gitlab_email_from                   = undef # 'gitlab@example.com'
   $gitlab_default_projects_limit       = undef # How many projects a user can create (default: 10)
+  $gitlab_time_zone                    = undef # What timezone to use (default: UTC)
   $gitlab_default_can_create_group     = undef # Allow users to make own groups (default: true)
   $gitlab_username_changing_enabled    = undef # Allow users to change own username, not suggested if running ldap
   $gitlab_default_theme                = undef # Color Theme - 1=Basic, 2=Mars, 3=Modern, 4=Gray, 5=Color (default: 2)
