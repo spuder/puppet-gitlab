@@ -709,6 +709,7 @@ class gitlab (
 
   $gitlab_email_from                   = $::gitlab::params::gitlab_email_from,
   $gitlab_default_projects_limit       = $::gitlab::params::gitlab_default_projects_limit,
+  $gitlab_time_zone                    = $::gitlab::params::gitlab_time_zone,
   $gitlab_default_can_create_group     = $::gitlab::params::gitlab_default_can_create_group,
   $gitlab_username_changing_enabled    = $::gitlab::params::gitlab_username_changing_enabled,
   $gitlab_default_theme                = $::gitlab::params::gitlab_default_theme,
