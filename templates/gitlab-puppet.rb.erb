@@ -7,6 +7,7 @@
 <% if @external_url -%>external_url '<%= @external_url %>'
 <% end %><% if @gitlab_email_from -%>gitlab_rails['gitlab_email_from'] = '<%= @gitlab_email_from %>'
 <% end %><% if @gitlab_default_projects_limit -%>gitlab_rails['gitlab_default_projects_limit'] = <%= @gitlab_default_projects_limit %>
+<% end %><% if @gitlab_time_zone -%>gitlab_rails['time_zone'] = '<%= @gitlab_time_zone %>'
 <% end %><% if defined?(@gitlab_default_can_create_group) -%>gitlab_rails['gitlab_default_can_create_group'] = <%= @gitlab_default_can_create_group %>
 <% end %><% if defined?(@gitlab_username_changing_enabled) -%>gitlab_rails['gitlab_username_changing_enabled'] = <%= @gitlab_username_changing_enabled %>
 <% end %><% if @gitlab_default_theme -%>gitlab_rails['gitlab_default_theme'] = <%= @gitlab_default_theme %>
