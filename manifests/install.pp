@@ -22,6 +22,8 @@
 #
 class gitlab::install inherits ::gitlab {
 
+  require wget
+
   # Sets the download url. Examples for gitlab basic
   # https://downloads-packages.s3.amazonaws.com/centos-6.5/gitlab-7.0.0_omnibus-1.el6.x86_64.rpm
   # https://downloads-packages.s3.amazonaws.com/debian-7.5/gitlab_7.0.0-omnibus-1_amd64.deb
@@ -178,9 +180,6 @@ class gitlab::install inherits ::gitlab {
   validate_string($download_location)
   info("omnibus_filename is \'${omnibus_filename}\'")
 
-  package {'wget':
-    ensure  => present,
-  }
   # Use wget to download gitlab
   exec { 'download gitlab':
     command => "/usr/bin/wget ${gitlab_url}",
@@ -188,7 +187,6 @@ class gitlab::install inherits ::gitlab {
     cwd     => $download_location,
     creates => "${download_location}/${omnibus_filename}",
     timeout => 1800,
-    require => Package['wget'],
   }
   # Install gitlab with the appropriate package manager (rpm or dpkg)
   package { 'gitlab':
