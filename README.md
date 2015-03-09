@@ -234,7 +234,7 @@ gitlab.example.com.yaml
   gitlab::puppet_manage_packages: true
   gitlab::gitlab_branch: 7.2.0
   gitlab::gitlab_release: basic
-  gitlab::external_url: gitlab.example.com
+  gitlab::external_url: 'http://gitlab.example.com'
   gitlab::ldap_enabled: true
   gitlab::ldap_password: correct-horse-battery-staple
 ```
