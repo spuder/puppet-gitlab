@@ -35,7 +35,7 @@ class gitlab::install inherits ::gitlab {
   # Set variables to make it easy to define $gitlab_url 
   case $::osfamily {
     'Debian': {
-      $omnibus_release           = 'omnibus-1_amd64.deb'
+      $omnibus_release           = 'omnibus.1-1_amd64.deb'
       $url_separator             = '_' #some urls are gitlab-7.0.0 others gitlab_7.0.0
       $package_manager           = 'dpkg'
       $operatingsystem_lowercase = downcase($::operatingsystem)
