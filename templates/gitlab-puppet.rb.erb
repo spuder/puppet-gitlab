@@ -141,8 +141,8 @@ gitlab_rails['aws_region'] = '<%= @aws_region %>'
 gitlab_rails['smtp_enable'] = <%= @smtp_enable %>
 gitlab_rails['smtp_address'] = '<%= @smtp_address %>'
 gitlab_rails['smtp_port'] = <%= @smtp_port %>
-gitlab_rails['smtp_user_name'] = '<%= @smtp_user_name %>'
-gitlab_rails['smtp_password'] = '<%= @smtp_password %>'
+gitlab_rails['smtp_user_name'] = <% if @smtp_user_name %>'<%= @smtp_user_name %>'<% else %>nil<% end %>
+gitlab_rails['smtp_password'] = <% if @smtp_password %>'<%= @smtp_password %>'<% else %>nil<% end %>
 gitlab_rails['smtp_domain'] = '<%= @smtp_domain %>'
 gitlab_rails['smtp_authentication'] = '<%= @smtp_authentication %>'
 gitlab_rails['smtp_enable_starttls_auto'] = <%= @smtp_enable_starttls_auto %>
