@@ -4,7 +4,7 @@ describe 'gitlab', :type => 'class' do
 
 # Verify Using puppet 3.0 or greater
   context 'when puppet version < 3.0' do
-    let(:params) { 
+    let(:params) {
       {
         :external_url  => 'http://gitlab.example.com',
         :gitlab_branch => '7.0.0'
@@ -24,9 +24,9 @@ describe 'gitlab', :type => 'class' do
 
 # Verify $external_url contains http:// or https://
   context 'when external_url contains no http:// or https://' do
-    let(:params) { 
+    let(:params) {
       {
-        :external_url  => 'gitlab.example.com', 
+        :external_url  => 'gitlab.example.com',
         :gitlab_branch => '7.2.0'
       }
     }
@@ -43,6 +43,55 @@ describe 'gitlab', :type => 'class' do
       expect { subject }.to raise_error(/external_url must contain string/)
     end
   end
+
+  context 'when external_url contains https:// and redirect_http_to_https is false and ssl_certificate is a param' do
+    let(:params) {
+      {
+        :external_url           => 'https://gitlab.example.com',
+        :ssl_certificate        => '/etc/gitlab/ssl/test_cert.crt',
+        :redirect_http_to_https => false,
+        :gitlab_branch          => '7.2.0'
+      }
+    }
+    let(:facts)  {
+      {
+        :puppetversion => ENV['PUPPET_VERSION'],
+        :facterversion => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/nginx\['ssl_certificate'\] = '\/etc\/gitlab\/ssl\/test_cert.crt'/)
+    end
+  end
+
+  context 'when ci_external_url contains https:// and ci_redirect_http_to_https is false and ci_ssl_certificate is a param' do
+    let(:params) {
+      {
+        :external_url              => 'https://gitlab.example.com',
+        :ci_external_url           => 'https://ci.example.com',
+        :ci_ssl_certificate        => '/etc/gitlab/ssl/ci_test_cert.crt',
+        :ci_redirect_http_to_https => false,
+        :gitlab_branch             => '7.2.0'
+      }
+    }
+    let(:facts)  {
+      {
+        :puppetversion => ENV['PUPPET_VERSION'],
+        :facterversion => ENV['FACTER_VERSION'],
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.5',
+      }
+    }
+    it do
+      should contain_file('/etc/gitlab/gitlab.rb').with_content(/ci_nginx\['ssl_certificate'\] = '\/etc\/gitlab\/ssl\/ci_test_cert.crt'/)
+    end
+  end
+
+
 
 
 
@@ -75,15 +124,15 @@ describe 'gitlab', :type => 'class' do
   end
 
   # context 'warning if not using Ubuntu 12.04 CentOS 6.5, Debian 7.5 ' do
-  #   let(:params) { 
-  #     { 
+  #   let(:params) {
+  #     {
   #       :gitlab_branch => '7.0.0',
   #       :external_url  => 'http://gitlab.example.com'
   #     }
   #   }
   #   let(:facts) {
   #       {
-  #       :puppetversion => ENV['PUPPET_VERSION'], 
+  #       :puppetversion => ENV['PUPPET_VERSION'],
   #       :facterversion => ENV['FACTER_VERSION'],
   #       :osfamily => 'RedHat',
   #       :operatingsystem => 'CentOS',
@@ -111,7 +160,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
@@ -132,7 +181,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
@@ -153,7 +202,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
@@ -174,7 +223,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
@@ -195,7 +244,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
@@ -218,7 +267,7 @@ describe 'gitlab', :type => 'class' do
     }
     let(:facts) {
       {
-        :puppetversion          => ENV['PUPPET_VERSION'], 
+        :puppetversion          => ENV['PUPPET_VERSION'],
         :facterversion          => ENV['FACTER_VERSION'],
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',

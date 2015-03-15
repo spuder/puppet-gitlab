@@ -116,10 +116,11 @@ postgresql['enable'] = <%= @postgresql_enable %>
 <% end %><% if @gitlab_group     -%>user['group'] = '<%= @gitlab_group  %>'
 <% end %><% if @redirect_http_to_https == true -%>
 nginx['redirect_http_to_https'] = <%= @redirect_http_to_https %>
-nginx['ssl_certificate'] = '<%= @ssl_certificate -%>'
-nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
+<% end %><% if @external_url.start_with?("https://")-%>
+<% if @ssl_certificate -%>nginx['ssl_certificate'] = '<%= @ssl_certificate -%>'
+<% end %><% if @ssl_certificate_key -%>nginx['ssl_certificate_key'] = '<%= @ssl_certificate_key %>'
 <% end -%>
-<% if @listen_addresses -%>
+<% end %><% if @listen_addresses -%>
 nginx['listen_addresses'] = ["<%= @listen_addresses.join('","') %>"]
 <% end %><% if @git_username -%>user['username'] = '<%= @git_username %>'
 <% end %><% if @git_groupname -%>user['group'] = '<%= @git_groupname %>'
@@ -181,8 +182,10 @@ gitlab_ci['gitlab_server'] = <%= @gitlab_server %>
 <% end -%>
 <% end %><% if @ci_redirect_http_to_https == true -%>
 ci_nginx['redirect_http_to_https'] = <%= @ci_redirect_http_to_https %>
-ci_nginx['ssl_certificate'] = '<%= @ci_ssl_certificate -%>'
-ci_nginx['ssl_certificate_key'] = '<%= @ci_ssl_certificate_key %>'
-<% end -%><% if @ci_listen_addresses -%>
+<% end %><% if (@ci_external_url||'').start_with?("https://") -%>
+<% if @ci_ssl_certificate -%>ci_nginx['ssl_certificate'] = '<%= @ci_ssl_certificate -%>'
+<% end %><% if @ci_ssl_certificate_key -%>ci_nginx['ssl_certificate_key'] = '<%= @ci_ssl_certificate_key %>'
+<% end -%>
+<% end %><% if @ci_listen_addresses -%>
 ci_nginx['listen_addresses'] = ["<%= @ci_listen_addresses.join('","') %>"]
 <% end %>
