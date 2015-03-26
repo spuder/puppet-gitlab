@@ -178,9 +178,10 @@ class gitlab::install inherits ::gitlab {
   validate_string($download_location)
   info("omnibus_filename is \'${omnibus_filename}\'")
 
-  package {'wget':
-    ensure  => present,
+  if ! defined(Package['wget']) {
+    package { 'wget': ensure => present }
   }
+  
   # Use wget to download gitlab
   exec { 'download gitlab':
     command => "/usr/bin/wget ${gitlab_url}",
