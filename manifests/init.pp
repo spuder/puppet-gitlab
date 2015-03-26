@@ -17,6 +17,10 @@
 #   Includes packages.pp which installs postfix and openssh
 #   Gitlab packages will be managed regardless if this parameter is true or false
 #
+# [*puppet_fetch_client*]
+#   default => os specific
+#   the comand to use to fetch remote files
+#
 # [*external_url*]
 #   default => undef
 #   Required parameter, specifies the url that end user will navigate to
@@ -695,6 +699,7 @@ class gitlab (
   $puppet_manage_config    = $::gitlab::params::puppet_manage_config,
   $puppet_manage_backups   = $::gitlab::params::puppet_manage_backups,
   $puppet_manage_packages  = $::gitlab::params::puppet_manage_packages,
+  $puppet_fetch_client     = $::gitlab::params::puppet_fetch_client,
 
 
   $gitlab_branch           = $::gitlab::params::gitlab_branch,
