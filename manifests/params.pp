@@ -25,6 +25,19 @@ class gitlab::params {
   $puppet_manage_backups  = true  # Creates cron job to backup at 2am
   $puppet_manage_packages = true  # Manages openssl and postfix packages
 
+  #how to fetch remote files
+  case $::osfamily {
+    'debian': {
+      $puppet_fetch_client = 'wget -O'
+    }
+    'redhat': {
+      $puppet_fetch_client = 'curl -o'
+    }
+    default: {
+      $puppet_fetch_client = 'wget -O'
+    }
+  }
+
   # Gitlab server settings
   $gitlab_branch         = undef   # Required: (e.g. '7.0.0') - Branch to download and install
   $gitlab_release        = 'basic' # 'basic' | 'enterprise' - (default: basic)
