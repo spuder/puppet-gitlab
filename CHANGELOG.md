@@ -4,6 +4,7 @@
 - Changes file download name when using debain (issue #124)
 - Allows nil values in smtp settings (issue #124)
 - Fixes missing single quotes around backup_upload_remote_dir (issue #128, thanks red-trela)
+- Now detects OS and uses wget / curl depending on system (issue #134)
 
 2015-Mar-09: 2.3.6
 - Changes wget to curl (issue #102, thanks fvoges)
