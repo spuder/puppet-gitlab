@@ -74,7 +74,7 @@ class gitlab::packages inherits ::gitlab {
   package { $mail_application:
     ensure => latest,
   }
-  package {'curl':
+  package { 'curl':
     ensure => latest,
   }
   service { $mail_application:
