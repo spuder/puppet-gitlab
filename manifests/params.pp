@@ -42,6 +42,7 @@ class gitlab::params {
   $gitlab_branch         = undef   # Required: (e.g. '7.0.0') - Branch to download and install
   $gitlab_release        = 'basic' # 'basic' | 'enterprise' - (default: basic)
   $gitlab_download_link  = undef   # e.g. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
+  $omnibus_build_ver     = 1       # Sets default build release in cases where patches weren't released to a build
 
   $external_url          = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
