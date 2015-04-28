@@ -71,16 +71,18 @@ class gitlab::packages inherits ::gitlab {
   package { 'openssh-server':
     ensure => latest,
   }
+  service { $ssh_service_name:
+    ensure  => running,
+    require => Package['openssh-server'],
+  }
+  
   package { $mail_application:
     ensure => latest,
   }
   service { $mail_application:
     ensure  => running,
-    require => Package['openssh-server'],
+    require => Package[$mail_application],
   }
-  service { $ssh_service_name:
-    ensure  => running,
-    require => Package['openssh-server'],
-  }
+
 
 }
