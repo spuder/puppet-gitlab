@@ -111,7 +111,7 @@ postgresql['enable'] = <%= @postgresql_enable %>
 <% end %><% if @redis_port      -%>redis['port'] = <%= @redis_port %>
 <% end %><% if @postgresql_port -%>postgresql['port'] = <%= @postgresql_port %>
 <% end %><% if @unicorn_port     -%>unicorn['port'] = <%= @unicorn_port %>
-<% end %><% if @git_data_dir     -%>git_data_dir = '<%= @git_data_dir  %>'
+<% end %><% if @git_data_dir     -%>git_data_dir '<%= @git_data_dir  %>'
 <% end %><% if @gitlab_username  -%>user['username'] = '<%= @gitlab_username  %>'
 <% end %><% if @gitlab_group     -%>user['group'] = '<%= @gitlab_group  %>'
 <% end %><% if @redirect_http_to_https == true -%>
