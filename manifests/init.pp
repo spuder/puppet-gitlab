@@ -785,6 +785,12 @@ class gitlab (
 
   $backup_path                 = $::gitlab::params::backup_path,
   $backup_keep_time            = $::gitlab::params::backup_keep_time,
+  $backup_hour                 = $::gitlab::params::backup_hour,
+  $backup_minute               = $::gitlab::params::backup_minute,
+  $backup_month                = $::gitlab::params::backup_month,
+  $backup_day                  = $::gitlab::params::backup_day,
+  $backup_monthday             = $::gitlab::params::backup_monthday,
+  $backup_weekday              = $::gitlab::params::backup_weekday,
   $backup_upload_connection    = $::gitlab::params::backup_upload_connection,
   $backup_upload_remote_directory = $::gitlab::params::backup_upload_remote_directory,
   $gitlab_shell_path           = $::gitlab::params::gitlab_shell_path,
@@ -977,7 +983,16 @@ class gitlab (
   if $puppet_manage_backups == true {
     notice('Puppet will manage backups because $puppet_manage_backups is true')
     include ::gitlab::install
-    include ::gitlab::backup
+
+    class { '::gitlab::backup':
+      backup_hour     => $backup_hour
+      backup_minute   => $backup_minute
+      backup_month    => $backup_month
+      backup_day      => $backup_day
+      backup_monthday => $backup_monthday
+      backup_weekday  => $backup_weekday
+    }
+
     Class['::gitlab::install'] -> Class['::gitlab::backup']
   }
   else {
