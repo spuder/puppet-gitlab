@@ -376,7 +376,27 @@ irc     => spuder
 # [*puppet_manage_backups*]
 #   default => true
 #   Includes backup.pp which sets cron job to run rake task
-# 
+#
+# [*backup_hour*]
+#   default => 2
+#   The hour at which to run the backup rake task
+#
+# [*backup_minute*]
+#   default => 0
+#   The minute at which to run the backup rake task
+#
+# [*backup_month*]
+#   default => undef
+#   The month of the year in which to run the backup rake task
+#
+# [*backup_monthday*]
+#   default => undef
+#   The day of the month on which to run the backup rake task
+#
+# [*backup_weekday*]
+#   default => undef
+#   The weekday on which to run the backup rake task
+#
 # [*puppet_manage_packages*]
 #   default => true
 #   Includes packages.pp which installs postfix and openssh
