@@ -995,14 +995,14 @@ class gitlab (
 
   if ($db_adapter or $db_encoding or $db_database or $db_pool or $db_username
     or $db_password or $db_host or $db_socket)
-    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
-    fail('db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+    and (($postgresql_enable == undef or $postgresql_enable) and $mysql_enable) {
+    fail("db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgresql_enable is false (current value: ${postgresql_enable}) or mysql_enable is true (current value: ${mysql_enable})")
   }
 
   if ($ci_db_adapter or $ci_db_encoding or $ci_db_database or $ci_db_pool or $ci_db_username
     or $ci_db_password or $ci_db_host or $ci_db_socket)
-    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
-    fail('ci_db_adapter, ci_db_encoding, ci_db_database, ci_db_pool, ci_db_username, ci_db_password, ci_db_host, and ci_db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+    and (($postgresql_enable == undef or $postgresql_enable) and $mysql_enable) {
+    fail("ci_db_adapter, ci_db_encoding, ci_db_database, ci_db_pool, ci_db_username, ci_db_password, ci_db_host, and ci_db_socket cannot be set unless postgresql_enable is false (current value: ${postgresql_enable}) or mysql_enable is true (current value: ${mysql_enable}")
   }
 
   if $postgresql_port and !$db_port {
