@@ -139,6 +139,9 @@ class gitlab::params {
   $git_max_size                = undef # Incrase if large commits fail over https (default: 5242880) 5242880=5MB
   $git_timeout                 = undef # 10
 
+  $unicorn_worker_processes    = undef # number of cpu cores + 1
+  $unicorn_worker_timeout      = undef # 60
+
   #
   # 4. Extra customization
   # ==========================

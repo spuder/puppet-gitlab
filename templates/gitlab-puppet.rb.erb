@@ -85,6 +85,8 @@ gitlab_rails['ldap_admin_group'] = '<%= @ldap_admin_group %>'
 <% end %><% if @git_bin_path -%>gitlab_rails['git_bin_path'] = '<%= @git_bin_path %>'
 <% end %><% if @git_max_size -%>gitlab_rails['git_max_size'] = <%= @git_max_size %>
 <% end %><% if @git_timeout -%>gitlab_rails['git_timeout'] = <%= @git_timeout %>
+<% end %><% if @unicorn_worker_processes -%>unicorn['worker_processes'] = <%= @unicorn_worker_processes %>
+<% end %><% if @unicorn_worker_timeout -%>unicorn['worker_timeout'] = <%= @unicorn_worker_timeout %>
 <% end %>
 #
 # 4. Extra customization
