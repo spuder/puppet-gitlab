@@ -984,11 +984,11 @@ class gitlab (
     include ::gitlab::install
 
     class { '::gitlab::backup':
-      backup_hour     => $backup_hour
-      backup_minute   => $backup_minute
-      backup_month    => $backup_month
-      backup_monthday => $backup_monthday
-      backup_weekday  => $backup_weekday
+      backup_hour     => $backup_hour,
+      backup_minute   => $backup_minute,
+      backup_month    => $backup_month,
+      backup_monthday => $backup_monthday,
+      backup_weekday  => $backup_weekday,
     }
 
     Class['::gitlab::install'] -> Class['::gitlab::backup']
