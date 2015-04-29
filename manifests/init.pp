@@ -788,7 +788,6 @@ class gitlab (
   $backup_hour                 = $::gitlab::params::backup_hour,
   $backup_minute               = $::gitlab::params::backup_minute,
   $backup_month                = $::gitlab::params::backup_month,
-  $backup_day                  = $::gitlab::params::backup_day,
   $backup_monthday             = $::gitlab::params::backup_monthday,
   $backup_weekday              = $::gitlab::params::backup_weekday,
   $backup_upload_connection    = $::gitlab::params::backup_upload_connection,
@@ -988,7 +987,6 @@ class gitlab (
       backup_hour     => $backup_hour
       backup_minute   => $backup_minute
       backup_month    => $backup_month
-      backup_day      => $backup_day
       backup_monthday => $backup_monthday
       backup_weekday  => $backup_weekday
     }

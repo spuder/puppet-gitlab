@@ -27,7 +27,6 @@ class gitlab::backup inherits ::gitlab (
   $backup_hour     = 2,
   $backup_minute   = 0,
   $backup_month    = undef,
-  $backup_day      = undef,
   $backup_monthday = undef,
   $backup_weekday  = undef,
 ) {
@@ -39,7 +38,6 @@ class gitlab::backup inherits ::gitlab (
     hour     => $backup_hour,
     minute   => $backup_minute,
     month    => $backup_month,
-    day      => $backup_day,
     monthday => $backup_monthday,
     weekday  => $backup_weekday,
   }

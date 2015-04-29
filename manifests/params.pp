@@ -126,7 +126,6 @@ class gitlab::params {
   $backup_hour                 = 2,
   $backup_minute               = 0,
   $backup_month                = undef,
-  $backup_day                  = undef,
   $backup_monthday             = undef,
   $backup_weekday              = undef,
 
