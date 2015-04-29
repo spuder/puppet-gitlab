@@ -171,6 +171,9 @@ class { 'gitlab' :
   git_max_size                => 5242880, # 5 MB, Incrase to alow larger commits over https
   git_timeout                 => 10,
 
+  unicorn_worker_processes    => 5,
+  unicorn_worker_timeout      => 60,
+
 
 #
 # 4. Extra customization

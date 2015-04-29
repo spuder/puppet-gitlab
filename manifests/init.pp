@@ -367,6 +367,16 @@
 #     Timeout (in seconds) for git shell
 #     Example: 10
 #
+# [*unicorn_worker_processes*]
+#     default => undef
+#     Number of concurrent unicorn worker processes.
+#     Example: 5
+#
+# [*unicorn_worker_timeout*]
+#     default => undef
+#     Timeout (in seconds) for unicorn worker processes.
+#     Example: 60
+#
 # 4. Extra customization
 # ==========================
 #
@@ -796,6 +806,8 @@ class gitlab (
   $git_bin_path                = $::gitlab::params::git_bin_path,
   $git_max_size                = $::gitlab::params::git_max_size,
   $git_timeout                 = $::gitlab::params::git_timeout,
+  $unicorn_worker_processess   = $::gitlab::params::unicorn_worker_processess,
+  $unicorn_worker_timeout      = $::gitlab::params::unicorn_worker_timeout,
 
   #
   # 4. Extra customization
