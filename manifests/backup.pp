@@ -23,13 +23,13 @@
 #
 # Copyright 2014 Spencer Owen, unless otherwise noted.
 #
-class gitlab::backup inherits ::gitlab (
+class gitlab::backup (
   $backup_hour     = 2,
   $backup_minute   = 0,
   $backup_month    = undef,
   $backup_monthday = undef,
   $backup_weekday  = undef,
-) {
+) inherits ::gitlab {
 
   # Execute rake backup
   cron { 'gitlab-backup':
