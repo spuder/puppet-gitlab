@@ -367,6 +367,16 @@
 #     Timeout (in seconds) for git shell
 #     Example: 10
 #
+# [*unicorn_worker_processes*]
+#     default => undef
+#     Number of concurrent unicorn worker processes.
+#     Example: 5
+#
+# [*unicorn_worker_timeout*]
+#     default => undef
+#     Timeout (in seconds) for unicorn worker processes.
+#     Example: 60
+#
 # 4. Extra customization
 # ==========================
 #
@@ -796,6 +806,8 @@ class gitlab (
   $git_bin_path                = $::gitlab::params::git_bin_path,
   $git_max_size                = $::gitlab::params::git_max_size,
   $git_timeout                 = $::gitlab::params::git_timeout,
+  $unicorn_worker_processess   = $::gitlab::params::unicorn_worker_processess,
+  $unicorn_worker_timeout      = $::gitlab::params::unicorn_worker_timeout,
 
   #
   # 4. Extra customization
@@ -995,14 +1007,14 @@ class gitlab (
 
   if ($db_adapter or $db_encoding or $db_database or $db_pool or $db_username
     or $db_password or $db_host or $db_socket)
-    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
-    fail('db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+    and (($postgresql_enable == undef or $postgresql_enable) and $mysql_enable) {
+    fail("db_adapter, db_encoding, db_database, db_pool, db_username, db_password, db_host, and db_socket cannot be set unless postgresql_enable is false (current value: ${postgresql_enable}) or mysql_enable is true (current value: ${mysql_enable})")
   }
 
   if ($ci_db_adapter or $ci_db_encoding or $ci_db_database or $ci_db_pool or $ci_db_username
     or $ci_db_password or $ci_db_host or $ci_db_socket)
-    and ($postgresql_enable == undef or $postgresql_enable or !$mysql_enable) {
-    fail('ci_db_adapter, ci_db_encoding, ci_db_database, ci_db_pool, ci_db_username, ci_db_password, ci_db_host, and ci_db_socket cannot be set unless postgres_enable is false or mysql_enable is true')
+    and (($postgresql_enable == undef or $postgresql_enable) and $mysql_enable) {
+    fail("ci_db_adapter, ci_db_encoding, ci_db_database, ci_db_pool, ci_db_username, ci_db_password, ci_db_host, and ci_db_socket cannot be set unless postgresql_enable is false (current value: ${postgresql_enable}) or mysql_enable is true (current value: ${mysql_enable}")
   }
 
   if $postgresql_port and !$db_port {
