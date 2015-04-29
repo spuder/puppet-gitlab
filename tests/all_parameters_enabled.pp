@@ -153,6 +153,11 @@ class { 'gitlab' :
   # Backup
   backup_path                 => '/var/opt/gitlab/backups', #'tmp/backups'
   backup_keep_time            => 604800,
+  backup_hour                 => 2,
+  backup_minute               => 0,
+  backup_month                => '*',
+  backup_monthday             => '*',
+  backup_weekday              => '*',
 
   backup_upload_connection    => 'foobar',
   backup_upload_remote_directory => 'foobar',
