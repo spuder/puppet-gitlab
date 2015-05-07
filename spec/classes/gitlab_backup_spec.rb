@@ -9,6 +9,11 @@ describe 'gitlab', :type => 'class' do
         :gitlab_branch         => '7.2.0',
         :external_url          => 'http://gitlab.example.com',
         :puppet_manage_backups => true,
+        :backup_hour           => 2,
+        :backup_minute         => 0,
+        :backup_month          => 1,
+        :backup_monthday       => 1,
+        :backup_weekday        => 1,
       }
     }
     let(:facts) {
@@ -52,6 +57,11 @@ describe 'gitlab', :type => 'class' do
         :external_url     => 'http://gitlab.example.com',
         :backup_upload_connection => 'foobar',
         :puppet_manage_backups => true,
+        :backup_hour           => 2,
+        :backup_minute         => 0,
+        :backup_month          => 1,
+        :backup_monthday       => 1,
+        :backup_weekday        => 1,
       }
     }
     let(:facts) {
@@ -76,6 +86,11 @@ describe 'gitlab', :type => 'class' do
         :external_url     => 'http://gitlab.example.com',
         :backup_upload_remote_directory => 'foobar',
         :puppet_manage_backups => true,
+        :backup_hour           => 2,
+        :backup_minute         => 0,
+        :backup_month          => 1,
+        :backup_monthday       => 1,
+        :backup_weekday        => 1,
       }
     }
     let(:facts) {
@@ -91,6 +106,4 @@ describe 'gitlab', :type => 'class' do
       should contain_file('/etc/gitlab/gitlab.rb').with_content(/backup_upload_remote_directory/)
     end
   end
-
-
 end
