@@ -32,7 +32,7 @@ class gitlab::install inherits ::gitlab {
 
   # Download links change depending on the OS
   # Filename changes depending if basic or enterprise
-  # Set variables to make it easy to define $gitlab_url 
+  # Set variables to make it easy to define $gitlab_url
   case $::osfamily {
     'Debian': {
       $omnibus_release           = 'omnibus.1-1_amd64.deb'
@@ -63,7 +63,7 @@ class gitlab::install inherits ::gitlab {
             }
             else {
               # Use default package name
-              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb 
+              $omnibus_filename = "gitlab${url_separator}${::gitlab::gitlab_branch}-ee.${omnibus_release}" # eg. gitlab_7.0.0-ee.omnibus-1_amd64.deb
               info("gitlab_release is: ${::gitlab::gitlab_release}, using default omnibus_filename: ${omnibus_filename}")
             }
           }
@@ -159,7 +159,7 @@ class gitlab::install inherits ::gitlab {
       undef, 'basic' : {
         # Basic version, use default derived url. This is the most common configuration
         info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
-        # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
+        # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb
         $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
         info("Downloading from default url ${gitlab_url}")
       }
@@ -176,6 +176,12 @@ class gitlab::install inherits ::gitlab {
 
   validate_string($omnibus_filename)
   validate_string($download_location)
+  if $omnibus_filename =~ /^([^.]+)(?:(?:-)(\d\..+))*$/ {
+    $omnibus_packagename = $1
+  }
+  else {
+    fail("Cannot determine package name from \$omnibus_filename: ${omnibus_filename}")
+  }
   info("omnibus_filename is \'${omnibus_filename}\'")
 
   # Use wget or curl to download gitlab
@@ -189,6 +195,7 @@ class gitlab::install inherits ::gitlab {
   # Install gitlab with the appropriate package manager (rpm or dpkg)
   package { 'gitlab':
     ensure   => latest,
+    name     => $omnibus_packagename,
     source   => "${download_location}/${omnibus_filename}",
     provider => $package_manager,
     require  => Exec['download gitlab'],
