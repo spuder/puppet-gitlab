@@ -40,13 +40,25 @@ class gitlab::config inherits ::gitlab {
     require => File[$gitlab_config_dir],
   }
     # Some versions of gitlab require nginx to be stopped before upgrading: https://github.com/gitlabhq/gitlabhq/issues/7902
-  exec { 'stop gitlab':
-    refreshonly => true,
-    timeout     => 1800,
-    command     => '/usr/bin/gitlab-ctl stop nginx',
-    subscribe   => Package["$::gitlab::install::gitlab_pkg"],
-    notify      => Exec['/usr/bin/gitlab-ctl reconfigure'],
-    before      => [ Exec['/usr/bin/gitlab-ctl reconfigure'], Exec['start gitlab'] ],
+  if $::gitlab::gitlab_branch >= '7.10.0' {
+    exec { 'stop gitlab':
+      refreshonly => true,
+      timeout     => 1800,
+      command     => '/usr/bin/gitlab-ctl stop nginx',
+      subscribe   => Class['::gitlab::install::packagecloud'],
+      notify      => Exec['/usr/bin/gitlab-ctl reconfigure'],
+      before      => [ Exec['/usr/bin/gitlab-ctl reconfigure'], Exec['start gitlab'] ],
+    }
+  }
+  else {
+    exec { 'stop gitlab':
+      refreshonly => true,
+      timeout     => 1800,
+      command     => '/usr/bin/gitlab-ctl stop nginx',
+      subscribe   => Package["$::gitlab::install::gitlab_pkg"],
+      notify      => Exec['/usr/bin/gitlab-ctl reconfigure'],
+      before      => [ Exec['/usr/bin/gitlab-ctl reconfigure'], Exec['start gitlab'] ],
+    }
   }
   exec { '/usr/bin/gitlab-ctl reconfigure':
     refreshonly => true,

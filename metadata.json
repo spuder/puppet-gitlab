@@ -3,7 +3,10 @@
     "version": "2.3.6",
     "summary": "Installs and configures gitlab 7 using omnibus installer",
     "author": "Spencer Owen",
-    "dependencies": [ { "name": "puppetlabs/stdlib", "version_requirement": ">=3.0.0" } ],
+    "dependencies": [ 
+      { "name": "puppetlabs/stdlib", "version_requirement": ">=3.0.0" },
+      { "name": "computology/packagecloud", "version_requirement": ">=0.2.10" }
+    ],
     "source": "https://github.com/spuder/puppet-gitlab",
     "project_page": "https://github.com/spuder/puppet-gitlab/blob/master/README.md",
     "license": "GPLv3",

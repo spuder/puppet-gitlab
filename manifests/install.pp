@@ -44,18 +44,16 @@ class gitlab::install inherits ::gitlab {
             #Manage package name based on version, changes to gitlab-ce post v7.10.0 - used in config.pp
             if $::gitlab::gitlab_branch >= '7.10.0' {
               $gitlab_pkg  = 'gitlab-ce'
-
+               $gitlab_pkg      = 'gitlab-ce'
+               #Make sure old package is gone
+               package { 'gitlab':
+                 ensure  => 'absent',
+               }
               #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
               if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
                 validate_re($1, ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
                 $omnibus_filename = $1
                 info("gitlab_release is: ${::gitlab::gitlab_release}, user provided a download url: ${::gitlab::gitlab_download_link}, omnibus_filename is: ${omnibus_filename}")
-              }
-              else {
-                # Use default package name
-                $omnibus_release   = "omnibus.${::gitlab::omnibus_build_ver}_amd64.deb"
-                $omnibus_filename  = "gitlab-ce${url_separator}${::gitlab::gitlab_branch}~${omnibus_release}" # eg. gitlab-ce_7.10.0~omnibus-1_amd64.deb
-                info("gitlab_release is: ${::gitlab::gitlab_release}, using default omnibus_filename: ${omnibus_filename}")
               }
             }
             else {
@@ -118,18 +116,16 @@ class gitlab::install inherits ::gitlab {
              #Manage package name based on version, changes to gitlab-ce post v7.10.0 - used in config.pp
              if $::gitlab::gitlab_branch >= '7.10.0' {
                $gitlab_pkg      = 'gitlab-ce'
+               #Make sure old package is gone
+               package { 'gitlab':
+                 ensure  => 'absent',
+               }
 
                #Validate user supplied download link and strip url off of package name. e.g. gitlab_7.0.0-omnibus-1_amd64.deb
                if $::gitlab::gitlab_download_link and $::gitlab::gitlab_download_link =~ /\/([^\/]+)$/ {
                  validate_re($1, ['.rpm','.deb'],'gitlab_download_link must end in .rpm or .deb')
                  $omnibus_filename = $1
                  info("gitlab_release is: ${::gitlab::gitlab_release}, user provided a download url: ${::gitlab::gitlab_download_link}, omnibus_filename is: ${omnibus_filename}")
-               }
-               else {
-                 # Use default package name
-                 $omnibus_release  = "omnibus.${::gitlab::omnibus_build_ver}.x86_64.rpm"
-                 $omnibus_filename = "gitlab-ce${url_separator}${::gitlab::gitlab_branch}~${omnibus_release}" # eg. gitlab-ce-7.10.0~omnibus.1.x86_64.rpm
-                 info("gitlab_release is: ${::gitlab::gitlab_release}, using default omnibus_filename: ${omnibus_filename}")
                }
              }
              else {
@@ -199,43 +195,81 @@ class gitlab::install inherits ::gitlab {
   }
   # If user did not specify $gitlab_download_link
   else {
-    case $::gitlab::gitlab_release {
-      undef, 'basic' : {
-        # Basic version, use default derived url. This is the most common configuration
-        info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
-        # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
-        $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
-        info("Downloading from default url ${gitlab_url}")
+    #Check if v7.10.0 or greater (major packaging changes)
+    if $::gitlab::gitlab_branch >= '7.10.0' {
+      case $::gitlab::gitlab_release {
+        undef, 'basic' : {
+          #Install via packagecloud repository
+          class gitlab::install::packagecloud {
+            #wget required for installed gpg key in packagecloud repo (may want to use stdlib ensure_packages instead
+            package { 'wget':
+              ensure => 'installed',
+            }
+            include packagecloud
+            #Check OS
+            case $::osfamily {
+              'Debian': {
+                packagecloud::repo { "gitlab/gitlab-ce":
+                  type => 'deb',
+                  require => Package['wget'],
+                }
+              }
+              'RedHat': {
+                packagecloud::repo { "gitlab/gitlab-ce":
+                  type => 'rpm',
+                  require => Package['wget'],
+                }
+              }
+            }
+          }
+        }
+        'enterprise': {
+          #Enterprise version
+          info('Need more info on how the enterprise version gets installed post 7.10.0')
+        }
+        default : {
+          # $gitlab_release is neither basic nor enterprise, invalid input
+          fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
+        }
       }
-      'enterprise': {
-        # Enterprise version requires the url be provided, fail
-        fail('You must specify $gitlab_download_link when $gitlab_release is set to \'enterprise\'')
-      }
-      default : {
-        # $gitlab_release is neither basic nor enterprise, invalid input
-        fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
+    }
+    else {
+      case $::gitlab::gitlab_release {
+        undef, 'basic' : {
+          # Basic version, use default derived url. This is the most common configuration
+          info("\$gitlab_release is \'${::gitlab::gitlab_release}\' and \$gitlab_download_link is \'${::gitlab::gitlab_download_link}\'")
+          # e.g. https://foo/bar/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb 
+          $gitlab_url = "${download_prefix}/${operatingsystem_lowercase}-${::operatingsystemrelease}/${omnibus_filename}"
+          info("Downloading from default url ${gitlab_url}")
+          validate_string($omnibus_filename)
+          validate_string($download_location)
+          info("omnibus_filename is \'${omnibus_filename}\'")
+
+          # Use wget or curl to download gitlab
+          exec { 'download gitlab':
+            command => "${::gitlab::puppet_fetch_client} ${download_location}/${omnibus_filename} ${gitlab_url}",
+            path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin',
+            cwd     => $download_location,
+            creates => "${download_location}/${omnibus_filename}",
+            timeout => 1800,
+          }
+          # Install gitlab with the appropriate package manager (rpm or dpkg)
+          package { "$::gitlab::install::gitlab_pkg":
+            ensure   => 'latest',
+            source   => "${download_location}/${omnibus_filename}",
+            provider => $package_manager,
+            require  => Exec['download gitlab'],
+          }
+        }
+        'enterprise': {
+          # Enterprise version requires the url be provided, fail
+          fail('You must specify $gitlab_download_link when $gitlab_release is set to \'enterprise\'')
+        }
+        default : {
+          # $gitlab_release is neither basic nor enterprise, invalid input
+          fail("\$gitlab_release can only be 'basic', 'enterprise' or undef. Found: \'${::gitlab::gitlab_release}\'")
+        }
       }
     }
   }
-
-  validate_string($omnibus_filename)
-  validate_string($download_location)
-  info("omnibus_filename is \'${omnibus_filename}\'")
-
-  # Use wget or curl to download gitlab
-  exec { 'download gitlab':
-    command => "${::gitlab::puppet_fetch_client} ${download_location}/${omnibus_filename} ${gitlab_url}",
-    path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin',
-    cwd     => $download_location,
-    creates => "${download_location}/${omnibus_filename}",
-    timeout => 1800,
-  }
-  # Install gitlab with the appropriate package manager (rpm or dpkg)
-  package { "$::gitlab::install::gitlab_pkg":
-    ensure   => latest,
-    source   => "${download_location}/${omnibus_filename}",
-    provider => $package_manager,
-    require  => Exec['download gitlab'],
-  }
-
 }
