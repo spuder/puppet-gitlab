@@ -45,7 +45,6 @@ class gitlab::config inherits ::gitlab {
       refreshonly => true,
       timeout     => 1800,
       command     => '/usr/bin/gitlab-ctl stop nginx',
-      subscribe   => Class['::gitlab::install::packagecloud'],
       notify      => Exec['/usr/bin/gitlab-ctl reconfigure'],
       before      => [ Exec['/usr/bin/gitlab-ctl reconfigure'], Exec['start gitlab'] ],
     }
@@ -64,7 +63,7 @@ class gitlab::config inherits ::gitlab {
     refreshonly => true,
     timeout     => 1800,
     require     => File["${gitlab_config_dir}/gitlab.rb"],
-    subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'], Package["$::gitlab::install::gitlab_pkg"] ],
+    subscribe   => [ File["${gitlab_config_dir}/gitlab.rb"], Exec['stop gitlab'] ],
     before      => Exec['start gitlab'],
   }
   exec { 'start gitlab':
