@@ -215,7 +215,7 @@ class gitlab::install inherits ::gitlab {
               require => Package['wget'],
               notify  => Exec['stop gitlab'],
             }
-            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${omnibus_release}":
+            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${::gitlab::omnibus_build_ver}":
               ensure  => 'latest',
               notify  => Exec['stop gitlab'],
             }
@@ -225,7 +225,7 @@ class gitlab::install inherits ::gitlab {
               type    => 'rpm',
               require => Package['wget'],
             }
-            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${omnibus_release}":
+            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${::gitlab::omnibus_build_ver}":
               ensure  => 'latest',
               notify  => Exec['stop gitlab'],
             }
