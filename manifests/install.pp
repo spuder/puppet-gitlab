@@ -215,11 +215,18 @@ class gitlab::install inherits ::gitlab {
               require => Package['wget'],
               notify  => Exec['stop gitlab'],
             }
+            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${omnibus_release}":
+              ensure  => 'latest',
+              notify  => Exec['stop gitlab'],
+            }
           }
           'RedHat': {
             packagecloud::repo { "gitlab/gitlab-ce":
               type    => 'rpm',
               require => Package['wget'],
+            }
+            package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${omnibus_release}":
+              ensure  => 'latest',
               notify  => Exec['stop gitlab'],
             }
           }
