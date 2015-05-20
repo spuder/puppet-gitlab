@@ -7,6 +7,12 @@ class { 'gitlab' :
   gitlab_branch           => '7.4.2',
   gitlab_release          => 'basic',
   external_url            => 'http://192.168.33.10',
+  backup_hour             => 2,
+  backup_minute           => 0,
+  backup_month            => 1,
+  backup_monthday         => 1,
+  backup_weekday          => 1,
+
  
 
   # SSL highly recommended
