@@ -103,8 +103,8 @@ define gitlab::custom_hook(
   }
 
   file { "${hook_path}/${type}":
-    ensure      => 'present',
-    content     => $content,
-    source      => $source,
+    ensure  => 'present',
+    content => $content,
+    source  => $source,
   }
 }
