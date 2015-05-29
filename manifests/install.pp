@@ -212,8 +212,8 @@ class gitlab::install inherits ::gitlab {
           'Debian': {
             packagecloud::repo { "gitlab/gitlab-ce":
               type    => 'deb',
+              server_address => 'https://packages.gitlab.com',
               require => Package['wget'],
-              notify  => Exec['stop gitlab'],
             }
             package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${::gitlab::omnibus_build_ver}":
               ensure  => 'latest',
@@ -223,6 +223,7 @@ class gitlab::install inherits ::gitlab {
           'RedHat': {
             packagecloud::repo { "gitlab/gitlab-ce":
               type    => 'rpm',
+              server_address => 'https://packages.gitlab.com',
               require => Package['wget'],
             }
             package { "gitlab-ce-${::gitlab::gitlab_branch}~omnibus-${::gitlab::omnibus_build_ver}":
