@@ -83,6 +83,8 @@ class gitlab::params {
   $gravatar_plain_url  = undef # default: http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
   $gravatar_ssl_url    = undef # default: https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
 
+  $rails_env = undef
+
   #
   # 2. Auth settings
   # ==========================
@@ -100,7 +102,7 @@ class gitlab::params {
   $ldap_base      = undef #Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
 
   $ldap_sync_time = undef # Prevent clicks from taking long time, see http://bit.ly/1qxpWQr
-  
+
   # GitLab Enterprise Edition only
   $ldap_group_base  = undef # Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
   $ldap_user_filter = undef # Deprecated in 7.4: http://bit.ly/1vOlT5Q, see: http://bit.ly/1CXbx3G
@@ -132,15 +134,15 @@ class gitlab::params {
   $backup_upload_connection    = undef # Backup to fog http://bit.ly/1t5nAv5
   $backup_upload_remote_directory = undef # Where to store backups in fog http://bit.ly/1t5nAv5
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
-  
+
   $gitlab_shell_repos_path     = undef # '/var/opt/gitlab/git-data/repositories', Cannot be a symlink
   $gitlab_shell_hooks_path     = undef # '/opt/gitlab/embedded/service/gitlab-shell/hooks/', Cannot be a symlikn
-  
+
   $gitlab_shell_upload_pack    = undef # (default: true)
   $gitlab_shell_receive_pack   = undef # (default: true)
-  
+
   $gitlab_shell_ssh_port       = undef # (default: 22)
-  
+
   $git_bin_path                = undef # '/opt/gitlab/embedded/bin/git'
   $git_max_size                = undef # Incrase if large commits fail over https (default: 5242880) 5242880=5MB
   $git_timeout                 = undef # 10
@@ -152,12 +154,12 @@ class gitlab::params {
   # 4. Extra customization
   # ==========================
   $extra_google_analytics_id = undef
-  
+
   $extra_piwik_url           = undef
   $extra_piwik_site_id       = undef
-  
+
   $extra_sign_in_text        = undef # Allows for company logo/name on login page. See 'tests/sign_in_text.pp' for an example
-  
+
   #
   # 5. Omnibus customization
   # ==========================
@@ -220,7 +222,7 @@ class gitlab::params {
 
   # Enterprise Only Features
   $udp_log_shipping_host = undef # e.g. '192.0.2.0' Ip of syslog server
-  $udp_log_shipping_port = undef # syslog port (default: 514) 
+  $udp_log_shipping_port = undef # syslog port (default: 514)
 
   $high_availability_mountpoint = undef # Prevents omnibus-gitlab services (nginx, redis, unicorn etc.) from starting before a given filesystem is mounted
 
