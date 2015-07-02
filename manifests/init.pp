@@ -7,11 +7,11 @@
 # [*puppet_manage_config*]
 #   default => true
 #   /etc/gitlab/gitlab.rb will be managed by puppet
-# 
+#
 # [*puppet_manage_backups*]
 #   default => true
 #   Includes backup.pp which sets cron job to run rake task
-# 
+#
 # [*puppet_manage_packages*]
 #   default => true
 #   Includes packages.pp which installs postfix and openssh
@@ -37,7 +37,7 @@
 #    Example: 'enterprise'
 #
 # [*gitlab_download_link*]
-#    default => undef 
+#    default => undef
 #    specifies url to download gitlab from, optional if gitlab_release = basic
 #    string must end in '.deb' or '.rpm'
 #    Example: 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb'
@@ -52,7 +52,7 @@
 #
 # [*gitlab_email_from*]
 #    default => undef
-#    Example: 'gitlab@example.com' 
+#    Example: 'gitlab@example.com'
 #
 # [*gitlab_default_projects_limit*]
 #    default => undef
@@ -178,6 +178,10 @@
 #    default => undef
 #    Example: 'https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon'
 #
+# [*rails_env*]
+#    default => {}
+#    Example: { 'http_proxy' => 'http://user:pass@proxy.my.org', 'https_proxy' => 'https://user:pass@proxy.my.org' }
+#
 # 2. Auth settings
 # ==========================
 #
@@ -191,12 +195,12 @@
 # [*ldap_host*]
 #    default => 'server.example.com'
 #    See tests/active_directory.pp for more info
-#    
+#
 # [*ldap_port*]
 #     default => 636
 #     Example: 389
 #    See tests/active_directory.pp for more info
-#    
+#
 # [*ldap_uid*]
 #     default => 'sAMAccountName'
 #     Example: 'uid'
@@ -206,7 +210,7 @@
 #     default => 'ssl'
 #     Example: 'ssl'
 #    See tests/active_directory.pp for more info
-# 
+#
 # [*ldap_bind_dn*]
 #     default => 'CN=query user,CN=Users,DC=mycorp,DC=com'
 #    See tests/active_directory.pp for more info
@@ -269,7 +273,7 @@
 #
 # [*omniauth_providers*]
 #     default => undef
-#     Allows user to authenticate with Twitter, Google, Github ect... 
+#     Allows user to authenticate with Twitter, Google, Github ect...
 #     Example: [ '{
 #         "name"   => "google_oauth2",
 #         "app_id" => "YOUR APP ID",
@@ -277,7 +281,7 @@
 #         "args"   => { "access_type" => "offline", "approval_prompt" => "" }
 #       }',
 #       ',',
-#       '{ 
+#       '{
 #         "name"   => "twitter",
 #         "app_id" => "YOUR APP ID",
 #         "app_secret" =>  "YOUR APP SECRET"
@@ -306,7 +310,7 @@
 #
 # [*backup_path*]
 #     default => undef
-#     Location for backups (relative to rails root) 
+#     Location for backups (relative to rails root)
 #     Example: '/var/opt/gitlab/backups'
 #
 # [*backup_keep_time*]
@@ -500,7 +504,7 @@
 #
 # [*git_groupname*]
 #     default => undef
-#     name of git group (default: 'git' ) 
+#     name of git group (default: 'git' )
 #     Example: 42
 #
 # [*git_uid*]
@@ -685,7 +689,7 @@
 # === Examples
 #
 # Basic Example with https
-# class { 'gitlab' : 
+# class { 'gitlab' :
 #   gitlab_branch          => '7.0.0',
 #   external_url           => 'http://foo.bar',
 #   ssl_certificate        => '/etc/gitlab/ssl/gitlab.crt',
@@ -757,6 +761,8 @@ class gitlab (
   $gravatar_plain_url  = $::gitlab::params::gravatar_plain_url,
   $gravatar_ssl_url    = $::gitlab::params::gravatar_ssl_url,
 
+  $rails_env = $::gitlab::params::rails_env,
+
   #
   # 2. Auth settings
   # ==========================
@@ -769,7 +775,7 @@ class gitlab (
   $ldap_method    = $::gitlab::params::ldap_method,
   $ldap_bind_dn   = $::gitlab::params::ldap_bind_dn,
   $ldap_password  = $::gitlab::params::ldap_password,
-  
+
   $ldap_sync_time = $::gitlab::params::ldap_sync_time,
 
   $ldap_allow_username_or_email_login = $::gitlab::params::ldap_allow_username_or_email_login,
@@ -842,16 +848,16 @@ class gitlab (
   $redis_port       = $::gitlab::params::redis_port,
   $postgresql_port  = $::gitlab::params::postgresql_port,
   $unicorn_port     = $::gitlab::params::unicorn_port,
-  
+
   $git_data_dir     = $::gitlab::params::git_data_dir,
   $gitlab_username  = $::gitlab::params::gitlab_username,
   $gitlab_group     = $::gitlab::params::gitlab_group,
-  
+
   $redirect_http_to_https   = $::gitlab::params::redirect_http_to_https,
   $ssl_certificate          = $::gitlab::params::ssl_certificate,
   $ssl_certificate_key      = $::gitlab::params::ssl_certificate_key,
   $listen_addresses         = $::gitlab::params::listen_addresses,
-  
+
   $git_username       = $::gitlab::params::git_username,
   $git_groupname      = $::gitlab::params::git_groupname,
   $git_uid            = $::gitlab::params::git_uid,
@@ -860,13 +866,13 @@ class gitlab (
   $gitlab_redis_gid   = $::gitlab::params::gitlab_redis_gid,
   $gitlab_psql_uid    = $::gitlab::params::gitlab_psql_uid,
   $gitlab_psql_gid    = $::gitlab::params::gitlab_psql_gid,
-  
+
   $aws_enable               = $::gitlab::params::aws_enable,
   $aws_access_key_id        = $::gitlab::params::aws_access_key_id,
   $aws_secret_access_key    = $::gitlab::params::aws_secret_access_key,
   $aws_bucket               = $::gitlab::params::aws_bucket,
   $aws_region               = $::gitlab::params::aws_region,
-  
+
   $smtp_enable               = $::gitlab::params::smtp_enable,
   $smtp_address              = $::gitlab::params::smtp_address,
   $smtp_port                 = $::gitlab::params::smtp_port,
@@ -875,7 +881,7 @@ class gitlab (
   $smtp_domain               = $::gitlab::params::smtp_domain,
   $smtp_authentication       = $::gitlab::params::smtp_authentication,
   $smtp_enable_starttls_auto = $::gitlab::params::smtp_enable_starttls_auto,
-  
+
   $svlogd_size      = $::gitlab::params::svlogd_size,
   $svlogd_num       = $::gitlab::params::svlogd_num,
   $svlogd_timeout   = $::gitlab::params::svlogd_timeout,
@@ -914,7 +920,7 @@ class gitlab (
 
   ) inherits gitlab::params {
 
-  # Verify required parameters are provided. 
+  # Verify required parameters are provided.
   if !$external_url {
     fail ("\$external_url parameter required. \
     https://github.com/spuder/puppet-gitlab/blob/master/README.md")
@@ -936,6 +942,11 @@ class gitlab (
     if $ldap_admin_group {
       fail("\$ldap_admin_group is only available in gitlab 7.1.0 or greater, found: \'${gitlab_branch}\'")
     }
+  }
+
+  # Verify rails_env is a hash
+  if $rails_env {
+    validate_hash($rails_env)
   }
 
   # Verify parameters are valid for the release of gitlab

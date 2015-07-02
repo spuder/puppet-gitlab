@@ -36,13 +36,15 @@ gitlab_rails['issues_tracker_jira_new_issue_url'] = '<%= @issues_tracker_jira_ne
 <% end %><% if defined?(@gravatar_enabled)     %>gitlab_rails['gravatar_enabled'] = <%= @gravatar_enabled %>
 <% end %><% if @gravatar_plain_url   %>gitlab_rails['gravatar_plain_url'] = '<%= @gravatar_plain_url %>'
 <% end %><% if @gravatar_ssl_url     %>gitlab_rails['gravatar_ssl_url'] = '<%= @gravatar_ssl_url %>'
+<% end %><% if @rails_env            %>gitlab_rails['env'] = { <% @rails_env.each do |key, value| %>'<%= key %>' => '<%= value %>', <% end %>}
 <% end %>
+
 #
 # 2. Auth settings
-# # ==========================
+# ==========================
 gitlab_rails['ldap_enabled'] = <%= @ldap_enabled %>
 <% if @ldap_servers -%>gitlab_rails['ldap_servers'] = <%= @ldap_servers %> <% end %>
-<% if  @ldap_host -%>gitlab_rails['ldap_host'] = '<%= @ldap_host %>' 
+<% if  @ldap_host -%>gitlab_rails['ldap_host'] = '<%= @ldap_host %>'
 <% end %><% if @ldap_port -%>gitlab_rails['ldap_port'] = <%= @ldap_port %>
 <% end %><% if @ldap_uid -%>gitlab_rails['ldap_uid'] = '<%= @ldap_uid %>'
 <% end %><% if @ldap_method -%>gitlab_rails['ldap_method'] = '<%= @ldap_method %>'
