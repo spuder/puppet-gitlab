@@ -715,6 +715,7 @@ class gitlab (
   $gitlab_branch           = $::gitlab::params::gitlab_branch,
   $gitlab_release          = $::gitlab::params::gitlab_release,
   $gitlab_download_link    = $::gitlab::params::gitlab_download_link,
+  $omnibus_build_ver       = $::gitlab::params::omnibus_build_ver,
 
   $external_url   = $::gitlab::params::external_url,
 
