@@ -6,6 +6,9 @@
 .settings
 *.swp
 
+.ruby-*
+Gemfile.lock
+
 spec/fixtures/*
 tests/adaptive.pp
 tests/enterprise.pp

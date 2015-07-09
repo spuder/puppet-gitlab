@@ -42,6 +42,7 @@ class gitlab::params {
   $gitlab_branch         = undef   # Required: (e.g. '7.0.0') - Branch to download and install
   $gitlab_release        = 'basic' # 'basic' | 'enterprise' - (default: basic)
   $gitlab_download_link  = undef   # e.g. 'https://secret_url/ubuntu-12.04/gitlab_7.0.0-omnibus-1_amd64.deb', Enterprise only
+  $omnibus_build_ver     = 1       # Sets default build release in cases where patches weren't released to a build
 
   $external_url          = undef # Required: (eg. 'http://gitlab.example.com') - Sets nginx listening address
 
@@ -122,7 +123,13 @@ class gitlab::params {
 
   $backup_path                 = undef # '/var/opt/gitlab/backups'   # Relative paths are relative to Rails.root (default: tmp/backups/)
   $backup_keep_time            = undef # default: 0 (forever) (in seconds), 604800 = 1 week
-  
+
+  $backup_hour                 = 2
+  $backup_minute               = 0
+  $backup_month                = undef
+  $backup_monthday             = undef
+  $backup_weekday              = undef
+
   $backup_upload_connection    = undef # Backup to fog http://bit.ly/1t5nAv5
   $backup_upload_remote_directory = undef # Where to store backups in fog http://bit.ly/1t5nAv5
   $gitlab_shell_path           = undef # '/opt/gitlab/embedded/service/gitlab-shell/'
