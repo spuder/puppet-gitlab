@@ -1,11 +1,9 @@
 {
     "name": "spuder-gitlab",
-    "version": "2.3.6",
-    "summary": "Installs and configures gitlab 7 using omnibus installer",
+    "version": "3.0.0",
+    "summary": "Deprecated, use vshn/puppet-gitlab instead",
     "author": "Spencer Owen",
-    "dependencies": [ 
-      { "name": "puppetlabs/stdlib", "version_requirement": ">=3.0.0" },
-      { "name": "computology/packagecloud", "version_requirement": ">=0.2.10" }
+    "dependencies": [
     ],
     "source": "https://github.com/spuder/puppet-gitlab",
     "project_page": "https://github.com/spuder/puppet-gitlab/blob/master/README.md",
@@ -17,34 +15,6 @@
         }
     ],
     "operatingsystem_support": [
-        {
-            "operatingsystem": "RedHat",
-            "operatingsystemrelease": [
-                "6",
-                "7"
-            ]
-        },
-        {
-            "operatingsystem": "Ubuntu",
-            "operatingsystemrelease": [
-                "12.04",
-                "14.04"
-            ]
-        },
-        {
-            "operatingsystem": "Debian",
-            "operatingsystemrelease": [
-                "7"
-            ]
-        },
-        {
-            "operatingsystem": "OracleLinux",
-            "operatingsystemrelease": [
-                "6.5",
-                "7"
-            ]
-        }
-
     ]
 
 }
