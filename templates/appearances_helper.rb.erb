@@ -1,0 +1,18 @@
+# This module has been deployed by puppet for <%= @fqdn %>
+module AppearancesHelper
+  def brand_item
+    <% if @brand_image || @brand_text %>true<% else %>false<% end %>
+  end
+
+  def brand_title
+    <%if @brand_title %>'<%= @brand_title %>'<% else %>nil<% end %>
+  end
+
+  def brand_image
+    <%if @brand_image %>image_tag '<%= @brand_image %>'<% else %>nil<% end %>
+  end
+
+  def brand_text
+    <%if @brand_text %>'<%= @brand_text %>'<% else %>nil<% end %>
+  end
+end
